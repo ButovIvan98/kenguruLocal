@@ -1,0 +1,20 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.blockMain {
+    background-color: #112f40d9;
+}
+
+.indexBlockMain {
+    position: relative;
+    left: 180px;
+    top: 3px;
+}
+
+.textHeader {
+    color: white;
+    font-size: 16px;
+    line-height: 18px;
+}

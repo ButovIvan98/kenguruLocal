@@ -1,0 +1,43 @@
+.main{
+    background-color: #F5F5F5;
+}
+.header{
+    color: black;
+    font-size: 35px;
+}
+.blockRight{
+    width: 350px;
+}
+.blockLeft{
+    position: relative;
+    left:calc(100% - 350px);
+    width: 350px;
+}
+.inputSelectCity input{
+    height: 60px;   
+}
+.inputStyle input{
+width: 100%;
+}
+.blockCalculate{
+    width: 800px;
+    margin: 0 auto;
+}
+.buttonAddParametr{
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    outline: none!important;
+    font-weight: 500;
+    border-bottom: 2px solid black;
+}
+.hrDashed{
+    border: none;
+	border-top: 2px dashed #ddd;
+}
+@media (max-width: 991px) {
+    .blockCalculate{
+        width: 100%!important;
+        max-width: 450px;
+    }
+}
