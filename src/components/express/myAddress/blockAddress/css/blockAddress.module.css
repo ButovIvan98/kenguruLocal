@@ -1,12 +1,14 @@
 .block {
-    height: 70px;
-    background: white;
-    border-radius: 4px;
-    transition: .3s;
+        background-color: white;
+        padding: 15px;
+        border-radius: 4px;
+        cursor: pointer !important;
+        box-shadow: 0 0 5px #E3E3E3;
 }
 
 .block:hover {
-    box-shadow: 0px 3px 3px rgba(1, 61, 96, 0.05);
+    box-shadow: 0 0 5px rgba(0, 162, 255, 0.5);
+        transition: 0.3s;
 }
 
 .headerText {

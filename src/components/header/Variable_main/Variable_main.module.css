@@ -4,7 +4,8 @@
 }
 
 .blockMain {
-    background-color: #112f40d9;
+    /*background: linear-gradient(350deg, #18A2F1 0.79%, #0085FF 100%);*/
+    background: #c4e5ee;
 }
 
 .indexBlockMain {
@@ -14,7 +15,8 @@
 }
 
 .textHeader {
-    color: white;
+    color: cornflowerblue;
     font-size: 16px;
     line-height: 18px;
+    font-weight: bold;
 }

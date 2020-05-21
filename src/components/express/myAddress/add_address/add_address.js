@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import searchImg from '../../../common/searchAndFilter/img/search.png';
 import {NavLink} from "react-router-dom";
 import Autocomplete from "@material-ui/lab/Autocomplete";
+import InfoManager from "../../../common/infoManager/infoManager";
 
 const AddAddress = (props) => {
 
@@ -16,15 +17,15 @@ const AddAddress = (props) => {
                     </h3>
                 </div>
             </div>
-            <div className={'row mt-4' + ' ' + classes.block}>
-                <div className={'col-9'}>
+            <div className={'row mt-lg-4 mt-2'}>
+                <div className={'col-lg-9 col-12' + ' ' + classes.block}>
                     <div className={'row'}>
                         <div className={'col-12'}>
                             <h5>
                                 Заполните адрес
                             </h5>
                         </div>
-                        <div className={'col-lg-6 mt-lg-2'}>
+                        <div className={'col-lg-4 mt-2 col-12'}>
                             <Autocomplete
                                 id="combo-box-demo"
                                 //options={props.calculate.sendingCityList.map((option) => option.title)}
@@ -33,7 +34,7 @@ const AddAddress = (props) => {
                                 noOptionsText={'Нет такого города'}
                             />
                         </div>
-                        <div className={'col-lg-6 mt-lg-2'}>
+                        <div className={'col-lg-4 col-12 mt-2'}>
                             <Autocomplete
                                 id="combo-box-demo"
                                 //options={props.calculate.sendingCityList.map((option) => option.title)}
@@ -42,7 +43,7 @@ const AddAddress = (props) => {
                                 noOptionsText={'Нет такого города'}
                             />
                         </div>
-                        <div className={'col-lg-12 mt-3'}>
+                        <div className={'col-lg-4 col-12 mt-2'}>
                             <Autocomplete
                                 id="combo-box-demo"
                                 //options={props.calculate.sendingCityList.map((option) => option.title)}
@@ -51,7 +52,7 @@ const AddAddress = (props) => {
                                 noOptionsText={'Нет такого города'}
                             />
                         </div>
-                        <div className={'col-lg-4 mt-3'}>
+                        <div className={'col-lg-4 col-12 mt-3'}>
                             <Autocomplete
                                 id="combo-box-demo"
                                 //options={props.calculate.sendingCityList.map((option) => option.title)}
@@ -60,7 +61,7 @@ const AddAddress = (props) => {
                                 noOptionsText={'Нет такого города'}
                             />
                         </div>
-                        <div className={'col-lg-4 mt-3'}>
+                        <div className={'col-lg-4 col-12 mt-3'}>
                             <Autocomplete
                                 id="combo-box-demo"
                                 //options={props.calculate.sendingCityList.map((option) => option.title)}
@@ -69,7 +70,7 @@ const AddAddress = (props) => {
                                 noOptionsText={'Нет такого города'}
                             />
                         </div>
-                        <div className={'col-lg-4 mt-3'}>
+                        <div className={'col-lg-4 col-12 mt-3'}>
                             <Autocomplete
                                 id="combo-box-demo"
                                 //options={props.calculate.sendingCityList.map((option) => option.title)}
@@ -78,7 +79,7 @@ const AddAddress = (props) => {
                                 noOptionsText={'Нет такого города'}
                             />
                         </div>
-                        <div className={'col-lg-12 mt-lg-3'}>
+                        <div className={'col-lg-12 col-12 mt-3'}>
                             <TextField
                                 className={classes.input}
                                 id="outlined-required"
@@ -86,23 +87,36 @@ const AddAddress = (props) => {
                                 variant="outlined"
                             />
                         </div>
-                        <div className={'col-lg-12 mt-lg-3'}>
+                        <div className={'col-12 mt-3'}>
+                            <h6>
+                                Информация о контактном лице
+                            </h6>
+                        </div>
+                        <div className={'col-lg-4 col-12 mt-lg-0'}>
                             <TextField
                                 className={classes.input}
                                 id="outlined-required"
-                                label="Контактное лицо"
+                                label="Фамилия"
                                 variant="outlined"
                             />
                         </div>
-                        <div className={'col-lg-12 mt-lg-3'}>
+                        <div className={'col-lg-4 col-12 mt-lg-0 mt-3'}>
                             <TextField
                                 className={classes.input}
                                 id="outlined-required"
-                                label="Комментарий"
+                                label="Имя"
                                 variant="outlined"
                             />
                         </div>
-                        <div className={'col-lg-6 mt-lg-3'}>
+                        <div className={'col-lg-4 col-12 mt-lg-0 mt-3'}>
+                            <TextField
+                                className={classes.input}
+                                id="outlined-required"
+                                label="Отчество"
+                                variant="outlined"
+                            />
+                        </div>
+                        <div className={'col-lg-6 col-12 mt-3'}>
                             <TextField
                                 className={classes.input}
                                 id="outlined-required"
@@ -110,7 +124,7 @@ const AddAddress = (props) => {
                                 variant="outlined"
                             />
                         </div>
-                        <div className={'col-lg-6 mt-lg-3'}>
+                        <div className={'col-lg-6 col-12 mt-3'}>
                             <TextField
                                 className={classes.input}
                                 id="outlined-required"
@@ -118,12 +132,23 @@ const AddAddress = (props) => {
                                 variant="outlined"
                             />
                         </div>
+                        <div className={'col-lg-12  col-12 mt-3'}>
+                            <TextField
+                                className={classes.input}
+                                id="outlined-required"
+                                label="Комментарий"
+                                variant="outlined"
+                            />
+                        </div>
+                        <div className={'col-lg-12 mt-3 text-center'}>
+                            <button className={classes.addAddress}>
+                                Добавить адрес
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div className={'col-3'}>
-                    <div className={'row'}>
-
-                    </div>
+                <div className={'col-lg-3 mt-lg-0 mt-4 col-12'}>
+                    <InfoManager/>
                 </div>
             </div>
         </div>

@@ -2,8 +2,8 @@ import React from "react";
 import classes from './css/filterResult.module.css';
 
 const FilterResult = (props) => {
-    debugger
-    return <div className={'container mb-2'}>
+
+    return <div className={'container mt-3 mb-3'}>
         <div className={'row'}>
             <div className={'col-12'}>
                 <div className={classes.blockFilter}>

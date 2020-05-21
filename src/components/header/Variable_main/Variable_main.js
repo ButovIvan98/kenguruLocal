@@ -1,17 +1,17 @@
 import React from 'react';
-import classNamees from './Variable_main.module.css';
+import classes from './Variable_main.module.css';
 import {NavLink} from "react-router-dom";
 
 const Variable_main = (props) => {
     let navigationElement = props.Express_main.map(nav => (
-        <div className={'col-auto d-none d-lg-block mt-2' + ' ' + classNamees.indexBlockMain}>
-            <NavLink to={nav.id} activeclassName={classNamees.active}>
-                <p className={classNamees.textHeader}>
+        <div className={'col-auto d-none d-lg-block mt-2' + ' ' + classes.indexBlockMain}>
+            <NavLink to={nav.id} activeclassName={classes.active}>
+                <p className={classes.textHeader}>
                     {nav.title}
                 </p></NavLink>
         </div>))
     return <div className={'container-fluid'}>
-        <div className={'row' + ' ' + classNamees.blockMain}>
+        <div className={'row' + ' ' + classes.blockMain}>
             {navigationElement}
         </div>
     </div>

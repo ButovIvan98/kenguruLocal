@@ -4,13 +4,17 @@ import ExportCalculateFormContainer from "../../calculateForm/calculateFormConta
 import classes from '../../calculateForm/calculateForm.module.css'
 import InformationModuleCompany from "./informationModuleCompany/informationModuleCompany";
 import ExportCalculateResultContainer from "./calculateResult/calculateResultContainer";
+import TrainingUser from "./trainingUser/trainingUser";
+import NewsFeed from "./newsFeed/newsFeed";
 
 const MainPage = (props)=>{
-    return <div className={'container-fluid' + ' ' + classes.main }>
+    return <div className={'container-fluid pl-0 pr-0' + ' ' + classes.main }>
         <ExportCalculateFormContainer/>
         <ExportCalculateResultContainer/>
         <InformationCompany/>
+        <TrainingUser/>
         <InformationModuleCompany/>
+        <NewsFeed/>
     </div>
 }
 export default MainPage;

@@ -3,8 +3,7 @@ import classes from './css/informationCompany.module.css'
 import kenguIcons from './img/icons_kenguru.png';
 
 const InformationCompany = (props) => {
-    return <div className="row">
-
+    return <div className="row mr-0 ml-0">
         <div className="col-12  mb-0 mt-4  text-center">
             <img src={kenguIcons} className={classes.iconsLogo}/>
         </div>

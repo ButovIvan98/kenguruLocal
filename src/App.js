@@ -22,6 +22,10 @@ import ExportWebsitePlaginContainer from './components/footer/websitePlagin/webs
 import MainPage from "./components/express/main-page/mainPage";
 import ExportMyAddressContainer from "./components/express/myAddress/myAddressContainer";
 import AddAddress from "./components/express/myAddress/add_address/add_address";
+import MyPayment from "./components/express/myPayment/myPayment";
+import AddCompany from "./components/express/addCompany/addCompany";
+import Plan from "./components/plan";
+import PersonalAccount from "./components/express/personalAccount/personalAccount";
 const App = () => {
     return (
         <div className={'container-fluid pl-0 pr-0' + ' ' + classNamees.main}>
@@ -49,6 +53,10 @@ const App = () => {
                             <Route path={'/notificationReloadPassword'} render={() => <NotificationReloadPassword />} />
                             <Route path={'/websitePlagin'} render={()=> <ExportWebsitePlaginContainer />} />
                             <Route path={'/addAddress'} render={()=><AddAddress/>}/>
+                            <Route path={'/myPayment'} render={()=><MyPayment/>}/>
+                            <Route path={'/addCompany'} render={()=><AddCompany/>}/>
+                            <Route path={'/plan'} render={()=><Plan/>}/>
+                            <Route path={'/personalAccount'} render={()=><PersonalAccount/>}/>
                         </Switch>
                     </div>
                 </div>

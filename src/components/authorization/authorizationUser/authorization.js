@@ -79,7 +79,7 @@ const SignIn = (props) => {
                     />
                     {
                         props.authorization.isAuth
-                            ? <Redirect from={'/login'} to={'/lk'}></Redirect>
+                            ? <Redirect from={'/login'} to={'/'}></Redirect>
                             : <Button   
                                 fullWidth
                                 variant="contained"
