@@ -2,58 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c8f36c5-f73a-4c7e-82fb-7aecf26b4ff2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/calculateForm/img/box.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/calculateForm/img/deliver.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/calculateForm/img/fon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/calculateForm/img/fon3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/common/infoManager/css/infoManager.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/common/infoManager/infoManager.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/common/svgImg/cardIcon.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/common/svgImg/moneyIcon.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/common/svgImg/orderIcon.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/express/addCompany/addCompany.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/express/addCompany/addCompany.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/express/main-page/newsFeed/css/newsFeed.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/express/main-page/newsFeed/newsFeed.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/express/main-page/trainingUser/css/fon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/express/main-page/trainingUser/css/trainingUser.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/express/main-page/trainingUser/img/1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/express/main-page/trainingUser/img/fon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/express/main-page/trainingUser/img/fon3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/express/main-page/trainingUser/media/ddd-1.ogv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/express/main-page/trainingUser/trainingUser.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/express/myPayment/blockPayment/blockPayment.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/express/myPayment/blockPayment/blockPayment.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/express/myPayment/css/myPayment.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/express/myPayment/myPayment.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/express/personalAccount/css/personalAccount.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/express/personalAccount/personalAccount.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/express/personalAccount/setting/css/setting.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/express/personalAccount/setting/setting.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/plan.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/plan.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/express/personalAccount/blockCompany/blockCompany.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/express/personalAccount/blockCompany/css/blockCompany.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/express/personalAccount/personalAccountContainer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/redux/personalAccountReducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/authorization/authorizationUser/authorization.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/authorization/authorizationUser/authorization.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/calculateForm/blockDataCargo/blockDataCargo.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/calculateForm/blockDataCargo/blockDataCargo.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/calculateForm/calculateForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/calculateForm/calculateForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/calculateForm/calculateForm.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/calculateForm/calculateForm.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/selectBlock/blockMainSelect.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/selectBlock/blockMainSelect.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/selectBlock/blockMainSelect.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/selectBlock/blockMainSelect.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/express/main-page/calculateResult/filterResult/filterResult.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/main-page/calculateResult/filterResult/filterResult.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/express/main-page/informationCompany/informationCompany.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/main-page/informationCompany/informationCompany.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/express/main-page/mainPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/main-page/mainPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/express/myAddress/add_address/add_address.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/myAddress/add_address/add_address.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/express/myAddress/add_address/css/add_address.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/myAddress/add_address/css/add_address.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/express/myAddress/blockAddress/css/blockAddress.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/myAddress/blockAddress/css/blockAddress.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/Permanent_main/PermanentMain.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/Permanent_main/PermanentMain.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/Permanent_main/Permanent_main.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/Permanent_main/Permanent_main.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/Variable_main/Variable_main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/Variable_main/Variable_main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/Variable_main/Variable_main.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/Variable_main/Variable_main.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/headerReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/headerReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/personalAccount/personalAccount.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/personalAccount/personalAccount.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/redux-store.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/redux-store.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,7 +95,7 @@
       <workItem from="1589944040111" duration="1878000" />
       <workItem from="1589946527639" duration="3490000" />
       <workItem from="1589960089796" duration="2332000" />
-      <workItem from="1589962704130" duration="15423000" />
+      <workItem from="1589962704130" duration="29310000" />
     </task>
     <servers />
   </component>
@@ -178,7 +134,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/components/express/personalAccount/personalAccount.js</url>
-          <line>146</line>
+          <line>200</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="3" />
         </line-breakpoint>
