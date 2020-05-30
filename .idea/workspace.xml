@@ -2,14 +2,50 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c8f36c5-f73a-4c7e-82fb-7aecf26b4ff2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/express/personalAccount/blockCompany/blockCompany.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/express/personalAccount/blockCompany/css/blockCompany.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/express/personalAccount/personalAccountContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/redux/personalAccountReducer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/common/svgImg/clockImg.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/common/svgImg/searchSVG.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/express/addCompany/addingDocuments/addingDocuments.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/express/addCompany/addingDocuments/addingDocuments.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/express/addCompany/addingDocuments/done/done.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/express/addCompany/addingDocuments/done/done.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/express/addCompany/addingDocuments/done/img/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/express/addCompany/addingDocuments/done/img/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/express/addCompany/addingDocuments/done/img/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/express/addCompany/addingDocuments/done/img/kengu.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/express/addCompany/addingDocuments/img/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/express/myPayment/account/account.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/express/myPayment/account/account.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/express/myShipments/blockShipments/blockShipments.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/express/myShipments/infoOrder/infoOrder.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/express/myShipments/infoOrder/infoOrder.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/express/myShipments/myShipmentsInformation/blockTracking/blockTracking.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/express/myShipments/myShipmentsInformation/blockTracking/blockTracking.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/express/personalAccount/setting/css/setting.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/express/personalAccount/setting/settingContainer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/redux/settingReducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/express/personalAccount/personalAccount.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/personalAccount/personalAccount.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/infoManager/infoManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/infoManager/infoManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/standarts_elements/button/button_return/button_return.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/standarts_elements/button/button_return/button_return.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/addCompany/addCompany.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/addCompany/addCompany.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/myAddress/add_address/add_address.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/myAddress/add_address/add_address.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/myPayment/blockPayment/blockPayment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/myPayment/blockPayment/blockPayment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/myPayment/myPayment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/myPayment/myPayment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/myShipments/css/myShipments.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/myShipments/css/myShipments.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/myShipments/myShipments.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/myShipments/myShipments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/myShipments/myShipmentsInformation/css/myShipmentsInformation.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/myShipments/myShipmentsInformation/css/myShipmentsInformation.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/myShipments/myShipmentsInformation/myShipmentsInformation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/myShipments/myShipmentsInformation/myShipmentsInformation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/personalAccount/setting/css/setting.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/personalAccount/setting/css/setting.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/personalAccount/setting/setting.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/personalAccount/setting/setting.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/footer/websitePlagin/websitePlagin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/footer/websitePlagin/websitePlagin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/authReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/authReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/headerReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/headerReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/myShipmentsInformationReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/myShipmentsInformationReducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/redux-store.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/redux-store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +72,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="tsconfig.json" />
         <option value="JavaScript File" />
         <option value="CSS File" />
       </list>
@@ -54,7 +91,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Рабочий стол/startbootstrap-sb-admin-2-gh-pages" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/express/addCompany/addingDocuments/img" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -63,13 +100,15 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/express/addCompany/addingDocuments/img" />
+      <recent name="$PROJECT_DIR$/src/components/express/addCompany/addingDocuments/done/img" />
       <recent name="$PROJECT_DIR$/src/components/express/main-page/trainingUser/media" />
       <recent name="$PROJECT_DIR$/src/components/express/main-page/trainingUser/img" />
       <recent name="$PROJECT_DIR$/src/components/express/main-page/trainingUser/css" />
-      <recent name="$PROJECT_DIR$/src/components/calculateForm/img" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Админ\Documents\GitHub\react-django\frontend\src\components\express\main-page\calculateResult\blockResult\img" />
@@ -95,7 +134,13 @@
       <workItem from="1589944040111" duration="1878000" />
       <workItem from="1589946527639" duration="3490000" />
       <workItem from="1589960089796" duration="2332000" />
-      <workItem from="1589962704130" duration="29310000" />
+      <workItem from="1589962704130" duration="29910000" />
+      <workItem from="1590376171662" duration="8102000" />
+      <workItem from="1590461846094" duration="22954000" />
+      <workItem from="1590497323958" duration="10271000" />
+      <workItem from="1590570634871" duration="3115000" />
+      <workItem from="1590635357069" duration="18089000" />
+      <workItem from="1590721071041" duration="20424000" />
     </task>
     <servers />
   </component>
@@ -119,15 +164,19 @@
     </state>
     <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1586751958045" />
     <state x="770" y="304" width="424" height="484" key="FileChooserDialogImpl/49.27.1871.1053@49.27.1871.1053" timestamp="1589944579400" />
-    <state x="675" y="291" width="618" height="522" key="find.popup" timestamp="1589341257392">
+    <state x="675" y="291" width="618" height="522" key="find.popup" timestamp="1590569726940">
       <screen x="49" y="27" width="1871" height="1053" />
     </state>
-    <state x="675" y="291" width="618" height="522" key="find.popup/49.27.1871.1053@49.27.1871.1053" timestamp="1589341257392" />
-    <state x="649" y="270" key="run.anything.popup" timestamp="1589960864057">
+    <state x="675" y="291" width="618" height="522" key="find.popup/49.27.1871.1053@49.27.1871.1053" timestamp="1590569726940" />
+    <state x="649" y="270" key="run.anything.popup" timestamp="1590739025765">
       <screen x="49" y="27" width="1871" height="1053" />
     </state>
     <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1586508711979" />
-    <state x="649" y="270" key="run.anything.popup/49.27.1871.1053@49.27.1871.1053" timestamp="1589960864057" />
+    <state x="649" y="270" key="run.anything.popup/49.27.1871.1053@49.27.1871.1053" timestamp="1590739025765" />
+    <state x="647" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1590655894632">
+      <screen x="49" y="27" width="1871" height="1053" />
+    </state>
+    <state x="647" y="257" width="672" height="678" key="search.everywhere.popup/49.27.1871.1053@49.27.1871.1053" timestamp="1590655894632" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -135,7 +184,6 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/components/express/personalAccount/personalAccount.js</url>
           <line>200</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>

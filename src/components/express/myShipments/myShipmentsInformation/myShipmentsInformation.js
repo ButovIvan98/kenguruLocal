@@ -1,117 +1,136 @@
 import React from 'react';
-import classNamees from './css/myShipmentsInformation.module.css'
+import classes from './css/myShipmentsInformation.module.css'
 import Button_return from "../../../common/standarts_elements/button/button_return/button_return";
 import {NavLink} from "react-router-dom";
+import BlockShipments from "../blockShipments/blockShipments";
+import ClockImg from "../../../common/svgImg/clockImg";
+import BlockTracking from "./blockTracking/blockTracking";
 
 const MyShipmentInformation = (props) => {
-    debugger
+    let listTracking = props.MySpipmentsInfo.tracking.map(list=>(
+        <BlockTracking
+
+        />
+    ))
     return <div className={'container mt-3'}>
         <div className={'row'} style={{padding: '15px;'}}>
-            <div className={'col-lg-9 col-12  mb-4' + ' ' + classNamees.blockRow}>
+            <div className={'col-lg-9 col-12  mb-4' + ' ' + classes.blockRow}>
                 <div className={'row'}>
                     <div className={'col-12'}>
-                        <div className={'col-lg-12 mb-5  col-12' + ' ' + classNamees.block}>
+                        <div className={'col-lg-12 mb-5  col-12' + ' ' + classes.block}>
                             <Button_return/>
                         </div>
                     </div>
                 </div>
-                <div className={'row' + ' ' + classNamees.blockBoxShadow}>
-                    <div className={'col-lg-auto col-6'}>
-                        <span className={classNamees.textOrder}
+                <div className={'row ml-0 mr-0' + ' ' + classes.blockBoxShadow}>
+                    <div className={'col-lg-2 col-6'}>
+                        <span className={classes.textOrder}
                               style={{color: props.MySpipmentsInfo.color}}>{props.MySpipmentsInfo.status}</span>
-                        <p className={classNamees.textOrderStatus}>Статус заказа</p>
+                        <p className={classes.textOrderStatus}>Статус заказа</p>
                     </div>
-                    <div className={'col-lg-auto col-6 padding-left-block'}>
-                        <span className={classNamees.textOrder}>{props.MySpipmentsInfo.invoiceNumber}</span>
-                        <p className={classNamees.textOrderStatus}>Номер накладной</p>
+                    <div className={'col-lg-3 col-6 padding-left-block'}>
+                        <span className={classes.textOrder}>{props.MySpipmentsInfo.invoiceNumber}</span>
+                        <p className={classes.textOrderStatus}>Номер накладной</p>
                     </div>
-                    <div className={'col-lg-auto col-6 padding-left-block'}>
+                    <div className={'col-lg-2 col-6 padding-left-block'}>
 
                         <span
-                            className={classNamees.textOrder}>{props.MySpipmentsInfo.volume} м³,{props.MySpipmentsInfo.weight} кг</span>
-                        <p className={classNamees.textOrderStatus}>Объем и вес груза</p>
+                            className={classes.textOrder}>{props.MySpipmentsInfo.volume} м³,{props.MySpipmentsInfo.weight} кг</span>
+                        <p className={classes.textOrderStatus}>Объем и вес груза</p>
                     </div>
-                    <div className="col-lg-auto col-6">
-                        <span className={classNamees.textOrder}>{props.MySpipmentsInfo.dateOrder}</span>
-                        <p className={classNamees.textOrderStatus}>Дата заказа</p>
+                    <div className="col-lg-2 col-6">
+                        <span className={classes.textOrder}>{props.MySpipmentsInfo.dateOrder}</span>
+                        <p className={classes.textOrderStatus}>Дата заказа</p>
                     </div>
-                    <div className={'col-lg-3 col-6 pr-0 pl-0 text-center'}>
-                        <div className={classNamees.blockImg}>
-                            <img src={props.MySpipmentsInfo.photo} width={'100%'}/>
-                        </div>
+                    <div className={'col-lg-3 col-12 pr-0 pl-0 text-center'}>
+                        <img src={props.MySpipmentsInfo.photo} className={classes.blockImg}/>
                     </div>
                 </div>
                 <div className={'row mt-lg-5 mt-2'}>
                     <div className={'col-lg-6 col-12'}>
                         <div className={'row'}>
                             <div className={'col-12'}>
-                                <span className={classNamees.orderPageSender}>Отправитель</span><br/>
+                                <span className={classes.orderPageSender}>Отправитель</span><br/>
                             </div>
                             <div className={'col-12 mt-3'}>
-                                <span className={classNamees.orderText}>{props.MySpipmentsInfo.dateShipment}</span>
-                                <p className={classNamees.textOrderStatus}>Дата отправки</p>
+                                <span className={classes.orderText}>{props.MySpipmentsInfo.dateShipment}</span>
+                                <p className={classes.textOrderStatus}>Дата отправки</p>
                             </div>
                             <div className={'col-12 mt-0'}>
-                                <span className={classNamees.orderText}>{props.MySpipmentsInfo.companyShipment}</span>
-                                <p className={classNamees.textOrderStatus}>Компания</p>
+                                <span className={classes.orderText}>{props.MySpipmentsInfo.companyShipment}</span>
+                                <p className={classes.textOrderStatus}>Компания</p>
                             </div>
                             <div className={'col-12 mt-0'}>
-                                <span className={classNamees.orderText}>{props.MySpipmentsInfo.contactPersonShipment}</span>
-                                <p className={classNamees.textOrderStatus}>Контактное лицо</p>
+                                <span className={classes.orderText}>{props.MySpipmentsInfo.contactPersonShipment}</span>
+                                <p className={classes.textOrderStatus}>Контактное лицо</p>
                             </div>
                             <div className={'col-12 mt-0'}>
-                                <span className={classNamees.orderText}>{props.MySpipmentsInfo.phoneShipment}</span>
-                                <p className={classNamees.textOrderStatus}>Телефон</p>
+                                <span className={classes.orderText}>{props.MySpipmentsInfo.phoneShipment}</span>
+                                <p className={classes.textOrderStatus}>Телефон</p>
                             </div>
                             <div className={'col-12 mt-0'}>
-                                <span className={classNamees.orderText}>{props.MySpipmentsInfo.addressShipment}</span>
-                                <p className={classNamees.textOrderStatus}>Адрес отправителя</p>
+                                <span className={classes.orderText}>{props.MySpipmentsInfo.addressShipment}</span>
+                                <p className={classes.textOrderStatus}>Адрес отправителя</p>
                             </div>
                             <div className={'col-12 mt-0'}>
-                                <span className={classNamees.orderText}>{props.MySpipmentsInfo.commentShipment}</span>
-                                <p className={classNamees.textOrderStatus}>Комментарий</p>
+                                <span className={classes.orderText}>{props.MySpipmentsInfo.commentShipment}</span>
+                                <p className={classes.textOrderStatus}>Комментарий</p>
                             </div>
                         </div>
                     </div>
-                    <div className={'col-lg-6 col-12' + ' ' + classNamees.borderBlock}>
+                    <div className={'col-lg-6 col-12' + ' ' + classes.borderBlock}>
                         <div className={'row'}>
                             <div className={'col-12'}>
-                                <span className={classNamees.orderPageSender}>Получатель</span><br/>
+                                <span className={classes.orderPageSender}>Получатель</span><br/>
                             </div>
                             <div className={'col-12 mt-3'}>
-                                <span className={classNamees.orderText}>{props.MySpipmentsInfo.dateRecipient}</span>
-                                <p className={classNamees.textOrderStatus}>Дата получения</p>
+                                <span className={classes.orderText}>{props.MySpipmentsInfo.dateRecipient}</span>
+                                <p className={classes.textOrderStatus}>Дата получения</p>
                             </div>
                             <div className={'col-12 mt-0'}>
-                                <span className={classNamees.orderText}>{props.MySpipmentsInfo.companyRecipient}</span>
-                                <p className={classNamees.textOrderStatus}>Компания</p>
+                                <span className={classes.orderText}>{props.MySpipmentsInfo.companyRecipient}</span>
+                                <p className={classes.textOrderStatus}>Компания</p>
                             </div>
                             <div className={'col-12 mt-0 '}>
                                 <span
-                                    className={classNamees.orderText}>{props.MySpipmentsInfo.contactPersonRecipient}</span>
-                                <p className={classNamees.textOrderStatus}>Контактное лицо</p>
+                                    className={classes.orderText}>{props.MySpipmentsInfo.contactPersonRecipient}</span>
+                                <p className={classes.textOrderStatus}>Контактное лицо</p>
                             </div>
                             <div className={'col-12 mt-0 '}>
-                                <span className={classNamees.orderText}>{props.MySpipmentsInfo.phoneRecipient}</span>
-                                <p className={classNamees.textOrderStatus}>Телефон</p>
+                                <span className={classes.orderText}>{props.MySpipmentsInfo.phoneRecipient}</span>
+                                <p className={classes.textOrderStatus}>Телефон</p>
                             </div>
                             <div className={'col-12 mt-0 '}>
-                                <span className={classNamees.orderText}>{props.MySpipmentsInfo.addressRecipient}</span>
-                                <p className={classNamees.textOrderStatus}>Адрес получателя</p>
+                                <span className={classes.orderText}>{props.MySpipmentsInfo.addressRecipient}</span>
+                                <p className={classes.textOrderStatus}>Адрес получателя</p>
                             </div>
                             <div className='col-12 mt-0 '>
-                                <span className={classNamees.orderText}>{props.MySpipmentsInfo.commentRecipient}</span>
-                                <p className={classNamees.textOrderStatus}>Комментарий</p>
+                                <span className={classes.orderText}>{props.MySpipmentsInfo.commentRecipient}</span>
+                                <p className={classes.textOrderStatus}>Комментарий</p>
                             </div>
                         </div>
+                    </div>
+                    <div className={'col-lg-12 mt-5'}>
+                        <span className={classes.orderPageSender}>Геолокация посылки</span>
+                    </div>
+                    <div className={'col-lg-12'}>
+                        <hr className={classes.strip}/>
+                    </div>
+                    <div className={'col-lg-12 align-self-center'}>
+                        <BlockTracking/>
+                        <BlockTracking/>
+                        <BlockTracking/>
+                        <BlockTracking/>
+                        <BlockTracking/>
+                        <BlockTracking/>
                     </div>
                 </div>
             </div>
             <div className={'col-lg-3 col-12'}>
-                <div className={'row ml-0 ml-md-0' + ' ' + classNamees.blockRow}>
+                <div className={'row ml-0 ml-md-0' + ' ' + classes.blockRow}>
                     <div className={'col-12 mt-2 text-center'}>
-                        <span className={classNamees.priceText}>{props.MySpipmentsInfo.price} ₽</span> <span
-                        className={classNamees.textOrderStatus}>цена</span>
+                        <span className={classes.priceText}>{props.MySpipmentsInfo.price} ₽</span> <span
+                        className={classes.textOrderStatus}>цена</span>
                         <hr/>
                     </div>
                     <div className={'col-12'}>
@@ -129,7 +148,7 @@ const MyShipmentInformation = (props) => {
                                     </linearGradient>
                                 </defs>
                             </svg>
-                            <span className={classNamees.textLink}>Скачать накладную</span>
+                            <span className={classes.textLink}>Скачать накладную</span>
                         </NavLink>
                     </div>
                     <div className={'col-12 mt-2'}>
@@ -147,7 +166,7 @@ const MyShipmentInformation = (props) => {
                                     </linearGradient>
                                 </defs>
                             </svg>
-                            <span className={classNamees.textLink}>Закрепить</span>
+                            <span className={classes.textLink}>Закрепить</span>
                         </NavLink>
                     </div>
                     <div className={'col-12 mt-2'}>
@@ -165,7 +184,7 @@ const MyShipmentInformation = (props) => {
                                     </linearGradient>
                                 </defs>
                             </svg>
-                            <span className={classNamees.textLink}>Повторить заказ</span>
+                            <span className={classes.textLink}>Повторить заказ</span>
                         </NavLink>
                     </div>
                     <div className={'col-12 mt-2 mb-3'}>
@@ -183,7 +202,7 @@ const MyShipmentInformation = (props) => {
                                     </linearGradient>
                                 </defs>
                             </svg>
-                            <span className={classNamees.textLink}>Скопировать ссылку</span></NavLink>
+                            <span className={classes.textLink}>Скопировать ссылку</span></NavLink>
                     </div>
                 </div>
             </div>

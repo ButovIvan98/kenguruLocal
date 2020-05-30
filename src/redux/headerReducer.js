@@ -7,7 +7,7 @@ let initialState = {
         {id: '/', title: 'Калькулятор', active: 'classNamees.active'},
         {id: '/myShipments', title: 'Мои отправления', active: 'classNamees.active'},
         {id: '/myPayment', title: 'Счета и оплата', active: 'classNamees.active'},
-        {id: '/express/myAddress', title: 'Адресная книга', active: 'classNamees.active'},
+        {id: '/myAddress', title: 'Адресная книга', active: 'classNamees.active'},
     ],
     Cargo_main: [
         {id: '/car', title: 'Найти машины', active: 'classNamees.active'},

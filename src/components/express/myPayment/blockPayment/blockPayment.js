@@ -3,7 +3,7 @@ import classes from './blockPayment.module.css';
 import {NavLink} from "react-router-dom";
 
 const BlockPayment = (props) => {
-    return <NavLink className={classes.navLink} to={'/score/1'}>
+    return <NavLink className={classes.navLink} to={'/myPayment/account'}>
         <div className={'row mb-3 mt-3 mr-0 ml-0 ' + ' ' + classes.listOrder}>
             <hr className={'d-block d-lg-none' + ' ' + classes.line}/>
             <div className={'col-lg-2 mb-lg-0 mb-3 col-12 '} style={{borderLeft: '2px solid' + ' ' + 'red'}}>

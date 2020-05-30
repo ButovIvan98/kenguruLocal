@@ -58,7 +58,7 @@ const WebsitePlagin = (props) => {
                     <li className={classes.listPage} >
                         <p> Скопируйте код модуля, который приведен ниже. </p>
                     </li>
-                    <textarea readOnly className={classes.poleCode} value={'<iframe src="https://kenguruexpress.ru/widget" width="100%" height="400" > </iframe>'}></textarea >
+                    <textarea readOnly className={classes.poleCode} value={'<iframe img="https://kenguruexpress.ru/widget" width="100%" height="400" > </iframe>'}></textarea >
                     <li className={classes.listPage} >
                         <p> Определитесь где будете устанавливать на сайте, если это будет просто обычная страница, то вам самостоятельно не составит труда установить, в случае если это шаблон товара, то рекомендуем обратиться к техническому специалисту. </p>
                     </li >

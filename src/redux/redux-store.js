@@ -16,6 +16,7 @@ import ContactReducer from "./contactReducer";
 import FeedbackReducer from "./feedbackReducer";
 import MyAddressReducer from "./myAddressReducer";
 import PersonalAccountReducer from "./personalAccountReducer";
+import SettingReducer from "./settingReducer";
 
 let reducers = combineReducers({
     ProfilePage: ContentReducer,
@@ -33,7 +34,8 @@ let reducers = combineReducers({
     ContactPage: ContactReducer,
     FeedbackForm: FeedbackReducer,
     AddressPage: MyAddressReducer,
-    PersonalAccount:PersonalAccountReducer
+    PersonalAccount:PersonalAccountReducer,
+    Setting:SettingReducer
 });
 let store = createStore(reducers, applyMiddleware(thunkMiddleware));
 window.store = store;

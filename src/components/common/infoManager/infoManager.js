@@ -2,14 +2,14 @@ import React from "react";
 import classes from './css/infoManager.module.css';
 
 const InfoManager = (props) => {
-    return <div className={'row mr-lg-1 ml-lg-1' + ' ' + classes.blockManager}>
+    return <div className={'row mr-lg-3 ml-lg-3' + ' ' + classes.blockManager}>
         <div className="col-12 mt-4 text-center">
-            <img src={'https://avatars.mds.yandex.net/get-pdb/69339/203472834-portret-v-profil-1457607709.14/s1200'}
+            <img src={'https://yt3.ggpht.com/a/AGF-l7-sQKULI3LnRjfwoh2wM3Ea5W3mkqxtaJZWyw=s900-c-k-c0xffffffff-no-rj-mo'}
                  className={classes.imgManager}/>
         </div>
         <div className={'col-12 mt-2 text-center'}>
             <span className={classes.nameManager}>
-                Sankov Kirill
+                Кирилл Евгеньевич
             </span>
         </div>
         <div className={'col-12  text-center'}>

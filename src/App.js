@@ -4,7 +4,6 @@ import Footer from './components/footer/footer';
 import { Route, Router, Switch } from "react-router-dom";
 import HeaderContainer from "./components/header/headerСontainer";
 import AuthorizationContainerExport from "./components/authorization/authorizationUser/authorizationContainer";
-import AddressContainerExport from "./components/express/myAddress/add_address/add_addressContainer";
 import AboutMe from "./components/footer/aboutMe/aboutMe";
 import PolicyAndPrivacy from "./components/footer/policyAndPrivacy/policyAndPrivacy";
 import PublicOffer from "./components/footer/publicOffer/publicOffer";
@@ -26,7 +25,12 @@ import MyPayment from "./components/express/myPayment/myPayment";
 import AddCompany from "./components/express/addCompany/addCompany";
 import Plan from "./components/plan";
 import PersonalAccountContainerExport from "./components/express/personalAccount/personalAccountContainer";
+import ExportSettingContainer from "./components/express/personalAccount/setting/settingContainer";
+import AddingDocuments from "./components/express/addCompany/addingDocuments/addingDocuments";
+import Done from "./components/express/addCompany/addingDocuments/done/done";
+import Account from "./components/express/myPayment/account/account";
 const App = () => {
+    const NoMatchPage = () => {  return (    <h3>404 - Not found</h3>  );};
     return (
         <div className={'container-fluid pl-0 pr-0' + ' ' + classNamees.main}>
             <div className={'row mr-0 ml-0'}>
@@ -36,27 +40,32 @@ const App = () => {
                 <div className={'col-12 pl-0 pr-0'}>
                     <div className={classNamees.containerMain}>
                         <Switch>
-                            <Route path='/' exact render={() => <MainPage />}/>
-                            <Route path='/express/myAddress' render={() => <ExportMyAddressContainer />} />
-                            <Route path='/myShipments' render={() => <ExportMyShipmentsContainer />} />
-                            <Route path='/login' render={() => <AuthorizationContainerExport />} />
-                            <Route path={'/aboutMe'} render={() => <AboutMe />} />
-                            <Route path={'/contact'} render={() => <ExportContactContainer />} />
-                            <Route path={'/policy'} render={() => <PolicyAndPrivacy />} />
-                            <Route path={'/publicOffer'} render={() => <PublicOffer />} />
-                            <Route path={'/paymentMethod'} render={() => <PaymentMethod />} />
-                            <Route path={'/transportCompany'} render={() => <ExportTransportCompany />} />
-                            <Route path={'/profileCompany/'} render={() => <ExportProfileTransportCompany />} />
-                            <Route path={'/1'} render={() => <ExportMyShipmentsInformationContainer />} />
-                            <Route path={'/registration'} render={() => <RegistrationContainerExport />} />
-                            <Route path={'/reloadPassword'} render={() => <ExportReloadPasswordContainer />} />
-                            <Route path={'/notificationReloadPassword'} render={() => <NotificationReloadPassword />} />
-                            <Route path={'/websitePlagin'} render={()=> <ExportWebsitePlaginContainer />} />
-                            <Route path={'/addAddress'} render={()=><AddAddress/>}/>
-                            <Route path={'/myPayment'} render={()=><MyPayment/>}/>
-                            <Route path={'/addCompany'} render={()=><AddCompany/>}/>
-                            <Route path={'/plan'} render={()=><Plan/>}/>
-                            <Route path={'/personalAccount'} render={()=><PersonalAccountContainerExport/>}/>
+                            <Route exact path='/'  render={() => <MainPage />}/>
+                            <Route exact path='/myAddress' render={() => <ExportMyAddressContainer />} />
+                            <Route exact path='/myShipments' render={() => <ExportMyShipmentsContainer />} />
+                            <Route exact path='/login' render={() => <AuthorizationContainerExport />} />
+                            <Route exact path={'/aboutMe'} render={() => <AboutMe />} />
+                            <Route exact path={'/contact'} render={() => <ExportContactContainer />} />
+                            <Route exact path={'/policy'} render={() => <PolicyAndPrivacy />} />
+                            <Route exact path={'/publicOffer'} render={() => <PublicOffer />} />
+                            <Route exact path={'/paymentMethod'} render={() => <PaymentMethod />} />
+                            <Route exact path={'/transportCompany'} render={() => <ExportTransportCompany />} />
+                            <Route exact path={'/profileCompany/'} render={() => <ExportProfileTransportCompany />} />
+                            <Route exact path={'/1'} render={() => <ExportMyShipmentsInformationContainer />} />
+                            <Route exact path={'/registration'} render={() => <RegistrationContainerExport />} />
+                            <Route exact path={'/reloadPassword'} render={() => <ExportReloadPasswordContainer />} />
+                            <Route exact path={'/notificationReloadPassword'} render={() => <NotificationReloadPassword />} />
+                            <Route exact path={'/websitePlagin'} render={()=> <ExportWebsitePlaginContainer />} />
+                            <Route exact path={'/addAddress'} render={()=><AddAddress/>}/>
+                            <Route exact path={'/myPayment'} render={()=><MyPayment/>}/>
+                            <Route exact path={'/addCompany'} render={()=><AddCompany/>}/>
+                            <Route exact path={'/plan'} render={()=><Plan/>}/>
+                            <Route exact path={'/personalAccount'} render={()=><PersonalAccountContainerExport/>}/>
+                            <Route exact path={'/setting'} render={()=><ExportSettingContainer/>}/>
+                            <Route exact path={'/addCompany/loadingFile'} render={()=><AddingDocuments/>} />
+                            <Route exact path={'/addCompany/loadingFile/done'} render={()=><Done/>}/>
+                            <Route exact path={'/myPayment/account'} render={()=><Account/>}/>
+                            <Route render={()=><MainPage/>}/>
                         </Switch>
                     </div>
                 </div>

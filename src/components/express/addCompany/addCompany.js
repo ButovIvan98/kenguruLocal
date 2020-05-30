@@ -6,6 +6,8 @@ import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import InfoManager from "../../common/infoManager/infoManager";
 import {NavLink} from "react-router-dom";
+import classesStyle from "../personalAccount/setting/css/setting.module.css";
+import InputMask from "react-input-mask";
 
 const AddCompany =(props)=>{
     return <div className={'container-fluid' + ' ' + classes.mainBlock}>
@@ -157,6 +159,40 @@ const AddCompany =(props)=>{
                                 label="Должность"
                                 variant="outlined"
                             />
+                        </div>
+                        <div className={'col-12 mt-4 text-center'}>
+                            <h5 >
+                                Обратная связь
+                            </h5>
+                        </div>
+                        <div className={'col-12'}>
+                            <hr className={classes.line}/>
+                        </div>
+                        <div className={'col-lg-6'}>
+                            <TextField
+                                className={classes.inputData}
+                                label="Электронная почта"
+                                variant="outlined"
+                                placeholder={'user@mail.ru'}
+                            />
+                        </div>
+                        <div className={'col-lg-6'}>
+                            <InputMask mask="+7(999)999 99 99"
+                                       maskChar=" "
+                                       // onChange={(e) => {
+                                       //     props.updateNumber(e.target.value)
+                                       // }}
+                                       // value={props.setting.number}
+                            >
+                                <TextField
+                                    className={classesStyle.input}
+                                    label="Номер телефона"
+                                    variant="outlined"
+                                    type={"tel"}
+                                    disableUnderline
+                                    //error={props.setting.validNumber ? false : true}
+                                />
+                            </InputMask>
                         </div>
                         <div className={'col-lg-12 mt-3 text-center self-align-center'}>
                             <NavLink to={'/addCompany/loadingFile'} className={classes.addAddress}>

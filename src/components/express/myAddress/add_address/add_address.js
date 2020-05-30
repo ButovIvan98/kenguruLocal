@@ -5,12 +5,16 @@ import searchImg from '../../../common/searchAndFilter/img/search.png';
 import {NavLink} from "react-router-dom";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import InfoManager from "../../../common/infoManager/infoManager";
+import Button_return from "../../../common/standarts_elements/button/button_return/button_return";
 
 const AddAddress = (props) => {
 
     return <div className={'container-fluid' + ' ' + classes.styleBlock}>
         <div className={'container'}>
             <div className={'row'}>
+                <div className={'col-lg-12'}>
+                    <Button_return path={'/myAddress'}/>
+                </div>
                 <div className={'col-12 mt-2'}>
                     <h3 className={classes.headerText}>
                         Добавить адрес
