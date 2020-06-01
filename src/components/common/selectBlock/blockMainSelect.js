@@ -26,7 +26,7 @@ const BlockMainSelect = (props) => {
 
     return <div style={{display: props.status}} className={classes.listBlock}>
         <NavLink to={'/personalAccount'} className={classes.mainBlockLink}><span onClick={updateStatus}>Личный кабинет</span></NavLink><br/>
-        <NavLink to={'/'} className={classes.mainBlockLink}><span onClick={updateStatus}>Настройки</span></NavLink><br/>
+        <NavLink to={'/setting'} className={classes.mainBlockLink}><span onClick={updateStatus}>Настройки</span></NavLink><br/>
         <NavLink to={'/'} className={classes.mainBlockLink}><span onClick={updateStatus}>Выход</span></NavLink><br/>
         <div className={'row mb-2'}>
             <div className={'col-12 text-center'}>

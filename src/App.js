@@ -29,6 +29,8 @@ import ExportSettingContainer from "./components/express/personalAccount/setting
 import AddingDocuments from "./components/express/addCompany/addingDocuments/addingDocuments";
 import Done from "./components/express/addCompany/addingDocuments/done/done";
 import Account from "./components/express/myPayment/account/account";
+import Error404 from "./components/error404/error404";
+import Order from "./components/express/order/order";
 const App = () => {
     const NoMatchPage = () => {  return (    <h3>404 - Not found</h3>  );};
     return (
@@ -65,7 +67,8 @@ const App = () => {
                             <Route exact path={'/addCompany/loadingFile'} render={()=><AddingDocuments/>} />
                             <Route exact path={'/addCompany/loadingFile/done'} render={()=><Done/>}/>
                             <Route exact path={'/myPayment/account'} render={()=><Account/>}/>
-                            <Route render={()=><MainPage/>}/>
+                            <Route exact path={'/order'} render={()=><Order/>}/>
+                            <Route render={()=><Error404/>}/>
                         </Switch>
                     </div>
                 </div>

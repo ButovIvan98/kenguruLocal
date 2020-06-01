@@ -9,7 +9,6 @@ import BlockTracking from "./blockTracking/blockTracking";
 const MyShipmentInformation = (props) => {
     let listTracking = props.MySpipmentsInfo.tracking.map(list=>(
         <BlockTracking
-
         />
     ))
     return <div className={'container mt-3'}>
@@ -18,7 +17,7 @@ const MyShipmentInformation = (props) => {
                 <div className={'row'}>
                     <div className={'col-12'}>
                         <div className={'col-lg-12 mb-5  col-12' + ' ' + classes.block}>
-                            <Button_return/>
+                            <Button_return path={'/myShipments'}/>
                         </div>
                     </div>
                 </div>
