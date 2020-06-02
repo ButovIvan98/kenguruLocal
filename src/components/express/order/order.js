@@ -9,6 +9,7 @@ import classesStyle from "../personalAccount/setting/css/setting.module.css";
 import InputMask from "react-input-mask";
 import BlockDate from "./blockDate/blockDate";
 import BlockPersonalInformation from "./blockPersonalInformation/blockPersonalInformation";
+import {Redirect} from "react-router-dom";
 
 const Order = (props) => {
     return <div className={'container-fluid' + classes.blockMain}>
@@ -79,6 +80,34 @@ const Order = (props) => {
                             />
                         </div>
                     </div>
+                    <div className={'row mt-3' + ' ' + classes.blockMain}>
+                        <div className={'col-lg-12'}>
+                            <div className={'row'}>
+                                <div className={'col-lg-6 mt-3 mb-3'}>
+                                    <TextField
+                                        label="Дата забора"
+                                        variant="outlined"
+                                        type={'date'}
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                        className={classes.input}
+                                    />
+                                </div>
+                                <div className={'col-lg-6 mt-3 mb-3'}>
+                                    <TextField
+                                        label="Дата доставки"
+                                        variant="outlined"
+                                        type={'date'}
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                        className={classes.input}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div className={'col-lg-3 mt-lg-3 col-12 '}>
                     <div className={'row' + ' ' + classes.scrollingBlock}>
@@ -103,7 +132,7 @@ const Order = (props) => {
                                     <span className={classes.textMoney}>1 000 ₽</span>
                                 </div>
                                 <div className={'col-lg-12 text-center mt-3 mb-3'}>
-                                    <button className={classes.buttonPayment}>
+                                    <button onClick={()=><Redirect from={'/order'} to={'/order/orderSent'}></Redirect>} className={classes.buttonPayment}>
                                         Оформить заказ за <br/>
                                         <b>111 000 ₽</b>
                                     </button>
