@@ -1,6 +1,5 @@
 import React from 'react';
 import classes from './calculateForm.module.css';
-import Select from 'react-select'
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Button from '@material-ui/core/Button';
@@ -8,9 +7,29 @@ import {NavLink} from 'react-router-dom';
 import BlockDataCargo from './blockDataCargo/blockDataCargo';
 import carImg from './img/deliver.png';
 import boxImg from './img/box.png';
+import {makeStyles} from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import CarLittle from "../common/svgImg/carLittle";
+import Car3 from "../common/svgImg/car3";
+import Car5 from "../common/svgImg/car5";
+import Car10 from "../common/svgImg/car10";
 
 const CalculateForm = (props) => {
     //debugger
+    const useStyles = makeStyles((theme) => ({
+        selectEmpty: {
+            marginTop: theme.spacing(2),
+        },
+    }));
+    const classes2 = useStyles();
+    const [age, setAge] = React.useState('');
+    const handleChange = (event) => {
+        setAge(event.target.value);
+    };
     let listCargo = Object.values(props.calculate.listCargo).map(option => (
         <BlockDataCargo
             updateWeight={props.weightData}
@@ -45,10 +64,10 @@ const CalculateForm = (props) => {
                         по самой выгодной цене
                     </h3>
                 </div>
-                <div className={'col-12' }>
+                <div className={'col-12'}>
                     <div className={classes.blockCalculate}>
                         <div className={'row '}>
-                            <div className={'col-lg-5  pr-1 pl-1'}>
+                            <div className={'col-lg-4  pr-1 pl-1'}>
                                 <Autocomplete
                                     id="combo-box-demo"
                                     options={props.calculate.sendingCityList.map((option) => option.title)}
@@ -58,7 +77,7 @@ const CalculateForm = (props) => {
                                     noOptionsText={'Нет такого города'}
                                 />
                             </div>
-                            <div className={'col-lg-5 mt-lg-0 mt-2 pr-1 pl-1'}>
+                            <div className={'col-lg-4 mt-lg-0 mt-2 pr-1 pl-1'}>
                                 <Autocomplete
                                     id="combo-box-demo"
                                     options={props.calculate.destinationCityList.map((option) => option.title)}
@@ -68,15 +87,21 @@ const CalculateForm = (props) => {
                                     noOptionsText={'Нет такого города'}
                                 />
                             </div>
-                            <div className={'col-lg-2 mt-lg-0 mt-2 pr-1 pl-1'}>
-                                <Autocomplete
-                                    id="combo-box-demo"
-                                    options={props.calculate.destinationCityList.map((option) => option.title)}
-                                    renderInput={(params) => <TextField {...params} label="Тип груза"
-                                                                        variant="outlined"/>}
-                                    className={classes.inputStyle}
-                                    noOptionsText={'Нет такого города'}
-                                />
+                            <div className={'col-lg-4 mt-lg-0 mt-2 pr-1 pl-1'}>
+                                <FormControl variant="outlined" className={classes.inputSelectCity}>
+                                    <InputLabel id="demo-simple-select-outlined-label">Что отправляем?</InputLabel>
+                                    <Select
+                                        labelId="demo-simple-select-outlined-label"
+                                        id="demo-simple-select-outlined"
+                                        value={age}
+                                        onChange={handleChange}
+                                        label="Что отправляем?"
+                                    >
+                                        <MenuItem value={10}>Документы</MenuItem>
+                                        <MenuItem value={20}>Мелкие грузы</MenuItem>
+                                        <MenuItem value={30}>Большие грузы</MenuItem>
+                                    </Select>
+                                </FormControl>
                             </div>
                         </div>
                     </div>
@@ -86,15 +111,90 @@ const CalculateForm = (props) => {
                         {listCargo}
                     </div>
                 </div>
-                <div className={'col-12 text-right '}>
+                {/*<div className={'col-12 text-right '}>*/}
+                {/*    <div className={classes.blockWhite}>*/}
+                {/*        <button className={classes.addCargo}*/}
+                {/*                onClick={() => (props.addCargo(props.calculate.listCargo.length))}>*/}
+                {/*            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">*/}
+                {/*                <path opacity="1" d="M8 0V16M16 8H0" stroke="#183C51"/>*/}
+                {/*            </svg>*/}
+                {/*            Добавить груз*/}
+                {/*        </button>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
+                <div className={'col-12'}>
                     <div className={classes.blockWhite}>
-                        <button className={classes.addCargo}
-                                onClick={() => (props.addCargo(props.calculate.listCargo.length))}>
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path opacity="1" d="M8 0V16M16 8H0" stroke="#183C51"/>
-                            </svg>
-                            Добавить груз
-                        </button>
+                        <div className={'row'}>
+                            <div className={'col-lg-3 '}>
+                                <div className={'row text-left mr-0 ml-0' + ' ' + classes.blockCargo}>
+                                    <div className={'col-12 mt-2'}>
+                                        <CarLittle/>
+                                    </div>
+                                    <div className={'col-12 mt-1'}>
+                                        <label className={classes.textBlockCargo}>
+                                            <b>2 тонны, 10 кубов</b>
+                                        </label>
+                                    </div>
+                                    <div className={'col-12 mt-0 mb-2'}>
+                                        <label className={classes.textSize}>
+                                            4 x 1.8 x 1.8 м
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={'col-lg-3 '}>
+                                <div className={'row text-left mr-0 ml-0' + ' ' + classes.blockCargo}>
+                                    <div className={'col-12 mt-2'}>
+                                        <Car3/>
+                                    </div>
+                                    <div className={'col-12 mt-1'}>
+                                        <label className={classes.textBlockCargo}>
+                                            <b>3 тонны, 25 кубов</b>
+                                        </label>
+                                    </div>
+                                    <div className={'col-12 mt-0 mb-2'}>
+                                        <label className={classes.textSize}>
+                                            5.2 x 2.2 x 2.2 м
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={'col-lg-3 '}>
+                                <div className={'row text-left mr-0 ml-0' + ' ' + classes.blockCargo}>
+                                    <div className={'col-12 mt-2'}>
+                                        <Car5/>
+                                    </div>
+                                    <div className={'col-12 mt-1'}>
+                                        <label className={classes.textBlockCargo}>
+                                            <b>5 тонн, 36 кубов</b>
+                                        </label>
+                                    </div>
+                                    <div className={'col-12 mt-0 mb-2'}>
+                                        <label className={classes.textSize}>
+                                            6.2 x 2.45 x 2.5 м
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={'col-lg-3 '}>
+                                <div className={'row text-left mr-0 ml-0' + ' ' + classes.blockCargo}>
+                                    <div className={'col-12 mt-2'}>
+                                        <Car10/>
+                                    </div>
+                                    <div className={'col-12 mt-1'}>
+                                        <label className={classes.textBlockCargo}>
+                                            <b>10 тонн, 45 кубов</b>
+                                        </label>
+                                    </div>
+                                    <div className={'col-12 mt-0 mb-2'}>
+                                        <label className={classes.textSize}>
+                                            7.2 x 2.45 x 2.6 м
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
                 <div className={'col-12'}>

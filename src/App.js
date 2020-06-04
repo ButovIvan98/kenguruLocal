@@ -32,6 +32,7 @@ import Account from "./components/express/myPayment/account/account";
 import Error404 from "./components/error404/error404";
 import Order from "./components/express/order/order";
 import OrderSent from "./components/express/order/orderSent/orderSent";
+import Invoice from "./components/documents/invoice";
 const App = () => {
     const NoMatchPage = () => {  return (    <h3>404 - Not found</h3>  );};
     return (
@@ -70,6 +71,7 @@ const App = () => {
                             <Route exact path={'/myPayment/account'} render={()=><Account/>}/>
                             <Route exact path={'/order'} render={()=><Order/>}/>
                             <Route exact path={'/order/orderSent'} render={()=><OrderSent/>}/>
+                            <Route exact path={'/invoice'} render={()=><Invoice/>}/>
                             <Route render={()=><Error404/>}/>
                         </Switch>
                     </div>

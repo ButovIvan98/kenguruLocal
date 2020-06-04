@@ -6,28 +6,28 @@ import classesStyle from "../../personalAccount/setting/css/setting.module.css";
 
 const BlockPersonalInformation = (props)=>{
     return <div className={'row'}>
-        <div className={'col-lg-4 mt-lg-3'}>
+        <div className={'col-lg-4 mt-lg-3 mt-2'}>
             <TextField
                 label="Фамилия"
                 variant="outlined"
                 className={classes.input}
             />
         </div>
-        <div className={'col-lg-4 mt-lg-3'}>
+        <div className={'col-lg-4 mt-lg-3 mt-2'}>
             <TextField
                 label="Имя"
                 variant="outlined"
                 className={classes.input}
             />
         </div>
-        <div className={'col-lg-4 mt-lg-3'}>
+        <div className={'col-lg-4 mt-lg-3 mt-2'}>
             <TextField
                 label="Отчество"
                 variant="outlined"
                 className={classes.input}
             />
         </div>
-        <div className={'col-lg-3 mt-lg-3'}>
+        <div className={'col-lg-3 mt-lg-3 mt-2'}>
             <InputMask mask="+7(999)999 99 99"
                        maskChar=" "
                 // onChange={(e) => {
@@ -45,7 +45,7 @@ const BlockPersonalInformation = (props)=>{
                 />
             </InputMask>
         </div>
-        <div className={'col-lg-3 mt-lg-3'}>
+        <div className={'col-lg-3 mt-lg-3 mt-2'}>
             <InputMask mask="+7(999)999 99 99"
                        maskChar=" "
                 // onChange={(e) => {
@@ -63,7 +63,7 @@ const BlockPersonalInformation = (props)=>{
                 />
             </InputMask>
         </div>
-        <div className={'col-lg-6 mt-lg-3'}>
+        <div className={'col-lg-6 mt-lg-3 mb-3 mt-2'}>
             <TextField
                 label="Компания"
                 variant="outlined"

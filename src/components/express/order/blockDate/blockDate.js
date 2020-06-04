@@ -5,7 +5,7 @@ import {TextField} from "@material-ui/core";
 
 const BlockDate =(props)=>{
     return <div className={'row'}>
-        <div className={'col-lg-4 mt-3'}>
+        <div className={'col-lg-4 col-12 mt-lg-3 mt-2'}>
             <Autocomplete
                 id="combo-box-demo"
                 //options={props.calculate.sendingCityList.map((option) => option.title)}
@@ -14,7 +14,7 @@ const BlockDate =(props)=>{
                 noOptionsText={'Нет такого города'}
             />
         </div>
-        <div className={'col-lg-4 mt-3'}>
+        <div className={'col-lg-4 col-12 mt-lg-3 mt-2'}>
             <Autocomplete
                 id="combo-box-demo"
                 //options={props.calculate.sendingCityList.map((option) => option.title)}
@@ -23,7 +23,7 @@ const BlockDate =(props)=>{
                 noOptionsText={'Нет такого города'}
             />
         </div>
-        <div className={'col-lg-4 mt-3'}>
+        <div className={'col-lg-4 col-12 mt-lg-3 mt-2'}>
             <Autocomplete
                 id="combo-box-demo"
                 //options={props.calculate.sendingCityList.map((option) => option.title)}
@@ -32,28 +32,28 @@ const BlockDate =(props)=>{
                 noOptionsText={'Нет такого города'}
             />
         </div>
-        <div className={'col-lg-4 mt-3'}>
+        <div className={'col-lg-4 col-12 mt-lg-3 mt-2'}>
             <TextField
                 label="Дом, корпус"
                 variant="outlined"
                 className={classes.input}
             />
         </div>
-        <div className={'col-lg-4 mt-3'}>
+        <div className={'col-lg-4 col-12 mt-lg-3 mt-2'}>
             <TextField
                 label="Квартира, офис"
                 variant="outlined"
                 className={classes.input}
             />
         </div>
-        <div className={'col-lg-4 mt-3'}>
+        <div className={'col-lg-4 col-12 mt-lg-3 mt-2'}>
             <TextField
                 label="Индекс"
                 variant="outlined"
                 className={classes.input}
             />
         </div>
-        <div className={'col-lg-12 mt-lg-3'}>
+        <div className={'col-lg-12 col-12 mt-lg-3 mt-2'}>
             <TextField
                 label="Комментарий"
                 variant="outlined"
