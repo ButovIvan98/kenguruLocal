@@ -17,6 +17,7 @@ import CarLittle from "../common/svgImg/carLittle";
 import Car3 from "../common/svgImg/car3";
 import Car5 from "../common/svgImg/car5";
 import Car10 from "../common/svgImg/car10";
+import InputAdornment from "@material-ui/core/InputAdornment";
 
 const CalculateForm = (props) => {
     //debugger
@@ -106,108 +107,149 @@ const CalculateForm = (props) => {
                         </div>
                     </div>
                 </div>
-                <div className={'col-12'}>
-                    <div className={classes.blockList}>
-                        {listCargo}
-                    </div>
-                </div>
-                {/*<div className={'col-12 text-right '}>*/}
-                {/*    <div className={classes.blockWhite}>*/}
-                {/*        <button className={classes.addCargo}*/}
-                {/*                onClick={() => (props.addCargo(props.calculate.listCargo.length))}>*/}
-                {/*            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">*/}
-                {/*                <path opacity="1" d="M8 0V16M16 8H0" stroke="#183C51"/>*/}
-                {/*            </svg>*/}
-                {/*            Добавить груз*/}
-                {/*        </button>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
-                <div className={'col-12'}>
-                    <div className={classes.blockWhite}>
-                        <div className={'row'}>
-                            <div className={'col-lg-3 '}>
-                                <div className={'row text-left mr-0 ml-0' + ' ' + classes.blockCargo}>
-                                    <div className={'col-12 mt-2'}>
-                                        <CarLittle/>
-                                    </div>
-                                    <div className={'col-12 mt-1'}>
-                                        <label className={classes.textBlockCargo}>
-                                            <b>2 тонны, 10 кубов</b>
-                                        </label>
-                                    </div>
-                                    <div className={'col-12 mt-0 mb-2'}>
-                                        <label className={classes.textSize}>
-                                            4 x 1.8 x 1.8 м
-                                        </label>
-                                    </div>
+                {age === 10 ? <div className={'col-12'}>
+                        <div className={classes.blockList}>
+                            <div className={'row mt-3'}>
+                                <div className={'col-lg-4 pl-0'}>
+                                    <TextField
+                                        error={props.validVolume}
+                                        data-number-cargo={props.id}
+                                        variant="outlined"
+                                        id="standard-helperText"
+                                        type={'number'}
+                                        label="Вес"
+                                        InputProps={{
+                                            startAdornment: <InputAdornment position="start">кг </InputAdornment>,
+                                        }}
+                                        value={0.2}
+                                        onChange={(e) => (props.updateVolume(e.target.value, props.id))}
+                                        //helperText="Some important text"
+                                    />
                                 </div>
                             </div>
-                            <div className={'col-lg-3 '}>
-                                <div className={'row text-left mr-0 ml-0' + ' ' + classes.blockCargo}>
-                                    <div className={'col-12 mt-2'}>
-                                        <Car3/>
-                                    </div>
-                                    <div className={'col-12 mt-1'}>
-                                        <label className={classes.textBlockCargo}>
-                                            <b>3 тонны, 25 кубов</b>
-                                        </label>
-                                    </div>
-                                    <div className={'col-12 mt-0 mb-2'}>
-                                        <label className={classes.textSize}>
-                                            5.2 x 2.2 x 2.2 м
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className={'col-lg-3 '}>
-                                <div className={'row text-left mr-0 ml-0' + ' ' + classes.blockCargo}>
-                                    <div className={'col-12 mt-2'}>
-                                        <Car5/>
-                                    </div>
-                                    <div className={'col-12 mt-1'}>
-                                        <label className={classes.textBlockCargo}>
-                                            <b>5 тонн, 36 кубов</b>
-                                        </label>
-                                    </div>
-                                    <div className={'col-12 mt-0 mb-2'}>
-                                        <label className={classes.textSize}>
-                                            6.2 x 2.45 x 2.5 м
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className={'col-lg-3 '}>
-                                <div className={'row text-left mr-0 ml-0' + ' ' + classes.blockCargo}>
-                                    <div className={'col-12 mt-2'}>
-                                        <Car10/>
-                                    </div>
-                                    <div className={'col-12 mt-1'}>
-                                        <label className={classes.textBlockCargo}>
-                                            <b>10 тонн, 45 кубов</b>
-                                        </label>
-                                    </div>
-                                    <div className={'col-12 mt-0 mb-2'}>
-                                        <label className={classes.textSize}>
-                                            7.2 x 2.45 x 2.6 м
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
-                </div>
-                <div className={'col-12'}>
+                    : null}
+                {age === 20
+                    ? <div className={'col-12'}>
+                        <div className={'row'}>
+                            <div className={'col-12'}>
+                                <div className={classes.blockList}>
+                                    {listCargo}
+                                </div>
+                            </div>
+                            <div className={'col-12 text-right '}>
+                                <div className={classes.blockWhite}>
+                                    <button className={classes.addCargo}
+                                            onClick={() => (props.addCargo(props.calculate.listCargo.length))}>
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path opacity="1" d="M8 0V16M16 8H0" stroke="#183C51"/>
+                                        </svg>
+                                        Добавить груз
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    : null}
+                {age === 30
+                    ? <div className={'col-12'}>
+                        <div className={classes.blockWhite}>
+                            <div className={'row mt-3'}>
+                                <div className={'col-lg-3 mt-lg-0 mt-2'}>
+                                    <div className={'row text-left mr-0 ml-0' + ' ' + classes.blockCargo}>
+                                        <div className={'col-12 mt-3'}>
+                                            <CarLittle/>
+                                        </div>
+                                        <div className={'col-12 mt-1'}>
+                                            <label className={classes.textBlockCargo}>
+                                                <b>2 тонны, 10 кубов</b>
+                                            </label>
+                                        </div>
+                                        <div className={'col-12 mt-0 mb-2'}>
+                                            <label className={classes.textSize}>
+                                                4 x 1.8 x 1.8 м
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className={'col-lg-3 mt-lg-0 mt-3'}>
+                                    <div className={'row text-left mr-0 ml-0' + ' ' + classes.blockCargo}>
+                                        <div className={'col-12 mt-2'}>
+                                            <Car3/>
+                                        </div>
+                                        <div className={'col-12 mt-1'}>
+                                            <label className={classes.textBlockCargo}>
+                                                <b>3 тонны, 25 кубов</b>
+                                            </label>
+                                        </div>
+                                        <div className={'col-12 mt-0 mb-2'}>
+                                            <label className={classes.textSize}>
+                                                5.2 x 2.2 x 2.2 м
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className={'col-lg-3 mt-lg-0 mt-3'}>
+                                    <div className={'row text-left mr-0 ml-0' + ' ' + classes.blockCargo}>
+                                        <div className={'col-12 mt-2'}>
+                                            <Car5/>
+                                        </div>
+                                        <div className={'col-12 mt-1'}>
+                                            <label className={classes.textBlockCargo}>
+                                                <b>5 тонн, 36 кубов</b>
+                                            </label>
+                                        </div>
+                                        <div className={'col-12 mt-0 mb-2'}>
+                                            <label className={classes.textSize}>
+                                                6.2 x 2.45 x 2.5 м
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className={'col-lg-3 mt-lg-0 mt-3'}>
+                                    <div className={'row text-left mr-0 ml-0' + ' ' + classes.blockCargo}>
+                                        <div className={'col-12 mt-2'}>
+                                            <Car10/>
+                                        </div>
+                                        <div className={'col-12 mt-1'}>
+                                            <label className={classes.textBlockCargo}>
+                                                <b>10 тонн, 45 кубов</b>
+                                            </label>
+                                        </div>
+                                        <div className={'col-12 mt-0 mb-2'}>
+                                            <label className={classes.textSize}>
+                                                7.2 x 2.45 x 2.6 м
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    : null}
+                <div className={'col-12 mb-3'}>
                     <div className={classes.blockBottomCalculate}>
-                        <button className={classes.calculation}>Рассчитать</button>
+                        <button onClick={() => {
+                            props.statusCalculate(props.calculate.statusCalculate);
+                        }} className={classes.calculation}>Рассчитать
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
-        <div className={classes.wrap}>
-            <img src={carImg} className={classes.imgCar + ' ' + classes.truck}/>
-            <img src={boxImg} className={classes.imgBox}/>
-            <img src={boxImg} className={classes.imgBox + ' ' + classes.imgBox2}/>
+        {
+            props.calculate.statusCalculate ? <div className={classes.wrap} id={'calculate'}>
+                    <img src={carImg} className={classes.imgCar + ' ' + classes.truck}/>
+                    <img src={boxImg} className={classes.imgBox}/>
+                    <img src={boxImg} className={classes.imgBox + ' ' + classes.imgBox2}/>
+                </div>
+                : <div id={'calculate'}></div>
+        }
+        <div className={'col-12'}>
+
         </div>
     </div>
 }

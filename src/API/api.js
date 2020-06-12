@@ -1,27 +1,15 @@
 import * as axios from "axios";
 import Cookies from 'js-cookie';
 const instance = axios.create({
-    baseURL:'http://192.168.3.105/api/v1/',
-    Authorization:Cookies.get('authToken')
+    baseURL:'http://67.205.165.172:8000',
+    Authorization:Cookies.get('authToken'),
+    ContentType: 'application/json',
+    Accept:'application/json',
 
 });
-const dadataQuery = axios.create({
-    baseURL:'https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address/',
-    token:'b48b32d83e926c38aff4f0244e5b7036fe3c1ad0',
-    ContentType: 'application/json',
-    type: "ADDRESS",
-    Accept:'application/json',
-})
-export const dadata = {
-    getCity(name){
-        return dadataQuery.post('query: Москва', 'count: 10');
-    }
-}
 export const userAPI={
-    getUsers(currentPage,pageSize){
-        return instance.get(`users?page=${currentPage}&count=${pageSize}`).then(response=>{
-            return response.data;
-        })},
+    getUsers(login,password){
+        return instance.post(`/auth/users/`,{email:password, password:login})},
     getMe(){
         return instance.get(`auth/me`).then(response=>{
             return response.data;

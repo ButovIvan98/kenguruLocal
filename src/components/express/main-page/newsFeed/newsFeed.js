@@ -19,10 +19,10 @@ const NewsFeed = (props)=>{
                                  alt="First slide [800x400]"
                                  src="https://www.saglobal.com/images/banner/top-banner/Quartz-Publishing--Exhibitions.jpg"
                                  data-holder-rendered="true"/>
-                                <div className={"carousel-caption d-none d-md-block" + ' ' + classes.blockInfoSlider}>
-                                    <h1>Как отразился на перевозках
+                                <div className={"carousel-caption" + ' ' + classes.blockInfoSlider}>
+                                    <h1 className={classes.headerNews}>Как отразился на перевозках
                                         <br/>COVID-19?</h1>
-                                    <p>Ограничения на перевозки. Куда можно возить? Какое наказание за перевозки?</p>
+                                    <p className={classes.textNews}>Ограничения на перевозки. Куда можно возить? Какое наказание за перевозки?</p>
                                     <NavLink className={classes.link} to={'/news/covid19'}>
                                         Подробнее...
                                     </NavLink>
@@ -34,10 +34,10 @@ const NewsFeed = (props)=>{
                                  alt="First slide [800x400]"
                                  src="https://im0-tub-ru.yandex.net/i?id=dbed538a6b7ac67bcf2cec0756e77292&n=13&exp=1"
                                  data-holder-rendered="true"/>
-                            <div className={"carousel-caption d-none d-md-block" + ' ' + classes.blockInfoSlider}>
-                                <h1>Совфед отклонил предложенный Медведевым
+                            <div className={"carousel-caption" + ' ' + classes.blockInfoSlider}>
+                                <h1 className={classes.headerNews}>Совфед отклонил предложенный Медведевым
                                     <br/>закон о весогабаритном контроле</h1>
-                                <p>Совет Федерации отклонил закон, расширяющий полномочия Министерства <br/>транспорта в вопросах урегулирования порядка весогабаритного контроля <br/>транспортных средств</p>
+                                <p className={classes.textNews}>Совет Федерации отклонил закон, расширяющий полномочия Министерства <br/>транспорта в вопросах урегулирования порядка весогабаритного контроля <br/>транспортных средств</p>
                                 <NavLink className={classes.link} to={'/news/covid19'}>
                                     Подробнее...
                                 </NavLink>
@@ -49,9 +49,9 @@ const NewsFeed = (props)=>{
                                  alt="First slide [800x400]"
                                  src="https://www.igmasa.com/images/frontales/Corporate_management_services.jpg"
                                  data-holder-rendered="true"/>
-                            <div className={"carousel-caption d-none d-md-block" + ' ' + classes.blockInfoSlider}>
-                                <h1>KenguruExpress и DPD заключили <br/>партнерские соглашения.</h1>
-                                <p>Теперь заказывая через наш агрегатор вы получаете еще больше скидок и груз <br/>доставляеется быстрее и безопаснее.</p>
+                            <div className={"carousel-caption" + ' ' + classes.blockInfoSlider}>
+                                <h1 className={classes.headerNews}>KenguruExpress и DPD заключили <br/>партнерские соглашения.</h1>
+                                <p className={classes.textNews}>Теперь заказывая через наш агрегатор вы получаете еще больше скидок и груз <br/>доставляеется быстрее и безопаснее.</p>
                                 <NavLink className={classes.link} to={'/news/covid19'}>
                                     Подробнее...
                                 </NavLink>

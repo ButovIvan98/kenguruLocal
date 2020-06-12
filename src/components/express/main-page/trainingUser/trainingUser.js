@@ -7,7 +7,7 @@ const TrainingUser = (props) => {
         <div className={'row'}>
             <div className={'col-12 pt-3 pb-4 text-center'}>
                 <h2 className={classes.headerText}>
-                    Не знаете как пользоваться? Мы научим
+                    Не знаете как пользоваться? <br/>Мы научим
                 </h2>
             </div>
             <div className={'col-12'}>

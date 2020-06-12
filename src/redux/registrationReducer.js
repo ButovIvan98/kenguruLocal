@@ -1,3 +1,5 @@
+import {userAPI} from "../API/api";
+
 const INPUT_TEXT_EMAIL = 'INPUT_TEXT_EMAIL';//Емаил
 const INPUT_TEXT_PASSWORD = 'INPUT_TEXT_PASSWORD';//Пароль
 const NOTIFICATION = 'NOTIFICATION';//уведомление
@@ -99,6 +101,9 @@ export const updateChecked = (value) => {
 /*Добавление User-а*/
 export const addUser = (password, email) => {
     return (dispatch) => {
+        // userAPI.getUsers(email,password).then(response=>{
+        //     return console.log(response.data);
+        // })
         dispatch(addUserStatus(true));
     }
 };
@@ -119,7 +124,7 @@ export const Email = (email) => {
 export const Password = (password) => {
     return (dispatch) => {
         dispatch(updateTextPassword(password));
-        if (!/[a-zA-Z0-9]/.test(password) || password.length < 6) {
+        if (!/[a-zA-Z0-9]/.test(password) || password.length < 8) {
             dispatch(checkValidPassword(false, '1px solid red'));
         } else {
             dispatch(checkValidPassword(true, '1px solid #c0e4f9'));

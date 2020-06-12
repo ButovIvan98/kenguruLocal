@@ -44,7 +44,6 @@ const Permanent_main = (props) => {
             </div>
             {props.auth.isAuth
                 ? <div className={'col-lg-3 d-lg-block text-right d-none align-self-center'}>
-                    <NavLink className={classes.phoneNumber} to="tel:+78006004044">8(800)-600-40-44</NavLink>
                     <span onClick={updateStatus} className={classes.listHeader}>
                         <img id={props.companyId}
                              src={props.companyLogo}

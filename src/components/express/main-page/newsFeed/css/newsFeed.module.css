@@ -47,3 +47,17 @@
     cursor: pointer;
     background: rgba(0,0,0,0.5);
 }
+.headerNews{
+    font-size: 25px;
+}
+.textNews{
+    font-size: 16px;
+}
+@media (max-width: 992px) {
+    .headerNews{
+        font-size: 17px;
+    }
+    .textNews{
+        font-size: 13px;
+    }
+}

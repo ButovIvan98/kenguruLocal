@@ -8,6 +8,7 @@ let UPDATE_WEIGHT = 'UPDATE_WEIGHT';
 let UPDATE_QUANTITY = 'UPDATE_QUANTITY';
 let UPDATE_COMMENT = 'UPDATE_COMMENT';
 let UPDATE_VOLUME = 'UPDATE_VOLUME';
+let STATUS_CALCULATE='STATUS_CALCULATE';
 
 let VALID_WIDTH = 'VALID_STATUS_WIDTH';
 let VALID_HEIGHT = 'VALID_HEIGHT';
@@ -42,6 +43,7 @@ let initialState = {
     ],
     statusDetailedParameters: true,
     destinationCityList: [],
+    statusCalculate:false,//статус калькуляции(идет расчет или нет)
     listCargo: [
         {
             id: 1,
@@ -106,6 +108,11 @@ let initialState = {
 }
 const CalculateFormReducer = (state = initialState, action) => {
     switch (action.type) {
+        case STATUS_CALCULATE:
+            return {
+                ...state,
+                statusCalculate: action.bodyStatusCalculation
+            }
         case UPDATE_WIDTH:
             return {
                 ...state,
@@ -249,6 +256,15 @@ const updateQuantity = (quantity, id, valid) => ({
 });
 const updateTextComment = (comment) => ({type: UPDATE_COMMENT, bodyComment: comment});
 const addCargoData = (value) => ({type: ADD_CARGO, bodyIdCargo: value});
+const updateStatusCalculation=(status)=>({type:STATUS_CALCULATE,bodyStatusCalculation:status});//Изменение статуса идет в данный момент расчет или нет
+
+export const statusCalculate =(status)=>{
+    return(dispatch)=>{
+        dispatch(updateStatusCalculation(true));
+        window.location.href = '#calculate'
+        setTimeout(()=>{dispatch(updateStatusCalculation(false))},10000)
+    }
+}
 export const updateStatusParameters = (status, id) => ({
     type: STATUS_DETAILED_PARAMETERS,
     bodyStatusParameters: !status,

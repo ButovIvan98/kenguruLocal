@@ -7,7 +7,7 @@ const AUTH = 'AUTH';
 let initialState = {
     email: '',
     password: '122',
-    isAuth: true,
+    isAuth: false,
     token: '',
     rememberMe:false
 };

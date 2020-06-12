@@ -34,18 +34,18 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const SignIn = (props) => {
-    const classNamees = useStyles();
+    const classes = useStyles();
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline/>
-            <div className={classNamees.paper}>
-                <Avatar className={classNamees.avatar}>
+            <div className={classes.paper}>
+                <Avatar className={classes.avatar}>
                     <LockOutlinedIcon/>
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     Авторизация
                 </Typography>
-                <form className={classNamees.form} noValidate>
+                <form className={classes.form} noValidate>
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -84,7 +84,7 @@ const SignIn = (props) => {
                                 fullWidth
                                 variant="contained"
                                 color="primary"
-                                className={classNamees.submit}
+                                className={classes.submit}
                                 onClick={()=>(props.auth(props.authorization.email, props.authorization.password))}
                             >
                                 Авторизация

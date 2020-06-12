@@ -193,3 +193,18 @@
     margin-bottom: 0;
     cursor: pointer;
 }
+@media (max-width: 992px) {
+    .header{
+        font-size: 22px;
+    }
+    .blockBottomCalculate{
+        width: 100%;
+        max-width: 450px;
+    }
+    .blockList{
+        width: 100%;
+    }
+    .blockWhite{
+        width: 100%;
+    }
+}

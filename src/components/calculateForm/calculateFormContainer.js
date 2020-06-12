@@ -1,6 +1,16 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {updateStatusParameters, widthData, weightData, lenghtData, heightData, quantityData, volumeData, addCargo} from '../../redux/calculateFormReducer'
+import {
+    updateStatusParameters,
+    widthData,
+    weightData,
+    lenghtData,
+    heightData,
+    quantityData,
+    volumeData,
+    addCargo,
+    statusCalculate
+} from '../../redux/calculateFormReducer'
 import CalculateForm from "./calculateForm";
 
 class CalculateFormContainer extends React.Component{
@@ -14,5 +24,16 @@ let mapStateToProps =(state)=>{
         calculate:state.CalculateFormPage
     }
 }
-const ExportCalculateFormContainer = connect(mapStateToProps,{updateStatusParameters, addCargo, widthData, weightData, volumeData, lenghtData, heightData, quantityData})(CalculateFormContainer);
+const ExportCalculateFormContainer = connect(mapStateToProps,
+    {
+        updateStatusParameters,
+        addCargo,
+        widthData,
+        weightData,
+        volumeData,
+        lenghtData,
+        heightData,
+        quantityData,
+        statusCalculate
+    })(CalculateFormContainer);
 export default ExportCalculateFormContainer;
