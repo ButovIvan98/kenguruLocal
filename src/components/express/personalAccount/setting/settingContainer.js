@@ -2,15 +2,21 @@ import React from 'react';
 import {connect} from "react-redux";
 import Setting from "./setting";
 import {
-    activateUser, codeReviews,
+    activateUser, activationEmail, activationEmailUser, codeReviews,
     updateClickButtonCode,
     updateMiddleName,
     updateName,
     updateNumber,
-    updateSurname
+    updateSurname, userEmailActive
 } from "../../../../redux/settingReducer";
 
 class SettingContainer extends React.Component {
+    componentDidMount() {
+        if(this.props.setting.activationEmail===false){
+            this.props.userEmailActive();
+        }
+    }
+
     render() {
         return <Setting {...this.props}/>
     }
@@ -30,5 +36,6 @@ let ExportSettingContainer = connect(mapStateToProps,
         updateClickButtonCode,
         activateUser,
         codeReviews,
+        userEmailActive
     })(SettingContainer);
 export default ExportSettingContainer;

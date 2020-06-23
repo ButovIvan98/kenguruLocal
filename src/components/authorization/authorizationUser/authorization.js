@@ -56,8 +56,10 @@ const SignIn = (props) => {
                         name="email"
                         autoComplete="email"
                         autoFocus
-                        onChange={(e) => (props.updateEmail(e.target.value))}
+                        onChange={(e) => (props.Email(e.target.value))}
                         value={props.authorization.email}
+                        error={props.authorization.validEmail ? false:true}
+                        helperText={props.authorization.validEmail ? '' : 'Введите Email'}
                     />
                     <TextField
                         variant="outlined"
@@ -92,7 +94,7 @@ const SignIn = (props) => {
                     }
                     <Grid container>
                         <Grid item xs>
-                            <NavLink to={'/reloadPassword'} variant="body2">
+                            <NavLink to={props.authorization.validEmail ? '/reloadPassword' : '/login'} onClick={props.authorization.validEmail ? ()=>{props.reloadPasswordUser(props.authorization.email)}: null} variant="body2">
                                 Забыли пароль?
                             </NavLink>
                         </Grid>

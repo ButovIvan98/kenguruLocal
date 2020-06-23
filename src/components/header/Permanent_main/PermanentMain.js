@@ -4,9 +4,9 @@ import {NavLink} from "react-router-dom";
 import KenguruIcons from "../../common/svgImg/kenguruIcons";
 import KenguruText from "../../common/svgImg/kenguruText";
 import ListMenu from "../../common/svgImg/listMenu";
-import BlockMainSelect from "../../common/selectBlock/blockMainSelect";
 import ListMenuIn from "../../common/svgImg/listMenuIn";
 import ModalMobileMenu from "../../common/modal/modalMobileMenu/modalMobileMenu";
+import BlockMainSelectContainerExport from "../../common/selectBlock/blockMainSelectContainer";
 
 const Permanent_main = (props) => {
     let updateStatus = () => {
@@ -40,18 +40,18 @@ const Permanent_main = (props) => {
                         <path d="M1 14H14L13 16H0L1 14Z" fill="white"></path>
                     </svg>
                 </button>
-                <ModalMobileMenu props={props} listCompany={props.DataCompany}/>
+                <ModalMobileMenu  props={props} listCompany={props.DataCompany}/>
             </div>
-            {props.auth.isAuth
+            { props.auth.isAuth
                 ? <div className={'col-lg-3 d-lg-block text-right d-none align-self-center'}>
                     <span onClick={updateStatus} className={classes.listHeader}>
-                        <img id={props.companyId}
-                             src={props.companyLogo}
+                        <img id={props.activeCompany.id}
+                             src={props.activeCompany.photo}
                              className={classes.imgHeader}/><text
-                        className={classes.listHeader}>{props.companyName}</text>
-                        {props.status === "none" ? <ListMenu/> : <ListMenuIn/>}
+                        className={classes.listHeader}>{props.activeCompany.isPersonal ? props.activeCompany.username : props.activeCompany.companyTitle}</text>
+                        {props.status === false ? <ListMenu/> : <ListMenuIn/>}
                     </span>
-                    <BlockMainSelect props={props} listCompany={props.DataCompany} status={props.status}/>
+                    <BlockMainSelectContainerExport />
                 </div>
                 : <div className={'col-lg-3 d-lg-block text-right d-none align-self-center'}>
                     <NavLink className={classes.phoneNumber} to="tel:+78006004044">8(800)-600-40-44</NavLink>

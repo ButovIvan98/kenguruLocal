@@ -13,6 +13,7 @@ import InputMask from 'react-input-mask';
 import BeenhereIcon from "@material-ui/icons/Beenhere";
 import {DropzoneArea} from "material-ui-dropzone";
 import settingStyle from './css/setting.css';
+import {userEmailActive} from "../../../../redux/settingReducer";
 
 const Setting = (props) => {
     const useStyles = makeStyles((theme) => ({
@@ -37,6 +38,10 @@ const Setting = (props) => {
     function getStepContent(step) {
         switch (step) {
             case 0:
+                if(props.setting.activationEmail===true){
+                    handleNext();
+                }
+                console.log(props.setting.activationEmail);
                 return <div className={'row'}>
                     <div className={'col-lg-12'}>
                         <h3>
@@ -129,7 +134,7 @@ const Setting = (props) => {
                                                maskChar=" "
                                                value={props.setting.confirmationCode}
                                                onChange={(e) => {
-                                                   props.codeReview(e.target.value)
+                                                   //props.codeReview(e.target.value)
                                                }}
                                     >
                                         <TextField
@@ -146,36 +151,33 @@ const Setting = (props) => {
                     }
                 </div>;
             default:
-                return 'Белисима';
+                return null;
         }
     }
-
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
     const steps = getSteps();
-
     const handleNext = () => {
         if (activeStep === 0) {
             setActiveStep((prevActiveStep) => prevActiveStep + 1);
         }
         if (activeStep === 1) {
             if (props.setting.validSurname && props.setting.validMiddleName && props.setting.validName) {
+
                 setActiveStep((prevActiveStep) => prevActiveStep + 1);
+
             } else return null
         }
         if (activeStep === 2) {
             setActiveStep((prevActiveStep) => prevActiveStep + 1);
         }
     };
-
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
     return <div className={'container-fluid' + ' ' + classesStyle.blockContainer}>
-        <div className={'container'}>
-            {
 
-            }
+        <div className={'container'}>
             {props.setting.activeUser
                 ? <div className={'row' + ' ' + classesStyle.blockSetting}>
                     <div className={'col-lg-12 mt-3 mb-3 text-center'}>
@@ -192,7 +194,7 @@ const Setting = (props) => {
                                             <div className={classes.actionsContainer}>
                                                 <div>
                                                     <Button
-                                                        disabled={activeStep === 0}
+                                                        disabled={activeStep === 0 || activeStep === 1 }
                                                         onClick={handleBack}
                                                         className={classes.button}
                                                     >

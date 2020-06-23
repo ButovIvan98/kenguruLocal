@@ -91,8 +91,8 @@ let initialState = {
             tariff: 'Автотранспорт',
             rating: '3.2',
             deliveryTime: '2',
-            priceBefore: '214',
-            priceAfter: '1000'
+            priceBefore: '1000',
+            priceAfter: '879'
         },
         {
             id: 4,
@@ -101,8 +101,8 @@ let initialState = {
             tariff: 'Автотранспорт',
             rating: '3.2',
             deliveryTime: '5',
-            priceBefore: '50',
-            priceAfter: '50'
+            priceBefore: '1260',
+            priceAfter: '780'
         },
     ]
 }

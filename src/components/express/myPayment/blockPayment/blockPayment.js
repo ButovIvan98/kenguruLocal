@@ -7,23 +7,23 @@ const BlockPayment = (props) => {
         <div className={'row mb-3 mt-3 mr-0 ml-0 ' + ' ' + classes.listOrder}>
             <hr className={'d-block d-lg-none' + ' ' + classes.line}/>
             <div className={'col-lg-2 mb-lg-0 mb-3 col-12 '} style={{borderLeft: '2px solid' + ' ' + 'red'}}>
-                <span className={classes.textHeader}>Счет от 11.04.2019</span>
+                <span className={classes.textHeader}>Счет от 15.05.2019</span>
                 <p className={classes.text}>Требуется оплата</p>
             </div>
             <div className={'col-lg-3 mb-lg-0 mb-3 col-12' + ' ' + classes.cityIn}>
-                <span className={classes.textHeader}>ООО «Рога и Копыта»</span>
+                <span className={classes.textHeader}>ООО «DELL»</span>
                 <p className={classes.text}>Компания</p>
             </div>
             <div className={'col-lg-3 mb-lg-0 mb-3 col-12'}>
-                <span className={classes.textHeader}>С 12.02.2019 по 15.03.2019</span>
+                <span className={classes.textHeader}>С 15.04.2020 по 15.04.2020</span>
                 <p className={classes.text}>Период</p>
             </div>
             <div className={'col-lg-1 mb-lg-0 mb-2 col-6'}>
-                <span className={classes.textHeader} style={{color: '#28a4eb'}}>70</span>
+                <span className={classes.textHeader} style={{color: '#28a4eb'}}>1</span>
                 <p className={classes.text}>Заявки</p>
             </div>
             <div className={'col-lg-1 col-6 pl-lg-0 pr-lg-0'}>
-                <span className={classes.textHeader}>4 500 ₽</span>
+                <span className={classes.textHeader}>7 236 ₽</span>
                 <p className={classes.text}>Сумма</p>
             </div>
             <div className={'col-lg-2 mt-lg-0 mt-2 col-12 align-self-center text-lg-right text-center'}>

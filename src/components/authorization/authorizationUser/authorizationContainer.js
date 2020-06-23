@@ -3,8 +3,8 @@ import SignIn from "./authorization";
 import {connect} from "react-redux";
 import {
     auth,
-    updateEmail,
-    updatePassword, updateRememberMe,
+    Email,
+    updatePassword, updateRememberMe,reloadPasswordUser
 
 } from "../../../redux/authReducer";
 
@@ -20,9 +20,9 @@ let mapStateToProps = (state) => {
     }
 };
 const AuthorizationContainerExport = connect(mapStateToProps, {
-    updateEmail,
+    Email,
     updatePassword,
     auth,
-    updateRememberMe
+    updateRememberMe,reloadPasswordUser
 })(AuthorizationContainer);
 export default AuthorizationContainerExport

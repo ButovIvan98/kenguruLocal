@@ -14,6 +14,7 @@ let initialState = {
     emailUser: '',
     passwordUser: '',
     newPasswordUser: '',
+
 };
 const UserReducer = (state = initialState, action) => {
     switch (action.type) {

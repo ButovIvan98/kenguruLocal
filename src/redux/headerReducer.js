@@ -1,7 +1,10 @@
 import Cookies from "js-cookie";
+import {companyAPI, userAPI} from "../API/api";
+import {checkToken} from "./authReducer";
 
-const UPDATE_STATUS='UPDATE_STATUS';
-const UPDATE_ACTIVE_COMPANY ='UPDATE_ACTIVE_COMPANY';
+const UPDATE_STATUS = 'UPDATE_STATUS';
+const UPDATE_ACTIVE_COMPANY = 'UPDATE_ACTIVE_COMPANY';
+const ADD_COMPANY = 'ADD_COMPANY';
 let initialState = {
     Express_main: [
         {id: '/', title: 'Калькулятор', active: 'classNamees.active'},
@@ -16,17 +19,17 @@ let initialState = {
         {id: '/my_cargo', title: 'Мои грузы', active: 'classNamees.active'},
         {id: '/my_contact', title: 'Адресная книга', active: 'classNamees.active'},
     ],
-    statusBlockMain:'none',
-    company:[
-        {id:0,logo:'https://pngimg.com/uploads/apple_logo/apple_logo_PNG19670.png', name:'ОАО "apple"',responsiblePerson:'Саньков К.Е.'},
-        {id:1,logo:'https://turbologo.ru/blog/wp-content/uploads/2018/10/wordpress-600x381.png', name:'ОАО"Вольскцемент"',responsiblePerson:'Великосельских М.В.'},
-        {id:2,logo:'https://xn--80aed5aobb1a.xn--p1ai/wp-content/uploads/mercedes-benz-emblem-1926-1920x1080.png', name:'ОАО "Mercedes-Benz"',responsiblePerson:'Дудин Н.А.'},
-        {id:3,logo:'https://i.pinimg.com/originals/d5/c7/3c/d5c73cdc88a63224ec80532c548982c9.png', name:'ОАО "DELL"',responsiblePerson:'Бутов И.Ю.'},
-    ],
-    currentCompanyName:'ОАО "DELL',
-    currentCompanyLogo:'https://i.pinimg.com/originals/d5/c7/3c/d5c73cdc88a63224ec80532c548982c9.png',
-    currentCompanyId:'3',
-    currentCompanyResponsiblePerson:'Саньков К.Е.',
+    statusBlockMain: false,//Открыто или закрыто меню
+    listCompany: [],//Список моих компаний
+    activeCompany: {
+        id: null,
+        companyTitle: null,//
+        isLegal: null,//true если юр. лицо
+        isOwnerCompany: null,//Владелец компании
+        isPersonal: null,//true если физ. лицо
+        photo: null,
+        username: null
+    }
 };
 const SidebarReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -38,33 +41,89 @@ const SidebarReducer = (state = initialState, action) => {
         case UPDATE_ACTIVE_COMPANY:
             return {
                 ...state,
-                currentCompanyName:action.bodyActionNameCompany,
-                currentCompanyLogo:action.bodyActionLogoCompany,
-                currentCompanyId: action.bodyActionIdCompany,
-                currentCompanyResponsiblePerson: action.bodyActionPersonCompany
+                activeCompany: {
+                    companyTitle: action.bodyCompanyTitle,
+                    id: action.bodyId,
+                    isLegal: action.bodyIsLegal,
+                    isOwnerCompany: action.bodyIsOwnerCompany,
+                    isPersonal: action.bodyIsPersonal,
+                    photo: action.bodyPhoto,
+                    username: action.bodyUsername
+                }
+            }
+        case ADD_COMPANY:
+            return {
+                ...state,
+                listCompany: action.bodyCompany
             }
         default:
             return state;
     }
 }
 const updateStatus = (status) => ({type: UPDATE_STATUS, statusBody: status});
-const updateCompanyActive = (idCompany,nameCompany, logoCompany,person) => ({type: UPDATE_ACTIVE_COMPANY, bodyActionNameCompany: nameCompany,bodyActionLogoCompany:logoCompany,bodyActionIdCompany:idCompany,bodyActionPersonCompany:person});
-export const newStatus = (status)=>{
-    return(dispatch)=>{
-        if(status==='block'){
-            dispatch(updateStatus('none'));
-        }
-        else
-        {
-            dispatch(updateStatus('block'))
-        }
+const updateCompanyActive = (id, companyTitle, isLegal, isOwnerCompany, isPersonal, photo, username) => ({
+    type: UPDATE_ACTIVE_COMPANY,
+    bodyId: id,
+    bodyCompanyTitle: companyTitle,
+    bodyIsLegal: isLegal,
+    bodyIsOwnerCompany: isOwnerCompany,
+    bodyIsPersonal: isPersonal,
+    bodyPhoto: photo,
+    bodyUsername: username
+});
+const updateCompany = (company) => ({type: ADD_COMPANY, bodyCompany: company});
+/*Открытие и закрытие меню*/
+export const newStatus = (status) => {
+    return (dispatch) => {
+        if (status === true) dispatch(updateStatus(false));
+        else dispatch(updateStatus(true));
     }
 };
-export const updateCompanyActiveData=(id,nameCompany,logoCompany,person)=>{
-
-    return(dispatch)=>{
-        dispatch(updateCompanyActive(id,nameCompany,logoCompany,person));
-        Cookies.set('idCompany', id)
+/*Отправка запроса на выход с сайта и удаление токена.*/
+export const logout = () => {
+    return (dispatch) => {
+        userAPI.deleteToken().then(response => {
+            document.cookie = 'auth_token=' + '';
+            dispatch(checkToken());
+        }).catch(error => {
+            console.log(Cookies.get('auth_token'))
+        });
     }
 }
+/*Заполнение списка моих компаний*/
+export const listCompany = () => {
+    return (dispatch) => {
+        companyAPI.listCompanyHeader().then(response => {
+            dispatch(updateCompany(response.data));
+            if(Cookies.get('id_company')===undefined){
+                Cookies.set('id_company',response.data[0].id);
+            }
+            console.log(Cookies.get('id_company'));
+            response.data.map(nav => {
+                if (String(nav.id) === String(Cookies.get('id_company'))) {
+                    dispatch(updateCompanyActive(
+                        nav.id,
+                        nav.company_title,
+                        nav.is_legal,
+                        nav.is_owner_company,
+                        nav.is_personal,
+                        nav.photo,
+                        nav.username
+                    ))
+                }
+            })
+        }).catch(error => {
+            console.log(error.response.data);
+        })
+    }
+};
+
+export const updateCompanyActiveData = (id, companyTitle, isLegal, isOwnerCompany, isPersonal, photo, username) => {
+    return (dispatch) => {
+        console.log(id, companyTitle, isLegal, isOwnerCompany, isPersonal, photo, username);
+        dispatch(updateCompanyActive(id, companyTitle, isLegal, isOwnerCompany, isPersonal, photo, username));
+        Cookies.set('id_company', id)
+    }
+};
+
 export default SidebarReducer;

@@ -57,6 +57,10 @@
 .header{
     font-size: 28px;
 }
+/*Модальное окно*/
+.blockModal{
+
+}
 @media (max-width: 992px) {
     .line{
         margin-top: 10px;

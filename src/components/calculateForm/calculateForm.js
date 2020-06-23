@@ -81,7 +81,7 @@ const CalculateForm = (props) => {
                             <div className={'col-lg-4 mt-lg-0 mt-2 pr-1 pl-1'}>
                                 <Autocomplete
                                     id="combo-box-demo"
-                                    options={props.calculate.destinationCityList.map((option) => option.title)}
+                                    options={props.calculate.sendingCityList.map((option) => option.title)}
                                     renderInput={(params) => <TextField {...params} label="Город доставки груза"
                                                                         variant="outlined"/>}
                                     className={classes.inputStyle}

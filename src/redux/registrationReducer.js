@@ -1,4 +1,5 @@
 import {userAPI} from "../API/api";
+import {auth} from "./authReducer";
 
 const INPUT_TEXT_EMAIL = 'INPUT_TEXT_EMAIL';//Емаил
 const INPUT_TEXT_PASSWORD = 'INPUT_TEXT_PASSWORD';//Пароль
@@ -101,10 +102,12 @@ export const updateChecked = (value) => {
 /*Добавление User-а*/
 export const addUser = (password, email) => {
     return (dispatch) => {
-        // userAPI.getUsers(email,password).then(response=>{
-        //     return console.log(response.data);
-        // })
-        dispatch(addUserStatus(true));
+
+        userAPI.getUsers(email,password).then(response=>{
+            dispatch(addUserStatus(true));
+            //dispatch(auth(password,email));
+        }).catch(error=>{console.log(error.response.data)})
+        //dispatch(addUserStatus(true));
     }
 };
 

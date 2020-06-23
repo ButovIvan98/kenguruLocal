@@ -1,3 +1,5 @@
+import {userAPI} from "../API/api";
+
 const INPUT_SURNAME = 'INPUT_SURNAME';//Изменения фамилии
 const INPUT_MIDDLE_NAME = 'INPUT_MIDDLE_NAME';//Изменения отчества
 const INPUT_NAME = 'INPUT_NAME';//Изменения имени
@@ -6,6 +8,7 @@ const BUTTON_SENDING_CODE = 'BUTTON_SENDING_CODE';//Отправка кода д
 const TIMER = 'TIMER';//Таймер отсчета до возможности отправки нового кода подтверждения аккаунта
 const ACTIVATE_USER='ACTIVATE_USER';//Активация пользователя
 const REVIEW_CODE='REVIEW_CODE';//Проверка кода активации
+const ACTIVATION_EMAIL='ACTIVATION_EMAIL'//Активация емайла
 
 let initialState = {
     surname:null,//Фамилия
@@ -20,9 +23,10 @@ let initialState = {
     validInputCode:false,//Отображает поле для ввода проверочного кода телефона
     countClickButtonCode:0,//Количество высланных кодов
     validTimer:false,//Отображение таймера
-    activeUser:false,//Активирован юзер или нет, если да то появляются обычные настройки, если нет то - обязатыльные поля для активации выпадают.
+    activeUser:true,//Активирован юзер или нет, если да то появляются обычные настройки, если нет то - обязатыльные поля для активации выпадают.
     confirmationCode:'1234',//Текстовое поле кода активации
     validCodeActivate:false,//Проверка правильный ли код или нет
+    activationEmail:false,
 };
 
 const SettingReducer = (state = initialState, action) => {
@@ -76,6 +80,12 @@ const SettingReducer = (state = initialState, action) => {
                 confirmationCode:action.bodyCode,
                 validCodeActivate: action.bodyValidCodeActivate
             }
+        case ACTIVATION_EMAIL:
+
+            return {
+                ...state,
+                activationEmail: action.bodyActivationEmail
+            }
         default:
             return {...state}
     }
@@ -89,6 +99,7 @@ const clickButtonCode = (status) => ({type:BUTTON_SENDING_CODE, bodyValidClickBu
 const timerData = (time) =>({type:TIMER, bodyTimer:time});
 const activeUser = (status) =>({type:ACTIVATE_USER, bodyActiveUser:status});
 const activeCodeData=(status, code)=>({type:REVIEW_CODE, bodyValidCodeActivate:status, bodyCode:code});
+const activeEmail=(value)=>({type:ACTIVATION_EMAIL, bodyActivationEmail:value});
 
 /*Валидация и обновление информации поля --фамилия*/
 export const updateSurname=(surname)=>{
@@ -112,6 +123,7 @@ export const updateMiddleName=(middleName)=>{
         }
     }
 }
+
 /*Валидация и обновление информации поля --Имя*/
 export const updateName=(name)=>{
     return(dispatch)=>{
@@ -157,6 +169,18 @@ export const codeReviews=(code)=>{
             //     dispatch(activeCodeData(false, number));
             // }
         }
+};
+
+export const userEmailActive = () => {
+    return(dispatch)=>{
+        let array = (window.location.pathname).split('/')
+        userAPI.postActivationEmail(array[array.length - 1],array[array.length - 2]).then(response=>{
+            dispatch(activeEmail(true));
+        }).catch(error=>{
+            console.log(error.response.data)
+        })
+        //console.log(JSON.stringify(props.match.params));
+    }
 }
 /*Активация аккаунта пользователя*/
 export const activateUser=()=>{

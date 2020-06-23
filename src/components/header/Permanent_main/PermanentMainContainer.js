@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
 import Permanent_main from "./PermanentMain";
-import {newStatus, updateCompanyActiveData} from "../../../redux/headerReducer";
+import {logout, newStatus, updateCompanyActiveData} from "../../../redux/headerReducer";
 
 class PermanentMainContainer extends React.Component {
     render() {
@@ -10,14 +10,11 @@ class PermanentMainContainer extends React.Component {
 }
 let mapStateToProps = (state) => {
     return {
+        activeCompany:state.Sidebar.activeCompany,
         StatusBlock: state.Sidebar.statusBlockMain,
-        DataCompany:state.Sidebar.company,
-        companyName:state.Sidebar.currentCompanyName,
-        companyLogo:state.Sidebar.currentCompanyLogo,
-        companyId:state.Sidebar.currentCompanyId,
-        ResponsiblePerson:state.Sidebar.currentCompanyResponsiblePerson,
+        DataCompany:state.Sidebar.listCompany,
         auth:state.AuthPage
     }
 }
-const PermanentContainerMain = connect(mapStateToProps, {newStatus, updateCompanyActiveData})(PermanentMainContainer);
+const PermanentContainerMain = connect(mapStateToProps, {newStatus, updateCompanyActiveData,logout})(PermanentMainContainer);
 export default PermanentContainerMain;

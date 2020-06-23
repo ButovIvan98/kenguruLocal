@@ -66,6 +66,7 @@
     text-align: left;
     color: white;
     transition: 0.3s;
+    cursor: pointer;
 }
 .mainBlockLink:hover{
     opacity: 0.5;

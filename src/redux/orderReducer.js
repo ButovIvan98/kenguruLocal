@@ -1,4 +1,30 @@
 let initialState = {
+    addressBook:[
+        {
+            id: 1,
+            user: 1,
+            nameLocality:'Москва',//Наименование города
+            locality: 1,//Код города
+            street: 'test',//Наименование улицы
+            street_type: '',//Тип улицы (пл. ул. и тд)
+            house: "test",//Дом
+            house_type: "test",//Тип дома
+            block: "test",//Курпус дома (А и Б и тд)
+            block_type: "test",//Тип корпуса
+            flat: "test",//Квартира
+            flat_type: "test",//Тип квартиры (кв, офис и тд)
+            zip: "test",//Индекс
+            company: "test",//Наименование компании
+            surname: "test",//Фамилия
+            name: "test",//Имя
+            patronymic: "test",//Отчество
+            phone: "test",//Телефон
+            phone_extension: "test",//Добавочный номер
+            phone2: "test",//Телефон 2
+            phone2_extension: "test",//Добавочный номер 2
+            comment: "test"//Комментарий
+        }
+    ],
     orderInfo:{
         idOrder:null,//id заказа
         imgCompany:null,//Логотип компании

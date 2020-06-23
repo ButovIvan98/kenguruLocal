@@ -6,12 +6,14 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import {BrowserRouter, Switch} from "react-router-dom";
 import {Provider} from "react-redux";
+import ExportAppContainer from "./appContainer";
+import BlockMainSelect from "./components/common/selectBlock/blockMainSelect";
 
 let rerenderEntireTree = () => {
     ReactDOM.render(
         <BrowserRouter>
             <Provider store={store}>
-                <App/>
+                <ExportAppContainer/>
             </Provider>
         </BrowserRouter>
         , document.getElementById('root'));

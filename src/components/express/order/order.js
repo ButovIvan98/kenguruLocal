@@ -6,8 +6,62 @@ import BlockDate from "./blockDate/blockDate";
 import BlockPersonalInformation from "./blockPersonalInformation/blockPersonalInformation";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import { makeStyles } from '@material-ui/core/styles';
+import Modal from '@material-ui/core/Modal';
+
+function rand() {
+    return Math.round(Math.random() * 20) - 10;
+}
+
+function getModalStyle() {
+    const top = 50 + rand();
+    const left = 50 + rand();
+
+    return {
+        top: `${top}%`,
+        left: `${left}%`,
+        transform: `translate(-${top}%, -${left}%)`,
+    };
+}
+
+const useStyles = makeStyles((theme) => ({
+    paper: {
+        position: 'absolute',
+        width: 400,
+        backgroundColor: theme.palette.background.paper,
+        border: '2px solid #000',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+    },
+}));
 
 const Order = (props) => {
+    const classes2 = useStyles();
+    // getModalStyle is not a pure function, we roll the style only on the first render
+    const [modalStyle] = React.useState(getModalStyle);
+    const [open, setOpen] = React.useState(false);
+
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const modalAddress = (
+        <div  className={'container'}>
+            <div className={'row'}>
+                <div className={'col-12'}>
+                    <div className={'row>'}>
+                     <div className={'col-2'}>
+
+                     </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
     return <div className={'container-fluid' + classes.blockMain}>
         <div className={'container'}>
             <div className={'row'}>
@@ -27,7 +81,15 @@ const Order = (props) => {
                             <h5 className={classes.headerText}>Адрес отправителя</h5>
                         </div>
                         <div className={'col-lg-6 col-12 text-center text-lg-right mt-2'}>
-                            <button className={classes.buttonAddressBook}>Выбрать из адресной книги</button>
+                            <button className={classes.buttonAddressBook} onClick={handleOpen}>Выбрать из адресной книги</button>
+                            <Modal
+                                open={open}
+                                onClose={handleClose}
+                                aria-labelledby="simple-modal-title"
+                                aria-describedby="simple-modal-description"
+                            >
+                                {modalAddress}
+                            </Modal>
                         </div>
                         <div className={'col-lg-12'}>
                             <hr className={classes.line}/>
