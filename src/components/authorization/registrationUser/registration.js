@@ -103,7 +103,7 @@ const SignUp = (props) => {
                                         autoComplete="email"
                                         value={props.registrationPage.email}
                                         onChange={(e) => (props.Email(e.target.value))}
-                                        helperText={props.registrationPage.validEmail ? '' : 'Введите Email'}
+                                        helperText={props.registrationPage.validEmail ? '' : props.registrationPage.helperTextEmail}
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
@@ -119,7 +119,7 @@ const SignUp = (props) => {
                                         autoComplete="current-password"
                                         value={props.registrationPage.password}
                                         onChange={(e) => (props.Password(e.target.value))}
-                                        helperText={props.registrationPage.validPassword ? '' : 'Введите пароль'}
+                                        helperText={props.registrationPage.validPassword ? '' : props.registrationPage.helperTextPassword}
                                     />
                                 </Grid>
                                 <Grid item xs={12}>

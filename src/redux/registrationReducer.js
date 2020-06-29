@@ -8,6 +8,9 @@ const NOTIFICATION = 'NOTIFICATION';//уведомление
 const VALID_EMAIL = 'VALID_EMAIL';//Валидация емаил
 const VALID_PASSWORD = 'VALID_PASSWORD';//Валидация пароля
 
+const HELPER_TEXT_EMAIL='HELPER_TEXT_EMAIL';//Текст сообщение об ошибке по Email
+const HELPER_TEXT_PASSWORD='HELPER_TEXT_PASSWORD';//Текст сообщение об ошибке по паролю
+
 const ADD_USER = 'ADD_USER';//Добавление юзера
 const RELOAD_PASSWORD = 'RELOAD_PASSWORD';//Отправика запроса на восстановление
 
@@ -16,8 +19,10 @@ const UPDATE_RELOAD_EMAIL = 'UPDATE_RELOAD_EMAIL';//Емаил для восст
 let initialState = {
     email: '',
     validEmail: false,
+    helperTextEmail:'Введите Email',
     password: '',
     validPassword: false,
+    helperTextPassword:'Введите пароль',
     addUser: false,
     notifications: false,
     reloadPasswordEmail: '',
@@ -65,6 +70,16 @@ const RegistrationReducer = (state = initialState, action) => {
                 ...state,
                 statusSendingRecovery:action.bodyStatusSendingRecovery
             };
+        case HELPER_TEXT_EMAIL:
+            return {
+                ...state,
+                helperTextEmail: action.bodyHelperTextEmail
+            }
+        case HELPER_TEXT_PASSWORD:
+            return {
+                ...state,
+                helperTextPassword: action.bodyHelperTextPassword
+            }
         default:
             return {...state}
     }
@@ -77,6 +92,10 @@ const updateCheckedNotification = (status) => ({type: NOTIFICATION, bodyStatusNo
 /*Изменение статуса валидациии полей*/
 const checkValidEmail = (status) => ({type: VALID_EMAIL, emailStatus: status});
 const checkValidPassword = (status) => ({type: VALID_PASSWORD, passwordStatus: status});
+
+/*Изменение текста ошибке*/
+const updateHelperTextEmail=(helperText)=>({type:HELPER_TEXT_EMAIL, bodyHelperTextEmail:helperText});
+const updateHelperTextPassword=(helperText)=>({type:HELPER_TEXT_PASSWORD, bodyHelperTextPassword:helperText});
 
 /*Изменение статуса, если отправка данных на сервер прошла успешно.*/
 const addUserStatus = (status) => ({type: ADD_USER, bodyStatusUser: status});
@@ -106,8 +125,17 @@ export const addUser = (password, email) => {
         userAPI.getUsers(email,password).then(response=>{
             dispatch(addUserStatus(true));
             //dispatch(auth(password,email));
-        }).catch(error=>{console.log(error.response.data)})
-        //dispatch(addUserStatus(true));
+        }).catch(error=>{
+            if(error.response.data.email===undefined){
+                dispatch(updateHelperTextPassword(error.response.data.password[0]));
+                dispatch(checkValidPassword(false));
+            }
+            else{
+                dispatch(updateHelperTextEmail(error.response.data.email[0]));
+                dispatch(checkValidEmail(false))
+            }
+            })
+
     }
 };
 

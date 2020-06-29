@@ -1,4 +1,4 @@
-import {CalculateAPI} from "../API/api";
+import {CalculateAPI, cityAPI} from "../API/api";
 import {updateObjectInArray} from "../components/utils/updateElementMassive";
 
 let UPDATE_WIDTH = 'UPDATE_WIDTH';
@@ -20,27 +20,22 @@ let STATUS_DETAILED_PARAMETERS = 'STATUS_DETAILED_PARAMETERS';//Статус п�
 let ADD_CARGO = 'ADD_CARGO';//Добавить поля
 let SEARCH_TRANSPORT_COMPANY = 'SEARCH_TRANSPORT_COMPANY';//Поиск транпортных компаний
 
+const SEARCH_CITY_DEPARTURE='SEARCH_CITY_DEPARTURE';//Поиск города отправки
+const SEARCH_CITY_DESTINATION='SEARCH_CITY_DESTINATION';//Поиск города доставки
+
 let UPDATE_DATA = 'UPDATE_DATA';//Обновление данных
 let UPDATE_TEXT_SENDING = 'UPDATE_TEXT_SENDING';//Город отправления
 let UPDATE_TEXT_DESTINATION = 'UPDATE_TEXT_DESTINATION';//Город прибытия
 
 let initialState = {
-    sendingCity: [
-        {
-            nameCity: '',
-            cladr: '',
-            fias: '',
-            index: '',
-
-        }
-    ],
-    textSendingCity: '',
-    textDestinationCity: '',
-    sendingCityList: [
-        {id: 1, title: "Москва"},
-        {id: 2, title: "Барнаул"},
-        {id: 3, title: "Новосибирск"},
-    ],
+    cityOfDeparture:{
+        listCity:[],
+        city:{},
+    },
+    cityOfDestination:{
+        listCity:[],
+        city:[],
+    },
     statusDetailedParameters: true,
     destinationCityList: [],
     statusCalculate:false,//статус калькуляции(идет расчет или нет)
@@ -185,12 +180,18 @@ const CalculateFormReducer = (state = initialState, action) => {
         case UPDATE_TEXT_SENDING:
             return {
                 ...state,
-                textSendingCity: action.bodySendingCity
+                cityOfDeparture: {
+                    listCity: action.bodyListCityDeparture,
+                    city: action.bodyCityDeparture
+                }
             }
         case UPDATE_TEXT_DESTINATION:
             return {
                 ...state,
-                textDestinationCity: action.bodyDestinationCity
+                cityOfDestination: {
+                    listCity: action.bodyListCityDestination,
+                    city: action.bodyCityDestination
+                }
             }
         case UPDATE_VOLUME:
             return {
@@ -205,6 +206,20 @@ const CalculateFormReducer = (state = initialState, action) => {
                 ...state,
                 resultCalculate: action.dataBody
             }
+        case SEARCH_CITY_DEPARTURE:
+            return {
+                ...state,
+                cityOfDeparture:{
+                    listCity: action.bodyListCityDeparture
+                }
+            }
+        case SEARCH_CITY_DESTINATION:
+            return {
+                ...state,
+                cityOfDestination:{
+                    listCity: action.bodyListCityDestination
+                }
+            }
         default:
             return {
 
@@ -213,11 +228,9 @@ const CalculateFormReducer = (state = initialState, action) => {
     }
     return state;
 };
-const updateTextSendingCity = (sendingCity) => ({type: UPDATE_TEXT_SENDING, bodySendingCity: sendingCity});
-const updateTextDestinationCity = (destinationCity) => ({
-    type: UPDATE_TEXT_DESTINATION,
-    bodyDestinationCity: destinationCity
-});
+
+
+
 const updateWidth = (width, id, valid) => ({
     type: UPDATE_WIDTH,
     bodyWidth: width,
@@ -254,9 +267,16 @@ const updateQuantity = (quantity, id, valid) => ({
     bodyIdQuantity: id,
     bodyValidQuantity: valid
 });
-const updateTextComment = (comment) => ({type: UPDATE_COMMENT, bodyComment: comment});
 const addCargoData = (value) => ({type: ADD_CARGO, bodyIdCargo: value});
 const updateStatusCalculation=(status)=>({type:STATUS_CALCULATE,bodyStatusCalculation:status});//Изменение статуса идет в данный момент расчет или нет
+
+const updateCityDepartureInformation=(city,listCity)=>({type:UPDATE_TEXT_SENDING, bodyCityDeparture:city,bodyListCityDeparture:listCity});//Добавление полной информации о городе отправления груза
+const updateCityDestinationInformation=(city,listCity)=>({type:UPDATE_TEXT_DESTINATION, bodyCityDestination:city,bodyListCityDestination:listCity});//Добавление полной информации о городе доставки
+
+const updateListCityDeparture=(list)=>({type:SEARCH_CITY_DEPARTURE,bodyListCityDeparture:list});//Добавление списка поиска городов отправки груза
+const updateListCityDestination=(list)=>({type:SEARCH_CITY_DESTINATION,bodyListCityDestination:list});//Добавление списка поиска городов доставки груза
+
+
 
 export const statusCalculate =(status)=>{
     return(dispatch)=>{
@@ -310,7 +330,7 @@ export const heightData = (value, id) => {
         }
     }
 };
-export const lenghtData = (value, id) => {
+export const lengthData = (value, id) => {
     return (dispatch) => {
         if (!/^[\d,.]*$/.test(value)) {
         } else {
@@ -330,6 +350,48 @@ export const quantityData = (value, id) => {
         }
     }
 };
+/*Получение полной информации о городе отправки*/
+export const updateCityDeparture=(city,listCity)=>{
+    return(dispatch)=>{
+        cityAPI.cityInformation(city).then(response=>{
+            dispatch(updateCityDepartureInformation(response.data[0],listCity));
+        }).catch(error=>{
+
+        })
+    }
+}
+/*Автокомплит города отправки*/
+export const ListCityDeparture=(city)=>{
+    return(dispatch)=>{
+        if(city.length >= 3) {
+            cityAPI.searchCity(city).then(response => {
+                dispatch(updateListCityDeparture(response.data));
+            }).catch(error=>{
+                });
+        }
+    }
+}
+/*Получение полной информации о городе отправки*/
+export const updateCityDestination=(city, listCity)=>{
+    return(dispatch)=>{
+        cityAPI.cityInformation(city).then(response=>{
+            dispatch(updateCityDestinationInformation(response.data[0], listCity));
+        }).catch(error=>{
+
+        })
+    }
+}
+/*Автокомплит города отправки*/
+export const ListCityDestination=(city)=>{
+    return(dispatch)=>{
+        if(city.length >= 3) {
+            cityAPI.searchCity(city).then(response => {
+                dispatch(updateListCityDestination(response.data));
+            }).catch(error=>{
+            });
+        }
+    }
+}
 export const volumeData = (value, id) => {
     return (dispatch) => {
         if (!/^[\d,.]*$/.test(value)) {

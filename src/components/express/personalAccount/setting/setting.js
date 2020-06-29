@@ -13,7 +13,6 @@ import InputMask from 'react-input-mask';
 import BeenhereIcon from "@material-ui/icons/Beenhere";
 import {DropzoneArea} from "material-ui-dropzone";
 import settingStyle from './css/setting.css';
-import {userEmailActive} from "../../../../redux/settingReducer";
 
 const Setting = (props) => {
     const useStyles = makeStyles((theme) => ({
@@ -35,10 +34,11 @@ const Setting = (props) => {
     function getSteps() {
         return ['Подтвердите Email', 'Заполните ФИО', 'Подтвердите телефон'];
     }
+
     function getStepContent(step) {
         switch (step) {
             case 0:
-                if(props.setting.activationEmail===true){
+                if (props.setting.activationEmail === true) {
                     handleNext();
                 }
                 console.log(props.setting.activationEmail);
@@ -71,10 +71,10 @@ const Setting = (props) => {
                             label="Имя"
                             variant="outlined"
                             onChange={(e) => {
-                                props.updateMiddleName(e.target.value)
+                                props.updateName(e.target.value)
                             }}
-                            value={props.setting.middleName}
-                            error={props.setting.validMiddleName ? false : true}
+                            value={props.setting.name}
+                            error={props.setting.validName ? false : true}
                         />
                     </div>
                     <div className={'col-lg-4'}>
@@ -83,10 +83,10 @@ const Setting = (props) => {
                             label="Отчество"
                             variant="outlined"
                             onChange={(e) => {
-                                props.updateName(e.target.value)
+                                props.updateMiddleName(e.target.value)
                             }}
-                            value={props.setting.name}
-                            error={props.setting.validName ? false : true}
+                            value={props.setting.middleName}
+                            error={props.setting.validMiddleName ? false : true}
                         />
                     </div>
                 </div>;
@@ -113,7 +113,7 @@ const Setting = (props) => {
                     <div className={'col-lg-8'}>
                         {props.setting.validButtonCode
                             ? <button onClick={() => {
-                                props.updateClickButtonCode()
+                                props.updateClickButtonCode(props.setting.number)
                             }} className={classesStyle.buttonCode}>
                                 Выслать код
                             </button>
@@ -127,46 +127,44 @@ const Setting = (props) => {
                     </div>
                     {
                         props.setting.validCodeActivate
-                            ? '32132'
-                            : props.setting.validInputCode
-                                ? <div className={'col-lg-4 mt-3'}>
-                                    <InputMask mask="9-9-9-9"
-                                               maskChar=" "
-                                               value={props.setting.confirmationCode}
-                                               onChange={(e) => {
-                                                   //props.codeReview(e.target.value)
-                                               }}
-                                    >
-                                        <TextField
-                                            className={classesStyle.input}
-                                            label="Код подтверждения"
-                                            variant="outlined"
-                                            type={"tel"}
-                                            disableUnderline
-                                            //error={props.setting.validNumber ? false : true}
-                                        />
-                                    </InputMask>
-                                </div>
-                                : ''
+                            ? null
+                            : (props.setting.validInputCode
+                            ? <div className={'col-lg-4 mt-3'}>
+                                <InputMask mask="9-9-9-9"
+                                           maskChar=" "
+                                           value={props.setting.confirmationCode}
+                                           onChange={(e) => {
+                                               props.codeReviewsNumber(e.target.value, props.setting.number)
+                                           }}
+                                >
+                                    <TextField
+                                        className={classesStyle.input}
+                                        label="Код подтверждения"
+                                        variant="outlined"
+                                        disableUnderline
+                                        error={props.setting.validCodeActivate ? false : true}
+                                    />
+                                </InputMask>
+                            </div>
+                            : '')
                     }
                 </div>;
             default:
                 return null;
         }
     }
+
     const classes = useStyles();
-    const [activeStep, setActiveStep] = React.useState(0);
+    const [activeStep, setActiveStep] = React.useState(props.setting.validFormEmail ? (props.setting.validFormFIO ? (props.setting.validFormPhone ? 3 : 2) : 1) : 0);
     const steps = getSteps();
     const handleNext = () => {
         if (activeStep === 0) {
             setActiveStep((prevActiveStep) => prevActiveStep + 1);
         }
         if (activeStep === 1) {
-            if (props.setting.validSurname && props.setting.validMiddleName && props.setting.validName) {
-
+            if (props.setting.validSurname  && props.setting.validName) {
                 setActiveStep((prevActiveStep) => prevActiveStep + 1);
-
-            } else return null
+            }
         }
         if (activeStep === 2) {
             setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -176,7 +174,6 @@ const Setting = (props) => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
     return <div className={'container-fluid' + ' ' + classesStyle.blockContainer}>
-
         <div className={'container'}>
             {props.setting.activeUser
                 ? <div className={'row' + ' ' + classesStyle.blockSetting}>
@@ -194,7 +191,7 @@ const Setting = (props) => {
                                             <div className={classes.actionsContainer}>
                                                 <div>
                                                     <Button
-                                                        disabled={activeStep === 0 || activeStep === 1 }
+                                                        disabled={activeStep === 0 || activeStep === 1}
                                                         onClick={handleBack}
                                                         className={classes.button}
                                                     >
@@ -203,8 +200,18 @@ const Setting = (props) => {
                                                     <Button
                                                         variant="contained"
                                                         color="primary"
-                                                        onClick={handleNext}
+                                                        onClick={() => {
+                                                            handleNext();
+                                                            if (activeStep === steps.length - 2) {
+                                                                if (props.setting.validSurname && props.setting.validName) {
+                                                                    console.log(props.setting.surname, props.setting.name, props.setting.middleName)
+                                                                    props.updateFioUser(props.setting.surname, props.setting.name, props.setting.middleName)
+                                                                }
+                                                            }
+                                                        }
+                                                        }
                                                         className={classes.button}
+                                                        disabled={activeStep === steps.length - 1 ? true : false}
                                                     >
                                                         {activeStep === steps.length - 1 ? 'Готово' : 'Далее'}
                                                     </Button>
@@ -348,7 +355,7 @@ const Setting = (props) => {
                                     <div className={'col-lg-6 mb-3'}>
                                         {props.setting.validButtonCode
                                             ? <button onClick={() => {
-                                                props.updateClickButtonCode()
+                                                props.updateClickButtonCode(props.setting.number)
                                             }} className={classesStyle.buttonCode}>
                                                 Выслать код
                                             </button>
@@ -367,9 +374,10 @@ const Setting = (props) => {
                                         ? <div className={'col-lg-6 mt-3 mb-3'}>
                                             <InputMask mask="9-9-9-9"
                                                        maskChar=" "
-                                                       value={ props.setting.confirmationCode}
-                                                       onChange = { (e) => (props.codeReviews(e.target.value))
-                                                       }
+                                                       value={props.setting.confirmationCode}
+                                                       onChange={(e) => {
+                                                           props.codeReviewsNumber(e.target.value)
+                                                       }}
                                             >
                                                 <TextField
                                                     className={classesStyle.input}
@@ -384,13 +392,12 @@ const Setting = (props) => {
                                         : ''
                                     }
                                     <div className={'col-lg-12 text-center mb-3'}>
-                                        <button  className={classesStyle.buttonCode}>
+                                        <button className={classesStyle.buttonCode}>
                                             Сохранить изменения
                                         </button>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>

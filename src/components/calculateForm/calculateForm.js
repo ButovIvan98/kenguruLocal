@@ -18,6 +18,7 @@ import Car3 from "../common/svgImg/car3";
 import Car5 from "../common/svgImg/car5";
 import Car10 from "../common/svgImg/car10";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import {ListCityDeparture} from "../../redux/calculateFormReducer";
 
 const CalculateForm = (props) => {
     //debugger
@@ -37,7 +38,7 @@ const CalculateForm = (props) => {
             updateHeight={props.heightData}
             updateWidth={props.widthData}
             updateVolume={props.volumeData}
-            updateLenght={props.lenghtData}
+            updateLenght={props.lengthData}
             updateQuantity={props.quantityData}
             updateStatus={props.updateStatusParameters}
             validVolume={option.validVolume}
@@ -71,21 +72,29 @@ const CalculateForm = (props) => {
                             <div className={'col-lg-4  pr-1 pl-1'}>
                                 <Autocomplete
                                     id="combo-box-demo"
-                                    options={props.calculate.sendingCityList.map((option) => option.title)}
-                                    renderInput={(params) => <TextField {...params} label="Город отправки груза"
-                                                                        variant="outlined"/>}
+                                    options={props.calculate.cityOfDeparture.listCity.map((option) => option.title)}
+                                    fullWidth={true}
+                                    renderInput={(params) => <TextField {...params} value={props.calculate.cityOfDeparture.city} onChange={(e)=>{ props.ListCityDeparture(e.target.value)}
+                                    } label="Город отправки груза" variant="outlined"/>}
                                     className={classes.inputStyle}
                                     noOptionsText={'Нет такого города'}
+                                    onChange={(event)=>{ props.updateCityDeparture(event.target.valueOf().innerText, props.calculate.cityOfDeparture.listCity)}}
                                 />
                             </div>
                             <div className={'col-lg-4 mt-lg-0 mt-2 pr-1 pl-1'}>
                                 <Autocomplete
                                     id="combo-box-demo"
-                                    options={props.calculate.sendingCityList.map((option) => option.title)}
-                                    renderInput={(params) => <TextField {...params} label="Город доставки груза"
-                                                                        variant="outlined"/>}
+                                    options={props.calculate.cityOfDestination.listCity.map((option) => option.title)}
+                                    renderInput={(params) => <TextField
+                                        {...params}
+                                        label="Город доставки груза"
+                                        variant="outlined"
+                                        onChange={(e)=>{ props.ListCityDestination(e.target.value)}}
+                                    />
+                                    }
                                     className={classes.inputStyle}
                                     noOptionsText={'Нет такого города'}
+                                    onChange={(event)=>{ props.updateCityDestination(event.target.valueOf().innerText, props.calculate.cityOfDestination.listCity)}}
                                 />
                             </div>
                             <div className={'col-lg-4 mt-lg-0 mt-2 pr-1 pl-1'}>

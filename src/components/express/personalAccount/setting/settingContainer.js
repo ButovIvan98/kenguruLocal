@@ -2,8 +2,8 @@ import React from 'react';
 import {connect} from "react-redux";
 import Setting from "./setting";
 import {
-    activateUser, activationEmail, activationEmailUser, codeReviews,
-    updateClickButtonCode,
+    activateUser, codeReviewsNumber, profileInfo,
+    updateClickButtonCode, updateEmailForm, updateFioUser,
     updateMiddleName,
     updateName,
     updateNumber,
@@ -12,9 +12,7 @@ import {
 
 class SettingContainer extends React.Component {
     componentDidMount() {
-        if(this.props.setting.activationEmail===false){
-            this.props.userEmailActive();
-        }
+        this.props.profileInfo();
     }
 
     render() {
@@ -35,7 +33,10 @@ let ExportSettingContainer = connect(mapStateToProps,
         updateNumber,
         updateClickButtonCode,
         activateUser,
-        codeReviews,
-        userEmailActive
+        codeReviewsNumber,
+        userEmailActive,
+        updateEmailForm,
+        updateFioUser,
+        profileInfo
     })(SettingContainer);
 export default ExportSettingContainer;

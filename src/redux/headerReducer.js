@@ -113,7 +113,6 @@ export const listCompany = () => {
                 }
             })
         }).catch(error => {
-            console.log(error.response.data);
         })
     }
 };

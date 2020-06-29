@@ -25,18 +25,41 @@ const auth = axios.create({
 
 
 export const companyAPI = {
-   listCompanyHeader(){
-       return instance().get('/profile/')
-   }
+    listCompanyHeader() {
+        return instance().get('/profile/')
+    }
+}
+export const cityAPI={
+    cityInformation(city){
+        return auth.post('/geo/locality/',{locality:city,count:1})
+    },
+    searchCity(city){
+        return auth.post('/geo/locality/',{locality:city,count:10})
+    }
 }
 export const userAPI = {
-    /*Отправка нового пароля*/
-    resetPassword(uid,token,password){
-        return auth.post('/auth/users/reset_password_confirm/',{uid,token,new_password:password})
+    /*Запорс на информацию о пользователе*/
+    profileInfo(){
+        return instance().get(`/profile/${Cookies.get('id_company')}/`)
+    },
+    /*Отпрвка ФИО*/
+    updateFIOData(surname, name, middleName) {
+        return instance().post('/users/me', {first_name: name, last_name: surname, patronymic: middleName})
+    },
+    /*Отправка кода*/
+    activateUserPhone(phone, code) {
+        return instance().post('/users/phone/verify', {phone, code})
+    },
+    /*Отправка номера на подтверждение*/
+    registerPhone(phone) {
+        return instance().post('/users/phone/register', {phone: phone})
+    },
+    resetPassword(uid, token, password) {
+        return auth.post('/auth/users/reset_password_confirm/', {uid, token, new_password: password})
     },
     /*Отправка запроса на ссылки на восстановление пароля*/
-    reloadPassword(email){
-      return auth.post('/auth/users/reset_password/', {email})
+    reloadPassword(email) {
+        return auth.post('/auth/users/reset_password/', {email})
     },
     /*Запрос для удаления токена если пользователь выходит с сайта.*/
     deleteToken() {

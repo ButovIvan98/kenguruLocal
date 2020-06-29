@@ -8,6 +8,8 @@ const RELOAD_PASSWORD = 'RELOAD_PASSWORD';
 const AUTH = 'AUTH';
 const UPDATE_PASSWORD_RESET='PASSWORD_RESET';//Обнолвение состояния поля новый пароль.
 const RESET_PASSWORD = 'RESET_PASSWORD';//Отправка запроса с новым паролем на восстановление пароля
+const HELPER_TEXT='HELPER_TEXT';//Информация об ошибки приходящая с сервера
+const VALID_EMAIL='VALID_EMAIL';
 
 let initialState = {
     email: null,
@@ -15,6 +17,7 @@ let initialState = {
     isAuth: false,
     rememberMe: false,
     validEmail: null,//Статус валидности email
+    helperText:'Введите email',
     validResetPassword:null,//Успешно ли введены данные(email) и выполнялся запрос для восстановления пароля
     passwordReset:null,//Состояние нового пароля
     validPasswordReset:null,//Валидность нового пароля
@@ -25,14 +28,18 @@ const AuthorezetionReducer = (state = initialState, action) => {
         case UPDATE_TEXT_LOGIN:
             return {
                 ...state,
-                email: action.emailBody,
-                validEmail: action.bodyStatus
+                email: action.emailBody
             };
         case UPDATE_TEXT_PASSWORD:
             return {
                 ...state,
                 password: action.passwordBody
             };
+        case VALID_EMAIL:
+            return {
+                ...state,
+                validEmail: action.validEmailBody
+            }
         case AUTH:
             return {
                 ...state,
@@ -59,16 +66,23 @@ const AuthorezetionReducer = (state = initialState, action) => {
                 ...state,
                 passwordRestored: action.bodyPasswordRestored
             }
+        case HELPER_TEXT:
+            return {
+                ...state,
+                helperText: action.bodyHelperText
+            }
         default:
             return state;
     }
 };
-const updateEmail = (email, status) => ({type: UPDATE_TEXT_LOGIN, emailBody: email, bodyStatus: status});
+const updateEmail = (email) => ({type: UPDATE_TEXT_LOGIN, emailBody: email});
 export const updatePassword = (password) => ({type: UPDATE_TEXT_PASSWORD, passwordBody: password});
 export const authIs = (status) => ({type: AUTH, authBody: status});
 export const updateRememberMe = (value) => ({type: REMEMBER_ME, bodyRememberMeStatus: !value});
 const updatePasswordReset = (password,status)=>({type:UPDATE_PASSWORD_RESET,bodyValidPasswordReset:status, bodyPasswordReset:password});
 const resetPasswordUser = (status)=>({type:RESET_PASSWORD, bodyPasswordRestored:status});
+const updateHelperText = (helperText)=>({type:HELPER_TEXT, bodyHelperText:helperText});
+const updateValidEmail = (status) =>({type:VALID_EMAIL,validEmailBody:status})
 
 /*Авторизация user-a*/
 export const auth = (email, password) => {
@@ -77,7 +91,8 @@ export const auth = (email, password) => {
             document.cookie = 'auth_token=' + response.data.auth_token;
             dispatch(authIs(true));
         }).catch(error => {
-            console.log(error.response.data)
+            dispatch(updateHelperText(error.response.data.non_field_errors[0]));
+            dispatch(updateValidEmail(false));
         })
     }
 };
@@ -87,6 +102,7 @@ export const checkToken = () => {
         userAPI.checkToken().then(response => {
             console.log(response.data.status);
             dispatch(authIs(true));
+            dispatch(listCompany());
             //dispatch(listCompany());
         }).catch(error => {
             dispatch(authIs(false));
@@ -98,9 +114,11 @@ export const checkToken = () => {
 export const Email = (email) => {
     return (dispatch) => {
         if (!/.+@.+\.[A-Za-z]+$/.test(email)) {
-            dispatch(updateEmail(email, false));
+            dispatch(updateEmail(email));
+            dispatch(updateValidEmail(false));
         } else {
-            dispatch(updateEmail(email, true));
+            dispatch(updateEmail(email));
+            dispatch(updateValidEmail(true));
         }
     }
 };

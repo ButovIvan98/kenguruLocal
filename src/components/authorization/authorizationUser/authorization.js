@@ -59,7 +59,7 @@ const SignIn = (props) => {
                         onChange={(e) => (props.Email(e.target.value))}
                         value={props.authorization.email}
                         error={props.authorization.validEmail ? false:true}
-                        helperText={props.authorization.validEmail ? '' : 'Введите Email'}
+                        helperText={props.authorization.validEmail ? '' : props.authorization.helperText}
                     />
                     <TextField
                         variant="outlined"
