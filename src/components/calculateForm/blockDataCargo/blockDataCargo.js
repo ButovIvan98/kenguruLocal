@@ -3,7 +3,7 @@ import classes from './blockDataCargo.module.css';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Button from '@material-ui/core/Button';
-import { NavLink } from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
 const BlockDataCargo = (props) => {
@@ -26,7 +26,7 @@ const BlockDataCargo = (props) => {
                                     startAdornment: <InputAdornment position="start">Кг</InputAdornment>,
                                 }}
                                 onChange={(e) => (props.updateWeight(e.target.value, props.id))}
-                            //helperText="Some important text"
+                                //helperText="Some important text"
                             />
                         </div>
                         <div className={'col-lg-4 col-6 pl-1 pr-1'}>
@@ -42,7 +42,7 @@ const BlockDataCargo = (props) => {
                                 }}
                                 value={props.volume}
                                 onChange={(e) => (props.updateVolume(e.target.value, props.id))}
-                            //helperText="Some important text"
+                                //helperText="Some important text"
                             />
                         </div>
                         <div className={'col-lg-4 mt-lg-0 mt-2 col-12  pl-1 pr-1 '}>
@@ -59,13 +59,15 @@ const BlockDataCargo = (props) => {
 
                                 value={props.quantity}
                                 onChange={(e) => (props.updateQuantity(e.target.value, props.id))}
-                            //helperText="Some important text"
+                                //helperText="Some important text"
                             />
                         </div>
                     </div>
                 </div>
                 <div className={'col-lg-5 col-12 text-lg-right text-center align-self-center'}>
-                    <span onClick={() => { props.updateStatus(props.status, props.id) }} className={classes.buttonAddParametr}>Подробные параметры</span>
+                    <span onClick={() => {
+                        props.updateStatus(props.status, props.id)
+                    }} className={classes.buttonAddParametr}>Подробные параметры</span>
                 </div>
             </div>
             : <div className={'row mt-3'}>
@@ -82,7 +84,7 @@ const BlockDataCargo = (props) => {
                             startAdornment: <InputAdornment position="start">См</InputAdornment>,
                         }}
                         onChange={(e) => (props.updateLenght(e.target.value, props.id))}
-                    //helperText="Some important text"
+                        //helperText="Some important text"
                     />
                 </div>
                 <div className={'col-lg-2 col-4 pl-1 pr-1'}>
@@ -98,7 +100,7 @@ const BlockDataCargo = (props) => {
                         InputProps={{
                             startAdornment: <InputAdornment position="start">См</InputAdornment>,
                         }}
-                    //helperText="Some important text"
+                        //helperText="Some important text"
                     />
                 </div>
                 <div className={'col-lg-2 col-4 pl-1 pr-1'}>
@@ -114,7 +116,7 @@ const BlockDataCargo = (props) => {
                         InputProps={{
                             startAdornment: <InputAdornment position="start">См</InputAdornment>,
                         }}
-                    //helperText="Some important text"
+                        //helperText="Some important text"
                     />
                 </div>
                 <div className={'col-lg-2 mt-lg-0 mt-2 col-4 pl-1 pr-1'}>
@@ -130,7 +132,7 @@ const BlockDataCargo = (props) => {
                         InputProps={{
                             startAdornment: <InputAdornment position="start">Кг</InputAdornment>,
                         }}
-                    //helperText="Some important text"
+                        //helperText="Some important text"
                     />
                 </div>
                 <div className={'col-lg-2 mt-lg-0 mt-2  col-4 pl-1 pr-1'}>
@@ -146,7 +148,7 @@ const BlockDataCargo = (props) => {
                         InputProps={{
                             startAdornment: <InputAdornment position="start">м³</InputAdornment>,
                         }}
-                    //helperText="Some important text"
+                        //helperText="Some important text"
                     />
                 </div>
                 <div className={'col-lg-2 mt-lg-0 mt-2 col-4 pl-1 pr-1'}>
@@ -162,13 +164,28 @@ const BlockDataCargo = (props) => {
                         InputProps={{
                             startAdornment: <InputAdornment position="start">Шт</InputAdornment>,
                         }}
-                    //helperText="Some important text"
+                        //helperText="Some important text"
                     />
                 </div>
             </div>
         }
+        {
+            (props.props.calculate.listCargo).length>1
+                ? <div className={'col-12 mt-2 text-right'}>
+                    <button className={classes.deleteCargo} onClick={() => {
+                        props.deleteCargo.deleteCargoList(props.props.calculate.listCargo, props.id)
+                    }}>
+                        <svg width="16" height="2" viewBox="0 0 16 1" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path opacity="0.8" d="M8 1V0M16 0.5H0" stroke="black"/>
+                        </svg>
+                        Удалить груз
+                    </button>
+                </div>
+                : null
+        }
+
         <div className={'col-12'}>
-            <hr className={classes.hrDashed} />
+            <hr className={classes.hrDashed}/>
         </div>
     </div>
 }

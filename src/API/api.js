@@ -14,7 +14,6 @@ export const instance = () => {
     )
 }
 
-
 const auth = axios.create({
     baseURL: 'http://67.205.165.172:8000',
     headers: {
@@ -23,7 +22,14 @@ const auth = axios.create({
     }
 });
 
-
+export const calculateAPI={
+    calculate(cargo, idCityDeparture,idCityDestination){
+        return auth.post('/rates/create/',{sender_city:idCityDeparture, receiver_city:idCityDestination, cargoes:cargo})
+    },
+    addCargo(type, delivery_type, height,length,width,weight,volume,volumetric_weight,quantity,comment){
+        return auth.post('/product/',{type, delivery_type, height, length, width, weight, volume, volumetric_weight, quantity, comment})
+    }
+}
 export const companyAPI = {
     listCompanyHeader() {
         return instance().get('/profile/')

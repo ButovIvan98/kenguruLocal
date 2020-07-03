@@ -50,7 +50,7 @@
 .buttonClick {
     outline: none !important;
     cursor: pointer;
-    width: 90%;
+    width: 100%;
     border: 0;
     background: linear-gradient(210.4deg, #18A2F1 16.79%, #0085FF 100%);
     border-radius: 40px;

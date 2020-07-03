@@ -34,6 +34,7 @@ const CalculateForm = (props) => {
     };
     let listCargo = Object.values(props.calculate.listCargo).map(option => (
         <BlockDataCargo
+            deleteCargo={props}
             updateWeight={props.weightData}
             updateHeight={props.heightData}
             updateWidth={props.widthData}
@@ -150,7 +151,7 @@ const CalculateForm = (props) => {
                             <div className={'col-12 text-right '}>
                                 <div className={classes.blockWhite}>
                                     <button className={classes.addCargo}
-                                            onClick={() => (props.addCargo(props.calculate.listCargo.length))}>
+                                            onClick={() => (props.addCargo(props.calculate.listCargo[(props.calculate.listCargo).length - 1].id))}>
                                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
                                             <path opacity="1" d="M8 0V16M16 8H0" stroke="#183C51"/>
@@ -242,6 +243,7 @@ const CalculateForm = (props) => {
                 <div className={'col-12 mb-3'}>
                     <div className={classes.blockBottomCalculate}>
                         <button onClick={() => {
+                            props.calculateTariff(props.calculate.listCargo,props.calculate.cityOfDeparture.city,props.calculate.cityOfDestination.city);
                             props.statusCalculate(props.calculate.statusCalculate);
                         }} className={classes.calculation}>Рассчитать
                         </button>

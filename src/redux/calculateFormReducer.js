@@ -1,4 +1,4 @@
-import {CalculateAPI, cityAPI} from "../API/api";
+import {calculateAPI, CalculateAPI, cityAPI} from "../API/api";
 import {updateObjectInArray} from "../components/utils/updateElementMassive";
 
 let UPDATE_WIDTH = 'UPDATE_WIDTH';
@@ -8,7 +8,7 @@ let UPDATE_WEIGHT = 'UPDATE_WEIGHT';
 let UPDATE_QUANTITY = 'UPDATE_QUANTITY';
 let UPDATE_COMMENT = 'UPDATE_COMMENT';
 let UPDATE_VOLUME = 'UPDATE_VOLUME';
-let STATUS_CALCULATE='STATUS_CALCULATE';
+let STATUS_CALCULATE = 'STATUS_CALCULATE';
 
 let VALID_WIDTH = 'VALID_STATUS_WIDTH';
 let VALID_HEIGHT = 'VALID_HEIGHT';
@@ -18,36 +18,40 @@ let VALID_QUANTITY = 'VALID_QUANTITY';
 
 let STATUS_DETAILED_PARAMETERS = 'STATUS_DETAILED_PARAMETERS';//Статус подробные параметры
 let ADD_CARGO = 'ADD_CARGO';//Добавить поля
+let DELETE_CARGO='DELETE_CARGO';//Удаление груза
 let SEARCH_TRANSPORT_COMPANY = 'SEARCH_TRANSPORT_COMPANY';//Поиск транпортных компаний
 
-const SEARCH_CITY_DEPARTURE='SEARCH_CITY_DEPARTURE';//Поиск города отправки
-const SEARCH_CITY_DESTINATION='SEARCH_CITY_DESTINATION';//Поиск города доставки
+const SEARCH_CITY_DEPARTURE = 'SEARCH_CITY_DEPARTURE';//Поиск города отправки
+const SEARCH_CITY_DESTINATION = 'SEARCH_CITY_DESTINATION';//Поиск города доставки
 
 let UPDATE_DATA = 'UPDATE_DATA';//Обновление данных
 let UPDATE_TEXT_SENDING = 'UPDATE_TEXT_SENDING';//Город отправления
 let UPDATE_TEXT_DESTINATION = 'UPDATE_TEXT_DESTINATION';//Город прибытия
 
+const ADD_LIST_RESULT='ADD_LIST_RESULT';//Результат расчета
+const CLEAR_LIST_RESULT='CLEAR_LIST_RESULT';//Очистка результатов поиска тк
+
 let initialState = {
-    cityOfDeparture:{
-        listCity:[],
-        city:{},
+    cityOfDeparture: {
+        listCity: [],
+        city: {},
     },
-    cityOfDestination:{
-        listCity:[],
-        city:[],
+    cityOfDestination: {
+        listCity: [],
+        city: [],
     },
     statusDetailedParameters: true,
     destinationCityList: [],
-    statusCalculate:false,//статус калькуляции(идет расчет или нет)
+    statusCalculate: false,//статус калькуляции(идет расчет или нет)
     listCargo: [
         {
             id: 1,
-            weight: '10',
-            volume: '10',
-            height: '10',
-            lenght: '10',
-            width: '10',
-            quantity: '10',
+            weight: null,
+            volume: null,
+            height: null,
+            lenght: null,
+            width: null,
+            quantity: null,
             status: true,
             validWeight: null,
             validVolume: null,
@@ -58,48 +62,7 @@ let initialState = {
         }
     ],
     type: 'parcel',
-    resultCalculate: [
-        {
-            id: 1,
-            imgCompany: 'https://kenguruexpress.ru/images/services/dimex.png',
-            company: 'Dimex',
-            tariff: 'Автотранспорт',
-            rating: '3.2',
-            deliveryTime: '12',
-            priceBefore: '754',
-            priceAfter: '479'
-        },
-        {
-            id: 2,
-            imgCompany: 'https://kenguruexpress.ru/images/services/gtd.jpg',
-            company: 'GTD',
-            tariff: 'Автотранспорт',
-            rating: '3.2',
-            deliveryTime: '10',
-            priceBefore: '754',
-            priceAfter: '568'
-        },
-        {
-            id: 3,
-            imgCompany: 'https://kenguruexpress.ru/images/services/glavdostavka.png',
-            company: 'Главдоставка',
-            tariff: 'Автотранспорт',
-            rating: '3.2',
-            deliveryTime: '2',
-            priceBefore: '1000',
-            priceAfter: '879'
-        },
-        {
-            id: 4,
-            imgCompany: 'https://kenguruexpress.ru/images/services/pony.jpg',
-            company: 'PonyExpress',
-            tariff: 'Автотранспорт',
-            rating: '3.2',
-            deliveryTime: '5',
-            priceBefore: '1260',
-            priceAfter: '780'
-        },
-    ]
+    resultCalculate: []
 }
 const CalculateFormReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -177,6 +140,11 @@ const CalculateFormReducer = (state = initialState, action) => {
                     }
                 ]
             }
+        case DELETE_CARGO:
+            return {
+                ...state,
+                listCargo: action.bodyResultCalculate
+            }
         case UPDATE_TEXT_SENDING:
             return {
                 ...state,
@@ -209,16 +177,37 @@ const CalculateFormReducer = (state = initialState, action) => {
         case SEARCH_CITY_DEPARTURE:
             return {
                 ...state,
-                cityOfDeparture:{
+                cityOfDeparture: {
                     listCity: action.bodyListCityDeparture
                 }
             }
         case SEARCH_CITY_DESTINATION:
             return {
                 ...state,
-                cityOfDestination:{
+                cityOfDestination: {
                     listCity: action.bodyListCityDestination
                 }
+            }
+        case  ADD_LIST_RESULT:
+            return {
+                ...state,
+                resultCalculate: [
+                    ...state.resultCalculate,{
+                        id: action.bodyIdResult,
+                        imgCompany: action.bodyImgCompany,
+                        company: action.bodyCompanyName,
+                        tariff: action.bodyTariffName,
+                        rating: action.bodyRatingCompany,
+                        deliveryTime: action.bodyDeliveryTime,
+                        priceBefore: action.bodyPriceBefore,
+                        priceAfter: action.bodyPriceAfter
+                    }
+                ]
+            }
+        case CLEAR_LIST_RESULT:
+            return {
+                ...state,
+                resultCalculate: []
             }
         default:
             return {
@@ -228,7 +217,6 @@ const CalculateFormReducer = (state = initialState, action) => {
     }
     return state;
 };
-
 
 
 const updateWidth = (width, id, valid) => ({
@@ -267,22 +255,45 @@ const updateQuantity = (quantity, id, valid) => ({
     bodyIdQuantity: id,
     bodyValidQuantity: valid
 });
+
 const addCargoData = (value) => ({type: ADD_CARGO, bodyIdCargo: value});
-const updateStatusCalculation=(status)=>({type:STATUS_CALCULATE,bodyStatusCalculation:status});//Изменение статуса идет в данный момент расчет или нет
+const deleteCargo = (value)=>({type:DELETE_CARGO, bodyResultCalculate:value})
 
-const updateCityDepartureInformation=(city,listCity)=>({type:UPDATE_TEXT_SENDING, bodyCityDeparture:city,bodyListCityDeparture:listCity});//Добавление полной информации о городе отправления груза
-const updateCityDestinationInformation=(city,listCity)=>({type:UPDATE_TEXT_DESTINATION, bodyCityDestination:city,bodyListCityDestination:listCity});//Добавление полной информации о городе доставки
+const updateStatusCalculation = (status) => ({type: STATUS_CALCULATE, bodyStatusCalculation: status});//Изменение статуса идет в данный момент расчет или нет
 
-const updateListCityDeparture=(list)=>({type:SEARCH_CITY_DEPARTURE,bodyListCityDeparture:list});//Добавление списка поиска городов отправки груза
-const updateListCityDestination=(list)=>({type:SEARCH_CITY_DESTINATION,bodyListCityDestination:list});//Добавление списка поиска городов доставки груза
+const addListCalculateResult=(id,img,company,tariff,rating,time,priceBefore,priceAfter) =>({
+    type:ADD_LIST_RESULT,
+    bodyIdResult:id,
+    bodyImgCompany:img,
+    bodyCompanyName:company,
+    bodyTariffName:tariff,
+    bodyRatingCompany:rating,
+    bodyDeliveryTime:time,
+    bodyPriceBefore:priceBefore,
+    bodyPriceAfter:priceAfter
+    });
+const clearListResult=()=>({type: CLEAR_LIST_RESULT});
+const updateCityDepartureInformation = (city, listCity) => ({
+    type: UPDATE_TEXT_SENDING,
+    bodyCityDeparture: city,
+    bodyListCityDeparture: listCity
+});//Добавление полной информации о городе отправления груза
+const updateCityDestinationInformation = (city, listCity) => ({
+    type: UPDATE_TEXT_DESTINATION,
+    bodyCityDestination: city,
+    bodyListCityDestination: listCity
+});//Добавление полной информации о городе доставки
 
+const updateListCityDeparture = (list) => ({type: SEARCH_CITY_DEPARTURE, bodyListCityDeparture: list});//Добавление списка поиска городов отправки груза
+const updateListCityDestination = (list) => ({type: SEARCH_CITY_DESTINATION, bodyListCityDestination: list});//Добавление списка поиска городов доставки груза
 
-
-export const statusCalculate =(status)=>{
-    return(dispatch)=>{
+export const statusCalculate = (status) => {
+    return (dispatch) => {
         dispatch(updateStatusCalculation(true));
         window.location.href = '#calculate'
-        setTimeout(()=>{dispatch(updateStatusCalculation(false))},10000)
+        setTimeout(() => {
+            dispatch(updateStatusCalculation(false))
+        }, 10000)
     }
 }
 export const updateStatusParameters = (status, id) => ({
@@ -292,12 +303,33 @@ export const updateStatusParameters = (status, id) => ({
 });
 const updateData = (data) => ({type: UPDATE_DATA, dataBody: data});
 
+/*Добавление груза*/
 export const addCargo = (value) => {
     return (dispatch) => {
         dispatch(addCargoData(value + 1));
     }
 }
-
+/*Удаление груза*/
+export const deleteCargoList=(listCargo,id)=>{
+    return(dispatch)=>{
+        let newListCargo=[];
+        for(let i=0;i<listCargo.length;i++){
+            if(String(listCargo[i].id)===String(id)){
+                console.log('!----------!');
+                console.log(listCargo);
+                console.log(id);
+                console.log(newListCargo);
+                console.log('!----------!');
+                listCargo.splice(i, 1)
+                dispatch(deleteCargo(listCargo))
+                console.log('----------');
+                console.log(listCargo);
+                console.log(id);
+                console.log('----------');
+            }
+        }
+    }
+}
 export const widthData = (value, id) => {
     return (dispatch) => {
         if (!/^[\d,.]*$/.test(value)) {
@@ -310,7 +342,6 @@ export const widthData = (value, id) => {
 };
 
 export const weightData = (value, id) => {
-    debugger
     return (dispatch) => {
         if (!/^[\d,.]*$/.test(value)) {
         } else {
@@ -351,43 +382,43 @@ export const quantityData = (value, id) => {
     }
 };
 /*Получение полной информации о городе отправки*/
-export const updateCityDeparture=(city,listCity)=>{
-    return(dispatch)=>{
-        cityAPI.cityInformation(city).then(response=>{
-            dispatch(updateCityDepartureInformation(response.data[0],listCity));
-        }).catch(error=>{
+export const updateCityDeparture = (city, listCity) => {
+    return (dispatch) => {
+        cityAPI.cityInformation(city).then(response => {
+            dispatch(updateCityDepartureInformation(response.data[0], listCity));
+        }).catch(error => {
 
         })
     }
 }
 /*Автокомплит города отправки*/
-export const ListCityDeparture=(city)=>{
-    return(dispatch)=>{
-        if(city.length >= 3) {
+export const ListCityDeparture = (city) => {
+    return (dispatch) => {
+        if (city.length >= 3) {
             cityAPI.searchCity(city).then(response => {
                 dispatch(updateListCityDeparture(response.data));
-            }).catch(error=>{
-                });
+            }).catch(error => {
+            });
         }
     }
 }
 /*Получение полной информации о городе отправки*/
-export const updateCityDestination=(city, listCity)=>{
-    return(dispatch)=>{
-        cityAPI.cityInformation(city).then(response=>{
+export const updateCityDestination = (city, listCity) => {
+    return (dispatch) => {
+        cityAPI.cityInformation(city).then(response => {
             dispatch(updateCityDestinationInformation(response.data[0], listCity));
-        }).catch(error=>{
+        }).catch(error => {
 
         })
     }
 }
 /*Автокомплит города отправки*/
-export const ListCityDestination=(city)=>{
-    return(dispatch)=>{
-        if(city.length >= 3) {
+export const ListCityDestination = (city) => {
+    return (dispatch) => {
+        if (city.length >= 3) {
             cityAPI.searchCity(city).then(response => {
                 dispatch(updateListCityDestination(response.data));
-            }).catch(error=>{
+            }).catch(error => {
             });
         }
     }
@@ -413,6 +444,46 @@ export const updateDataCheaper = (data) => {
         dispatch(updateData(data.sort(compareNumbersCheaper)));
     }
 };
+
+
+/*Отпарвка грузов и рассчет тарифов*/
+export const calculateTariff = (cargo, idCityDeparture, idCityDestination) => {
+    return (dispatch) => {
+        let flag = true;
+        let idCargo = [];
+        let idString='';
+        for(let i=0; i<cargo.length; i++){
+            calculateAPI.addCargo(null,
+                'cargo',
+                cargo[i].height, cargo[i].lenght,
+                cargo[i].width, cargo[i].weight,
+                cargo[i].volume, '',
+                cargo[i].quantity).then(response => {
+                if((cargo.length - 1) === i){
+                    idCargo.push(response.data.id);
+                    calculateAPI.calculate(idCargo, idCityDeparture.id, idCityDestination.id).then(response => {
+                        dispatch(clearListResult());
+                        let chatSocket = new WebSocket(
+                            'ws://67.205.165.172:8002/ws/calculation/?key=' + response.data.id);
+                        chatSocket.onmessage = function(e) {
+                            let data = JSON.parse(e.data);
+                            let message = JSON.parse(data['message']);
+                            console.log(message);
+                            dispatch(addListCalculateResult(message.id,'https://kenguruexpress.ru/images/services/dimex.png',message.operator,message.title,message.rating,message.term,message.common_price,message.price ))
+                        };
+                        chatSocket.onclose = function(e) {
+                            console.error('Chat socket closed unexpectedly');
+                        };
+                    }).catch(error => {
+                    })
+                }
+                else idCargo.push(response.data.id);
+            }).catch(error=> {
+            });
+        }
+    }
+}
+
 
 /*Сортировка массива по времени доставки*/
 export const updateDataFaster = (data) => {

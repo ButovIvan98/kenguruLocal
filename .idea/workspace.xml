@@ -3,20 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="7c8f36c5-f73a-4c7e-82fb-7aecf26b4ff2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/API/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/API/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/appContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/appContainer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/authorization/authorizationUser/authorization.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/authorization/authorizationUser/authorization.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/authorization/registrationUser/registration.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/authorization/registrationUser/registration.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/calculateForm/blockDataCargo/blockDataCargo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/calculateForm/blockDataCargo/blockDataCargo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/calculateForm/blockDataCargo/blockDataCargo.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/calculateForm/blockDataCargo/blockDataCargo.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/calculateForm/calculateForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/calculateForm/calculateForm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/calculateForm/calculateFormContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/calculateForm/calculateFormContainer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/express/personalAccount/setting/setting.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/personalAccount/setting/setting.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/express/personalAccount/setting/settingContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/personalAccount/setting/settingContainer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/Permanent_main/PermanentMainContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/Permanent_main/PermanentMainContainer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/authReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/authReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/main-page/calculateResult/blockResult/css/blockResult.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/main-page/calculateResult/blockResult/css/blockResult.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/calculateFormReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/calculateFormReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/headerReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/headerReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/registrationReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/registrationReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/settingReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/settingReducer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,7 +134,10 @@
       <workItem from="1592899964294" duration="8683000" />
       <workItem from="1592982755754" duration="4272000" />
       <workItem from="1592987426979" duration="6792000" />
-      <workItem from="1592994682543" duration="19613000" />
+      <workItem from="1592994682543" duration="29971000" />
+      <workItem from="1593510986447" duration="43000" />
+      <workItem from="1593511031121" duration="7185000" />
+      <workItem from="1593662571710" duration="15538000" />
     </task>
     <servers />
   </component>
@@ -167,11 +164,11 @@
       <screen x="49" y="27" width="1871" height="1053" />
     </state>
     <state x="717" y="301" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/49.27.1871.1053@49.27.1871.1053" timestamp="1592577983270" />
-    <state x="770" y="304" width="424" height="484" key="FileChooserDialogImpl" timestamp="1592899960114">
+    <state x="770" y="304" width="424" height="484" key="FileChooserDialogImpl" timestamp="1593511026850">
       <screen x="49" y="27" width="1871" height="1053" />
     </state>
     <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1586751958045" />
-    <state x="770" y="304" width="424" height="484" key="FileChooserDialogImpl/49.27.1871.1053@49.27.1871.1053" timestamp="1592899960114" />
+    <state x="770" y="304" width="424" height="484" key="FileChooserDialogImpl/49.27.1871.1053@49.27.1871.1053" timestamp="1593511026850" />
     <state x="473" y="187" key="SettingsEditor" timestamp="1592027174055">
       <screen x="49" y="27" width="1871" height="1053" />
     </state>
