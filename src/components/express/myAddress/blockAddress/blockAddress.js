@@ -6,7 +6,7 @@ const BlockAddress = (props) => {
         <div className={'row mb-2' + ' ' + classes.block}>
                 <div className={'col-lg-3 col-12 align-self-center'}>
                         <span className={classes.headerText}>
-                            {list.nameUser}
+                            {list.name} {list.patronymic}
                         </span>
                     <br/>
                     <span className={classes.headerTextDescription}>
@@ -15,7 +15,7 @@ const BlockAddress = (props) => {
                 </div>
                 <div className={'col-lg-3 col-12 align-self-center'}>
                         <span className={classes.headerText}>
-                            {list.nameCompany}
+                            {list.company}
                         </span>
                     <br/>
                     <span className={classes.headerTextDescription}>
@@ -25,7 +25,7 @@ const BlockAddress = (props) => {
                 </div>
                 <div className={'col-lg-4 col-12 align-self-center'}>
                         <span className={classes.headerText}>
-                            {list.addressCountry}, {list.addressCity}, {list.addressStreet} {list.addressNumberHouse}/ {list.addressNumberOffice}
+                            {list.locality_type} {list.locality_title}, {list.street_type} {list.street}, {list.house_type} {list.house}{list.block!==null ? `, ${list.block_type} ${list.block}` : ''}, {list.flat_type} {list.flat}
                         </span>
                     <br/>
                     <span className={classes.headerTextDescription}>
@@ -45,7 +45,7 @@ const BlockAddress = (props) => {
                             />
                         </svg>
                     </button>
-                    <button className={classes.update}>
+                    <button className={classes.update} onClick={()=>{props.delete(list.id)}}>
                         <svg className={classes.updateSize} viewBox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path className={classes.color}
                                   d="M6.40228 7.35768e-05C6.29645 -0.00136261 6.1914 0.0182395 6.09322 0.0577416C5.99504 0.0972437 5.90568 0.155859 5.83034 0.230182C5.755 0.304506 5.69518 0.393057 5.65435 0.490693C5.61352 0.58833 5.59249 0.693105 5.59249 0.798936H0.81024C0.704381 0.797439 0.599281 0.816996 0.501046 0.856471C0.402811 0.895946 0.313402 0.954551 0.238014 1.02888C0.162625 1.10321 0.102761 1.19178 0.0619014 1.28945C0.0210415 1.38712 0 1.49193 0 1.5978C0 1.70367 0.0210415 1.80848 0.0619014 1.90615C0.102761 2.00381 0.162625 2.09239 0.238014 2.16672C0.313402 2.24105 0.402811 2.29965 0.501046 2.33913C0.599281 2.3786 0.704381 2.39816 0.81024 2.39666H15.1898C15.2956 2.39816 15.4007 2.3786 15.499 2.33913C15.5972 2.29965 15.6866 2.24105 15.762 2.16672C15.8374 2.09239 15.8972 2.00381 15.9381 1.90615C15.979 1.80848 16 1.70367 16 1.5978C16 1.49193 15.979 1.38712 15.9381 1.28945C15.8972 1.19178 15.8374 1.10321 15.762 1.02888C15.6866 0.954551 15.5972 0.895946 15.499 0.856471C15.4007 0.816996 15.2956 0.797439 15.1898 0.798936H10.4075C10.4075 0.693105 10.3865 0.58833 10.3456 0.490693C10.3048 0.393057 10.245 0.304506 10.1697 0.230182C10.0943 0.155859 10.005 0.0972437 9.90678 0.0577416C9.8086 0.0182395 9.70354 -0.00136261 9.59772 7.35768e-05H6.40228ZM0.81024 3.99439V16.7762C0.81024 17.6589 1.52522 18.3739 2.40796 18.3739H13.592C14.4748 18.3739 15.1898 17.6589 15.1898 16.7762V3.99439H0.81024Z"

@@ -18,7 +18,7 @@ const MyAddress = (props) => {
                     <SearchAndFilter/>
                 </div>
             </div>
-            <BlockAddress data={props.myAddress.dataAddress}/>
+            <BlockAddress delete={props.deleteAddress} data={props.myAddress.listAddress}/>
         </div>
     </div>
 }

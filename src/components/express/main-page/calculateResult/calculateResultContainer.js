@@ -1,11 +1,22 @@
 import React from 'react';
 import CalculateResult from "./calculateResult";
 import {connect} from "react-redux";
-import {updateDataCheaper, updateDataFaster} from "../../../../redux/calculateFormReducer";
+import {
+    door_door, door_warehouse,
+    updateDataCheaper,
+    updateDataFaster,
+    warehouse_door,
+    warehouse_warehouse
+} from "../../../../redux/calculateFormReducer";
 
 class CalculateResultContainer extends React.Component {
     render() {
-        return <CalculateResult {...this.props}/>
+        if(this.props.calculate.formResultCalculate){
+            return  <CalculateResult {...this.props}/>
+        }
+        else {
+            return null
+        }
     }
 }
 
@@ -14,5 +25,5 @@ let mapStateToProps = (state) => {
         calculate: state.CalculateFormPage,
     }
 }
-let ExportCalculateResultContainer = connect(mapStateToProps, { updateDataFaster, updateDataCheaper })(CalculateResultContainer);
+let ExportCalculateResultContainer = connect(mapStateToProps, { updateDataFaster, updateDataCheaper, warehouse_warehouse,warehouse_door,door_door,door_warehouse})(CalculateResultContainer);
 export default ExportCalculateResultContainer;

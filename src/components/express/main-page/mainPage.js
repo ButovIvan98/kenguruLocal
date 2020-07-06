@@ -10,7 +10,7 @@ import NewsFeed from "./newsFeed/newsFeed";
 const MainPage = (props)=>{
     return <div className={'container-fluid pl-0 pr-0' + ' ' + classes.main }>
         <ExportCalculateFormContainer/>
-        <ExportCalculateResultContainer/>
+        <ExportCalculateResultContainer props={props}/>
         <InformationCompany/>
         <TrainingUser/>
         <InformationModuleCompany/>

@@ -12,6 +12,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FilterDelivery from "./filterDelivery/filterDelivery";
+import ExportFilterDeliveryContainer from "./filterDelivery/filterDeliveryContainer";
 
 const CalculateResult = (props) => {
     let listBLock = props.calculate.resultCalculate.map(nav => (
@@ -38,7 +39,7 @@ const CalculateResult = (props) => {
                 {listBLock}
             </div>
             <div className={'col-lg-3'}>
-                <FilterDelivery/>
+                <ExportFilterDeliveryContainer calculate={props}/>
             </div>
         </div>
     </div>

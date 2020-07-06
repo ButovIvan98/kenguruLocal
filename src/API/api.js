@@ -30,17 +30,90 @@ export const calculateAPI={
         return auth.post('/product/',{type, delivery_type, height, length, width, weight, volume, volumetric_weight, quantity, comment})
     }
 }
+
 export const companyAPI = {
     listCompanyHeader() {
         return instance().get('/profile/')
     }
 }
 export const cityAPI={
+    searchHouse(street_fias,house){
+        return auth.post('/geo/suggest/house/',{street_fias:street_fias,house:house,count:10})
+    },
+    houseInformation(street_fias,unrestricted_value){
+        return auth.post('/geo/suggest/house/',{street_fias:street_fias,house:unrestricted_value,count:1})
+    },
+    searchStreet(locality_type,locality_fias,street){
+      return auth.post('/geo/suggest/street/',{locality_type:locality_type,locality_fias:locality_fias,street,count:10})
+    },
     cityInformation(city){
         return auth.post('/geo/locality/',{locality:city,count:1})
     },
     searchCity(city){
         return auth.post('/geo/locality/',{locality:city,count:10})
+    }
+}
+export const addAddressAPI={
+    deleteAddress(id){
+        return instance().delete(`/profile/contact/${id}/`)
+    },
+    listAddress(){
+        return instance().get('/profile/contact/')
+    },
+    retrieveAddress(id){
+        return instance().get(`/profile/contact/${id}/`)
+    },
+    updateAddress(id,userID,locality,street,street_type,house,house_type,block,block_type,flat,flat_type,zip,company,surname,name,patronymic,phone,phone_extension,phone2,phone2_extension,comment,latitude,longitude ){
+        return instance().update(`/profile/contact/${id}/`,{
+            user:userID,
+            locality:locality,
+            street:street,
+            street_type:street_type,
+            house:house,
+            house_type:house_type,
+            block:block,
+            block_type:block_type,
+            flat:flat,
+            flat_type:flat_type,
+            zip:zip,
+            company:company,
+            surname:surname,
+            name:name,
+            patronymic:patronymic,
+            phone:phone,
+            phone_extension:phone_extension,
+            phone2:phone2,
+            phone2_extension:phone2_extension,
+            comment:comment,
+            latitude:latitude,
+            longitude:longitude
+        })
+    },
+    addBookAddress(userID,locality,street,street_type,house,house_type,block,block_type,flat,flat_type,zip,company,surname,name,patronymic,phone,phone_extension,phone2,phone2_extension,comment,latitude,longitude ){
+        return instance().post('/profile/contact/',{
+            user:userID,
+            locality:locality,
+            street:street,
+            street_type:street_type,
+            house:house,
+            house_type:house_type,
+            block:block,
+            block_type:block_type,
+            flat:flat,
+            flat_type:flat_type,
+            zip:zip,
+            company:company,
+            surname:surname,
+            name:name,
+            patronymic:patronymic,
+            phone:phone,
+            phone_extension:phone_extension,
+            phone2:phone2,
+            phone2_extension:phone2_extension,
+            comment:comment,
+            latitude:latitude,
+            longitude:longitude
+        })
     }
 }
 export const userAPI = {

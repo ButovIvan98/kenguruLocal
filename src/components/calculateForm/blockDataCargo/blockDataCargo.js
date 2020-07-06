@@ -7,7 +7,6 @@ import {NavLink} from 'react-router-dom';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
 const BlockDataCargo = (props) => {
-    //debugger
     return <div className={classes.blockCalculate}>
         {props.status
             ? <div className={'row mt-3'}>
@@ -83,7 +82,7 @@ const BlockDataCargo = (props) => {
                         InputProps={{
                             startAdornment: <InputAdornment position="start">См</InputAdornment>,
                         }}
-                        onChange={(e) => (props.updateLenght(e.target.value, props.id))}
+                        onChange={(e) => (props.updateLenght(e.target.value, props.id,props.width,props.height))}
                         //helperText="Some important text"
                     />
                 </div>
@@ -96,7 +95,7 @@ const BlockDataCargo = (props) => {
                         type={'number'}
                         label="Высота"
                         value={props.height}
-                        onChange={(e) => (props.updateHeight(e.target.value, props.id))}
+                        onChange={(e) => (props.updateHeight(e.target.value, props.id,props.lenght,props.width))}
                         InputProps={{
                             startAdornment: <InputAdornment position="start">См</InputAdornment>,
                         }}
@@ -112,7 +111,7 @@ const BlockDataCargo = (props) => {
                         type={'number'}
                         label="Ширина"
                         value={props.width}
-                        onChange={(e) => (props.updateWidth(e.target.value, props.id))}
+                        onChange={(e) => (props.updateWidth(e.target.value, props.id,props.height,props.lenght))}
                         InputProps={{
                             startAdornment: <InputAdornment position="start">См</InputAdornment>,
                         }}

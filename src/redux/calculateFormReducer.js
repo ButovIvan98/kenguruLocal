@@ -10,16 +10,9 @@ let UPDATE_COMMENT = 'UPDATE_COMMENT';
 let UPDATE_VOLUME = 'UPDATE_VOLUME';
 let STATUS_CALCULATE = 'STATUS_CALCULATE';
 
-let VALID_WIDTH = 'VALID_STATUS_WIDTH';
-let VALID_HEIGHT = 'VALID_HEIGHT';
-let VALID_LENGHT = 'VALID_LENGHT';
-let VALID_WEIGHT = 'VALID_WEIGHT';
-let VALID_QUANTITY = 'VALID_QUANTITY';
-
 let STATUS_DETAILED_PARAMETERS = 'STATUS_DETAILED_PARAMETERS';//Статус подробные параметры
 let ADD_CARGO = 'ADD_CARGO';//Добавить поля
-let DELETE_CARGO='DELETE_CARGO';//Удаление груза
-let SEARCH_TRANSPORT_COMPANY = 'SEARCH_TRANSPORT_COMPANY';//Поиск транпортных компаний
+let DELETE_CARGO = 'DELETE_CARGO';//Удаление груза
 
 const SEARCH_CITY_DEPARTURE = 'SEARCH_CITY_DEPARTURE';//Поиск города отправки
 const SEARCH_CITY_DESTINATION = 'SEARCH_CITY_DESTINATION';//Поиск города доставки
@@ -27,9 +20,16 @@ const SEARCH_CITY_DESTINATION = 'SEARCH_CITY_DESTINATION';//Поиск горо�
 let UPDATE_DATA = 'UPDATE_DATA';//Обновление данных
 let UPDATE_TEXT_SENDING = 'UPDATE_TEXT_SENDING';//Город отправления
 let UPDATE_TEXT_DESTINATION = 'UPDATE_TEXT_DESTINATION';//Город прибытия
+let UPDATE_TYPE_CARGO='UPDATE_TYPE_CARGO';//Изменение типа груза
 
-const ADD_LIST_RESULT='ADD_LIST_RESULT';//Результат расчета
-const CLEAR_LIST_RESULT='CLEAR_LIST_RESULT';//Очистка результатов поиска тк
+const ADD_LIST_RESULT = 'ADD_LIST_RESULT';//Результат расчета
+const ADD_FILTER_CALCULATE='ADD_FILTER_CALCULATE';//Добавляется отсортированный массив (Дверь-Дверь). Когда пользователь нажал рассчитать ему предлагается сразу такой вариант
+const CLEAR_LIST_RESULT = 'CLEAR_LIST_RESULT';//Очистка результатов поиска тк
+
+const FILTER_LIST='FILTER_LIST'//Фильтрация результата рассчета.
+const STATUS_FILTER='STATUS_FILTER'//Состояние статуса фильтра
+
+const CLEAR_CARGO='CLEAR_CARGO';//Очистка списка грузов
 
 let initialState = {
     cityOfDeparture: {
@@ -61,15 +61,24 @@ let initialState = {
             validQuantity: null
         }
     ],
-    type: 'parcel',
-    resultCalculate: []
+    typeCargo: null,
+    resultCalculate: [],
+    fullListCalculateResult:[],
+    filterDeliveryOption:{
+        filterWW:false,
+        filterWD:false,
+        filterDD:true,
+        filterDW:false,
+    },
+    formResultCalculate:false
 }
 const CalculateFormReducer = (state = initialState, action) => {
     switch (action.type) {
         case STATUS_CALCULATE:
             return {
                 ...state,
-                statusCalculate: action.bodyStatusCalculation
+                statusCalculate: action.bodyStatusCalculation,
+                formResultCalculate: action.bodyStatusForm
             }
         case UPDATE_WIDTH:
             return {
@@ -188,11 +197,11 @@ const CalculateFormReducer = (state = initialState, action) => {
                     listCity: action.bodyListCityDestination
                 }
             }
-        case  ADD_LIST_RESULT:
+        case ADD_LIST_RESULT:
             return {
                 ...state,
-                resultCalculate: [
-                    ...state.resultCalculate,{
+                fullListCalculateResult:[
+                    ...state.fullListCalculateResult, {
                         id: action.bodyIdResult,
                         imgCompany: action.bodyImgCompany,
                         company: action.bodyCompanyName,
@@ -200,14 +209,55 @@ const CalculateFormReducer = (state = initialState, action) => {
                         rating: action.bodyRatingCompany,
                         deliveryTime: action.bodyDeliveryTime,
                         priceBefore: action.bodyPriceBefore,
-                        priceAfter: action.bodyPriceAfter
+                        priceAfter: action.bodyPriceAfter,
+                        pickup: action.bodyPickup,
+                        delivery: action.bodyDelivery
+                    }
+                ]
+            }
+        case ADD_FILTER_CALCULATE:
+            return {
+                ...state,
+                resultCalculate: [
+                    ...state.resultCalculate, {
+                        id: action.bodyIdResult,
+                        imgCompany: action.bodyImgCompany,
+                        company: action.bodyCompanyName,
+                        tariff: action.bodyTariffName,
+                        rating: action.bodyRatingCompany,
+                        deliveryTime: action.bodyDeliveryTime,
+                        priceBefore: action.bodyPriceBefore,
+                        priceAfter: action.bodyPriceAfter,
+                        pickup: action.bodyPickup,
+                        delivery: action.bodyDelivery
                     }
                 ]
             }
         case CLEAR_LIST_RESULT:
             return {
                 ...state,
-                resultCalculate: []
+                resultCalculate: [],
+                fullListCalculateResult:[]
+            }
+        case FILTER_LIST:
+            return {
+                ...state,
+                resultCalculate: action.bodyResultFilter
+            }
+        case STATUS_FILTER:
+            return {
+                ...state,
+                filterDeliveryOption: {
+                    filterWW: action.bodyFilterWW,
+                    filterWD: action.bodyFilterWD,
+                    filterDD: action.bodyFilterDD,
+                    filterDW: action.bodyFilterDW,
+                }
+            }
+        case UPDATE_TYPE_CARGO:
+            return {
+                ...state,
+                typeCargo: action.bodyTypeCargo
             }
         default:
             return {
@@ -255,24 +305,40 @@ const updateQuantity = (quantity, id, valid) => ({
     bodyIdQuantity: id,
     bodyValidQuantity: valid
 });
+export const updateTypeCargo = (typeCargo)=>({type:UPDATE_TYPE_CARGO,bodyTypeCargo:typeCargo});
 
 const addCargoData = (value) => ({type: ADD_CARGO, bodyIdCargo: value});
-const deleteCargo = (value)=>({type:DELETE_CARGO, bodyResultCalculate:value})
+const deleteCargo = (value) => ({type: DELETE_CARGO, bodyResultCalculate: value})
 
-const updateStatusCalculation = (status) => ({type: STATUS_CALCULATE, bodyStatusCalculation: status});//Изменение статуса идет в данный момент расчет или нет
+const updateStatusCalculation = (status,valueForm) => ({type: STATUS_CALCULATE, bodyStatusCalculation: status, bodyStatusForm:valueForm});//Изменение статуса идет в данный момент расчет или нет
 
-const addListCalculateResult=(id,img,company,tariff,rating,time,priceBefore,priceAfter) =>({
-    type:ADD_LIST_RESULT,
-    bodyIdResult:id,
-    bodyImgCompany:img,
-    bodyCompanyName:company,
-    bodyTariffName:tariff,
-    bodyRatingCompany:rating,
-    bodyDeliveryTime:time,
-    bodyPriceBefore:priceBefore,
-    bodyPriceAfter:priceAfter
-    });
-const clearListResult=()=>({type: CLEAR_LIST_RESULT});
+const addListCalculateResult = (id, img, company, tariff, rating, time, priceBefore, priceAfter, pickup, delivery) => ({
+    type: ADD_LIST_RESULT,
+    bodyIdResult: id,
+    bodyImgCompany: img,
+    bodyCompanyName: company,
+    bodyTariffName: tariff,
+    bodyRatingCompany: rating,
+    bodyDeliveryTime: time,
+    bodyPriceBefore: priceBefore,
+    bodyPriceAfter: priceAfter,
+    bodyPickup: pickup,
+    bodyDelivery: delivery
+});
+const addListFilterResult = (id, img, company, tariff, rating, time, priceBefore, priceAfter, pickup, delivery) => ({
+    type: ADD_FILTER_CALCULATE,
+    bodyIdResult: id,
+    bodyImgCompany: img,
+    bodyCompanyName: company,
+    bodyTariffName: tariff,
+    bodyRatingCompany: rating,
+    bodyDeliveryTime: time,
+    bodyPriceBefore: priceBefore,
+    bodyPriceAfter: priceAfter,
+    bodyPickup: pickup,
+    bodyDelivery: delivery
+});
+const clearListResult = () => ({type: CLEAR_LIST_RESULT});
 const updateCityDepartureInformation = (city, listCity) => ({
     type: UPDATE_TEXT_SENDING,
     bodyCityDeparture: city,
@@ -286,13 +352,15 @@ const updateCityDestinationInformation = (city, listCity) => ({
 
 const updateListCityDeparture = (list) => ({type: SEARCH_CITY_DEPARTURE, bodyListCityDeparture: list});//Добавление списка поиска городов отправки груза
 const updateListCityDestination = (list) => ({type: SEARCH_CITY_DESTINATION, bodyListCityDestination: list});//Добавление списка поиска городов доставки груза
+const sortListCalculate = (list)=>({type:FILTER_LIST,bodyResultFilter:list});
+const statusFilterCalculate = (WW,WD,DD,DW)=>({type:STATUS_FILTER, bodyFilterWW:WW,bodyFilterWD:WD,bodyFilterDD:DD,bodyFilterDW:DW});//WW(склад-склад), WD(склад-дверь), DD(дверь-дверь),DW(дверь-склад)
 
 export const statusCalculate = (status) => {
     return (dispatch) => {
-        dispatch(updateStatusCalculation(true));
+        dispatch(updateStatusCalculation(true, true));
         window.location.href = '#calculate'
         setTimeout(() => {
-            dispatch(updateStatusCalculation(false))
+            dispatch(updateStatusCalculation(false, true))
         }, 10000)
     }
 }
@@ -302,7 +370,6 @@ export const updateStatusParameters = (status, id) => ({
     bodyIdStatus: id
 });
 const updateData = (data) => ({type: UPDATE_DATA, dataBody: data});
-
 /*Добавление груза*/
 export const addCargo = (value) => {
     return (dispatch) => {
@@ -310,37 +377,33 @@ export const addCargo = (value) => {
     }
 }
 /*Удаление груза*/
-export const deleteCargoList=(listCargo,id)=>{
-    return(dispatch)=>{
-        let newListCargo=[];
-        for(let i=0;i<listCargo.length;i++){
-            if(String(listCargo[i].id)===String(id)){
-                console.log('!----------!');
-                console.log(listCargo);
-                console.log(id);
-                console.log(newListCargo);
-                console.log('!----------!');
+export const deleteCargoList = (listCargo, id) => {
+    return (dispatch) => {
+        for (let i = 0; i < listCargo.length; i++) {
+            if (String(listCargo[i].id) === String(id)) {
                 listCargo.splice(i, 1)
                 dispatch(deleteCargo(listCargo))
-                console.log('----------');
-                console.log(listCargo);
-                console.log(id);
-                console.log('----------');
             }
         }
     }
 }
-export const widthData = (value, id) => {
+export const widthData = (value, id,height,length) => {
     return (dispatch) => {
         if (!/^[\d,.]*$/.test(value)) {
         } else {
-            value.length > 0
-                ? dispatch(updateWidth(value, id, false))
-                : dispatch(updateWidth(value, id, true))
+            if(value.length>0){
+                dispatch(updateWidth(value, id, false))
+                if(height>0 && length>0){
+                    let volume=Math.round(height*length*value/1000000);
+                    dispatch(updateVolume(volume, id, false));
+                }
+            }
+            else{
+                dispatch(updateWidth(value, id, true))
+            }
         }
     }
 };
-
 export const weightData = (value, id) => {
     return (dispatch) => {
         if (!/^[\d,.]*$/.test(value)) {
@@ -351,23 +414,37 @@ export const weightData = (value, id) => {
         }
     }
 };
-export const heightData = (value, id) => {
+export const heightData = (value, id, length, width) => {
     return (dispatch) => {
         if (!/^[\d,.]*$/.test(value)) {
         } else {
-            value.length > 0
-                ? dispatch(updateHeight(value, id, false))
-                : dispatch(updateHeight(value, id, true))
+            if(value.length>0){
+                dispatch(updateHeight(value, id, false))
+                if(width>0 && length>0){
+                    let volume=Math.round(width*length*value/1000000);
+                    dispatch(updateVolume(volume, id, false));
+                }
+            }
+            else{
+                dispatch(updateHeight(value, id, true))
+            }
         }
     }
 };
-export const lengthData = (value, id) => {
+export const lengthData = (value, id, width, height) => {
     return (dispatch) => {
         if (!/^[\d,.]*$/.test(value)) {
         } else {
-            value.length > 0
-                ? dispatch(updateLength(value, id, false))
-                : dispatch(updateLength(value, id, true))
+            if(value.length>0){
+                dispatch(updateLength(value, id, false))
+                if(width>0 && height>0){
+                    let volume=Math.round(width*height*value/1000000);
+                    dispatch(updateVolume(volume, id, false));
+                }
+            }
+            else{
+                dispatch(updateLength(value, id, true))
+            }
         }
     }
 };
@@ -423,17 +500,25 @@ export const ListCityDestination = (city) => {
         }
     }
 }
+/*Изменения объема груза*/
 export const volumeData = (value, id) => {
+    let params=Math.round(Math.cbrt(value * 1000000,3));
     return (dispatch) => {
         if (!/^[\d,.]*$/.test(value)) {
         } else {
-            value.length > 0
-                ? dispatch(updateVolume(value, id, false))
-                : dispatch(updateVolume(value, id, true))
+            if(value.length>0){
+                console.log(value)
+                dispatch(updateVolume(value, id, false));
+                dispatch(updateHeight(params, id, false));
+                dispatch(updateWidth(params, id, false));
+                dispatch(updateLength(params, id, false));
+            }
+            else{
+                dispatch(updateVolume(value, id, true));
+            }
         }
     }
 };
-
 /*Сортировка массива по цене*/
 export const updateDataCheaper = (data) => {
     function compareNumbersCheaper(a, b) {
@@ -444,47 +529,126 @@ export const updateDataCheaper = (data) => {
         dispatch(updateData(data.sort(compareNumbersCheaper)));
     }
 };
-
-
+/*Сортировка Склад-Склад*/
+export const warehouse_warehouse=(listTariff)=>{
+    let sortList=[];
+    for(let i=0;i<listTariff.length;i++){
+        if(String(listTariff[i].pickup)===String(0) && String(listTariff[i].delivery)===String(0)){
+            sortList.push(listTariff[i]);
+        }
+    }
+    return(dispatch)=>{
+        dispatch(sortListCalculate(sortList));
+        dispatch(statusFilterCalculate(true,false,false,false));
+    }
+}
+/*Сортировка Склад-Дверь*/
+export const warehouse_door=(listTariff)=>{
+    let sortList=[];
+    for(let i=0;i<listTariff.length;i++){
+        if(String(listTariff[i].pickup)===String(0) && String(listTariff[i].delivery)===String(1)){
+            sortList.push(listTariff[i]);
+        }
+    }
+    return(dispatch)=>{
+        dispatch(sortListCalculate(sortList));
+        dispatch(statusFilterCalculate(false,true,false,false));
+    }
+}
+/*Сортировка Дверь-Дверь*/
+export const door_door=(listTariff)=>{
+    let sortList=[];
+    for(let i=0;i<listTariff.length;i++){
+        if(String(listTariff[i].pickup)===String(1) && String(listTariff[i].delivery)===String(1)){
+            sortList.push(listTariff[i]);
+        }
+    }
+    return(dispatch)=>{
+        dispatch(sortListCalculate(sortList));
+        dispatch(statusFilterCalculate(false,false,true,false));
+    }
+}
+/*Сортировка Склад-Дверь*/
+export const door_warehouse=(listTariff)=>{
+    let sortList=[];
+    for(let i=0;i<listTariff.length;i++){
+        if(String(listTariff[i].pickup)===String(1) && String(listTariff[i].delivery)===String(0)){
+            sortList.push(listTariff[i]);
+        }
+    }
+    return(dispatch)=>{
+        dispatch(sortListCalculate(sortList));
+        dispatch(statusFilterCalculate(false,false,false,true));
+    }
+}
+/*Стандартные габариты у документов*/
+export const defaultParams=()=>{
+    return(dispatch)=>{
+        dispatch();
+        dispatch(updateLength(25));
+        dispatch();
+        dispatch();
+    }
+}
 /*Отпарвка грузов и рассчет тарифов*/
-export const calculateTariff = (cargo, idCityDeparture, idCityDestination) => {
+export const calculateTariff = (cargo, type, idCityDeparture, idCityDestination) => {
     return (dispatch) => {
-        let flag = true;
         let idCargo = [];
-        let idString='';
-        for(let i=0; i<cargo.length; i++){
+        for (let i = 0; i < cargo.length; i++) {
             calculateAPI.addCargo(null,
-                'cargo',
+                type,
                 cargo[i].height, cargo[i].lenght,
                 cargo[i].width, cargo[i].weight,
                 cargo[i].volume, '',
                 cargo[i].quantity).then(response => {
-                if((cargo.length - 1) === i){
+                if ((cargo.length - 1) === i) {
                     idCargo.push(response.data.id);
                     calculateAPI.calculate(idCargo, idCityDeparture.id, idCityDestination.id).then(response => {
                         dispatch(clearListResult());
+                        dispatch(statusFilterCalculate(false,false,true,false));
                         let chatSocket = new WebSocket(
                             'ws://67.205.165.172:8002/ws/calculation/?key=' + response.data.id);
-                        chatSocket.onmessage = function(e) {
+                        chatSocket.onmessage = function (e) {
                             let data = JSON.parse(e.data);
                             let message = JSON.parse(data['message']);
-                            console.log(message);
-                            dispatch(addListCalculateResult(message.id,'https://kenguruexpress.ru/images/services/dimex.png',message.operator,message.title,message.rating,message.term,message.common_price,message.price ))
+                            if(String(message.pickup)===String(1) && String(message.delivery)===String(1)) {
+                                dispatch(addListFilterResult(
+                                    message.id,
+                                    'https://kenguruexpress.ru/images/services/dimex.png',
+                                    message.operator,
+                                    message.title,
+                                    message.rating,
+                                    message.term,
+                                    message.common_price,
+                                    message.price,
+                                    message.pickup,
+                                    message.delivery
+                                ))
+                            }
+                            dispatch(addListCalculateResult(
+                                message.id,
+                                'https://kenguruexpress.ru/images/services/dimex.png',
+                                message.operator,
+                                message.title,
+                                message.rating,
+                                message.term,
+                                message.common_price,
+                                message.price,
+                                message.pickup,
+                                message.delivery
+                            ))
                         };
-                        chatSocket.onclose = function(e) {
+                        chatSocket.onclose = function (e) {
                             console.error('Chat socket closed unexpectedly');
                         };
                     }).catch(error => {
                     })
-                }
-                else idCargo.push(response.data.id);
-            }).catch(error=> {
+                } else idCargo.push(response.data.id);
+            }).catch(error => {
             });
         }
     }
 }
-
-
 /*Сортировка массива по времени доставки*/
 export const updateDataFaster = (data) => {
     function compareNumbersFaster(a, b) {

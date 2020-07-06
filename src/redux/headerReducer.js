@@ -86,7 +86,7 @@ export const logout = () => {
             document.cookie = 'auth_token=' + '';
             dispatch(checkToken());
         }).catch(error => {
-            console.log(Cookies.get('auth_token'))
+
         });
     }
 }
@@ -98,7 +98,6 @@ export const listCompany = () => {
             if(Cookies.get('id_company')===undefined){
                 Cookies.set('id_company',response.data[0].id);
             }
-            console.log(Cookies.get('id_company'));
             response.data.map(nav => {
                 if (String(nav.id) === String(Cookies.get('id_company'))) {
                     dispatch(updateCompanyActive(

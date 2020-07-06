@@ -1,34 +1,39 @@
 import React from 'react';
 import {connect} from "react-redux";
-import AddAddress from "./add_address";
 import {
-    updateTextCity,
-    updateTextCountry,
-    updateTextFlat,
-    updateTextHouse,
-    updateTextIndex,
-    updateTextStreet
-} from "../../../../redux/addressReducer";
+    addAddressBook,
+    cityInfo,
+    flatInfo, fullInfoCity, fullInfoHouse, fullInfoStreet,
+    houseInfo, indexInfo, listMyAddress,
+    middleNameInfo,
+    nameInfo,
+    phoneInfo1,
+    phoneInfo2, streetInfo,
+    surnameInfo,
+    updateComment, updateNameCompany
+} from "../../../../redux/myAddressReducer";
+import AddAddress from "./add_address";
 
-
-class AddressForm extends React.Component {
-
+class AddAddressContainer extends React.Component {
+    componentWillUnmount() {
+        this.props.listMyAddress();
+    }
     render() {
-        return <AddAddress {...this.props} address={this.props.addressPage}/>
+        return <AddAddress {...this.props}/>
     }
 }
 
 let mapStateToProps = (state) => {
     return {
-        addressPage: state.Address
+        addressPage: state.AddressPage.addAddress
     }
 };
 const AddressContainerExport = connect(mapStateToProps, {
-    updateTextCountry,
-    updateTextCity,
-    updateTextStreet,
-    updateTextHouse,
-    updateTextFlat,
-    updateTextIndex
-})(AddressForm);
+    surnameInfo, nameInfo,middleNameInfo,
+    phoneInfo1,phoneInfo2,updateComment,
+    updateNameCompany,houseInfo,fullInfoHouse,
+    flatInfo,indexInfo,cityInfo,fullInfoCity,
+    streetInfo,fullInfoStreet,addAddressBook,
+    listMyAddress
+})(AddAddressContainer);
 export default AddressContainerExport;

@@ -204,8 +204,7 @@ const Setting = (props) => {
                                                             handleNext();
                                                             if (activeStep === steps.length - 2) {
                                                                 if (props.setting.validSurname && props.setting.validName) {
-                                                                    console.log(props.setting.surname, props.setting.name, props.setting.middleName)
-                                                                    props.updateFioUser(props.setting.surname, props.setting.name, props.setting.middleName)
+
                                                                 }
                                                             }
                                                         }

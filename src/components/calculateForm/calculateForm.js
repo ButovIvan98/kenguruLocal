@@ -18,10 +18,8 @@ import Car3 from "../common/svgImg/car3";
 import Car5 from "../common/svgImg/car5";
 import Car10 from "../common/svgImg/car10";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import {ListCityDeparture} from "../../redux/calculateFormReducer";
 
 const CalculateForm = (props) => {
-    //debugger
     const useStyles = makeStyles((theme) => ({
         selectEmpty: {
             marginTop: theme.spacing(2),
@@ -30,6 +28,7 @@ const CalculateForm = (props) => {
     const classes2 = useStyles();
     const [age, setAge] = React.useState('');
     const handleChange = (event) => {
+        props.updateTypeCargo(event.target.value);
         setAge(event.target.value);
     };
     let listCargo = Object.values(props.calculate.listCargo).map(option => (
@@ -107,9 +106,10 @@ const CalculateForm = (props) => {
                                         value={age}
                                         onChange={handleChange}
                                         label="Что отправляем?"
+
                                     >
-                                        <MenuItem value={10}>Документы</MenuItem>
-                                        <MenuItem value={20}>Мелкие грузы</MenuItem>
+                                        <MenuItem value={'doc'}>Документы</MenuItem>
+                                        <MenuItem value={'cargo'}>Мелкие грузы</MenuItem>
                                         <MenuItem value={30}>Большие грузы</MenuItem>
                                     </Select>
                                 </FormControl>
@@ -117,7 +117,7 @@ const CalculateForm = (props) => {
                         </div>
                     </div>
                 </div>
-                {age === 10 ? <div className={'col-12'}>
+                {age === 'doc' ? <div className={'col-12'}>
                         <div className={classes.blockList}>
                             <div className={'row mt-3'}>
                                 <div className={'col-lg-4 pl-0'}>
@@ -131,8 +131,8 @@ const CalculateForm = (props) => {
                                         InputProps={{
                                             startAdornment: <InputAdornment position="start">кг </InputAdornment>,
                                         }}
-                                        value={0.2}
-                                        onChange={(e) => (props.updateVolume(e.target.value, props.id))}
+                                        value={props.calculate.listCargo.weight}
+                                        onChange={(e) => {}}
                                         //helperText="Some important text"
                                     />
                                 </div>
@@ -140,7 +140,7 @@ const CalculateForm = (props) => {
                         </div>
                     </div>
                     : null}
-                {age === 20
+                {age === 'cargo'
                     ? <div className={'col-12'}>
                         <div className={'row'}>
                             <div className={'col-12'}>
@@ -243,7 +243,7 @@ const CalculateForm = (props) => {
                 <div className={'col-12 mb-3'}>
                     <div className={classes.blockBottomCalculate}>
                         <button onClick={() => {
-                            props.calculateTariff(props.calculate.listCargo,props.calculate.cityOfDeparture.city,props.calculate.cityOfDestination.city);
+                            props.calculateTariff(props.calculate.listCargo,props.calculate.typeCargo ,props.calculate.cityOfDeparture.city,props.calculate.cityOfDestination.city);
                             props.statusCalculate(props.calculate.statusCalculate);
                         }} className={classes.calculation}>Рассчитать
                         </button>
