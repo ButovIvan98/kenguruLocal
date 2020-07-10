@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 
 export const instance = () => {
     return axios.create({
-            baseURL: 'http://67.205.165.172:8000',
+            baseURL: 'http://api.ke22.ru:8000',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Token ' + Cookies.get('auth_token'),
@@ -15,7 +15,7 @@ export const instance = () => {
 }
 
 const auth = axios.create({
-    baseURL: 'http://67.205.165.172:8000',
+    baseURL: 'http://api.ke22.ru:8000',
     headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
