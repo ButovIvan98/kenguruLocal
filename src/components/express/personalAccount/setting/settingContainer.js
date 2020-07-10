@@ -2,17 +2,18 @@ import React from 'react';
 import {connect} from "react-redux";
 import Setting from "./setting";
 import {
-    activateUser, codeReviewsNumber, profileInfo,
-    updateClickButtonCode, updateEmailForm, updateFioUser,
+    activateUser, birthdayUser, codeReviewsNumber, profileInfo,
+    updateClickButtonCode, updateEmailForm, updateFioUser, updateInfoUser,
     updateMiddleName,
     updateName,
     updateNumber,
-    updateSurname, userEmailActive
+    updateSurname, userEmailActive, userFullInfo
 } from "../../../../redux/settingReducer";
 
 class SettingContainer extends React.Component {
     componentDidMount() {
         this.props.profileInfo();
+        this.props.userFullInfo();
     }
 
     render() {
@@ -37,6 +38,9 @@ let ExportSettingContainer = connect(mapStateToProps,
         userEmailActive,
         updateEmailForm,
         updateFioUser,
-        profileInfo
+        profileInfo,
+        birthdayUser,
+        updateInfoUser,
+        userFullInfo
     })(SettingContainer);
 export default ExportSettingContainer;

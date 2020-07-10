@@ -1,10 +1,25 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {
-    updateStatusParameters, widthData, weightData, heightData,
-    quantityData, volumeData, addCargo, statusCalculate,
-    updateCityDeparture, ListCityDeparture, updateCityDestination,
-    ListCityDestination, lengthData, calculateTariff, deleteCargoList, warehouse_warehouse, updateTypeCargo
+    updateStatusParameters,
+    widthData,
+    weightData,
+    heightData,
+    quantityData,
+    volumeData,
+    addCargo,
+    statusCalculate,
+    updateCityDeparture,
+    ListCityDeparture,
+    updateCityDestination,
+    ListCityDestination,
+    lengthData,
+    calculateTariff,
+    deleteCargoList,
+    warehouse_warehouse,
+    updateTypeCargo,
+    autoSizeDoc,
+    clearCargoData
 } from '../../redux/calculateFormReducer'
 import CalculateForm from "./calculateForm";
 
@@ -37,6 +52,8 @@ const ExportCalculateFormContainer = connect(mapStateToProps,
         calculateTariff,
         deleteCargoList,
         warehouse_warehouse,
-        updateTypeCargo
+        updateTypeCargo,
+        autoSizeDoc,
+        clearCargoData
     })(CalculateFormContainer);
 export default ExportCalculateFormContainer;

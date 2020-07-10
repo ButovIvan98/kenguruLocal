@@ -1,18 +1,10 @@
-/*.DropzoneArea-dropZone-148{*/
-/*    outline: none !important;*/
-/*    height: 70px!important;*/
-/*    min-height: 70px!important;*/
-/*    background: white !important;*/
-/*    border: 3px dashed #1099f5 !important;*/
-/*}*/
-/*.DropzoneArea-dropZone-6{*/
-/*    max-height: 70px!important;*/
-/*    outline: none !important;*/
-/*    height: 70px!important;*/
-/*    min-height: 70px!important;*/
-/*    background: white !important;*/
-/*    border: 3px dashed #1099f5 !important;*/
-/*}*/
+.dropzona{
+    outline: none !important;
+    height: 70px!important;
+    min-height: 70px!important;
+    background: white !important;
+    border: 3px dashed #1099f5 !important;
+}
 /*.DropzoneArea-uploadIconSize-152{*/
 /*    position: relative;*/
 /*    top: -12px;*/

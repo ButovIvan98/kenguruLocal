@@ -38,16 +38,16 @@ let initialState = {
         {
             id: '1',
             sender: 'Максим В.',
-            rating: '2',
+            rating: '5',
             dateAndTime: '28.01.2019 18:47',
-            text: 'Говно, которое разъебало мне посылку.'
+            text: 'Супер.Все быстро и сервис классный.'
         },
         {
             id: '2',
             sender: 'Кирилл С.',
             rating: '5',
             dateAndTime: '28.01.2019 19:47',
-            text: 'Все четко.'
+            text: 'Все супер!'
         }
     ],
     newComment: '',

@@ -83,10 +83,10 @@ export const newStatus = (status) => {
 export const logout = () => {
     return (dispatch) => {
         userAPI.deleteToken().then(response => {
-            document.cookie = 'auth_token=' + '';
+            document.cookie = 'auth_token=' + ' '
+            document.cookie= 'id_company=' + ' '
             dispatch(checkToken());
         }).catch(error => {
-
         });
     }
 }
@@ -95,7 +95,7 @@ export const listCompany = () => {
     return (dispatch) => {
         companyAPI.listCompanyHeader().then(response => {
             dispatch(updateCompany(response.data));
-            if(Cookies.get('id_company')===undefined){
+            if(Cookies.get('id_company')==='' || Cookies.get('id_company')===undefined){
                 Cookies.set('id_company',response.data[0].id);
             }
             response.data.map(nav => {
@@ -107,7 +107,7 @@ export const listCompany = () => {
                         nav.is_owner_company,
                         nav.is_personal,
                         nav.photo,
-                        nav.username
+                        nav.last_name + ' ' + nav.first_name
                     ))
                 }
             })

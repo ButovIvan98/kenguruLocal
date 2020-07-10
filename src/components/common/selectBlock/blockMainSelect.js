@@ -13,14 +13,14 @@ const BlockMainSelect = (props) => {
                 nav.is_owner_company,
                 nav.is_personal,
                 nav.photo,
-                nav.username
+                (nav.last_name + ' ' + nav.first_name)
             )}} className={'row mr-0 ml-0 mb-2' + ' ' + classes.blockCompany}>
             <div className={'col-auto pr-0 align-self-center'}>
                 <img src={nav.photo} className={classes.imgProfile}/>
             </div>
             <div className={'col-auto text-left pr-0'}>
                 <span className={classes.nameCompany}>{nav.is_personal ? 'Физ. лицо' : nav.company_title}</span><br/>
-                <span className={classes.authorizedFaceCompany}>{nav.username}</span>
+                <span className={classes.authorizedFaceCompany}>{nav.last_name}</span>
             </div>
         </div>
     ))

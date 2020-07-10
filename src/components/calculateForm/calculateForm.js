@@ -109,7 +109,7 @@ const CalculateForm = (props) => {
 
                                     >
                                         <MenuItem value={'doc'}>Документы</MenuItem>
-                                        <MenuItem value={'cargo'}>Мелкие грузы</MenuItem>
+                                        <MenuItem onClick={()=>{ props.clearCargoData();}} value={'cargo'}>Мелкие грузы</MenuItem>
                                         <MenuItem value={30}>Большие грузы</MenuItem>
                                     </Select>
                                 </FormControl>
@@ -132,7 +132,7 @@ const CalculateForm = (props) => {
                                             startAdornment: <InputAdornment position="start">кг </InputAdornment>,
                                         }}
                                         value={props.calculate.listCargo.weight}
-                                        onChange={(e) => {}}
+                                        onChange={(e) => {props.autoSizeDoc(e.target.value)}}
                                         //helperText="Some important text"
                                     />
                                 </div>

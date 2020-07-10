@@ -14,7 +14,7 @@ const Account =(props)=>{
                 </div>
                 <div className={'col-lg-12 mt-3 '}>
                     <h2>
-                        Счет от 11.04.2019
+                        Счет от 28.06.2020
                     </h2>
                 </div>
                 <div className={'col-lg-12'}>

@@ -117,6 +117,14 @@ export const addAddressAPI={
     }
 }
 export const userAPI = {
+    /*Запрос на информацию о пользователе*/
+    userFullInfo(){
+      return instance().get('/users/me')
+    },
+    /*Изменение данных профиля пользователя*/
+    updateInfoUser(last_name, first_name, patronymic, date_birth){
+      return instance().post('/users/me',{last_name:last_name, first_name:patronymic, patronymic:first_name, date_birth:date_birth})
+    },
     /*Запорс на информацию о пользователе*/
     profileInfo(){
         return instance().get(`/profile/${Cookies.get('id_company')}/`)

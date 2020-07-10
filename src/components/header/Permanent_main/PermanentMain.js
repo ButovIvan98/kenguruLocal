@@ -48,7 +48,7 @@ const Permanent_main = (props) => {
                         <img id={props.activeCompany.id}
                              src={props.activeCompany.photo}
                              className={classes.imgHeader}/><text
-                        className={classes.listHeader}>{props.activeCompany.isPersonal ? props.activeCompany.username : props.activeCompany.companyTitle}</text>
+                        className={classes.listHeader}>{props.activeCompany.isPersonal ? (props.activeCompany.username) : props.activeCompany.companyTitle}</text>
                         {props.status === false ? <ListMenu/> : <ListMenuIn/>}
                     </span>
                     <BlockMainSelectContainerExport />

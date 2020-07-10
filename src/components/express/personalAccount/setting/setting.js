@@ -249,11 +249,11 @@ const Setting = (props) => {
                                 <div className={'row'}>
                                     <div className={'col-lg-12'}>
                                         <img className={classesStyle.imgProfile}
-                                             src={'https://i.pinimg.com/originals/c3/76/7a/c3767a26bd0101b5844f7b41de59dafe.jpg'}/>
+                                             src={'https://i0.wp.com/salesforce-developer.ru/wp-content/uploads/avatars/no-avatar.jpg?ssl=1'}/>
                                     </div>
-                                    <div className={'col-lg-12 mb-lg-3'}>
+                                    <div className={'col-lg-12 mb-lg-3 ' + ' ' + classesStyle.dropzona} >
                                         <DropzoneArea
-                                            className={settingStyle.DropzoneAreaDropZone6}
+                                            className={settingStyle.zona}
                                             dropzoneParagraphClass={settingStyle.DropzoneAreaDropZone6}
                                             //onChange={this.handleChange.bind(this)}
                                             filesLimit={1}
@@ -312,23 +312,24 @@ const Setting = (props) => {
                                             InputLabelProps={{
                                                 shrink: true,
                                             }}
-                                            // onChange={(e) => {
-                                            //     props.updateSurname(e.target.value)
-                                            // }}
-                                            // value={props.setting.surname}
-                                            // error={props.setting.validSurname ? false : true}
+                                             onChange={(e) => {
+                                                 props.birthdayUser(e.target.value)
+                                             }}
+                                             value={props.setting.birthday}
+                                             //error={props.setting.validSurname ? false : true}
                                         />
                                     </div>
                                     <div className={'col-lg-6 mt-lg-3 '}>
                                         <TextField
                                             className={classesStyle.input}
                                             label="Email"
+                                            disabled={true}
                                             variant="outlined"
                                             // onChange={(e) => {
-                                            //     props.updateMiddleName(e.target.value)
+                                            //     props.birthdayUser(e.target.value)
                                             // }}
-                                            // value={props.setting.middleName}
-                                            // error={props.setting.validMiddleName ? false : true}
+                                              value={props.setting.email}
+                                            //  error={props.setting.validMiddleName ? false : true}
                                         />
                                     </div>
                                     <div className={'col-lg-6 mt-lg-3 mb-lg-3'}>
@@ -345,7 +346,7 @@ const Setting = (props) => {
                                                 variant="outlined"
                                                 type={"tel"}
                                                 disableUnderline
-                                                error={props.setting.validNumber ? false : true}
+                                                //error={props.setting.validNumber ? false : true}
                                             />
                                         </InputMask>
                                     </div>
@@ -375,7 +376,7 @@ const Setting = (props) => {
                                                        maskChar=" "
                                                        value={props.setting.confirmationCode}
                                                        onChange={(e) => {
-                                                           props.codeReviewsNumber(e.target.value)
+                                                           props.codeReviewsNumber(e.target.value,props.setting.number)
                                                        }}
                                             >
                                                 <TextField
@@ -391,7 +392,7 @@ const Setting = (props) => {
                                         : ''
                                     }
                                     <div className={'col-lg-12 text-center mb-3'}>
-                                        <button className={classesStyle.buttonCode}>
+                                        <button onClick={()=>{props.updateInfoUser(props.setting.surname, props.setting.name,props.setting.middleName,props.setting.birthday)}} className={classesStyle.buttonCode}>
                                             Сохранить изменения
                                         </button>
                                     </div>

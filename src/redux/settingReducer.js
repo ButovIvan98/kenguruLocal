@@ -9,6 +9,9 @@ const TIMER = 'TIMER';//Таймер отсчета до возможности 
 const ACTIVATE_USER = 'ACTIVATE_USER';//Активация пользователя
 const REVIEW_CODE = 'REVIEW_CODE';//Проверка кода активации
 const ACTIVATION_EMAIL = 'ACTIVATION_EMAIL'//Активация емайла
+const BIRTHDAY='BIRTHDAY';//Дата рождения пользователя
+const BLOCK_RESET_NUMBER='BLOCK_RESET_NUMBER';//блок для ввода поля активации
+const UPDATE_EMAIL = 'UPDATE_EMAIL';//Обновление почты клиента
 
 /*Валидация полей активации профиля*/
 const VALID_PHONE = 'VALID_PHONE';
@@ -17,6 +20,7 @@ const VALID_FIO = 'VALID_FIO';
 
 
 let initialState = {
+    birthday:'',
     validFormEmail: true,
     validFormFIO: false,
     validFormPhone: false,
@@ -27,6 +31,7 @@ let initialState = {
     name: null,//Имя
     validName: false,//Поле имя заполнено корректно
     number: null,//Телефон
+    email:null,//Почта клиента
     validNumber: false,//Поле телефон заполнено корректно
     validButtonCode: false,//Нажата кнопка отправки кода
     validInputCode: false,//Отображает поле для ввода проверочного кода телефона
@@ -40,6 +45,11 @@ let initialState = {
 
 const SettingReducer = (state = initialState, action) => {
     switch (action.type) {
+        case BIRTHDAY:
+            return {
+                ...state,
+                birthday: action.bodyBirthday
+            }
         case INPUT_SURNAME:
             return {
                 ...state,
@@ -63,8 +73,7 @@ const SettingReducer = (state = initialState, action) => {
             return {
                 ...state,
                 countClickButtonCode: state.countClickButtonCode + 1,
-                validButtonCode: action.bodyValidClickButtonCode,
-                validInputCode: true
+                validButtonCode: action.bodyValidClickButtonCode
             }
         case INPUT_NUMBER:
             return {
@@ -90,7 +99,6 @@ const SettingReducer = (state = initialState, action) => {
                 validCodeActivate: action.bodyValidCodeActivate
             }
         case ACTIVATION_EMAIL:
-
             return {
                 ...state,
                 activationEmail: action.bodyActivationEmail
@@ -110,6 +118,16 @@ const SettingReducer = (state = initialState, action) => {
                 ...state,
                 validFormEmail: action.bodyValidFormEmail
             }
+        case BLOCK_RESET_NUMBER:
+            return {
+                ...state,
+                validInputCode:action.bodyValidCode
+            }
+        case UPDATE_EMAIL:
+            return {
+                ...state,
+                email: action.bodyEmailUser
+            }
         default:
             return {...state}
     }
@@ -118,6 +136,9 @@ const SettingReducer = (state = initialState, action) => {
 export const updateEmailForm = (status) => ({type: VALID_MAIL, bodyValidFormEmail: !status});
 const updateFIOForm = (status) => ({type: VALID_FIO, bodyValidFormFIO: status});
 const updatePhoneForm = (status) => ({type: VALID_PHONE, bodyValidFormPhone: status});
+const updateBirthday = (date)=>({type:BIRTHDAY,bodyBirthday:date});
+const updateStatusCode =(status)=>({type:BLOCK_RESET_NUMBER, bodyValidCode:status});
+const updateEmailUser = (email)=>({type:UPDATE_EMAIL,bodyEmailUser:email});
 
 const surnameData = (surname, status) => ({type: INPUT_SURNAME, bodySurname: surname, bodyValidSurname: status});
 const middleNameData = (middleName, status) => ({
@@ -139,6 +160,12 @@ const activeUser = (status) => ({type: ACTIVATE_USER, bodyActiveUser: status});
 const activeCodeData = (status, code) => ({type: REVIEW_CODE, bodyValidCodeActivate: status, bodyCode: code});
 const activeEmail = (value) => ({type: ACTIVATION_EMAIL, bodyActivationEmail: value});
 
+/*Добавление даты рождения пользователя*/
+export const birthdayUser=(date)=>{
+    return(dispatch)=>{
+        dispatch(updateBirthday(date));
+    }
+}
 /*Валидация и обновление информации поля --фамилия*/
 export const updateSurname = (surname) => {
     return (dispatch) => {
@@ -165,6 +192,7 @@ export const updateName = (name) => {
         }
     }
 }
+
 /*Валидация и обновление информации поля --Телефон*/
 export const updateNumber = (number) => {
     return (dispatch) => {
@@ -185,6 +213,7 @@ export const updateClickButtonCode = (number) => {
         userAPI.registerPhone(phone).then(response => {
             dispatch(clickButtonCode(false));
             dispatch(timerData(true));
+            dispatch(updateStatusCode(true));
             setTimeout(() => {
                 dispatch(clickButtonCode(true))
             }, 60000);
@@ -202,10 +231,14 @@ export const codeReviewsNumber = (code, phone) => {
         let phoneUser = Number(phone.replace(/[^\d]/g, ''));
         let number = Number(code.replace(/[^\d]/g, ''));
         console.log(phone)
+        console.log(number)
         if (String(number).length == '4') {
             dispatch(activeCodeData(false, code));
             userAPI.activateUserPhone(phoneUser, number).then(response => {
                 dispatch(activeUser(false));
+                dispatch(updateStatusCode(false));
+                dispatch(clickButtonCode(false));
+                dispatch(timerData(false));
                 dispatch(activeCodeData(true,null));
             }).catch(error=>{
                 dispatch(activeCodeData(false,null));
@@ -222,7 +255,7 @@ export const codeReviewsNumber = (code, phone) => {
 /*Обновление фамилии*/
 export const updateFioUser = (surname, name, middleName) => {
     return (dispatch) => {
-        userAPI.updateFIOData(surname, name, middleName).then(response => {
+        userAPI.updateFIOData(surname,middleName, name).then(response => {
             dispatch(updateFIOForm(true));
         })
     }
@@ -236,7 +269,6 @@ export const userEmailActive = () => {
         }).catch(error => {
             console.log(error.response.data)
         })
-        //console.log(JSON.stringify(props.match.params));
     }
 }
 /*Активация аккаунта пользователя*/
@@ -246,16 +278,40 @@ export const activateUser = () => {
     }
 }
 /*Информация о юзере*/
+export const userFullInfo=()=>{
+    return(dispatch)=>{
+        userAPI.userFullInfo().then(response=>{
+            dispatch(updateSurname(response.data.last_name));
+            dispatch(updateName(response.data.first_name));
+            dispatch(updateMiddleName(response.data.patronymic));
+            dispatch(updateBirthday(response.data.date_birth));
+            dispatch(updateNumber(response.data.phone));
+            dispatch(updateEmailUser(response.data.email));
+            dispatch(clickButtonCode(false));
+        })
+    }
+}
 export const profileInfo=()=>{
     return(dispatch)=>{
         userAPI.profileInfo().then(response=>{
             console.log(response.data);
+            //dispatch(update)
             response.data.username!== '' ? dispatch(updateFIOForm(true)) : dispatch(updateFIOForm(false))
             response.data.phone_confirmed ? dispatch(updatePhoneForm(true)) : dispatch(updatePhoneForm(false))
             if(response.data.email_confirmed && response.data.phone_confirmed && response.data.username!== ''){
                 dispatch(activeUser(false));
                 console.log('ddd');
             }
+        })
+    }
+}
+/*Сохранение изменений информации и пользователе*/
+export const updateInfoUser=(first_name, last_name, patronymic, date_birth)=>{
+    return(dispatch)=>{
+        userAPI.updateInfoUser(first_name, last_name, patronymic, date_birth =='' ? null : date_birth).then(r=>{
+
+        }).catch(error=>{
+
         })
     }
 }

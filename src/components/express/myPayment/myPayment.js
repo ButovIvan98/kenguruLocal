@@ -19,7 +19,6 @@ const MyPayment =(props)=>{
                 </div>
                 <div className={'col-12'}>
                     <BlockPayment/>
-                    <BlockPayment/>
                 </div>
             </div>
         </div>

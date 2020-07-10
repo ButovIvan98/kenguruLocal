@@ -34,12 +34,15 @@
     object-fit: cover;
     border-radius: 8px;
 }
-.dropzone1{
-    height: 50px!important;
-    min-height: 100px!important;
+
+.dropzona div{
+    outline: none !important;
+    height: 70px!important;
+    min-height: 70px!important;
+    background: white !important;
+    /*border: 3px dashed #1099f5 !important;*/
 }
-.dropzone2{
-    height: 50px!important;
-    min-height: 100px!important;
-    font-size: 14px;
+.dropzona div div{
+    border: 0;
+    background: transparent!important;
 }
