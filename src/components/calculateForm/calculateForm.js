@@ -18,6 +18,8 @@ import Car3 from "../common/svgImg/car3";
 import Car5 from "../common/svgImg/car5";
 import Car10 from "../common/svgImg/car10";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Switch from "@material-ui/core/Switch";
 
 const CalculateForm = (props) => {
     const useStyles = makeStyles((theme) => ({
@@ -74,11 +76,29 @@ const CalculateForm = (props) => {
                                     id="combo-box-demo"
                                     options={props.calculate.cityOfDeparture.listCity.map((option) => option.title)}
                                     fullWidth={true}
-                                    renderInput={(params) => <TextField {...params} value={props.calculate.cityOfDeparture.city} onChange={(e)=>{ props.ListCityDeparture(e.target.value)}
-                                    } label="Город отправки груза" variant="outlined"/>}
+                                    renderInput={(params) => <TextField {...params}
+                                                                        error={!props.calculate.cityOfDeparture.validCity}
+                                                                        value={props.calculate.cityOfDeparture.city}
+                                                                        onChange={(e) => {
+                                                                            props.ListCityDeparture(e.target.value)
+                                                                        }
+                                                                        } label="Город отправки груза"
+                                                                        variant="outlined"/>}
                                     className={classes.inputStyle}
                                     noOptionsText={'Нет такого города'}
-                                    onChange={(event)=>{ props.updateCityDeparture(event.target.valueOf().innerText, props.calculate.cityOfDeparture.listCity)}}
+                                    onChange={(event) => {
+                                        props.updateCityDeparture(event.target.valueOf().innerText, props.calculate.cityOfDeparture.listCity)
+                                    }}
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Switch
+                                            checked={props.calculate.pickup}
+                                            //onChange={}
+                                            color="primary"
+                                        />
+                                    }
+                                    label={'Склад'}
                                 />
                             </div>
                             <div className={'col-lg-4 mt-lg-0 mt-2 pr-1 pl-1'}>
@@ -86,15 +106,30 @@ const CalculateForm = (props) => {
                                     id="combo-box-demo"
                                     options={props.calculate.cityOfDestination.listCity.map((option) => option.title)}
                                     renderInput={(params) => <TextField
+                                        error={!props.calculate.cityOfDestination.validCity}
                                         {...params}
                                         label="Город доставки груза"
                                         variant="outlined"
-                                        onChange={(e)=>{ props.ListCityDestination(e.target.value)}}
+                                        onChange={(e) => {
+                                            props.ListCityDestination(e.target.value)
+                                        }}
                                     />
                                     }
                                     className={classes.inputStyle}
                                     noOptionsText={'Нет такого города'}
-                                    onChange={(event)=>{ props.updateCityDestination(event.target.valueOf().innerText, props.calculate.cityOfDestination.listCity)}}
+                                    onChange={(event) => {
+                                        props.updateCityDestination(event.target.valueOf().innerText, props.calculate.cityOfDestination.listCity)
+                                    }}
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Switch
+                                            checked={props.calculate.delivery}
+                                            //onChange={handleChange}
+                                            color="primary"
+                                        />
+                                    }
+                                    label={'Склад'}
                                 />
                             </div>
                             <div className={'col-lg-4 mt-lg-0 mt-2 pr-1 pl-1'}>
@@ -109,7 +144,9 @@ const CalculateForm = (props) => {
 
                                     >
                                         <MenuItem value={'doc'}>Документы</MenuItem>
-                                        <MenuItem onClick={()=>{ props.clearCargoData();}} value={'cargo'}>Мелкие грузы</MenuItem>
+                                        <MenuItem onClick={() => {
+                                            props.clearCargoData();
+                                        }} value={'cargo'}>Мелкие грузы</MenuItem>
                                         <MenuItem value={30}>Большие грузы</MenuItem>
                                     </Select>
                                 </FormControl>
@@ -132,7 +169,9 @@ const CalculateForm = (props) => {
                                             startAdornment: <InputAdornment position="start">кг </InputAdornment>,
                                         }}
                                         value={props.calculate.listCargo.weight}
-                                        onChange={(e) => {props.autoSizeDoc(e.target.value)}}
+                                        onChange={(e) => {
+                                            props.autoSizeDoc(e.target.value)
+                                        }}
                                         //helperText="Some important text"
                                     />
                                 </div>
@@ -243,8 +282,7 @@ const CalculateForm = (props) => {
                 <div className={'col-12 mb-3'}>
                     <div className={classes.blockBottomCalculate}>
                         <button onClick={() => {
-                            props.calculateTariff(props.calculate.listCargo,props.calculate.typeCargo ,props.calculate.cityOfDeparture.city,props.calculate.cityOfDestination.city);
-                            props.statusCalculate(props.calculate.statusCalculate);
+                            props.calculateTariff(props.calculate.listCargo, props.calculate.typeCargo, props.calculate.cityOfDeparture.city, props.calculate.cityOfDestination.city);
                         }} className={classes.calculation}>Рассчитать
                         </button>
                     </div>

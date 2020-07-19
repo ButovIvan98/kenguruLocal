@@ -344,6 +344,7 @@ export const cityInfo = (city) => {
     return (dispatch) => {
         if (city.length > 2) {
             cityAPI.searchCity(city).then(r => {
+                console.log(r.data);
                 dispatch(listCity(r.data));
             }).catch(error => {
 

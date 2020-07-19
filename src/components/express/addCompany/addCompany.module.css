@@ -38,7 +38,3 @@
 .addAddress:active{
     background: #001C2D;
 }
-.addAddress span{
-    position: relative;
-    top: 15px;
-}

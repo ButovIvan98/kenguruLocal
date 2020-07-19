@@ -196,13 +196,18 @@ export const updateName = (name) => {
 /*Валидация и обновление информации поля --Телефон*/
 export const updateNumber = (number) => {
     return (dispatch) => {
-        let phone = Number(number.replace(/[^\d]/g, ''));
-        if ((String(phone)).length === 11) {
-            dispatch(numberData(number, true, true))
+        if(number===null){
 
-        } else {
-            dispatch(numberData(number, false, false));
-            console.log(phone)
+        }
+        else {
+            let phone = Number(number.replace(/[^\d]/g, ''));
+            if ((String(phone)).length === 11) {
+                dispatch(numberData(number, true, true))
+
+            } else {
+                dispatch(numberData(number, false, false));
+                console.log(phone)
+            }
         }
     }
 }

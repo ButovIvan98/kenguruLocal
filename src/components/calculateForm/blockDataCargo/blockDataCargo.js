@@ -14,7 +14,7 @@ const BlockDataCargo = (props) => {
                     <div className={'row'}>
                         <div className={'col-lg-4 col-6 pl-1 pr-1'}>
                             <TextField
-                                error={props.validWeight}
+                                error={!props.validWeight}
                                 data-number-cargo={props.id}
                                 variant="outlined"
                                 type={'number'}
@@ -30,7 +30,7 @@ const BlockDataCargo = (props) => {
                         </div>
                         <div className={'col-lg-4 col-6 pl-1 pr-1'}>
                             <TextField
-                                error={props.validVolume}
+                                error={!props.validVolume}
                                 data-number-cargo={props.id}
                                 variant="outlined"
                                 id="standard-helperText"
@@ -46,7 +46,7 @@ const BlockDataCargo = (props) => {
                         </div>
                         <div className={'col-lg-4 mt-lg-0 mt-2 col-12  pl-1 pr-1 '}>
                             <TextField
-                                error={props.validQuantity}
+                                error={!props.validQuantity}
                                 data-number-cargo={props.id}
                                 variant="outlined"
                                 id="standard-helperText"
@@ -72,7 +72,7 @@ const BlockDataCargo = (props) => {
             : <div className={'row mt-3'}>
                 <div className={'col-lg-2 col-4 pl-1 pr-1'}>
                     <TextField
-                        error={props.validLenght}
+                        error={!props.validLenght}
                         data-number-cargo={props.id}
                         variant="outlined"
                         id="standard-helperText"
@@ -88,7 +88,7 @@ const BlockDataCargo = (props) => {
                 </div>
                 <div className={'col-lg-2 col-4 pl-1 pr-1'}>
                     <TextField
-                        error={props.validHeight}
+                        error={!props.validHeight}
                         data-number-cargo={props.id}
                         variant="outlined"
                         id="standard-helperText"
@@ -104,7 +104,7 @@ const BlockDataCargo = (props) => {
                 </div>
                 <div className={'col-lg-2 col-4 pl-1 pr-1'}>
                     <TextField
-                        error={props.validWidth}
+                        error={!props.validWidth}
                         data-number-cargo={props.id}
                         variant="outlined"
                         id="standard-helperText"
@@ -120,7 +120,7 @@ const BlockDataCargo = (props) => {
                 </div>
                 <div className={'col-lg-2 mt-lg-0 mt-2 col-4 pl-1 pr-1'}>
                     <TextField
-                        error={props.validWeight}
+                        error={!props.validWeight}
                         data-number-cargo={props.id}
                         variant="outlined"
                         id="standard-helperText"
@@ -136,7 +136,7 @@ const BlockDataCargo = (props) => {
                 </div>
                 <div className={'col-lg-2 mt-lg-0 mt-2  col-4 pl-1 pr-1'}>
                     <TextField
-                        error={props.validVolume}
+                        error={!props.validVolume}
                         data-number-cargo={props.id}
                         variant="outlined"
                         id="standard-helperText"
@@ -152,7 +152,7 @@ const BlockDataCargo = (props) => {
                 </div>
                 <div className={'col-lg-2 mt-lg-0 mt-2 col-4 pl-1 pr-1'}>
                     <TextField
-                        error={props.validQuantity}
+                        error={!props.validQuantity}
                         data-number-cargo={props.id}
                         variant="outlined"
                         id="standard-helperText"

@@ -44,20 +44,19 @@ const AddingDocuments =(props)=> {
                 </div>
                 <div className={'col-lg-6 mt-3 mb-3'}>
                     <DropzoneArea
-                        //acceptedFiles={'/doc,/pdf'}
                         dropzoneText={"Перенесите или добавьте ИНН"}
                         dropzoneClass={classes.dropzoneContainer}
                         dropzoneParagraphClass={classes.dropzoneParagraph}
                         maxFileSize={10000000}
                         filesLimit={1}
-                        acceptedFiles={['application/doc','application/pdf']}
+                        acceptedFiles={['application/doc','application/docx','application/pdf']}
                         showFileNames={true}
                         uploadIconSize={classes.dropzoneSvg}
+                        onChange={(files) => console.log('Files:', files)}
                     />
                 </div>
                 <div className={'col-lg-6 mt-3 mb-3'}>
                     <DropzoneArea
-                        //acceptedFiles={'/doc,/pdf'}
                         dropzoneText={"Перенесите или добавьте Устав организации."}
                         dropzoneClass={classes.dropzoneContainer}
                         dropzoneParagraphClass={classes.dropzoneParagraph}

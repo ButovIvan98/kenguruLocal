@@ -36,6 +36,7 @@ import Plan from "./components/plan";
 import { Alert } from 'bootstrap-4-react';
 import ResetPasswordContainerExport from "./components/authorization/resetPassword/resetPassworsContainer";
 import AddressContainerExport from "./components/express/myAddress/add_address/add_addressContainer";
+import ExportAddCompanyContainer from "./components/express/addCompany/addCompanyContainer";
 //нельзя удалять полетит бутстрап
 
 const App = (props) => {
@@ -67,7 +68,7 @@ const App = (props) => {
                                         <Route exact path={'/websitePlagin'} render={()=> <ExportWebsitePlaginContainer />} />
                                         <Route exact path={'/addAddress'} render={()=><AddressContainerExport/>}/>
                                         <Route exact path={'/myPayment'} render={()=><MyPayment/>}/>
-                                        <Route exact path={'/addCompany'} render={()=><AddCompany/>}/>
+                                        <Route exact path={'/addCompany'} render={()=><ExportAddCompanyContainer/>}/>
                                         <Route exact path={'/plan'} render={()=><Plan/>}/>
                                         <Route exact path={'/personalAccount'} render={()=><PersonalAccountContainerExport/>}/>
                                         <Route path={'/setting'} render={()=><ExportSettingContainer/>}/>

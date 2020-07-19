@@ -17,6 +17,7 @@ import FeedbackReducer from "./feedbackReducer";
 import MyAddressReducer from "./myAddressReducer";
 import PersonalAccountReducer from "./personalAccountReducer";
 import SettingReducer from "./settingReducer";
+import AddCompanyReducer from "./addCompanyReducer";
 
 let reducers = combineReducers({
     ProfilePage: ContentReducer,
@@ -35,7 +36,8 @@ let reducers = combineReducers({
     FeedbackForm: FeedbackReducer,
     AddressPage: MyAddressReducer,
     PersonalAccount:PersonalAccountReducer,
-    Setting:SettingReducer
+    Setting:SettingReducer,
+    AddCompany:AddCompanyReducer,//Редюсер добавления компании в личный кабинет
 });
 let store = createStore(reducers, applyMiddleware(thunkMiddleware));
 window.store = store;
