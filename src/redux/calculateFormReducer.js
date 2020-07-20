@@ -12,6 +12,9 @@ let UPDATE_PICKUP = 'UPDATE_PICKUP';
 let UPDATE_DELIVERY = 'UPDATE_DELIVERY';
 let STATUS_CALCULATE = 'STATUS_CALCULATE';
 
+let SEARCH_CHEAPLY='SEARCH_CHEAPLY'//Поиск самого дешевого варианта доставки
+let SEARCH_FASTER='SEARCH_FASTER'//Поиск самого быстрого варианта доставки
+
 let STATUS_DETAILED_PARAMETERS = 'STATUS_DETAILED_PARAMETERS';//Статус подробные параметры
 let ADD_CARGO = 'ADD_CARGO';//Добавить поля
 let DELETE_CARGO = 'DELETE_CARGO';//Удаление груза
@@ -74,12 +77,41 @@ let initialState = {
         filterDD: true,
         filterDW: false,
     },
-    pickup:false,
-    delivery:false,
-    formResultCalculate: false
+    pickup:false,//Место отправки от двери или от терминала
+    delivery:false,//Место доставки до двери или до терминала
+    formResultCalculate: false,
+    CharacteristicsCargo:{//Категории груза
+        dangerous:false,//Опасный груз
+        fragile:false,//Хрупкий груз
+        wet:false,//Мокрый груз
+        valuable:false//Ценный груз
+    },
+    card:{//Информация о предложениях по самым дешевым и самым быстрым перевозкам
+        cheaply:[],//Быстрее
+        faster:[],//Дешевле
+        showForm:false,//Показывать карточки или нет
+    }
+
 }
 const CalculateFormReducer = (state = initialState, action) => {
     switch (action.type) {
+        case SEARCH_CHEAPLY:
+            return {
+                ...state,
+                card:{
+                    ...state.card,
+                    cheaply: action.bodyCheaply
+                }
+            }
+        case SEARCH_FASTER:
+            return {
+                ...state,
+                card:{
+                    ...state.card,
+                    faster: action.bodyFaster,
+                    showForm: action.bodyShowForm
+                }
+            }
         case UPDATE_PICKUP:
             return {
                 ...state,
@@ -294,6 +326,10 @@ const CalculateFormReducer = (state = initialState, action) => {
     return state;
 };
 
+export const updatePickup=(status)=>({type:UPDATE_PICKUP,bodyPickupCargo:status})
+export const updateDelivery=(status)=>({type:UPDATE_DELIVERY,bodyDeliveryCargo:status})
+const updateCheaply=(data)=>({type:SEARCH_CHEAPLY, bodyCheaply:data})
+const updateFaster=(data,status)=>({type:SEARCH_FASTER, bodyFaster:data,bodyShowForm:status})
 const updateWidth = (width, id, valid) => ({
     type: UPDATE_WIDTH,
     bodyWidth: width,
@@ -663,7 +699,7 @@ export const defaultParams = () => {
     }
 }
 /*Отпарвка грузов и расчет тарифов*/
-export const calculateTariff = (cargo, type, idCityDeparture, idCityDestination) => {
+export const calculateTariff = (cargo, type, idCityDeparture, idCityDestination,pickup,delivery) => {
     return (dispatch) => {
         for (let i = 0; i < cargo.length; i++) {
             if (cargo[i].validHeight && cargo[i].validWidth && cargo[i].validLenght && cargo[i].validQuantity && cargo[i].validVolume && cargo[i].validWeight && idCityDestination.length!==0 && idCityDeparture.id!==undefined) {
@@ -679,40 +715,60 @@ export const calculateTariff = (cargo, type, idCityDeparture, idCityDestination)
                             cargo[i].quantity).then(response => {
                             if ((cargo.length - 1) === i) {
                                 idCargo.push(response.data.id);
-                                calculateAPI.calculate(idCargo, idCityDeparture.id, idCityDestination.id).then(response => {
+                                calculateAPI.calculate(idCargo, idCityDeparture.id, idCityDestination.id,pickup,delivery).then(response => {
                                     dispatch(clearListResult());
                                     dispatch(statusFilterCalculate(false, false, true, false));
+                                    let newArr=[];
                                     let chatSocket = new WebSocket(
                                         'ws://67.205.165.172:8002/ws/calculation/?key=' + response.data.id);
                                     chatSocket.onmessage = function (e) {
                                         let data = JSON.parse(e.data);
                                         let message = JSON.parse(data['message']);
-                                        if (String(message.pickup) === String(1) && String(message.delivery) === String(1)) {
-                                            dispatch(addListFilterResult(
-                                                message.id,
-                                                'https://kenguruexpress.ru/images/services/dimex.png',
-                                                message.operator,
-                                                message.title,
-                                                message.rating,
-                                                message.term,
-                                                message.common_price,
-                                                message.price,
-                                                message.pickup,
-                                                message.delivery
-                                            ))
+                                        console.log(message);
+                                        newArr.push(message);
+                                        if(message.calculation===true){
+                                            dispatch(cheaplyAndFaster(newArr));
                                         }
-                                        dispatch(addListCalculateResult(
-                                            message.id,
-                                            'https://kenguruexpress.ru/images/services/dimex.png',
-                                            message.operator,
-                                            message.title,
-                                            message.rating,
-                                            message.term,
-                                            message.common_price,
-                                            message.price,
-                                            message.pickup,
-                                            message.delivery
-                                        ))
+                                        else{
+                                            dispatch(addListFilterResult(
+                                                     message.id,
+                                                     'https://kenguruexpress.ru/images/services/dimex.png',
+                                                     message.operator,
+                                                     message.title,
+                                                     message.rating,
+                                                     message.term,
+                                                     message.common_price,
+                                                     message.price,
+                                                     message.pickup,
+                                                     message.delivery
+                                                 ))
+                                        }
+                                        // if (String(message.pickup) === String(1) && String(message.delivery) === String(1)) {
+                                        //     dispatch(addListFilterResult(
+                                        //         message.id,
+                                        //         'https://kenguruexpress.ru/images/services/dimex.png',
+                                        //         message.operator,
+                                        //         message.title,
+                                        //         message.rating,
+                                        //         message.term,
+                                        //         message.common_price,
+                                        //         message.price,
+                                        //         message.pickup,
+                                        //         message.delivery
+                                        //     ))
+                                        // }
+                                        // dispatch(addListCalculateResult(
+                                        //     message.id,
+                                        //     'https://kenguruexpress.ru/images/services/dimex.png',
+                                        //     message.operator,
+                                        //     message.title,
+                                        //     message.rating,
+                                        //     message.term,
+                                        //     message.common_price,
+                                        //     message.price,
+                                        //     message.pickup,
+                                        //     message.delivery
+                                        // ))
                                     };
                                     chatSocket.onclose = function (e) {
                                         console.error('Chat socket closed unexpectedly');
@@ -762,5 +818,17 @@ export const updateDataFaster = (data) => {
         dispatch(updateData(data.sort(compareNumbersFaster)));
     }
 };
-
+/*Поиск самой дешевой и самой быстрой доставки*/
+const cheaplyAndFaster=(listResultCalculate)=>{
+    function compareCheaply(a, b) {
+        return a.price - b.price;
+    }
+    function compareFaster(a, b) {
+        return a.term - b.term;
+    }
+    return(dispatch)=>{
+        dispatch(updateCheaply(listResultCalculate.sort(compareCheaply)[0]))
+        dispatch(updateFaster(listResultCalculate.sort(compareFaster)[0],true))
+    }
+}
 export default CalculateFormReducer;

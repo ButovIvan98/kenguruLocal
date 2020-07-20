@@ -3,7 +3,7 @@ import classes from './css/blockResult.module.css';
 import Rating from '@material-ui/lab/Rating';
 
 const BlockResult = (props) => {
-    return <div className={'row mb-2 ml-0 mr-0' + ' ' + classes.block}>
+    return <div className={'row  mb-2 ml-0 mr-0' + ' ' + classes.block}>
         <div className={'col-lg-3 text-lg-left text-center mt-lg-0 mt-3 col-6'}>
             <img src={props.img} className={classes.iconsTk}/>
         </div>
