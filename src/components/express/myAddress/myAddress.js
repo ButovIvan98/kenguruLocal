@@ -1,11 +1,9 @@
 import React from 'react';
-import AddressContainerExport from "./add_address/add_addressContainer";
 import classes from "./add_address/css/add_address.module.css";
 import SearchAndFilter from "../../common/searchAndFilter/searchAndFilter";
 import BlockAddress from "./blockAddress/blockAddress";
 
 const MyAddress = (props) => {
-    debugger
     return <div className={'container-fluid' + ' ' + classes.styleBlock}>
         <div className={'container'}>
             <div className={'row'}>

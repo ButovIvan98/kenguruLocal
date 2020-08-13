@@ -18,6 +18,7 @@ import MyAddressReducer from "./myAddressReducer";
 import PersonalAccountReducer from "./personalAccountReducer";
 import SettingReducer from "./settingReducer";
 import AddCompanyReducer from "./addCompanyReducer";
+import OrderReducer from "./orderReducer";
 
 let reducers = combineReducers({
     ProfilePage: ContentReducer,
@@ -38,6 +39,7 @@ let reducers = combineReducers({
     PersonalAccount:PersonalAccountReducer,
     Setting:SettingReducer,
     AddCompany:AddCompanyReducer,//Редюсер добавления компании в личный кабинет
+    Order:OrderReducer,//Редюсер для работы с формой заказа
 });
 let store = createStore(reducers, applyMiddleware(thunkMiddleware));
 window.store = store;

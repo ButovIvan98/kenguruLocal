@@ -1,16 +1,6 @@
 import React from 'react';
 import BlockResult from "./blockResult/blockResult";
 import FilterResult from "./filterResult/filterResult";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import Typography from "@material-ui/core/Typography";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Switch from "@material-ui/core/Switch";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
 import FilterDelivery from "./filterDelivery/filterDelivery";
 import ExportFilterDeliveryContainer from "./filterDelivery/filterDeliveryContainer";
 import Pricing from "./conditions/conditions";
@@ -25,6 +15,11 @@ const CalculateResult = (props) => {
                 deliveryTime={nav.deliveryTime}
                 beforePrice={nav.priceBefore}
                 afterPrice={nav.priceAfter}
+                arrange={props.clickArrangeOrder}
+                statusArrange={props.calculate.arrangeOrder}
+                fullInfoCityDeparture={props.calculate.cityOfDeparture.city}
+                fullInfoCityDestination={props.calculate.cityOfDestination.city}
+                fullInfoTK={nav}
             />
         )
     )

@@ -444,6 +444,7 @@ export const addAddressBook = (data) => {
             && (String(data.name).length > 2)
             && (String(data.surname).length > 2)) {
             addAddressAPI.addBookAddress(
+
                 Cookies.get('id_company'),
                 data.fullInfoCity[0].id,
                 data.fullInfoStreet.street,
@@ -465,7 +466,8 @@ export const addAddressBook = (data) => {
                 '',
                 data.comment,
                 data.fullInfoHouse[0].latitude,
-                data.fullInfoHouse[0].longitude
+                data.fullInfoHouse[0].longitude,
+                data.fullInfoHouse[0].house_fias_id
             ).then(r => {
                 dispatch(updateStatusButton(true));
                 dispatch(updateCity('', true, []));

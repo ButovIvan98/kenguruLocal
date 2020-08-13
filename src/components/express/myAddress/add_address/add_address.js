@@ -85,7 +85,6 @@ console.log(props)
                                 noOptionsText={'Нет такого дома'}
                                 onChange={(event)=>{props.fullInfoHouse(props.addressPage.fullInfoStreet.street_fias_id,event.target.valueOf().innerText,props.addressPage.listHouse)}}
                             />
-
                         </div>
                         <div className={'col-lg-4 col-12 mt-3'}>
                             <TextField

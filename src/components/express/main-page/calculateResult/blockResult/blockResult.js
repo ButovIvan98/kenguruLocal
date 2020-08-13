@@ -1,6 +1,7 @@
 import React from 'react';
 import classes from './css/blockResult.module.css';
 import Rating from '@material-ui/lab/Rating';
+import {Redirect} from "react-router-dom";
 
 const BlockResult = (props) => {
     return <div className={'row  mb-2 ml-0 mr-0' + ' ' + classes.block}>
@@ -39,8 +40,9 @@ const BlockResult = (props) => {
                     Срок доставки
                 </span>
         </div>
-        <div className={'col-lg-3 text-lg-left text-center mt-lg-0 mt-2  mb-lg-0 mb-3 col-12 align-self-center text-center'}>
-            <button className={classes.buttonClick}>
+        <div
+            className={'col-lg-3 text-lg-left text-center mt-lg-0 mt-2  mb-lg-0 mb-3 col-12 align-self-center text-center'}>
+            <button onClick={() => (props.arrange(props.fullInfoCityDeparture, props.fullInfoCityDestination,props.fullInfoTK))} className={classes.buttonClick}>
                     <span className={classes.buttonTextHeader}>
                     Заказать за {props.afterPrice} ₽
                 </span>
@@ -49,6 +51,11 @@ const BlockResult = (props) => {
                     Обычная цена <s>{props.beforePrice} ₽</s>
                 </span>
             </button>
+            {
+                props.statusArrange
+                    ? <Redirect to={'/order/' + props.beforePrice}/>
+                    : ''
+            }
         </div>
     </div>
 }

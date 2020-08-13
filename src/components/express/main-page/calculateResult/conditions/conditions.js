@@ -92,7 +92,7 @@ const Pricing = (props) => {
                                     subheader={''}
                                     titleTypographyProps={{align: 'center'}}
                                     subheaderTypographyProps={{align: 'center'}}
-                                    action={<SpeedIcon
+                                    action={<AttachMoney
                                     color={'primary'}
                                     />}
                                     className={classes.cardHeader}
@@ -171,7 +171,7 @@ const Pricing = (props) => {
                                     subheader={''}
                                     titleTypographyProps={{align: 'center'}}
                                     subheaderTypographyProps={{align: 'center'}}
-                                    action={<AttachMoney
+                                    action={<SpeedIcon
                                         color={'primary'}
                                     />}
                                     className={classes.cardHeader}

@@ -2,6 +2,7 @@ import React from 'react';
 import CalculateResult from "./calculateResult";
 import {connect} from "react-redux";
 import {
+    clickArrangeOrder,
     door_door, door_warehouse,
     updateDataCheaper,
     updateDataFaster,
@@ -23,7 +24,8 @@ class CalculateResultContainer extends React.Component {
 let mapStateToProps = (state) => {
     return {
         calculate: state.CalculateFormPage,
+        address:state.AddressPage
     }
 }
-let ExportCalculateResultContainer = connect(mapStateToProps, { updateDataFaster, updateDataCheaper, warehouse_warehouse,warehouse_door,door_door,door_warehouse})(CalculateResultContainer);
+let ExportCalculateResultContainer = connect(mapStateToProps, {clickArrangeOrder, updateDataFaster, updateDataCheaper, warehouse_warehouse,warehouse_door,door_door,door_warehouse})(CalculateResultContainer);
 export default ExportCalculateResultContainer;
