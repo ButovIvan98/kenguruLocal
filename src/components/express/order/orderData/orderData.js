@@ -5,24 +5,24 @@ import bksImg from './img/bklsrv.png';
 import Rating from "@material-ui/lab/Rating";
 
 const OrderData = (props) => {
-    return <div className={'row self-align-center'}>
-        <div className={'col-lg-3  text-center self-align-center'}>
-            <img src={bksImg}/>
+    return <div className={'row align-self-center'}>
+        <div className={'col-lg-3  text-center align-self-center'}>
+            <img className={classes.imgCompany} src={props.company.imgCompany}/>
         </div>
-        <div className={'col-lg-3 mt-lg-0 mt-2 col-6 self-align-center'}>
+        <div className={'col-lg-3 mt-lg-0 mt-2 col-6 align-self-center'}>
             <span className={classes.header1}>
-                Байкал Сервис
+                {props.company.company}
             </span>
             <br/>
             <span className={classes.header2}>
-                Автотранспорт
+                {props.company.tariff}
             </span>
         </div>
-        <div className={'col-lg-2 col-6 mt-lg-0 mt-2'}>
+        <div className={'col-lg-2 col-6 mt-lg-0 mt-2 align-self-center'}>
             <span className={classes.header1}>
                 <Rating
                     name="simple-controlled"
-                    value={4.5}
+                    value={props.company.rating}
                     precision={0.1}
                     readOnly={true}
                 />
@@ -32,18 +32,18 @@ const OrderData = (props) => {
                 Рейтинг
             </span>
         </div>
-        <div className={'col-lg-2 col-6 mt-lg-0 mt-2\''}>
+        <div className={'col-lg-2 col-6 mt-lg-0 mt-2 align-self-center'}>
             <span className={classes.header1}>
-                8 дней
+                {props.company.deliveryTime} дней
             </span>
             <br/>
             <span className={classes.header2}>
                 Срок доставки
             </span>
         </div>
-        <div className={'col-lg-2 col-6 mt-lg-0 mt-2\''}>
+        <div className={'col-lg-2 col-6 mt-lg-0 mt-2 align-self-center'}>
             <span className={classes.header1}>
-                Склад-Склад
+                {props.company.pickup ? 'Дверь' : 'Склад'}-{props.company.delivery ? 'Дверь' : 'Склад'}
             </span>
             <br/>
             <span className={classes.header2}>

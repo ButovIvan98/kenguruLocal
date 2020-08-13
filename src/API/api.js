@@ -4,11 +4,11 @@ import Cookies from 'js-cookie';
 
 export const instance = () => {
     return axios.create({
-            baseURL: 'http://api.ke22.ru:8000',
+            baseURL: 'https://api.ke22.ru',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Token ' + Cookies.get('auth_token'),
-                'Accept': 'application/json'
+                'Accept': 'application/json',
             }
         }
     )
@@ -16,18 +16,18 @@ export const instance = () => {
 /*Запрос с типом formData*/
 export const instanceHeaders = () => {
     return axios.create({
-            baseURL: 'http://api.ke22.ru:8000',
+            baseURL: 'https://api.ke22.ru',
             headers: {
                 'Content-Type': 'multipart/form-data',
                 'Authorization': 'Token ' + Cookies.get('auth_token'),
-                'Accept': 'application/json'
+                'Accept': 'application/json',
             }
         }
     )
 }
 
 const auth = axios.create({
-    baseURL: 'http://api.ke22.ru:8000',
+    baseURL: 'https://api.ke22.ru',
     headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
@@ -151,7 +151,7 @@ export const addAddressAPI = {
             longitude: longitude
         })
     },
-    addBookAddress(userID, locality, street, street_type, house, house_type, block, block_type, flat, flat_type, zip, company, surname, name, patronymic, phone, phone_extension, phone2, phone2_extension, comment, latitude, longitude) {
+    addBookAddress(userID, locality, street, street_type, house, house_type, block, block_type, flat, flat_type, zip, company, surname, name, patronymic, phone, phone_extension, phone2, phone2_extension, comment, latitude, longitude,fias_house) {
         return instance().post('/profile/contact/', {
             user: userID,
             locality: locality,
@@ -163,7 +163,7 @@ export const addAddressAPI = {
             block_type: block_type,
             flat: flat,
             flat_type: flat_type,
-            zip: zip,
+            index_number: zip,
             company: company,
             surname: surname,
             name: name,
@@ -174,8 +174,14 @@ export const addAddressAPI = {
             phone2_extension: phone2_extension,
             comment: comment,
             latitude: latitude,
-            longitude: longitude
+            longitude: longitude,
+            house_fias:fias_house
         })
+    }
+}
+export const orderAPI={
+    allTerminal(idCity,nameTK){
+        return instance().post('/geo/terminal/',{locality_id:idCity, operator:nameTK})
     }
 }
 export const userAPI = {
@@ -262,28 +268,3 @@ export const ProfileAPI = {
     //     return instance.get(`profile/status/` + userID)
     // }
 };
-//Регистрация + авторизация
-export const RegistrationAPI = {
-    // putRegistration(surname, name, middleName, phone, email, password) {
-    //     return instance.post('user/auth/logout', {
-    //         middle: surname,
-    //         first: name,
-    //         last: middleName,
-    //         password: password,
-    //         email: email,
-    //         phone: phone
-    //     }).then()
-    // },
-    // putAthorization(email, password) {
-    //     return instance.post('user/auth/login', {email: email, password: password})
-    // }
-    // putAthorization(email,password){
-    //     return instance.get('user/auth/logout')
-    // }
-};
-//Калькуляция и добавление груза
-export const CalculateAPI = {
-    // addСargo(width, height, length, weight, quantity, comment, type) {
-    //     return instance.post('express/cargo/create', {width, height, length, weight, quantity, comment, type}).then();
-    // }
-}

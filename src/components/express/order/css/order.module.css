@@ -59,7 +59,19 @@
 }
 /*Модальное окно*/
 .blockModal{
-
+    width: 450px;
+    background: white;
+    margin: 0 auto;
+}
+.rowCompanyModal{
+    cursor: pointer;
+    box-shadow: 0 0 2px darkgrey;
+    padding: 10px;
+    border-radius: 8px;
+    transition:0.1s;
+}
+.rowCompanyModal:hover{
+    box-shadow: 0 0 4px darkgrey;
 }
 @media (max-width: 992px) {
     .line{

@@ -37,6 +37,7 @@ import { Alert } from 'bootstrap-4-react';
 import ResetPasswordContainerExport from "./components/authorization/resetPassword/resetPassworsContainer";
 import AddressContainerExport from "./components/express/myAddress/add_address/add_addressContainer";
 import ExportAddCompanyContainer from "./components/express/addCompany/addCompanyContainer";
+import ExportOrderContainer from "./components/express/order/orderContainer";
 //нельзя удалять полетит бутстрап
 
 const App = (props) => {
@@ -50,7 +51,8 @@ const App = (props) => {
                     <div className={classes.containerMain}>
                             {
                                 props.auth.isAuth
-                                    ?  <Switch>
+                                    ?
+                                    <Switch>
                                         <Route exact path='/'  render={() => <MainPage />}/>
                                         <Route exact path='/myAddress' render={() => <ExportMyAddressContainer />} />
                                         <Route exact path='/myShipments' render={() => <ExportMyShipmentsContainer />} />
@@ -75,7 +77,7 @@ const App = (props) => {
                                         <Route exact path={'/addCompany/loadingFile'} render={()=><AddingDocuments/>} />
                                         <Route exact path={'/addCompany/loadingFile/done'} render={()=><Done/>}/>
                                         <Route exact path={'/myPayment/account'} render={()=><Account/>}/>
-                                        <Route exact path={'/order'} render={()=><Order/>}/>
+                                        <Route path={'/order/'} render={()=><ExportOrderContainer/>}/>
                                         <Route exact path={'/order/orderSent'} render={()=><OrderSent/>}/>
                                         <Route exact path={'/invoice'} render={()=><Invoice/>}/>
                                         <Route render={()=><Error404/>}/>

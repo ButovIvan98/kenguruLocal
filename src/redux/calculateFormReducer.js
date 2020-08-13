@@ -1,5 +1,13 @@
-import {calculateAPI, CalculateAPI, cityAPI} from "../API/api";
+import {calculateAPI, cityAPI} from "../API/api";
 import {updateObjectInArray} from "../components/utils/updateElementMassive";
+import {
+    addAddressBookRecipient,
+    addAddressBookSender,
+    addTerminal,
+    updateCityRecipient,
+    updateCitySender,
+    updateInformationCompany
+} from "./orderReducer";
 
 let UPDATE_WIDTH = 'UPDATE_WIDTH';
 let UPDATE_HEIGHT = 'UPDATE_HEIGHT';
@@ -11,6 +19,9 @@ let UPDATE_VOLUME = 'UPDATE_VOLUME';
 let UPDATE_PICKUP = 'UPDATE_PICKUP';
 let UPDATE_DELIVERY = 'UPDATE_DELIVERY';
 let STATUS_CALCULATE = 'STATUS_CALCULATE';
+
+let SEARCH_CHEAPLY = 'SEARCH_CHEAPLY'//Поиск самого дешевого варианта доставки
+let SEARCH_FASTER = 'SEARCH_FASTER'//Поиск самого быстрого варианта доставки
 
 let STATUS_DETAILED_PARAMETERS = 'STATUS_DETAILED_PARAMETERS';//Статус подробные параметры
 let ADD_CARGO = 'ADD_CARGO';//Добавить поля
@@ -33,16 +44,18 @@ const STATUS_FILTER = 'STATUS_FILTER'//Состояние статуса фил�
 
 const CLEAR_CARGO = 'CLEAR_CARGO';//Очистка списка грузов
 
+const ARRANGE_ORDER = 'ARRANGE_ORDER'//Выбор тарифа и тк для перехода к оформлению заказа
+
 let initialState = {
     cityOfDeparture: {
         listCity: [],
         city: {},
-        validCity:true
+        validCity: true
     },
     cityOfDestination: {
         listCity: [],
         city: [],
-        validCity:true
+        validCity: true
     },
     statusDetailedParameters: true,
     destinationCityList: [],
@@ -74,12 +87,41 @@ let initialState = {
         filterDD: true,
         filterDW: false,
     },
-    pickup:false,
-    delivery:false,
-    formResultCalculate: false
+    pickup: false,//Место отправки от двери или от терминала
+    delivery: false,//Место доставки до двери или до терминала
+    formResultCalculate: false,
+    CharacteristicsCargo: {//Категории груза
+        dangerous: false,//Опасный груз
+        fragile: false,//Хрупкий груз
+        wet: false,//Мокрый груз
+        valuable: false//Ценный груз
+    },
+    card: {//Информация о предложениях по самым дешевым и самым быстрым перевозкам
+        cheaply: [],//Быстрее
+        faster: [],//Дешевле
+        showForm: false,//Показывать карточки или нет
+    },
+    arrangeOrder: false,
 }
 const CalculateFormReducer = (state = initialState, action) => {
     switch (action.type) {
+        case SEARCH_CHEAPLY:
+            return {
+                ...state,
+                card: {
+                    ...state.card,
+                    cheaply: action.bodyCheaply
+                }
+            }
+        case SEARCH_FASTER:
+            return {
+                ...state,
+                card: {
+                    ...state.card,
+                    faster: action.bodyFaster,
+                    showForm: action.bodyShowForm
+                }
+            }
         case UPDATE_PICKUP:
             return {
                 ...state,
@@ -122,7 +164,7 @@ const CalculateFormReducer = (state = initialState, action) => {
                 ...state,
                 listCargo: updateObjectInArray(state.listCargo, action.bodyIdLenght, "id", {
                     lenght: action.bodyLength,
-                    validLenght:action.bodyValidLenght
+                    validLenght: action.bodyValidLenght
                 })
             }
         case UPDATE_WEIGHT:
@@ -285,15 +327,21 @@ const CalculateFormReducer = (state = initialState, action) => {
                 ...state,
                 typeCargo: action.bodyTypeCargo
             }
-        default:
+        case ARRANGE_ORDER:
             return {
-
-                ...state
+                ...state,
+                arrangeOrder: action.bodyArrangeOrder
             }
+        default:
+            return {...state}
     }
     return state;
 };
 
+export const updatePickup = (status) => ({type: UPDATE_PICKUP, bodyPickupCargo: status})
+export const updateDelivery = (status) => ({type: UPDATE_DELIVERY, bodyDeliveryCargo: status})
+const updateCheaply = (data) => ({type: SEARCH_CHEAPLY, bodyCheaply: data})
+const updateFaster = (data, status) => ({type: SEARCH_FASTER, bodyFaster: data, bodyShowForm: status})
 const updateWidth = (width, id, valid) => ({
     type: UPDATE_WIDTH,
     bodyWidth: width,
@@ -366,7 +414,7 @@ const addListFilterResult = (id, img, company, tariff, rating, time, priceBefore
     bodyDelivery: delivery
 });
 const clearListResult = () => ({type: CLEAR_LIST_RESULT});
-const updateCityDepartureInformation = (city, listCity,status) => ({
+const updateCityDepartureInformation = (city, listCity, status) => ({
     type: UPDATE_TEXT_SENDING,
     bodyCityDeparture: city,
     bodyListCityDeparture: listCity,
@@ -376,11 +424,12 @@ const updateCityDestinationInformation = (city, listCity, status) => ({
     type: UPDATE_TEXT_DESTINATION,
     bodyCityDestination: city,
     bodyListCityDestination: listCity,
-    bodyValidCityDestination:status
+    bodyValidCityDestination: status
 });//Добавление полной информации о городе доставки
 const updateListCityDeparture = (list) => ({type: SEARCH_CITY_DEPARTURE, bodyListCityDeparture: list});//Добавление списка поиска городов отправки груза
 const updateListCityDestination = (list) => ({type: SEARCH_CITY_DESTINATION, bodyListCityDestination: list});//Добавление списка поиска городов доставки груза
 const sortListCalculate = (list) => ({type: FILTER_LIST, bodyResultFilter: list});
+const updateArrangeOrder = (status) => ({type: ARRANGE_ORDER, bodyArrangeOrder: status})
 /*
 Переменные для фильтра по типу доставки:
 -WW(склад-склад)
@@ -487,7 +536,7 @@ export const lengthData = (value, id, width, height) => {
                     dispatch(updateVolume(volume, id, true));
                 }
             } else {
-                dispatch(updateLength(NewValue, id, false   ))
+                dispatch(updateLength(NewValue, id, false))
             }
         }
     }
@@ -507,7 +556,7 @@ export const quantityData = (value, id) => {
 export const updateCityDeparture = (city, listCity) => {
     return (dispatch) => {
         cityAPI.cityInformation(city).then(response => {
-            dispatch(updateCityDepartureInformation(response.data[0], listCity,true));
+            dispatch(updateCityDepartureInformation(response.data[0], listCity, true));
         }).catch(error => {
 
         })
@@ -552,7 +601,6 @@ export const volumeData = (value, id) => {
         if (!/^[\d,.]*$/.test(value)) {
         } else {
             if (value.length > 0) {
-                console.log(value)
                 dispatch(updateVolume(value, id, true));
                 dispatch(updateHeight(params, id, true));
                 dispatch(updateWidth(params, id, true));
@@ -663,10 +711,10 @@ export const defaultParams = () => {
     }
 }
 /*Отпарвка грузов и расчет тарифов*/
-export const calculateTariff = (cargo, type, idCityDeparture, idCityDestination) => {
+export const calculateTariff = (cargo, type, idCityDeparture, idCityDestination, pickup, delivery) => {
     return (dispatch) => {
         for (let i = 0; i < cargo.length; i++) {
-            if (cargo[i].validHeight && cargo[i].validWidth && cargo[i].validLenght && cargo[i].validQuantity && cargo[i].validVolume && cargo[i].validWeight && idCityDestination.length!==0 && idCityDeparture.id!==undefined) {
+            if (cargo[i].validHeight && cargo[i].validWidth && cargo[i].validLenght && cargo[i].validQuantity && cargo[i].validVolume && cargo[i].validWeight && idCityDestination.length !== 0 && idCityDeparture.id !== undefined) {
                 if (i === cargo.length - 1) {
                     dispatch(statusCalculate(true));
                     let idCargo = [];
@@ -679,15 +727,21 @@ export const calculateTariff = (cargo, type, idCityDeparture, idCityDestination)
                             cargo[i].quantity).then(response => {
                             if ((cargo.length - 1) === i) {
                                 idCargo.push(response.data.id);
-                                calculateAPI.calculate(idCargo, idCityDeparture.id, idCityDestination.id).then(response => {
+                                calculateAPI.calculate(idCargo, idCityDeparture.id, idCityDestination.id, pickup, delivery).then(response => {
                                     dispatch(clearListResult());
                                     dispatch(statusFilterCalculate(false, false, true, false));
+                                    let newArr = [];
                                     let chatSocket = new WebSocket(
                                         'ws://67.205.165.172:8002/ws/calculation/?key=' + response.data.id);
                                     chatSocket.onmessage = function (e) {
                                         let data = JSON.parse(e.data);
                                         let message = JSON.parse(data['message']);
-                                        if (String(message.pickup) === String(1) && String(message.delivery) === String(1)) {
+                                        newArr.push(message);
+                                        dispatch(updateCheaply([]))
+                                        dispatch(updateFaster([], false))
+                                        if (message.calculation === true) {
+                                            dispatch(cheaplyAndFaster(newArr));
+                                        } else {
                                             dispatch(addListFilterResult(
                                                 message.id,
                                                 'https://kenguruexpress.ru/images/services/dimex.png',
@@ -701,18 +755,32 @@ export const calculateTariff = (cargo, type, idCityDeparture, idCityDestination)
                                                 message.delivery
                                             ))
                                         }
-                                        dispatch(addListCalculateResult(
-                                            message.id,
-                                            'https://kenguruexpress.ru/images/services/dimex.png',
-                                            message.operator,
-                                            message.title,
-                                            message.rating,
-                                            message.term,
-                                            message.common_price,
-                                            message.price,
-                                            message.pickup,
-                                            message.delivery
-                                        ))
+                                        // if (String(message.pickup) === String(1) && String(message.delivery) === String(1)) {
+                                        //     dispatch(addListFilterResult(
+                                        //         message.id,
+                                        //         'https://kenguruexpress.ru/images/services/dimex.png',
+                                        //         message.operator,
+                                        //         message.title,
+                                        //         message.rating,
+                                        //         message.term,
+                                        //         message.common_price,
+                                        //         message.price,
+                                        //         message.pickup,
+                                        //         message.delivery
+                                        //     ))
+                                        // }
+                                        // dispatch(addListCalculateResult(
+                                        //     message.id,
+                                        //     'https://kenguruexpress.ru/images/services/dimex.png',
+                                        //     message.operator,
+                                        //     message.title,
+                                        //     message.rating,
+                                        //     message.term,
+                                        //     message.common_price,
+                                        //     message.price,
+                                        //     message.pickup,
+                                        //     message.delivery
+                                        // ))
                                     };
                                     chatSocket.onclose = function (e) {
                                         console.error('Chat socket closed unexpectedly');
@@ -725,29 +793,29 @@ export const calculateTariff = (cargo, type, idCityDeparture, idCityDestination)
                     }
                 }
             }
-            if(!cargo[i].validWeight){
-                dispatch(updateWeight('',cargo[i].id,false));
+            if (!cargo[i].validWeight) {
+                dispatch(updateWeight('', cargo[i].id, false));
             }
-            if(!cargo[i].validHeight){
-                dispatch(updateHeight('',cargo[i].id,false));
+            if (!cargo[i].validHeight) {
+                dispatch(updateHeight('', cargo[i].id, false));
             }
-            if(!cargo[i].validVolume){
-                dispatch(updateVolume('',cargo[i].id,false));
+            if (!cargo[i].validVolume) {
+                dispatch(updateVolume('', cargo[i].id, false));
             }
-            if(!cargo[i].validWidth){
-                dispatch(updateWidth('',cargo[i].id,false));
+            if (!cargo[i].validWidth) {
+                dispatch(updateWidth('', cargo[i].id, false));
             }
-            if(!cargo[i].validLenght){
-                dispatch(updateLength('',cargo[i].id,false));
+            if (!cargo[i].validLenght) {
+                dispatch(updateLength('', cargo[i].id, false));
             }
-            if(!cargo[i].validQuantity){
-                dispatch(updateQuantity('',cargo[i].id,false));
+            if (!cargo[i].validQuantity) {
+                dispatch(updateQuantity('', cargo[i].id, false));
             }
-            if(idCityDeparture.id===undefined){
-                dispatch(updateCityDepartureInformation('',[],false));
+            if (idCityDeparture.id === undefined) {
+                dispatch(updateCityDepartureInformation('', [], false));
             }
-            if(idCityDestination.length===0){
-                dispatch(updateCityDestinationInformation('',[],false));
+            if (idCityDestination.length === 0) {
+                dispatch(updateCityDestinationInformation('', [], false));
             }
         }
     }
@@ -762,5 +830,37 @@ export const updateDataFaster = (data) => {
         dispatch(updateData(data.sort(compareNumbersFaster)));
     }
 };
+/*Поиск самой дешевой и самой быстрой доставки*/
+const cheaplyAndFaster = (listResultCalculate) => {
+    function compareCheaply(a, b) {
+        return a.price - b.price;
+    }
 
+    function compareFaster(a, b) {
+        return a.term - b.term;
+    }
+
+    return (dispatch) => {
+        dispatch(updateCheaply(listResultCalculate.sort(compareCheaply)[0]))
+        dispatch(updateFaster(listResultCalculate.sort(compareFaster)[0], true))
+    }
+}
+/*Обработка нажатия заказать*/
+export const clickArrangeOrder = (infoCitySender, infoCityRecipient, infoTK) => {
+    return (dispatch) => {
+        dispatch(addAddressBookSender(infoCitySender.locality));
+        dispatch(addAddressBookRecipient(infoCityRecipient.locality));
+        dispatch(addTerminal(infoCitySender.id, infoCityRecipient.id, infoTK));
+        dispatch(updateCitySender(infoCitySender));//Добавляет информацию о городе отправки в orderReducer
+        dispatch(updateCityRecipient(infoCityRecipient));//Добавляет информацию о городе доставки в orderReducer
+        dispatch(updateInformationCompany(infoTK));//Добавляет информацию о транспортной компании в orderReducer
+        setTimeout(() => {
+            dispatch(updateArrangeOrder(true))
+        }, 1000)
+        setTimeout(() => {
+            dispatch(updateArrangeOrder(false))
+        }, 4000)
+
+    }
+}
 export default CalculateFormReducer;

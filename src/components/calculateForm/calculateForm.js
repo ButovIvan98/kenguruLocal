@@ -20,6 +20,7 @@ import Car10 from "../common/svgImg/car10";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
+import Checkbox from "@material-ui/core/Checkbox";
 
 const CalculateForm = (props) => {
     const useStyles = makeStyles((theme) => ({
@@ -94,11 +95,11 @@ const CalculateForm = (props) => {
                                     control={
                                         <Switch
                                             checked={props.calculate.pickup}
-                                            //onChange={}
+                                            onChange={()=>{props.updatePickup(!props.calculate.pickup)}}
                                             color="primary"
                                         />
                                     }
-                                    label={'Склад'}
+                                    label={props.calculate.pickup ? 'От двери' :'От склад'}
                                 />
                             </div>
                             <div className={'col-lg-4 mt-lg-0 mt-2 pr-1 pl-1'}>
@@ -125,11 +126,11 @@ const CalculateForm = (props) => {
                                     control={
                                         <Switch
                                             checked={props.calculate.delivery}
-                                            //onChange={handleChange}
+                                            onChange={()=>{props.updateDelivery(!props.calculate.delivery)}}
                                             color="primary"
                                         />
                                     }
-                                    label={'Склад'}
+                                    label={ props.calculate.delivery ? 'До двери' : 'До склада'}
                                 />
                             </div>
                             <div className={'col-lg-4 mt-lg-0 mt-2 pr-1 pl-1'}>
@@ -150,6 +151,52 @@ const CalculateForm = (props) => {
                                         <MenuItem value={30}>Большие грузы</MenuItem>
                                     </Select>
                                 </FormControl>
+                            </div>
+                            <div className={'col-12'}>
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            //checked={state.checkedB}
+                                            onChange={handleChange}
+                                            name="checkedB"
+                                            color="primary"
+                                        />
+                                    }
+                                    label="Опасный груз"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            //checked={state.checkedB}
+                                            onChange={handleChange}
+                                            name="checkedB"
+                                            color="primary"
+                                        />
+                                    }
+                                    label="Хрупкий груз"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            //checked={state.checkedB}
+                                            onChange={handleChange}
+                                            name="checkedB"
+                                            color="primary"
+                                        />
+                                    }
+                                    label="Мокрый груз"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            //checked={state.checkedB}
+                                            onChange={handleChange}
+                                            name="checkedB"
+                                            color="primary"
+                                        />
+                                    }
+                                    label="Ценный груз"
+                                />
                             </div>
                         </div>
                     </div>
@@ -282,7 +329,7 @@ const CalculateForm = (props) => {
                 <div className={'col-12 mb-3'}>
                     <div className={classes.blockBottomCalculate}>
                         <button onClick={() => {
-                            props.calculateTariff(props.calculate.listCargo, props.calculate.typeCargo, props.calculate.cityOfDeparture.city, props.calculate.cityOfDestination.city);
+                            props.calculateTariff(props.calculate.listCargo, props.calculate.typeCargo, props.calculate.cityOfDeparture.city, props.calculate.cityOfDestination.city, props.calculate.pickup,props.calculate.delivery);
                         }} className={classes.calculation}>Рассчитать
                         </button>
                     </div>

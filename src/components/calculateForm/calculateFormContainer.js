@@ -19,7 +19,7 @@ import {
     warehouse_warehouse,
     updateTypeCargo,
     autoSizeDoc,
-    clearCargoData
+    clearCargoData, updatePickup, updateDelivery
 } from '../../redux/calculateFormReducer'
 import CalculateForm from "./calculateForm";
 
@@ -54,6 +54,8 @@ const ExportCalculateFormContainer = connect(mapStateToProps,
         warehouse_warehouse,
         updateTypeCargo,
         autoSizeDoc,
-        clearCargoData
+        clearCargoData,
+        updatePickup,
+        updateDelivery
     })(CalculateFormContainer);
 export default ExportCalculateFormContainer;
