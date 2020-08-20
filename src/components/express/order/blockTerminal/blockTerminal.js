@@ -7,7 +7,7 @@ import {TextField} from "@material-ui/core";
 
 const BlockTerminal = (props) => {
     let listTerminal = props.terminal.map(r=>(
-        <option onClick={ ()=>{props.clickTerminal(r.external_code)}} className={classes.list} value={r.external_code}>{r.address} {r.work_time === undefined ? '' : r.work_time}</option>
+        <option onClick={ ()=>{props.clickTerminal(r)}} className={classes.list} value={r.external_code}>{r.address} {r.work_time === undefined ? '' : r.work_time}</option>
     ))
     return <div className={'row mt-3'}>
             <div className={'col-12'}>

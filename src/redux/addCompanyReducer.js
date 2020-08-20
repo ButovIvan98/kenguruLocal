@@ -478,14 +478,10 @@ export const searchCompany = (value, id) => {
 /*Автоматическое заполнение полей*/
 export const informationYouCompany = (value, listCompany, id) => {
     let newArray = (value.replace(')', '')).split('(');
-    console.log('dasd')
-    console.log(id)
-    console.log(value)
     return (dispatch) => {
         listCompany.map(r => {
             if (newArray.length === 2) {
                 if (String(r.value) === String(newArray[0]) && String(r.management_name) === String(newArray[1])) {
-                    console.log(r)
                     dispatch(updateOGRN(r.ogrn, true));
                     dispatch(updateINN(r.inn, true));
                     dispatch(updateKPP(r.kpp, true));

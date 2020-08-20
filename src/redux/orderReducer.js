@@ -3,7 +3,7 @@ import {
     validationFormPhone,
     validationFormSurname
 } from "../components/common/validationForm/validForm";
-import {addAddressAPI, cityAPI, orderAPI} from "../API/api";
+import {addAddressAPI, addCompanyAPI, cityAPI, orderAPI} from "../API/api";
 import Cookies from "js-cookie";
 //Информация о транспортной компании и тарифе
 let UPDATE_INFORMATION_TK = 'UPDATE_INFORMATION_TK'
@@ -23,6 +23,7 @@ let UPDATE_PHONE_RECIPIENT = 'UPDATE_PHONE_RECIPIENT'//Изменение ном
 let UPDATE_ADDITIONAL_PHONE_RECIPIENT = 'UPDATE_ADDITIONAL_PHONE_RECIPIENT'//Изменение дополнительного номера телефона получателя
 let UPDATE_NAME_COMPANY_RECIPIENT = 'UPDATE_NAME_COMPANY_RECIPIENT'//Изменение наименование компании получателя
 let UPDATE_COMMENT_RECIPIENT = 'UPDATE_COMMENT_RECIPIENT'//Изменение комментария получателя
+let UPDATE_LEGAL_ENTITY='UPDATE_LEGAL_ENTITY'//Получатель юридическое лицо или физическое
 //Проверка полей на валидацию
 let VALID_SURNAME_SENDER = 'VALID_SURNAME_SENDER'//Проверка поля на валидность фамилии
 let VALID_NAME_SENDER = 'VALID_NAME_SENDER'//Проверка поля на валидность имени
@@ -53,6 +54,10 @@ let LIST_HOUSE_RECIPIENT = 'LIST_HOUSE_RECIPIENT'//Обновление спис
 let UPDATE_FLAT_RECIPIENT = 'UPDATE_FLAT_RECIPIENT'//Обнавление квартиры получателя
 let UPDATE_ZIP_RECIPIENT = 'UPDATE_ZIP_RECIPIENT'//Обновление индекса получателя
 //Заполнение и работа с адресной книгой.
+let FULL_INFO_COMPANY_SENDER='FULL_INFO_COMPANY_SENDER'//Добавление полной информармации о компании
+let FULL_INFO_COMPANY_RECIPIENT='FULL_INFO_COMPANY_RECIPIENT'//Добавление полной информармации о компании
+let LIST_COMPANY_SENDER='LIST_COMPANY_SENDER'//Список компаний отправителя
+let LIST_COMPANY_RECIPIENT='LIST_COMPANY_RECIPIENT'//Список компаний получателя
 let LIST_ADDRESS_BOOK = 'LIST_ADDRESS_BOOK'//Список адресов в адресной книге
 let LIST_ADDRESS_BOOK_SENDER = 'LIST_ADDRESS_BOOK_SENDER'//Список адресов для отправителя
 let LIST_ADDRESS_BOOK_RECIPIENT = 'LIST_ADDRESS_BOOK_RECIPIENT'//Список адресов для получателя
@@ -66,6 +71,8 @@ let TERMINAL_RECIPIENT = 'TERMINAL_RECIPIENT'//Выбранные термина
 let ID_ADDRESS_SENDER = 'ID_ADDRESS_SENDER'//Заполнение id адреса отправителя
 let ID_ADDRESS_RECIPIENT = 'ID_ADDRESS_RECIPIENT'//Заполнение id адреса получателя
 //Данные для получателя при отправке юр. лицом
+let UPDATE_DATE_ISSUE_PASSPORT='UPDATE_DATA_ISSUE_PASSPORT'//Дата получения паспорта
+let ISSUED_BY_PASSPORT='ISSUED_BY_PASSPORT'//Кем выдан паспорт
 let SERIES_NUMBER_PASSPORT = 'SERIES_NUMBER_PASSPORT'//Добавление серии и номера паспорта
 let INN_COMPANY_RECIPIENT = 'INN_COMPANY_RECIPIENT'//Добавление инн юр. лица для получателя
 let EMAIL_RECIPIENT = 'EMAIL_RECIPIENT'//Емаил получателя для отправки доверенности
@@ -73,6 +80,7 @@ let initialState = {
     addressBook: [],
     informationCompany: null,//Информация о тарифе и компании
     sender: {
+        type_user:'sender',//Отправитель
         addressBook: [],//Адресная книга
         terminalSender: [//Терминалы отправителя если выбран тип забора как склад
         ],
@@ -102,10 +110,13 @@ let initialState = {
             validPhone: true,//Валидация телефона
             additionalPhone: '',//Добавочный номер
             company: '',//Наименование компании
+            fullInfoCompany:'',//Полная информация о компании
+            listCompany:[],//Список компаний
             comment: '',//Добавленный комментарий к заказу
         },
     },
     recipient: {
+        type_user:'receiver',//Получатель
         addressBook: [],//Адресная книга
         terminalRecipient: [//Терминалы получателя если выбран тип доставки как склад
         ],
@@ -125,7 +136,8 @@ let initialState = {
             zip: '',//Индекс
             validZip: true,//Валидация индекса
         },
-        contactPerson: {//Отправитель
+        contactPerson: {//Получатель
+            legalEntity:false,//Юридическое лицо (true-false)
             surname: '',//Фамилия
             validSurname: true,//Валидация фамилии получателя
             name: '',//Имя
@@ -134,9 +146,13 @@ let initialState = {
             phone: '',//Основной телефон
             validPhone: true,//Валидация телефона
             additionalPhone: '',//Добавочный номер
+            listCompany:[],//Список компаний
             company: '',//Наименование компании
+            fullInfoCompany:'',//Полная информация о компании
             series: '',//Серия паспорта получателя
             number: '',//Номер паспорта получателя
+            issuedByPassport:'',//Кем выдан паспорт
+            dateIssue:'',//Дата выдачи
             emailRecipient: '',//Емаил адрес получателя для отправки доверенности
             innLegalEntity: '',//ИНН компании получателя, если отправляется как юр лицом
             comment: '',//Добавленный комментарий к заказу
@@ -448,6 +464,17 @@ const OrderReducer = (state = initialState, action) => {
                     }
                 }
             }
+        case UPDATE_LEGAL_ENTITY:
+            return {
+                ...state,
+                recipient: {
+                    ...state.recipient,
+                    contactPerson: {
+                        ...state.recipient.contactPerson,
+                        legalEntity: action.bodyLegalEntityRecipient
+                    }
+                }
+            }
 
         case VALID_SURNAME_RECIPIENT:
             return {
@@ -622,6 +649,51 @@ const OrderReducer = (state = initialState, action) => {
                     addressBook: action.bodyAddressBookRecipient
                 }
             }
+        case LIST_COMPANY_SENDER:
+            return {
+                ...state,
+                sender:{
+                    ...state.sender,
+                    contactPerson: {
+                        ...state.sender.contactPerson,
+                        listCompany: action.bodyListCompanySender
+                    }
+                }
+            }
+        case LIST_COMPANY_RECIPIENT:
+            return {
+                ...state,
+                recipient:{
+                    ...state.recipient,
+                    contactPerson: {
+                        ...state.recipient.contactPerson,
+                        listCompany: action.bodyListCompanyRecipient
+                    }
+                }
+            }
+        case FULL_INFO_COMPANY_SENDER:
+            return {
+                ...state,
+                sender: {
+                    ...state.sender,
+                    contactPerson: {
+                        ...state.sender.contactPerson,
+                        fullInfoCompany: action.bodyFullInfoCompanySender
+                    }
+                }
+            }
+        case FULL_INFO_COMPANY_RECIPIENT:
+            return {
+                ...state,
+                recipient: {
+                    ...state.recipient,
+                    contactPerson: {
+                        ...state.recipient.contactPerson,
+                        fullInfoCompany: action.bodyFullInfoCompanyRecipient
+                    }
+                }
+            }
+
         case CHOICE_ADDRESS_SENDER:
             return {
                 ...state,
@@ -726,10 +798,34 @@ const OrderReducer = (state = initialState, action) => {
                     }
                 }
             }
+        case ISSUED_BY_PASSPORT:
+            return {
+                ...state,
+                recipient: {
+                    ...state.recipient,
+                    contactPerson: {
+                        ...state.recipient.contactPerson,
+                        issuedByPassport: action.bodyIssuedByPassport
+                    }
+                }
+            }
+        case UPDATE_DATE_ISSUE_PASSPORT:
+            return {
+                ...state,
+                recipient: {
+                    ...state.recipient,
+                    contactPerson: {
+                        ...state.recipient.contactPerson,
+                        dateIssue: action.bodyDateIssue
+                    }
+                }
+            }
         default:
             return state
     }
 }
+export const updateDateIssue=(date)=>({type:UPDATE_DATE_ISSUE_PASSPORT,bodyDateIssue:date})
+export const updateIssuedByPassport=(date)=>({type:ISSUED_BY_PASSPORT,bodyIssuedByPassport:date})
 export const updateSurnameSender = (surname) => ({type: UPDATE_SURNAME_SENDER, bodySurnameSender: surname})
 export const updateNameSender = (name) => ({type: UPDATE_NAME_SENDER, bodyNameSender: name})
 export const updateMiddleNameSender = (middleName) => ({
@@ -769,6 +865,7 @@ export const updateNameCompanyRecipient = (company) => ({
     bodyCompanyRecipient: company
 })
 export const updateCommentRecipient = (comment) => ({type: UPDATE_COMMENT_RECIPIENT, bodyCommentRecipient: comment})
+export const updateLegalRecipient = (status) => ({type:UPDATE_LEGAL_ENTITY, bodyLegalEntityRecipient:status})
 export const validSurnameRecipient = (surname) => ({
     type: VALID_SURNAME_RECIPIENT,
     bodyValidSurnameRecipient: validationFormSurname(surname)
@@ -805,6 +902,10 @@ export const validHouseRecipient = (status) => ({type: UPDATE_ZIP_RECIPIENT, bod
 export const validZipRecipient = (status) => ({type: UPDATE_ZIP_RECIPIENT, bodyValidZipRecipient: status})
 
 export const updateInformationCompany = (info) => ({type: UPDATE_INFORMATION_TK, bodyInformationCompany: info})
+const updateListCompanySender=(list)=>({type:LIST_COMPANY_SENDER,bodyListCompanySender:list})
+const updateListCompanyRecipient=(list)=>({type:LIST_COMPANY_RECIPIENT,bodyListCompanyRecipient:list})
+const updateFullInfoCompanySender=(data)=>({type:FULL_INFO_COMPANY_SENDER,bodyFullInfoCompanySender:data})
+const updateFullInfoCompanyRecipient=(data)=>({type:FULL_INFO_COMPANY_RECIPIENT,bodyFullInfoCompanyRecipient:data})
 
 export const addListTerminalSender = (address) => ({type: LIST_TERMINAL_SENDER, bodyTerminalSender: address});
 export const addListTerminalRecipient = (address) => ({type: LIST_TERMINAL_RECIPIENT, bodyTerminalRecipient: address});
@@ -850,6 +951,48 @@ export const searchStreetSender = (locality_type, locality_fias, street) => {
                 dispatch(updateListStreetSender(r.data));
             })
         }
+    }
+}
+/*Поиск списка компаний для отправителей*/
+export const listCompanySender=(company)=>{
+    return(dispatch)=>{
+        if(String(company).length>1){
+            addCompanyAPI.searchDetail(company).then(r=>{
+                dispatch(updateListCompanySender(r.data))
+            })
+        }
+    }
+}
+/*Выбор компании определенной для отправителя*/
+export const choiceCompanySender =(list,company)=>{
+    return(dispatch)=>{
+        list.map(r=>{
+            if((r.value + '( ИНН:' + r.inn + ')')===company){
+                dispatch(updateFullInfoCompanySender(r));
+                dispatch(updateNameCompanySender(r.value));
+            }
+        })
+    }
+}
+/*Поиск списка компаний для получателей*/
+export const listCompanyRecipient=(company)=>{
+    return(dispatch)=>{
+        if(String(company).length>1){
+            addCompanyAPI.searchDetail(company).then(r=>{
+                dispatch(updateListCompanyRecipient(r.data))
+            })
+        }
+    }
+}
+export const choiceCompanyRecipient = (list,company)=>{
+    return(dispatch)=>{
+        list.map(r=>{
+            if((r.value + '( ИНН:' + r.inn + ')')===company){
+                dispatch(updateFullInfoCompanyRecipient(r));
+                dispatch(updateNameCompanyRecipient(r.value));
+                dispatch(updateInnCompanyRecipient(r.inn))
+            }
+        })
     }
 }
 /*Получение подробной информации по выбранной улице отправления*/
@@ -1050,63 +1193,141 @@ const addAddressBook = (address, contactPerson) => {
 
     return someAsyncFunction();
 }
-export const orderRegister = (fullInformationSender, fullInformationRecipient, fullInfoTK) => {
+/*Формирование терминала*/
+export const addTerminalBook = (fullInfoUser, infoTK, sender)=>{
+    function someAsyncFunction() {
+        return new Promise(function (resolve, reject) {orderAPI.addTerminal(
+            infoTK.id,fullInfoUser.type_user, fullInfoUser.terminal.external_code,
+            fullInfoUser.contactPerson.legalEntity,fullInfoUser.contactPerson.fullInfoCompany.value,
+            fullInfoUser.contactPerson.fullInfoCompany.inn,fullInfoUser.contactPerson.fullInfoCompany.management_name,
+            fullInfoUser.contactPerson.fullInfoCompany.address, sender, fullInfoUser.contactPerson.surname,
+            fullInfoUser.contactPerson.name,fullInfoUser.contactPerson.middleName,fullInfoUser.contactPerson.phone,
+            fullInfoUser.contactPerson.series,fullInfoUser.contactPerson.number,fullInfoUser.contactPerson.issuedByPassport,
+            fullInfoUser.contactPerson.dateIssue,fullInfoUser.contactPerson.emailRecipient
+            ).then(function (someValue) {
+            resolve(someValue);
+        });
+        })
+    }
+    return someAsyncFunction();
+}
+/*Отправка заказа если условие доставки Дверь-Дверь*/
+const orderRegisterDoorDoor = (fullInformationSender, fullInformationRecipient, fullInfoTK) => {
+    let idSender='';
+    let idRecipient='';
     return (dispatch) => {
-        // let idAddressSender = '';
-        // let idAddressRecipient = '';
-        // if (fullInfoTK.pickup) {
-        //     if (String(fullInformationSender.idAddress).length === 0) {
-        //         // if (fullInfoTK.pickup) {
-        //         //     if (String(fullInformationSender.idAddress).length === 0) {
-        //         //         addAddressBook(fullInformationSender.addressSender, fullInformationSender.contactPerson).then(r => {
-        //         //                 idAddressSender = r.data.id;
-        //         //                 if (fullInfoTK.delivery) {
-        //         //                     if (String(fullInformationRecipient.idAddress).length === 0) {
-        //         //                         addAddressBook(fullInformationRecipient.addressRecipient, fullInformationRecipient.contactPerson).then(e => {
-        //         //                             idAddressRecipient = e.data.id
-        //         //                             if (idAddressSender !== '' && idAddressRecipient !== '' && fullInfoTK.id !== '') {
-        //         //                                 /*Отправка запроса на сервер для создания заказа*/
-        //         //                             }
-        //         //                         })
-        //         //                     } else {
-        //         //                         idAddressRecipient = fullInformationRecipient.idAddress
-        //         //                         if (idAddressSender !== '' && idAddressRecipient !== '' && fullInfoTK.id !== '') {
-        //         //                             /*Отправка запроса на сервер для создания заказа*/
-        //         //                         }
-        //         //                     }
-        //         //                 } else {
-        //         //                     /*Если адрес получатель является терминалом*/
-        //         //                 }
-        //         //             }
-        //         //         );
-        //         //     } else {
-        //         //         idAddressSender = fullInformationSender.idAddress;
-        //         //     }
-        //         // } else {
-        //         //     if (fullInfoTK.delivery) {
-        //         //         if (String(fullInformationRecipient.idAddress).length === 0) {
-        //         //             addAddressBook(fullInformationRecipient.addressRecipient, fullInformationRecipient.contactPerson).then(e => {
-        //         //                 idAddressRecipient = e.data.id
-        //         //                 if (!fullInfoTK.pickup) {
-        //         //                     /*Если адрес отправителя является терминалом*/
-        //         //                 }
-        //         //             })
-        //         //         } else {
-        //         //             idAddressRecipient = fullInformationRecipient.idAddress
-        //         //             if (idAddressSender !== '' && idAddressRecipient !== '' && fullInfoTK.id !== '') {
-        //         //                 /*Отправка запроса на сервер для создания заказа*/
-        //         //             }
-        //         //         }
-        //         //     } else {
-        //         //         /*Если адрес отправителя является терминалом*/
-        //         //     }
-        //         // }
-        //         if (idAddressSender !== '' && idAddressRecipient !== '' && fullInfoTK.id !== '') {
-        //             console.log(idAddressSender)
-        //             console.log(idAddressRecipient)
-        //             console.log(fullInfoTK.id)
-        //         }
-        //     }
+        if (fullInformationSender.idAddress === '') {/*Если id адреса отправителя пустой*/
+            addAddressBook(fullInformationSender.addressSender, fullInformationSender.contactPerson).then(r => {
+                idSender=r.data.id;
+                if (fullInformationRecipient.idAddress === '') {/*Если id города получателя пустое*/
+                    addAddressBook(fullInformationRecipient.addressRecipient, fullInformationRecipient.contactPerson).then(r => {
+                        idRecipient = r.data.id;
+                        /*Вызываем функцию для отправки заказа на сервер*/
+                    })
+                } else {
+                    idRecipient=fullInformationRecipient.idAddress
+                    /*Вызываем функцию для отправки заказа на сервер*/
+                }
+            })
         }
+        else {
+            idSender=fullInformationSender.idAddress
+            if (fullInformationRecipient.idAddress === '') {/*Если id города получателя пустое*/
+                addAddressBook(fullInformationRecipient.addressRecipient, fullInformationRecipient.contactPerson).then(r => {
+                    idRecipient = r.data.id;
+                    /*Вызываем функцию для отправки заказа на сервер*/
+                })
+            } else {
+                idRecipient=fullInformationRecipient.idAddress
+                /*Вызываем функцию для отправки заказа на сервер*/
+            }
+        }
+    }
+}
+/*Отправка заказа если условия доставки Дверь-Склад*/
+const orderRegisterDoorTerminal=(fullInformationSender,fullInformationRecipient,fullInfoTK)=>{
+    let idSender='';
+    let idRecipient=''
+    let sender=String(fullInformationSender.contactPerson.company).length===0
+        ? (fullInformationSender.contactPerson.surname + ' ' + fullInformationSender.contactPerson.name + ' ' + fullInformationSender.contactPerson.middleName)
+        : fullInformationSender.contactPerson.company
+    return(dispatch)=>{
+        if(String(fullInformationSender.idAddress).length===0){
+            addAddressBook(fullInformationSender.addressSender, fullInformationSender.contactPerson).then(r => {
+                idSender = r.data.id;
+                addTerminalBook(fullInformationRecipient,fullInfoTK,sender).then(r=>{
+                    idRecipient=r.data.id
+                    /*Отправление заказа*/
+                })
+            })
+        }
+        else{
+            idSender=fullInformationSender.idAddress
+            addTerminalBook(fullInformationRecipient,fullInfoTK,sender).then(r=>{
+                idRecipient=r.data.id
+                /*Отправление заказа*/
+            })
+        }
+    }
+}
+/*Отправка заказа если условия доставки Склад-дверь*/
+const orderRegisterTerminalDoor=(fullInformationRecipient,fullInformationSender,fullInfoTK)=>{
+    let idRecipient='';
+    let idSender='';
+    let sender=String(fullInformationSender.contactPerson.company).length===0
+        ? (fullInformationSender.contactPerson.surname + ' ' + fullInformationSender.contactPerson.name + ' ' + fullInformationSender.contactPerson.middleName)
+        : fullInformationSender.contactPerson.company
+    return(dispatch)=>{
+        if(fullInformationRecipient.idAddress===''){
+            addAddressBook(fullInformationRecipient.addressRecipient, fullInformationRecipient.contactPerson).then(r => {
+                idRecipient = r.data.id;
+                addTerminalBook(fullInformationSender,fullInfoTK,sender).then(r=>{
+                    idSender=r.data.id
+                    /*Отправление заказа*/
+                })
+                /*Запрос на отправку добавления терминала и запрос на отправку оформления заказа*/
+            })
+        }
+        else{
+            idRecipient=fullInformationRecipient.idAddress
+            addTerminalBook(fullInformationSender,fullInfoTK,sender).then(r=>{
+                idSender=r.data.id
+                /*Отправление заказа*/
+            })
+            /*Запрос на отправку добавления терминала и запрос на отправку оформления заказа*/
+        }
+    }
+}
+/*Отправка заказа если условия достаки терминал-терминал*/
+const orderRegisterTerminalTerminal=(fullInformationRecipient,fullInformationSender,fullInfoTK)=>{
+    return(dispatch)=>{
+        /*Запрос на добавление терминала отправителя*/
+        /*Запрос на добавление терминала получателя*/
+        /*Запрос на оформление заказа*/
+    }
+}
+
+/*Оформление заказа, обработка валидаций*/
+export const orderRegister = (fullInformationSender, fullInformationRecipient, fullInfoTK,terminal) => {
+    return (dispatch) => {
+        console.log(fullInfoTK.pickup)
+        console.log(fullInfoTK.delivery)
+        if(fullInfoTK.pickup && fullInfoTK.delivery){
+            console.log('Дверь-дверь')
+            dispatch(orderRegisterDoorDoor(fullInformationSender,fullInformationRecipient,fullInfoTK));
+        }
+        else if(fullInfoTK.pickup && fullInfoTK.delivery===false){
+            console.log('Дверь-склад')
+            dispatch(orderRegisterDoorTerminal(fullInformationSender,fullInformationRecipient,fullInfoTK,terminal));
+        }
+        else if(fullInfoTK.pickup===false && fullInfoTK.delivery){
+            console.log('Склад-дверь')
+            dispatch(orderRegisterTerminalDoor(fullInformationRecipient,fullInformationSender,fullInfoTK))
+        }
+        else if(fullInfoTK.pickup===false && fullInfoTK.delivery===false){
+            console.log('Склад-Склад')
+            dispatch(orderRegisterTerminalTerminal(fullInformationRecipient,fullInformationSender,fullInfoTK))
+        }
+    }
 }
 export default OrderReducer

@@ -6,7 +6,7 @@ import {
     addTerminal,
     updateCityRecipient,
     updateCitySender,
-    updateInformationCompany
+    updateInformationCompany, updateLegalRecipient
 } from "./orderReducer";
 
 let UPDATE_WIDTH = 'UPDATE_WIDTH';
@@ -848,6 +848,7 @@ const cheaplyAndFaster = (listResultCalculate) => {
 /*Обработка нажатия заказать*/
 export const clickArrangeOrder = (infoCitySender, infoCityRecipient, infoTK) => {
     return (dispatch) => {
+        dispatch(updateLegalRecipient(false));
         dispatch(addAddressBookSender(infoCitySender.locality));
         dispatch(addAddressBookRecipient(infoCityRecipient.locality));
         dispatch(addTerminal(infoCitySender.id, infoCityRecipient.id, infoTK));

@@ -180,6 +180,21 @@ export const addAddressAPI = {
     }
 }
 export const orderAPI={
+    addTerminal(idTariff, type_user, code_tk, is_legal,
+                company_title,company_inn,company_leader_fio,
+                company_address,provider,surname,name,patronymic,
+                phone,passport_series,passport_number,
+                passport_issued_by,passport_date,send_poa_email){
+      return instance().post('/rates/terminal/create/',{rate:idTariff,direction:type_user,
+          external_code:code_tk, is_legal:is_legal,
+          company_title:company_title,company_inn:company_inn,
+          company_leader_fio:company_leader_fio, company_address:company_address,provider:provider,
+          surname:surname,name:name,patronymic:patronymic,phone:phone,
+          passport_series:passport_series,passport_number:passport_number,
+          passport_issued_by:passport_issued_by,passport_date:passport_date,
+          send_poa_email:send_poa_email
+      })
+    },
     allTerminal(idCity,nameTK){
         return instance().post('/geo/terminal/',{locality_id:idCity, operator:nameTK})
     }

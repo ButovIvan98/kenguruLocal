@@ -181,13 +181,14 @@ const Order = (props) => {
                                 updateMiddleName={props.updateMiddleNameSender}
                                 updatePhone={props.updatePhoneSender}
                                 updateAdditionalPhone={props.updateAdditionalPhoneSender}
-                                updateCompany={props.updateNameCompanySender}
+                                updateCompany={props.listCompanySender}
                                 validSurname={props.validSurnameSender}
                                 validName={props.validNameSender}
                                 validPhone={props.validPhoneSender}
                                 updateSeriesAndNumberPassport={props.seriesAndNumberPassport}
                                 delivery={true}/*true - значит не отображать поле*/
                                 updateComment={props.updateCommentSender}
+                                clickCompany={props.choiceCompanySender}
                             />
                         </div>
                     </div>
@@ -250,7 +251,7 @@ const Order = (props) => {
                                 updateMiddleName={props.updateMiddleNameRecipient}
                                 updatePhone={props.updatePhoneRecipient}
                                 updateAdditionalPhone={props.updateAdditionalPhoneRecipient}
-                                updateCompany={props.updateNameCompanyRecipient}
+                                updateCompany={props.listCompanyRecipient}
                                 validSurname={props.validSurnameRecipient}
                                 validName={props.validNameRecipient}
                                 validPhone={props.validPhoneRecipient}
@@ -259,6 +260,10 @@ const Order = (props) => {
                                 innCompany={props.updateInnCompanyRecipient}
                                 emailRecipient={props.updateEmailRecipient}
                                 updateComment={props.updateCommentRecipient}
+                                updateLegalEntity={props.updateLegalRecipient}
+                                clickCompany={props.choiceCompanyRecipient}
+                                dateIssue={props.updateDateIssue}
+                                issuedByPassport={props.updateIssuedByPassport}
                             />
                         </div>
                     </div>
@@ -341,7 +346,7 @@ const Order = (props) => {
                                     <span className={classes.textMoney}>{props.order.informationCompany === null ? '' :props.order.informationCompany.priceBefore} ₽</span>
                                 </div>
                                 <div className={'col-12 text-center mt-3 mb-3'}>
-                                    <button onClick={()=>{props.orderRegister(props.order.sender, props.order.recipient,props.order.informationCompany)}} className={classes.buttonPayment}>
+                                    <button onClick={()=>{props.orderRegister(props.order.sender, props.order.recipient,props.order.informationCompany,props.order.terminal)}} className={classes.buttonPayment}>
                                         Оформить заказ за <br/>
                                         <b>{props.order.informationCompany === null ? '' :props.order.informationCompany.priceBefore} ₽</b>
                                     </button>
