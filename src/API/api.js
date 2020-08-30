@@ -18,9 +18,8 @@ export const instanceHeaders = () => {
     return axios.create({
             baseURL: 'https://api.ke22.ru',
             headers: {
-                'Content-Type': 'multipart/form-data',
+                'Content-Type': 'application/x-www-form-urlencoded',
                 'Authorization': 'Token ' + Cookies.get('auth_token'),
-                'Accept': 'application/json',
             }
         }
     )
@@ -59,7 +58,7 @@ export const calculateAPI = {
         })
     }
 }
-
+/*Добавление компании*/
 export const addCompanyAPI = {
     searchDetail(query) {
         return auth.post('/suggest/legal/party', {query: query, count: 10})
@@ -85,8 +84,22 @@ export const addCompanyAPI = {
         })
     },
     addPhoneAndEmailCompany(id, formData) {
-        return instanceHeaders().patch(`/profile/${id}/`, {email: formData.get('email'), phone:formData.get('phone')})
+        return instanceHeaders().patch(`/profile/${id}/`, formData)
     }
+}
+export const addOrder={
+    order(price,sender_terminal,receiver_terminal,user,sender_contact,receiver_contact,rate){
+        return instance().post('/order/', {
+            price:price,
+            sender_terminal:sender_contact,
+            receiver_terminal:receiver_terminal,
+            user:user,
+            sender_contact:sender_contact,
+            receiver_contact:receiver_contact,
+            rate:rate
+
+        })
+    },
 }
 export const companyAPI = {
     listCompanyHeader() {

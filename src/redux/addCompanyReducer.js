@@ -621,10 +621,8 @@ export const addCompanyYou = (listInfo) => {
                 dispatch(listCompany());
                 dispatch(updateStep1(true));
                 let formData = new FormData();
-                // добавить к пересылке ещё пару ключ - значение
                 formData.append("email", listInfo.personalData.email);
                 formData.append("phone", listInfo.personalData.phone);
-                console.log(formData.get('email'));
                 addCompanyAPI.addPhoneAndEmailCompany(r.data.profile_id,formData);
             })
         }

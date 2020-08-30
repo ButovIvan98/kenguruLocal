@@ -38,6 +38,7 @@ import ResetPasswordContainerExport from "./components/authorization/resetPasswo
 import AddressContainerExport from "./components/express/myAddress/add_address/add_addressContainer";
 import ExportAddCompanyContainer from "./components/express/addCompany/addCompanyContainer";
 import ExportOrderContainer from "./components/express/order/orderContainer";
+import ExportAddingDocumentContainer from "./components/express/addCompany/addingDocuments/addingDocumentsContainer";
 //нельзя удалять полетит бутстрап
 
 const App = (props) => {
@@ -74,7 +75,7 @@ const App = (props) => {
                                         <Route exact path={'/plan'} render={()=><Plan/>}/>
                                         <Route exact path={'/personalAccount'} render={()=><PersonalAccountContainerExport/>}/>
                                         <Route path={'/setting'} render={()=><ExportSettingContainer/>}/>
-                                        <Route exact path={'/addCompany/loadingFile'} render={()=><AddingDocuments/>} />
+                                        <Route exact path={'/addCompany/loadingFile'} render={()=><ExportAddingDocumentContainer/>} />
                                         <Route exact path={'/addCompany/loadingFile/done'} render={()=><Done/>}/>
                                         <Route exact path={'/myPayment/account'} render={()=><Account/>}/>
                                         <Route path={'/order/'} render={()=><ExportOrderContainer/>}/>
@@ -85,28 +86,14 @@ const App = (props) => {
                                     :
                                     <Switch>
                                         <Route exact path='/'  render={() => <MainPage />}/>
-                                        <Route exact path='/login' render={() => <AuthorizationContainerExport />} />
-                                        <Route exact path={'/aboutMe'} render={() => <AboutMe />} />
-                                        <Route exact path={'/contact'} render={() => <ExportContactContainer />} />
-                                        <Route exact path={'/policy'} render={() => <PolicyAndPrivacy />} />
-                                        <Route exact path={'/publicOffer'} render={() => <PublicOffer />} />
-                                        <Route exact path={'/paymentMethod'} render={() => <PaymentMethod />} />
-                                        <Route exact path={'/1'} render={() => <ExportMyShipmentsInformationContainer />} />
                                         <Route exact path={'/registration'} render={() => <RegistrationContainerExport />} />
-                                        <Route exact path={'/reloadPassword'} render={() => <ExportReloadPasswordContainer />} />
-                                        <Route exact path={'/websitePlagin'} render={()=> <ExportWebsitePlaginContainer />} />
-                                        <Route exact path={'/plan'} render={()=><Plan/>}/>
-                                        <Route exact path={'/transportCompany'} render={() => <ExportTransportCompany />} />
-                                        <Route exact path={'/profileCompany/'} render={() => <ExportProfileTransportCompany />} />
-                                        <Route path={'/confirmation-email'} render={()=><ExportConfirmationEmailContainer/>}/>
-                                        <Route path={'/reset-password'} render={()=><ResetPasswordContainerExport/>} />
-                                        <Route render={()=><Error404/>}/>
+                                        <Route render={()=><AuthorizationContainerExport/>}/>
                                     </Switch>
                             }
                     </div>
                 </div>
                 <div className={'col-12'}>
-                    <Footer />
+                    <Footer/>
                 </div>
             </div>
         </div>

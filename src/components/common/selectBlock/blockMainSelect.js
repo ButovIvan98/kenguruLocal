@@ -1,6 +1,7 @@
 import React from "react";
 import classes from './blockMainSelect.module.css';
 import {NavLink} from "react-router-dom";
+import Avatar from "@material-ui/core/Avatar";
 
 const BlockMainSelect = (props) => {
     let listCompanyData = props.listInfoCompany.listCompany.map(nav => (
@@ -16,11 +17,17 @@ const BlockMainSelect = (props) => {
                 (nav.last_name + ' ' + nav.first_name)
             )}} className={'row mr-0 ml-0 mb-2' + ' ' + classes.blockCompany}>
             <div className={'col-auto pr-0 align-self-center'}>
-                <img src={nav.photo} className={classes.imgProfile}/>
+                <Avatar>
+                    {
+                        nav.is_personal
+                            ? ((nav.last_name + ' ' + nav.first_name).substring(0,2)).toUpperCase()
+                            : ((nav.company_title).substring(0,2)).toUpperCase()
+                    }
+                </Avatar>
             </div>
             <div className={'col-auto text-left pr-0'}>
                 <span className={classes.nameCompany}>{nav.is_personal ? 'Физ. лицо' : nav.company_title}</span><br/>
-                <span className={classes.authorizedFaceCompany}>{nav.last_name}</span>
+                <span className={classes.authorizedFaceCompany}>{nav.last_name + ' ' + nav.first_name}</span>
             </div>
         </div>
     ))

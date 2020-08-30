@@ -11,7 +11,6 @@
     padding-left: 15px;
     padding-top: 5px;
 }
-
 .buttonMobileMenu {
     outline: none!important;
     border-color: transparent!important;
@@ -85,6 +84,15 @@
     color: white;
     padding-left: 10px;
     cursor: pointer;
+    float: right;
+}
+.listHeader2{
+    position: relative;
+    top: 8px;
+    color: white;
+    padding-left: 10px;
+    cursor: pointer;
+    float: right;
 }
 .listBlock{
     padding: 15px;
@@ -98,12 +106,13 @@
     color: white;
 }
 .imgHeader{
+    float: right;
+    text-align: left!important;
     object-fit: cover;
     border-radius: 90px;
-    height: 35px;
-    width: 35px;
-    justify-content: center;
-    margin-left: 25px;
+    height: 40px!important;
+    width: 40px!important;
+    background: black;
 }
 .lineList{
     background: white;

@@ -12,6 +12,7 @@ const ACTIVATION_EMAIL = 'ACTIVATION_EMAIL'//Активация емайла
 const BIRTHDAY='BIRTHDAY';//Дата рождения пользователя
 const BLOCK_RESET_NUMBER='BLOCK_RESET_NUMBER';//блок для ввода поля активации
 const UPDATE_EMAIL = 'UPDATE_EMAIL';//Обновление почты клиента
+const PHOTO_USER='PHOTO_USER';//
 
 /*Валидация полей активации профиля*/
 const VALID_PHONE = 'VALID_PHONE';
@@ -41,6 +42,7 @@ let initialState = {
     confirmationCode: null,//Текстовое поле кода активации
     validCodeActivate: null,//Проверка правильный ли код или нет
     activationEmail: false,
+    photo:null,//Фотогорафия профиля клиента
 };
 
 const SettingReducer = (state = initialState, action) => {
@@ -123,6 +125,11 @@ const SettingReducer = (state = initialState, action) => {
                 ...state,
                 validInputCode:action.bodyValidCode
             }
+        case PHOTO_USER:
+            return {
+                ...state,
+                photo: action.bodyPhotoUser
+            }
         case UPDATE_EMAIL:
             return {
                 ...state,
@@ -139,6 +146,7 @@ const updatePhoneForm = (status) => ({type: VALID_PHONE, bodyValidFormPhone: sta
 const updateBirthday = (date)=>({type:BIRTHDAY,bodyBirthday:date});
 const updateStatusCode =(status)=>({type:BLOCK_RESET_NUMBER, bodyValidCode:status});
 const updateEmailUser = (email)=>({type:UPDATE_EMAIL,bodyEmailUser:email});
+export const updatePhotoUser = (photo)=>({type:PHOTO_USER, bodyPhotoUser:photo})
 
 const surnameData = (surname, status) => ({type: INPUT_SURNAME, bodySurname: surname, bodyValidSurname: status});
 const middleNameData = (middleName, status) => ({

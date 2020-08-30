@@ -1,16 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:npm_and_yarn" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="7c8f36c5-f73a-4c7e-82fb-7aecf26b4ff2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/API/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/API/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/express/order/blockPersonalInformation/blockPersonalInformation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/order/blockPersonalInformation/blockPersonalInformation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/express/order/blockTerminal/blockTerminal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/order/blockTerminal/blockTerminal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/express/order/order.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/order/order.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/express/order/orderContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/order/orderContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/selectBlock/blockMainSelect.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/selectBlock/blockMainSelect.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/selectBlock/blockMainSelect.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/selectBlock/blockMainSelect.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/addCompany/addingDocuments/addingDocuments.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/addCompany/addingDocuments/addingDocuments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/personalAccount/setting/setting.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/personalAccount/setting/setting.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/personalAccount/setting/settingContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/personalAccount/setting/settingContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/Permanent_main/PermanentMain.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/Permanent_main/PermanentMain.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/Permanent_main/Permanent_main.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/Permanent_main/Permanent_main.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/addCompanyReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/addCompanyReducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/calculateFormReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/calculateFormReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/headerReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/headerReducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/orderReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/orderReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/settingReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/settingReducer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,8 +93,9 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../test_market" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -67,6 +106,7 @@
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -89,6 +129,7 @@
       <command value="&quot;" />
     </option>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -182,14 +223,29 @@
       <workItem from="1597737752960" duration="731000" />
       <workItem from="1597819422017" duration="3682000" />
       <workItem from="1597908801212" duration="2191000" />
+      <workItem from="1598265091545" duration="4833000" />
+      <workItem from="1598433650483" duration="15039000" />
+      <workItem from="1598600364786" duration="12741000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="3" />
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.js" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="613" y="234" width="732" height="637" key="#Inspections" timestamp="1593423379218">
@@ -224,10 +280,11 @@
       <screen x="49" y="27" width="1871" height="1053" />
     </state>
     <state x="649" y="270" width="672" height="677" key="run.anything.popup/49.27.1871.1053@49.27.1871.1053" timestamp="1597319453801" />
-    <state x="647" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1597381783431">
-      <screen x="49" y="27" width="1871" height="1053" />
+    <state x="648" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1598774195515">
+      <screen x="51" y="27" width="1869" height="1053" />
     </state>
     <state x="647" y="257" width="672" height="678" key="search.everywhere.popup/49.27.1871.1053@49.27.1871.1053" timestamp="1597381783431" />
+    <state x="648" y="257" width="672" height="678" key="search.everywhere.popup/51.27.1869.1053@51.27.1869.1053" timestamp="1598774195515" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -6,7 +6,7 @@ import {
     updateClickButtonCode, updateEmailForm, updateFioUser, updateInfoUser,
     updateMiddleName,
     updateName,
-    updateNumber,
+    updateNumber, updatePhotoUser,
     updateSurname, userEmailActive, userFullInfo
 } from "../../../../redux/settingReducer";
 
@@ -41,6 +41,7 @@ let ExportSettingContainer = connect(mapStateToProps,
         profileInfo,
         birthdayUser,
         updateInfoUser,
-        userFullInfo
+        userFullInfo,
+        updatePhotoUser
     })(SettingContainer);
 export default ExportSettingContainer;

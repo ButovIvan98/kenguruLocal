@@ -5,8 +5,10 @@ import Button from "@material-ui/core/Button";
 import {AttachFile, Description, PictureAsPdf, Theaters} from "@material-ui/icons";
 import {NavLink} from "react-router-dom";
 import img from './img/1.png';
+import {addingDocumentINN} from "../../../../redux/addCompanyReducer";
 
 const AddingDocuments =(props)=> {
+    console.log(props)
     const handlePreviewIcon = (fileObject, classes) => {
         const {type} = fileObject.file
         const iconProps = {
@@ -49,10 +51,10 @@ const AddingDocuments =(props)=> {
                         dropzoneParagraphClass={classes.dropzoneParagraph}
                         maxFileSize={10000000}
                         filesLimit={1}
-                        acceptedFiles={['application/doc','application/docx','application/pdf']}
+                        //acceptedFiles={['application/doc','application/docx','application/pdf','application/odt']}
                         showFileNames={true}
                         uploadIconSize={classes.dropzoneSvg}
-                        onChange={(files) => console.log('Files:', files)}
+                        onChange={(files) => {props.addingDocumentINN(files)}}
                     />
                 </div>
                 <div className={'col-lg-6 mt-3 mb-3'}>

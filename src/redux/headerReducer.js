@@ -28,7 +28,8 @@ let initialState = {
         isOwnerCompany: null,//Владелец компании
         isPersonal: null,//true если физ. лицо
         photo: null,
-        username: null
+        username: null,
+        shortName:null//Короткое имя дли иконки
     }
 };
 const SidebarReducer = (state = initialState, action) => {
@@ -48,7 +49,8 @@ const SidebarReducer = (state = initialState, action) => {
                     isOwnerCompany: action.bodyIsOwnerCompany,
                     isPersonal: action.bodyIsPersonal,
                     photo: action.bodyPhoto,
-                    username: action.bodyUsername
+                    username: action.bodyUsername,
+                    shortName: action.bodyShortName
                 }
             }
         case ADD_COMPANY:
@@ -61,7 +63,7 @@ const SidebarReducer = (state = initialState, action) => {
     }
 }
 const updateStatus = (status) => ({type: UPDATE_STATUS, statusBody: status});
-const updateCompanyActive = (id, companyTitle, isLegal, isOwnerCompany, isPersonal, photo, username) => ({
+const updateCompanyActive = (id, companyTitle, isLegal, isOwnerCompany, isPersonal, photo, username,shortName) => ({
     type: UPDATE_ACTIVE_COMPANY,
     bodyId: id,
     bodyCompanyTitle: companyTitle,
@@ -69,7 +71,8 @@ const updateCompanyActive = (id, companyTitle, isLegal, isOwnerCompany, isPerson
     bodyIsOwnerCompany: isOwnerCompany,
     bodyIsPersonal: isPersonal,
     bodyPhoto: photo,
-    bodyUsername: username
+    bodyUsername: username,
+    bodyShortName:shortName
 });
 const updateCompany = (company) => ({type: ADD_COMPANY, bodyCompany: company});
 /*Открытие и закрытие меню*/
@@ -91,7 +94,7 @@ export const logout = () => {
     }
 }
 /*Заполнение списка моих компаний*/
-export const listCompany = () => {
+export const listCompany = () =>{
     return (dispatch) => {
         companyAPI.listCompanyHeader().then(response => {
             dispatch(updateCompany(response.data));
@@ -100,6 +103,7 @@ export const listCompany = () => {
             }
             response.data.map(nav => {
                 if (String(nav.id) === String(Cookies.get('id_company'))) {
+
                     dispatch(updateCompanyActive(
                         nav.id,
                         nav.company_title,
@@ -107,7 +111,8 @@ export const listCompany = () => {
                         nav.is_owner_company,
                         nav.is_personal,
                         nav.photo,
-                        nav.last_name + ' ' + nav.first_name
+                        nav.last_name + ' ' + nav.first_name,
+                        ((nav.last_name).substring(0,2)).toUpperCase()
                     ))
                 }
             })

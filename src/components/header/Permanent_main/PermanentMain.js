@@ -7,6 +7,7 @@ import ListMenu from "../../common/svgImg/listMenu";
 import ListMenuIn from "../../common/svgImg/listMenuIn";
 import ModalMobileMenu from "../../common/modal/modalMobileMenu/modalMobileMenu";
 import BlockMainSelectContainerExport from "../../common/selectBlock/blockMainSelectContainer";
+import {Avatar} from "@material-ui/core";
 
 const Permanent_main = (props) => {
     let updateStatus = () => {
@@ -45,11 +46,13 @@ const Permanent_main = (props) => {
             { props.auth.isAuth
                 ? <div className={'col-lg-3 d-lg-block text-right d-none align-self-center'}>
                     <span onClick={updateStatus} className={classes.listHeader}>
-                        <img id={props.activeCompany.id}
-                             src={props.activeCompany.photo}
-                             className={classes.imgHeader}/><text
-                        className={classes.listHeader}>{props.activeCompany.isPersonal ? (props.activeCompany.username) : props.activeCompany.companyTitle}</text>
-                        {props.status === false ? <ListMenu/> : <ListMenuIn/>}
+                        <text className={classes.listHeader2}>
+                            {props.activeCompany.isPersonal ? (props.activeCompany.username) : props.activeCompany.companyTitle}
+                            {props.status === false ? <ListMenu/> : <ListMenuIn/>}
+                        </text>
+                        <div className={classes.imgHeader}>
+                            <Avatar>{props.activeCompany.shortName}</Avatar>
+                        </div>
                     </span>
                     <BlockMainSelectContainerExport />
                 </div>

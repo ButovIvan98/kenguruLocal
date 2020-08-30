@@ -260,6 +260,7 @@ const Setting = (props) => {
                                             dropzoneText={''}
                                             previewGridClasses={settingStyle.DropzoneAreaDropZone6}
                                             classes={settingStyle.DropzoneAreaDropZone6}
+                                            onChange={(files) => {props.updatePhotoUser(files)}}
                                         />
                                     </div>
                                 </div>
