@@ -39,6 +39,7 @@ import AddressContainerExport from "./components/express/myAddress/add_address/a
 import ExportAddCompanyContainer from "./components/express/addCompany/addCompanyContainer";
 import ExportOrderContainer from "./components/express/order/orderContainer";
 import ExportAddingDocumentContainer from "./components/express/addCompany/addingDocuments/addingDocumentsContainer";
+import OrderSentContainerExport from "./components/express/order/orderSent/orderSentContainer";
 //нельзя удалять полетит бутстрап
 
 const App = (props) => {
@@ -79,7 +80,7 @@ const App = (props) => {
                                         <Route exact path={'/addCompany/loadingFile/done'} render={()=><Done/>}/>
                                         <Route exact path={'/myPayment/account'} render={()=><Account/>}/>
                                         <Route path={'/order/'} render={()=><ExportOrderContainer/>}/>
-                                        <Route exact path={'/order/orderSent'} render={()=><OrderSent/>}/>
+                                        <Route path={'/successful-departure/'} render={()=><OrderSentContainerExport/>}/>
                                         <Route exact path={'/invoice'} render={()=><Invoice/>}/>
                                         <Route render={()=><Error404/>}/>
                                     </Switch>

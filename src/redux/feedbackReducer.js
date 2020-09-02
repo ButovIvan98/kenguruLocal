@@ -21,7 +21,7 @@ const GENERAL_VALID_EMAIL = 'VALID_EMAIL';
 const GENERAL_ADD_MESSAGE = 'ADD_MESSAGE';//Отправка сообщения на сервер
 
 let initialState = {
-    nameIntagration: null,
+    nameIntegration: null,
     phoneIntagration: null,
     emailIntagration: null,
     textIntagration: null,

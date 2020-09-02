@@ -91,15 +91,17 @@ export const addOrder={
     order(price,sender_terminal,receiver_terminal,user,sender_contact,receiver_contact,rate){
         return instance().post('/order/', {
             price:price,
-            sender_terminal:sender_contact,
+            sender_terminal:sender_terminal,
             receiver_terminal:receiver_terminal,
             user:user,
             sender_contact:sender_contact,
             receiver_contact:receiver_contact,
             rate:rate
-
         })
     },
+    payOrder(id){
+        return instance().post('/order/payment/status', {internal_number:id})
+    }
 }
 export const companyAPI = {
     listCompanyHeader() {

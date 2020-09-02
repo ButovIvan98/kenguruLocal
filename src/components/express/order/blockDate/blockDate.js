@@ -4,9 +4,6 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import {TextField} from "@material-ui/core";
 
 const BlockDate = (props) => {
-    console.log('props.fullData')
-    console.log(props.fullData)
-    console.log('props.fullData')
     return <div className={'row'}>
         <div className={'col-lg-4 col-12 mt-lg-3 mt-2'}>
             <TextField
@@ -36,10 +33,10 @@ const BlockDate = (props) => {
                         {...params}
                         label="Улица"
                         variant="outlined"
+                        error={props.address.validStreet}
                         onChange={(e) => {
                             props.searchStreet(props.address.city.locality_type, props.address.city.fias, e.target.value)
                         }}
-
                     />}
                 onChange={(event) => {
                     props.infoStreet(event.target.valueOf().innerText, props.address.listStreet)
@@ -56,8 +53,10 @@ const BlockDate = (props) => {
                 renderInput={(params) =>
                     <TextField
                         {...params}
+                        disabled={props.address.street===null ? true :false}
                         label="Дом"
                         variant="outlined"
+                        error={props.address.validHouse}
                         onChange={(e) => {
                             props.searchHouse(props.address.street.street_fias_id, e.target.value)
                         }}

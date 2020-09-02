@@ -100,10 +100,8 @@ export const auth = (email, password) => {
 export const checkToken = () => {
     return (dispatch) => {
         userAPI.checkToken().then(response => {
-            console.log(response.data.status);
             dispatch(authIs(true));
             dispatch(listCompany());
-            //dispatch(listCompany());
         }).catch(error => {
             dispatch(authIs(false));
         })

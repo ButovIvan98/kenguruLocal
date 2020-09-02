@@ -72,11 +72,16 @@ export const validationFormPosition = (value) => {
 }
 /*Форма валидации полей - улица*/
 export const validationFormStreet = (street) => {
-    if (String(street).length > 1) return true
+    if (String(street).length > 0) return true
     else return false
 }
 /*Форма валидации полей - дом*/
 export const validationFormHouse = (house) => {
-    if (String(house).length > 1) return true
+    if (String(house).length > 0) return true
+    else return false
+}
+/*Форма валидации полей - индекс*/
+export const validationFormIndex = (index)=>{
+    if(String(index).length===6) return true
     else return false
 }

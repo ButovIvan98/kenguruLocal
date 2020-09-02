@@ -1,6 +1,7 @@
 import {
+    validationFormHouse, validationFormIndex,
     validationFormName,
-    validationFormPhone,
+    validationFormPhone, validationFormStreet,
     validationFormSurname
 } from "../components/common/validationForm/validForm";
 import {addAddressAPI, addCompanyAPI, addOrder, cityAPI, orderAPI} from "../API/api";
@@ -79,8 +80,13 @@ let EMAIL_RECIPIENT = 'EMAIL_RECIPIENT'//Емаил получателя для 
 
 /*Статус заказа*/
 const ORDER='ORDER';
+const PLACE_ORDER_LEGAL='PLACE_ORDER_LEGAL'//Заказа создает юридическое лицо
+const PLACE_ORDER_NATURAL='PLACE_ORDER_NATURAL'//Заказ создает физическое лицо
 
 let initialState = {
+    srcPay:null,//ссылка для оплаты заказа для физических лиц
+    placeOrderNaturalPerson:false,//если отправитель физическое лицо
+    placeOrderLegalEntity:false,//если отправитель юридическое лицо
     order:false,//Отправлен ли заказ или нет true-да false-нет
     addressBook: [],
     informationCompany: null,//Информация о тарифе и компании
@@ -831,10 +837,23 @@ const OrderReducer = (state = initialState, action) => {
                 ...state,
                 order:action.bodyOrder
             }
+        case PLACE_ORDER_LEGAL:
+            return {
+                ...state,
+                placeOrderLegalEntity: action.bodyPlaceOrderLegalEntity
+            }
+        case PLACE_ORDER_NATURAL:
+            return {
+                ...state,
+                placeOrderNaturalPerson: action.bodyPlaceOrderNaturalPerson,
+                srcPay: action.bodySrcPay
+            }
         default:
             return state
     }
 }
+const placeOrderNaturalPerson=(status,src)=>({type:PLACE_ORDER_NATURAL,bodyPlaceOrderNaturalPerson:status,bodySrcPay:src})
+const placeOrderLegalPerson=(status)=>({type:PLACE_ORDER_LEGAL,bodyPlaceOrderLegalEntity:status})
 const updateStatusOrder=(status)=>({type:ORDER,bodyOrder:status})
 export const updateDateIssue=(date)=>({type:UPDATE_DATE_ISSUE_PASSPORT,bodyDateIssue:date})
 export const updateIssuedByPassport=(date)=>({type:ISSUED_BY_PASSPORT,bodyIssuedByPassport:date})
@@ -1225,8 +1244,14 @@ export const addTerminalBook = (fullInfoUser, infoTK, sender)=>{
 /*Отправка запроса на добавления заказа*/
 const addOrderUser=(price,sender_terminal,receiver_terminal,user,sender_contact,receiver_contact,rate)=>{
     return(dispatch)=>{
-        addOrder.order(price,sender_terminal,receiver_terminal,user,sender_contact,receiver_contact,rate).then(r=>{
-
+        addOrder.order(10,sender_terminal,receiver_terminal,user,sender_contact,receiver_contact,rate).then(r=>{
+                dispatch(updateStatusOrder(true));
+                if(String(r.data.url).length>10){
+                    dispatch(placeOrderNaturalPerson(true,r.data.url))
+                }
+                else{
+                    dispatch(placeOrderLegalPerson(true));
+                }
             }
         )
     }
@@ -1239,14 +1264,15 @@ const orderRegisterDoorDoor = (fullInformationSender, fullInformationRecipient, 
         if (fullInformationSender.idAddress === '') {/*Если id адреса отправителя пустой*/
             addAddressBook(fullInformationSender.addressSender, fullInformationSender.contactPerson).then(r => {
                 idSender=r.data.id;
-                if (fullInformationRecipient.idAddress === '') {/*Если id города получателя пустое*/
+                if (fullInformationRecipient.idAddress === '') {
+                    /*Если id города получателя пустое*/
                     addAddressBook(fullInformationRecipient.addressRecipient, fullInformationRecipient.contactPerson).then(r => {
                         idRecipient = r.data.id;
-                        /*Вызываем функцию для отправки заказа на сервер*/
+                        dispatch(addOrderUser(fullInfoTK.priceBefore,null,null,Cookies.get('id_company'),idSender,idRecipient,fullInfoTK.id))
                     })
                 } else {
                     idRecipient=fullInformationRecipient.idAddress
-                    /*Вызываем функцию для отправки заказа на сервер*/
+                    dispatch(addOrderUser(fullInfoTK.priceBefore,null,null,Cookies.get('id_company'),idSender,idRecipient,fullInfoTK.id))
                 }
             })
         }
@@ -1255,11 +1281,11 @@ const orderRegisterDoorDoor = (fullInformationSender, fullInformationRecipient, 
             if (fullInformationRecipient.idAddress === '') {/*Если id города получателя пустое*/
                 addAddressBook(fullInformationRecipient.addressRecipient, fullInformationRecipient.contactPerson).then(r => {
                     idRecipient = r.data.id;
-                    /*Вызываем функцию для отправки заказа на сервер*/
+                    dispatch(addOrderUser(fullInfoTK.priceBefore,null,null,Cookies.get('id_company'),idSender,idRecipient,fullInfoTK.id))
                 })
             } else {
                 idRecipient=fullInformationRecipient.idAddress
-                /*Вызываем функцию для отправки заказа на сервер*/
+                dispatch(addOrderUser(fullInfoTK.priceBefore,null,null,Cookies.get('id_company'),idSender,idRecipient,fullInfoTK.id))
             }
         }
     }
@@ -1277,7 +1303,7 @@ const orderRegisterDoorTerminal=(fullInformationSender,fullInformationRecipient,
                 idSender = r.data.id;
                 addTerminalBook(fullInformationRecipient,fullInfoTK,sender).then(r=>{
                     idRecipient=r.data.id
-                    /*Отправление заказа*/
+                    dispatch(addOrderUser(fullInfoTK.priceBefore,null,idRecipient,Cookies.get('id_company'),idSender,null,fullInfoTK.id))
                 })
             })
         }
@@ -1285,7 +1311,7 @@ const orderRegisterDoorTerminal=(fullInformationSender,fullInformationRecipient,
             idSender=fullInformationSender.idAddress
             addTerminalBook(fullInformationRecipient,fullInfoTK,sender).then(r=>{
                 idRecipient=r.data.id
-                /*Отправление заказа*/
+                dispatch(addOrderUser(fullInfoTK.priceBefore,null,idRecipient,Cookies.get('id_company'),idSender,null,fullInfoTK.id))
             })
         }
     }
@@ -1303,7 +1329,7 @@ const orderRegisterTerminalDoor=(fullInformationRecipient,fullInformationSender,
                 idRecipient = r.data.external_code;
                 addTerminalBook(fullInformationSender,fullInfoTK,sender).then(r=>{
                     idSender=r.data.external_code
-
+                    dispatch(addOrderUser(fullInfoTK.priceBefore,idSender,null,Cookies.get('id_company'),null,idRecipient,fullInfoTK.id))
                 })
             })
         }
@@ -1311,9 +1337,8 @@ const orderRegisterTerminalDoor=(fullInformationRecipient,fullInformationSender,
             idRecipient=fullInformationRecipient.idAddress
             addTerminalBook(fullInformationSender,fullInfoTK,sender).then(r=>{
                 idSender=r.data.id
-                /*Отправление заказа*/
+                dispatch(addOrderUser(fullInfoTK.priceBefore,idSender,null,Cookies.get('id_company'),null,idRecipient,fullInfoTK.id))
             })
-            /*Запрос на отправку добавления терминала и запрос на отправку оформления заказа*/
         }
     }
 }
@@ -1329,10 +1354,7 @@ const orderRegisterTerminalTerminal=(fullInformationRecipient,fullInformationSen
             idRecipient=r.data.id;
             addTerminalBook(fullInformationSender,fullInfoTK,sender).then(r=>{
                 idSender=r.data.id;
-                console.log('idSender')
-                console.log(idSender)
-                console.log(idRecipient)
-                console.log('idRecipient')
+                dispatch(addOrderUser(fullInfoTK.priceBefore,idSender,idRecipient,Cookies.get('id_company'),null,null,fullInfoTK.id))
             })
         })
     }
@@ -1341,7 +1363,21 @@ const orderRegisterTerminalTerminal=(fullInformationRecipient,fullInformationSen
 export const orderRegister = (fullInformationSender, fullInformationRecipient, fullInfoTK,terminal) => {
     return (dispatch) => {
         if(fullInfoTK.pickup && fullInfoTK.delivery){
-            dispatch(orderRegisterDoorDoor(fullInformationSender,fullInformationRecipient,fullInfoTK));
+            if(validationFormStreet(fullInformationSender.addressSender.street.street) &&
+                validationFormHouse(fullInformationSender.addressSender.house.house) &&
+                validationFormStreet(fullInformationRecipient.addressRecipient.street.street) &&
+                validationFormHouse(fullInformationRecipient.addressRecipient.house.house) &&
+                validationFormIndex(fullInformationSender.addressSender.zip) &&
+                validationFormIndex(fullInformationRecipient.addressRecipient.zip) &&
+                validationFormName(fullInformationSender.contactPerson.name) &&
+                validationFormSurname(fullInformationSender.contactPerson.surname) &&
+                validationFormName(fullInformationRecipient.contactPerson.name) &&
+                validationFormSurname(fullInformationRecipient.contactPerson.surname) &&
+                validationFormPhone(fullInformationSender.contactPerson.phone) &&
+                validationFormPhone(fullInformationRecipient.contactPerson.phone)
+            ){
+                dispatch(orderRegisterDoorDoor(fullInformationSender,fullInformationRecipient,fullInfoTK));
+            }
         }
         else if(fullInfoTK.pickup && fullInfoTK.delivery===false){
             console.log('Дверь-склад')
@@ -1355,6 +1391,17 @@ export const orderRegister = (fullInformationSender, fullInformationRecipient, f
             console.log('Склад-Склад')
             dispatch(orderRegisterTerminalTerminal(fullInformationRecipient,fullInformationSender,fullInfoTK))
         }
+    }
+}
+/*Отправляем id оплаченного заказа для изменения статуса заказа*/
+export const sendingOrderIdPayment=()=>{
+    let array = (window.location.pathname).split('/')
+    let array1 = (array[array.length-1]).split('?');
+
+    return(dispatch)=>{
+        addOrder.payOrder(array1[0]).then(r=>{
+
+        })
     }
 }
 export default OrderReducer

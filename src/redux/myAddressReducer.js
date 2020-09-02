@@ -400,8 +400,6 @@ export const fullInfoHouse = (fias, house, list) => {
     return (dispatch) => {
         list.map(r => {
             let params = (r.block===null ? '' : r.house_type + ' ') + r.house  + (r.block===null ? '' : ' ' + r.block_type + ' ' + r.block );
-            console.log(params);
-            console.log(house)
             if (params === house) {
                 cityAPI.houseInformation(fias, r.unrestricted_value).then(res => {
                     dispatch(updateHouse(house, true, res.data));

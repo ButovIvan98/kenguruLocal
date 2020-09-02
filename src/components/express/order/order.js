@@ -4,12 +4,10 @@ import OrderData from "./orderData/orderData";
 import {TextField} from "@material-ui/core";
 import BlockDate from "./blockDate/blockDate";
 import BlockPersonalInformation from "./blockPersonalInformation/blockPersonalInformation";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import {makeStyles} from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import BlockTerminal from "./blockTerminal/blockTerminal";
-import {updateEmailRecipient, updateInnCompanyRecipient} from "../../../redux/orderReducer";
+import Redirect from "react-router-dom/es/Redirect";
 
 function rand() {
     return Math.round(Math.random() * 20) - 10;
@@ -357,6 +355,17 @@ const Order = (props) => {
                 </div>
             </div>
         </div>
+        {
+
+            props.order.placeOrderNaturalPerson
+                ? window.location.href=props.order.srcPay
+                : ''
+}
+        {
+            props.order.placeOrderLegalEntity
+                ? <Redirect to={'/successful-departure'} />
+                : ''
+        }
     </div>
 }
 export default Order;

@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+
+  ke22-prod:
+    container_name: ke22
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - /etc/letsencrypt/:/etc/letsencrypt/
+
