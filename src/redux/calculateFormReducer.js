@@ -732,7 +732,7 @@ export const calculateTariff = (cargo, type, idCityDeparture, idCityDestination,
                                     dispatch(statusFilterCalculate(false, false, true, false));
                                     let newArr = []
                                     let chatSocket = new WebSocket(
-                                        'wss://api.ke22.ru/ws/calculation/?key=' + response.data.id);
+                                        'ws://api.ke22.ru/ws/calculation/?key=' + response.data.id);
                                     chatSocket.onmessage = function (e) {
                                         let data = JSON.parse(e.data);
                                         let message = JSON.parse(data['message']);

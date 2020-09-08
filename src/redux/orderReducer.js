@@ -1238,7 +1238,7 @@ export const addTerminalBook = (fullInfoUser, infoTK, sender)=>{
             fullInfoUser.contactPerson.fullInfoCompany.address, sender, fullInfoUser.contactPerson.surname,
             fullInfoUser.contactPerson.name,fullInfoUser.contactPerson.middleName,fullInfoUser.contactPerson.phone,
             fullInfoUser.contactPerson.series,fullInfoUser.contactPerson.number,fullInfoUser.contactPerson.issuedByPassport,
-            fullInfoUser.contactPerson.dateIssue,fullInfoUser.contactPerson.emailRecipient
+            (String(fullInfoUser.contactPerson.dateIssue).length>1 ? null : fullInfoUser.contactPerson.dateIssue),fullInfoUser.contactPerson.emailRecipient
             ).then(function (someValue) {
             resolve(someValue);
         });

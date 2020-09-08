@@ -81,7 +81,7 @@ export const addCompanyAPI = {
             contact_first_name: contact_first_name, contact_patronymic: contact_patronymic,
             contact_position: contact_position, contact_reason: contact_reason, is_nds: is_nds,
             bank_title: bank_title, payment_account: payment_account, correspondent_account:correspondent_account,
-            bik: bik,fio_manager:fio_manager,email:email,phone:phone
+            bik: bik,fio_director:fio_manager,email:email,phone:phone
         })
     },
     addPhoneAndEmailCompany(id, formData) {
