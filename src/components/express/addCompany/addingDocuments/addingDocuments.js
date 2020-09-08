@@ -36,7 +36,7 @@ const AddingDocuments = (props) => {
                     </h2>
                 </div>
                 <div className={'col-lg-12 mt-3 text-center'}>
-                    <a href={img} className={classes.buttonLoad} download>
+                    <a href={props.company.documents.urlContract} className={classes.buttonLoad} download>
                         <span>
                             Скачать договор
                         </span>

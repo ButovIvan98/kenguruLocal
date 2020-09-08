@@ -20,6 +20,7 @@ const ADD_DOCUMENTS_REASON_FOR_SIGNING='ADD_DOCUMENTS_REASON_FOR_SIGNING'//До�
 const ADD_DOCUMENTS_CONTRACT='ADD_DOCUMENTS_CONTRACT'//Добавление документа - договор
 const ADD_DOCUMENTS_EGRIP='ADD_DOCUMENTS_EGRIP'//Добавление документа - егрип
 const ADDING_DOCUMENTS_SERVER='ADDING_DOCUMENTS_SERVER'//Флаг добавлены ли документы на сервер или нет
+const UPDATE_URL_DOCUMENTS='UPDATE_URL_DOCUMENTS'//Обновление пути для загрузки заполненного договора.
 
 const UPDATE_INN = 'UPDATE_INN';
 const UPDATE_OGRN = 'UPDATE_OGRN';
@@ -100,10 +101,19 @@ const initialState = {
         contract:null,//Документ - заполненный и подписанный договор клиента
         validContract:false,
         addingDocuments:false,//Отправлены документы на сервер или нет
+        urlContract:null,//
     }
 };
 const AddCompanyReducer = (state = initialState, action) => {
     switch (action.type) {
+        case UPDATE_URL_DOCUMENTS:
+            return {
+                ...state,
+                documents: {
+                    ...state.documents,
+                    urlContract: action.bodyUrlContract
+                }
+            }
         case SEARCH_COMPANY:
             return {
                 ...state,
@@ -375,6 +385,7 @@ const updateDocReasonForSigning=(value,status)=>({type:ADD_DOCUMENTS_REASON_FOR_
 const updateDocContract=(value,status)=>({type:ADD_DOCUMENTS_CONTRACT, bodyDocumentContract:value,bodyValidDocumentContract:status})
 const updateEgrip=(value,status)=>({type:ADD_DOCUMENTS_EGRIP,bodyDocumentEgrip:value,bodyValidDocumentEgrip:status})
 const updateStatusAddingDocument=(status)=>({type:ADDING_DOCUMENTS_SERVER, bodyDocumentAddingDocuments:status})
+const updateUrlContract=(url)=>({type:UPDATE_URL_DOCUMENTS,bodyUrlContact:url})
 const updateId=(id)=>({type:UPDATE_ID_COMPANY, bodyIdCompany:id})
 /*------------------*/
 export const updateVat_payer = (status) => ({type: UPDATE_VAT_PAYER, bodyVat_payer: !status})
@@ -655,6 +666,7 @@ export const addCompanyYou = (listInfo) => {
                 listInfo.BIC, listInfo.correspondentPayment, listInfo.fullInfoCompany.management_name,
                 listInfo.personalData.email,listInfo.personalData.phone
                 ).then(r=>{
+                    dispatch(updateUrlContract(r.data.contract))
                 dispatch(listCompany());
                 dispatch(updateStep1(true));
                 dispatch(updateId(r.data.id))
