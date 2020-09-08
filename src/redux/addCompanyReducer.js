@@ -385,7 +385,7 @@ const updateDocReasonForSigning=(value,status)=>({type:ADD_DOCUMENTS_REASON_FOR_
 const updateDocContract=(value,status)=>({type:ADD_DOCUMENTS_CONTRACT, bodyDocumentContract:value,bodyValidDocumentContract:status})
 const updateEgrip=(value,status)=>({type:ADD_DOCUMENTS_EGRIP,bodyDocumentEgrip:value,bodyValidDocumentEgrip:status})
 const updateStatusAddingDocument=(status)=>({type:ADDING_DOCUMENTS_SERVER, bodyDocumentAddingDocuments:status})
-const updateUrlContract=(url)=>({type:UPDATE_URL_DOCUMENTS,bodyUrlContact:url})
+const updateUrlContract=(url)=>({type:UPDATE_URL_DOCUMENTS,bodyUrlContract:url})
 const updateId=(id)=>({type:UPDATE_ID_COMPANY, bodyIdCompany:id})
 /*------------------*/
 export const updateVat_payer = (status) => ({type: UPDATE_VAT_PAYER, bodyVat_payer: !status})
