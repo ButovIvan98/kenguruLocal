@@ -34,15 +34,15 @@ const CalculateResult = (props) => {
             </div>
             <div className={'col-lg-9 col-12'}>
                 <div className={'row'}>
-                    <div className={'col-lg-12'}>
-                        {
-                            props.calculate.card.showForm
-                                ? <Pricing
-                                    result={props.calculate.card}
-                                />
-                                : ''
-                        }
-                    </div>
+                    {/*<div className={'col-lg-12'}>*/}
+                    {/*    {*/}
+                    {/*        props.calculate.card.showForm*/}
+                    {/*            ? <Pricing*/}
+                    {/*                result={props.calculate.card}*/}
+                    {/*            />*/}
+                    {/*            : ''*/}
+                    {/*    }*/}
+                    {/*</div>*/}
                     <div className={'col-12 mt-3'}>
                         {listBLock}
                     </div>

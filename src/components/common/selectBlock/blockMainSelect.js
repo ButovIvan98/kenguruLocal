@@ -26,7 +26,11 @@ const BlockMainSelect = (props) => {
                 </Avatar>
             </div>
             <div className={'col-auto text-left pr-0'}>
-                <span className={classes.nameCompany}>{nav.is_personal ? 'Физ. лицо' : nav.company_title}</span><br/>
+                <span className={classes.nameCompany}>{nav.is_personal
+                    ? 'Физ. лицо'
+                    : (String(nav.company_title).length > 15
+                        ? String(nav.company_title).substr(0,13) + '...'
+                        : nav.company_title)}</span><br/>
                 <span className={classes.authorizedFaceCompany}>{nav.last_name + ' ' + nav.first_name}</span>
             </div>
         </div>

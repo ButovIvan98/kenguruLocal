@@ -17,7 +17,7 @@ const OrderSent = (props) => {
                 </div>
                 <div className={'col-lg-12 text-center'}>
                     <h3 className={classes.headerText}>
-                        Ваше первое отправление успешно создано!<br/> Что дальше?
+                        Ваше отправление успешно создано!<br/> Что дальше?
                     </h3>
                 </div>
                 <div className={'col-lg-12'}>

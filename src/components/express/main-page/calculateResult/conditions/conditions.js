@@ -74,12 +74,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 const Pricing = (props) => {
     const classes = useStyles();
-    console.log('props.result.cheaply');
-    console.log(props.result.cheaply);
-    console.log('props.result.cheaply');
-    console.log('props.result.faster');
-    console.log(props.result.faster);
-    console.log('props.result.faster');
     return (
         <React.Fragment>
             <Container maxWidth="md" component="main">

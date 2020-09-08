@@ -166,7 +166,7 @@ const BlockPersonalInformation = (props) => {
         {props.value.legalEntity
             ? <div className={'col-12 mt-3'}>
                 <div className={'row'}>
-                    <div className={'col-4'}>
+                    <div className={'col-lg-4 col-12'}>
                         <InputMask mask="9999 999999"
                                    maskChar=" "
                                    onChange={(e) => {
@@ -186,7 +186,7 @@ const BlockPersonalInformation = (props) => {
                             />
                         </InputMask>
                     </div>
-                    <div className={'col-4'}>
+                    <div className={'col-lg-4 mt-lg-0 mt-3 col-12'}>
                         <TextField
                             label="Дата выдачи"
                             variant="outlined"
@@ -199,7 +199,7 @@ const BlockPersonalInformation = (props) => {
                             value={props.value.dateIssue}
                         />
                     </div>
-                    <div className={'col-4'}>
+                    <div className={'col-lg-4 mt-lg-0 mt-3 col-12'}>
                         <TextField
                             label="Кем выдан"
                             variant="outlined"
@@ -213,7 +213,7 @@ const BlockPersonalInformation = (props) => {
                             }}
                         />
                     </div>
-                    <div className={'col-4 mt-3'}>
+                    <div className={'col-lg-4 col-12 mt-3'}>
                         <InputMask mask="9999-9999-99"
                                    maskChar=" "
                                    onChange={(e) => {
@@ -233,7 +233,7 @@ const BlockPersonalInformation = (props) => {
                             />
                         </InputMask>
                     </div>
-                    <div className={'col-8 mt-3'}>
+                    <div className={'col-lg-8 col-12 mt-3'}>
                         <TextField
                             label="Email получателя"
                             variant="outlined"

@@ -33,16 +33,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c8f36c5-f73a-4c7e-82fb-7aecf26b4ff2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/express/order/orderSent/orderSentContainer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/API/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/API/api.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/validationForm/validForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/validationForm/validForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/calculateForm/calculateForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/calculateForm/calculateForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/selectBlock/blockMainSelect.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/selectBlock/blockMainSelect.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/addCompany/addingDocuments/addingDocuments.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/addCompany/addingDocuments/addingDocuments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/addCompany/addingDocuments/addingDocuments.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/addCompany/addingDocuments/addingDocuments.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/addCompany/addingDocuments/addingDocumentsContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/addCompany/addingDocuments/addingDocumentsContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/main-page/calculateResult/calculateResult.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/main-page/calculateResult/calculateResult.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/main-page/calculateResult/conditions/conditions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/main-page/calculateResult/conditions/conditions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/express/order/blockDate/blockDate.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/order/blockDate/blockDate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/express/order/order.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/order/order.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/authReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/authReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/feedbackReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/feedbackReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/myAddressReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/myAddressReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/order/blockPersonalInformation/blockPersonalInformation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/order/blockPersonalInformation/blockPersonalInformation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/order/orderSent/orderSent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/order/orderSent/orderSent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/addCompanyReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/addCompanyReducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/orderReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/orderReducer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -221,7 +225,8 @@
       <workItem from="1598265091545" duration="4833000" />
       <workItem from="1598433650483" duration="15039000" />
       <workItem from="1598600364786" duration="28666000" />
-      <workItem from="1598868247129" duration="13728000" />
+      <workItem from="1598868247129" duration="48274000" />
+      <workItem from="1599465555396" duration="8397000" />
     </task>
     <servers />
   </component>
@@ -268,20 +273,20 @@
       <screen x="49" y="27" width="1871" height="1053" />
     </state>
     <state x="473" y="187" key="SettingsEditor/49.27.1871.1053@49.27.1871.1053" timestamp="1592027174055" />
-    <state x="676" y="291" width="702" height="522" key="find.popup" timestamp="1598869529541">
+    <state x="887" y="527" width="702" height="522" key="find.popup" timestamp="1599117414963">
       <screen x="51" y="27" width="1869" height="1053" />
     </state>
     <state x="675" y="291" width="702" height="522" key="find.popup/49.27.1871.1053@49.27.1871.1053" timestamp="1596965537564" />
-    <state x="676" y="291" width="702" height="522" key="find.popup/51.27.1869.1053@51.27.1869.1053" timestamp="1598869529541" />
+    <state x="887" y="527" width="702" height="522" key="find.popup/51.27.1869.1053@51.27.1869.1053" timestamp="1599117414963" />
     <state x="649" y="270" width="672" height="677" key="run.anything.popup" timestamp="1597319453801">
       <screen x="49" y="27" width="1871" height="1053" />
     </state>
     <state x="649" y="270" width="672" height="677" key="run.anything.popup/49.27.1871.1053@49.27.1871.1053" timestamp="1597319453801" />
-    <state x="648" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1598774195515">
+    <state x="648" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1599033610572">
       <screen x="51" y="27" width="1869" height="1053" />
     </state>
     <state x="647" y="257" width="672" height="678" key="search.everywhere.popup/49.27.1871.1053@49.27.1871.1053" timestamp="1597381783431" />
-    <state x="648" y="257" width="672" height="678" key="search.everywhere.popup/51.27.1869.1053@51.27.1869.1053" timestamp="1598774195515" />
+    <state x="648" y="257" width="672" height="678" key="search.everywhere.popup/51.27.1869.1053@51.27.1869.1053" timestamp="1599033610572" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

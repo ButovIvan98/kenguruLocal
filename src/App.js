@@ -86,6 +86,13 @@ const App = (props) => {
                                     </Switch>
                                     :
                                     <Switch>
+                                        <Route exact path={'/confirmation-email/'} render={()=><ExportConfirmationEmailContainer/>}/>
+                                        <Route exact path={'/aboutMe'} render={() => <AboutMe />} />
+                                        <Route exact path={'/contact'} render={() => <ExportContactContainer />} />
+                                        <Route exact path={'/policy'} render={() => <PolicyAndPrivacy />} />
+                                        <Route exact path={'/publicOffer'} render={() => <PublicOffer />} />
+                                        <Route exact path={'/paymentMethod'} render={() => <PaymentMethod />} />
+                                        <Route exact path={'/transportCompany'} render={() => <ExportTransportCompany />} />
                                         <Route exact path='/'  render={() => <MainPage />}/>
                                         <Route exact path={'/registration'} render={() => <RegistrationContainerExport />} />
                                         <Route render={()=><AuthorizationContainerExport/>}/>

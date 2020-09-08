@@ -95,11 +95,13 @@ const CalculateForm = (props) => {
                                     control={
                                         <Switch
                                             checked={props.calculate.pickup}
-                                            onChange={()=>{props.updatePickup(!props.calculate.pickup)}}
+                                            onChange={() => {
+                                                props.updatePickup(!props.calculate.pickup)
+                                            }}
                                             color="primary"
                                         />
                                     }
-                                    label={props.calculate.pickup ? 'От двери' :'От склад'}
+                                    label={props.calculate.pickup ? 'От двери' : 'От склад'}
                                 />
                             </div>
                             <div className={'col-lg-4 mt-lg-0 mt-2 pr-1 pl-1'}>
@@ -126,11 +128,13 @@ const CalculateForm = (props) => {
                                     control={
                                         <Switch
                                             checked={props.calculate.delivery}
-                                            onChange={()=>{props.updateDelivery(!props.calculate.delivery)}}
+                                            onChange={() => {
+                                                props.updateDelivery(!props.calculate.delivery)
+                                            }}
                                             color="primary"
                                         />
                                     }
-                                    label={ props.calculate.delivery ? 'До двери' : 'До склада'}
+                                    label={props.calculate.delivery ? 'До двери' : 'До склада'}
                                 />
                             </div>
                             <div className={'col-lg-4 mt-lg-0 mt-2 pr-1 pl-1'}>
@@ -142,7 +146,6 @@ const CalculateForm = (props) => {
                                         value={age}
                                         onChange={handleChange}
                                         label="Что отправляем?"
-
                                     >
                                         <MenuItem value={'doc'}>Документы</MenuItem>
                                         <MenuItem onClick={() => {
@@ -329,7 +332,7 @@ const CalculateForm = (props) => {
                 <div className={'col-12 mb-3'}>
                     <div className={classes.blockBottomCalculate}>
                         <button onClick={() => {
-                            props.calculateTariff(props.calculate.listCargo, props.calculate.typeCargo, props.calculate.cityOfDeparture.city, props.calculate.cityOfDestination.city, props.calculate.pickup,props.calculate.delivery);
+                            props.calculateTariff(props.calculate.listCargo, props.calculate.typeCargo, props.calculate.cityOfDeparture.city, props.calculate.cityOfDestination.city, props.calculate.pickup, props.calculate.delivery);
                         }} className={classes.calculation}>Рассчитать
                         </button>
                     </div>

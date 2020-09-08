@@ -33,17 +33,18 @@ const BlockDate = (props) => {
                         {...params}
                         label="Улица"
                         variant="outlined"
-                        error={props.address.validStreet}
+                        error={!props.address.validStreet}
                         onChange={(e) => {
                             props.searchStreet(props.address.city.locality_type, props.address.city.fias, e.target.value)
                         }}
+                        helperText={!props.address.validStreet ? 'Заполните улицу' : ''}
                     />}
                 onChange={(event) => {
                     props.infoStreet(event.target.valueOf().innerText, props.address.listStreet)
                 }}
                 noOptionsText={'Нет такой улицы'}
                 value={props.address.street===null ? '' : props.address.street.street}
-                //defaultValue={props.fullData === null ? '' : props.fullData.street}
+
             />
         </div>
         <div className={'col-lg-4 col-12 mt-lg-3 mt-2'}>
@@ -53,14 +54,15 @@ const BlockDate = (props) => {
                 renderInput={(params) =>
                     <TextField
                         {...params}
-                        disabled={props.address.street===null ? true :false}
                         label="Дом"
                         variant="outlined"
-                        error={props.address.validHouse}
+                        error={!props.address.validHouse}
                         onChange={(e) => {
                             props.searchHouse(props.address.street.street_fias_id, e.target.value)
                         }}
+                        helperText={!props.address.validHouse ? 'Заполните номер дома' : ''}
                     />}
+                disabled={props.address.street===null ? true : false}
                 onChange={(event) => {
                     props.infoHouse(props.address.street.street_fias_id, event.target.valueOf().innerText, props.address.listHouse)
                 }}
@@ -92,7 +94,8 @@ const BlockDate = (props) => {
                 onChange={(e) => {
                     props.updateIndex(e.target.value)
                 }}
-
+                error={!props.address.validZip}
+                helperText={!props.address.validZip ? 'Заполните индекс' : ''}
             />
         </div>
     </div>

@@ -2,7 +2,8 @@ import React from "react";
 import {connect} from "react-redux";
 import AddingDocuments from "./addingDocuments";
 import {
-    addingDocumentContract,
+    addDocuments, addDocumentsCompany,
+    addingDocumentContract, addingDocumentEgrip,
     addingDocumentINN,
     addingDocumentOrganizationCharter,
     addingDocumentReasonForSigning
@@ -23,6 +24,9 @@ const ExportAddingDocumentContainer = connect(mapStateToProps,{
     addingDocumentINN,
     addingDocumentOrganizationCharter,
     addingDocumentReasonForSigning,
-    addingDocumentContract
+    addingDocumentContract,
+    addDocuments,
+    addingDocumentEgrip,
+    addDocumentsCompany
 })(addingDocumentsContainer);
 export default ExportAddingDocumentContainer;

@@ -71,7 +71,7 @@ export const addCompanyAPI = {
         opf_code, opf_full, opf_short, address_legal, address_real,
         contact_last_name, contact_first_name, contact_patronymic,
         contact_position, contact_reason, is_nds, bank_title,
-        payment_account, bik
+        payment_account, bik,correspondent_account,fio_manager,email,phone
     ) {
         return instance().post('/company/', {
             full_title: full_title, short_title: short_title,
@@ -80,11 +80,15 @@ export const addCompanyAPI = {
             address_real: address_real, contact_last_name: contact_last_name,
             contact_first_name: contact_first_name, contact_patronymic: contact_patronymic,
             contact_position: contact_position, contact_reason: contact_reason, is_nds: is_nds,
-            bank_title: bank_title, payment_account: payment_account, bik: bik
+            bank_title: bank_title, payment_account: payment_account, correspondent_account:correspondent_account,
+            bik: bik,fio_manager:fio_manager,email:email,phone:phone
         })
     },
     addPhoneAndEmailCompany(id, formData) {
         return instanceHeaders().patch(`/profile/${id}/`, formData)
+    },
+    addDocument(formData){
+        return instanceHeaders().post('/company/documents/',formData)
     }
 }
 export const addOrder={

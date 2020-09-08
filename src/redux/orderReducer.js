@@ -977,7 +977,7 @@ export const updateEmailRecipient = (email) => ({type: EMAIL_RECIPIENT, bodyEmai
 /*Поиск списка улиц отправления по введенным параметрам*/
 export const searchStreetSender = (locality_type, locality_fias, street) => {
     return (dispatch) => {
-        if (String(street).length > 2) {
+        if (String(street).length > 1) {
             cityAPI.searchStreet(locality_type, locality_fias, street).then(r => {
                 dispatch(updateListStreetSender(r.data));
             })
@@ -1015,6 +1015,7 @@ export const listCompanyRecipient=(company)=>{
         }
     }
 }
+/*Выбор компании для получателя*/
 export const choiceCompanyRecipient = (list,company)=>{
     return(dispatch)=>{
         list.map(r=>{
@@ -1039,9 +1040,11 @@ export const informationStreetSender = (street, listStreet) => {
 /*Поиск списка домов отправления по введенным параметрам*/
 export const searchHouseSender = (locality_fias, house) => {
     return (dispatch) => {
-        cityAPI.searchHouse(locality_fias, house).then(r => {
-            dispatch(updateListHouseSender(r.data));
-        })
+        if(String(house)>0) {
+            cityAPI.searchHouse(locality_fias, house).then(r => {
+                dispatch(updateListHouseSender(r.data));
+            })
+        }
     }
 }
 /*Получение подробной информации по выбранному дому отправления*/
@@ -1063,7 +1066,7 @@ export const informationHouseSender = (streetFias, house, listHouse) => {
 /*Поиск списка улиц отправления по введенным параметрам*/
 export const searchStreetRecipient = (locality_type, locality_fias, street) => {
     return (dispatch) => {
-        if (String(street).length > 2) {
+        if (String(street).length > 1) {
             cityAPI.searchStreet(locality_type, locality_fias, street).then(r => {
                 dispatch(updateListStreetRecipient(r.data));
             })
@@ -1083,9 +1086,11 @@ export const informationStreetRecipient = (street, listStreet) => {
 /*Поиск списка домов отправления по введенным параметрам*/
 export const searchHouseRecipient = (locality_fias, house) => {
     return (dispatch) => {
-        cityAPI.searchHouse(locality_fias, house).then(r => {
-            dispatch(updateListHouseRecipient(r.data));
-        })
+        if(String(house).length>0) {
+            cityAPI.searchHouse(locality_fias, house).then(r => {
+                dispatch(updateListHouseRecipient(r.data));
+            })
+        }
     }
 }
 /*Получение подробной информации по выбранному дому отправления*/
@@ -1378,6 +1383,45 @@ export const orderRegister = (fullInformationSender, fullInformationRecipient, f
             ){
                 dispatch(orderRegisterDoorDoor(fullInformationSender,fullInformationRecipient,fullInfoTK));
             }
+            else{
+                if(!validationFormStreet(fullInformationSender.addressSender.street.street)){
+                    dispatch(validStreetSender(false));
+                }
+                if(!validationFormStreet(fullInformationRecipient.addressRecipient.street.street)){
+                    dispatch(validStreetRecipient(false))
+                }
+                if(!validationFormHouse(fullInformationSender.addressSender.house.house)){
+                    dispatch(validHouseSender(false))
+                }
+                if(!validationFormHouse(fullInformationRecipient.addressRecipient.house.house)){
+                    dispatch(validHouseRecipient(false))
+                }
+                if(!validationFormIndex(fullInformationSender.addressSender.zip)){
+                    dispatch(validZipSender(false))
+                }
+                if(!validationFormIndex(fullInformationRecipient.addressRecipient.zip)){
+                    dispatch(validZipRecipient(false))
+                }
+                if(!validationFormName(fullInformationSender.contactPerson.name)){
+                    dispatch(validNameSender(false))
+                }
+                if(!validationFormName(fullInformationRecipient.contactPerson.name)){
+                    dispatch(validNameRecipient(false))
+                }
+                if(!validationFormSurname(fullInformationRecipient.contactPerson.surname)){
+                    dispatch(validSurnameRecipient(false))
+                }
+                if(!validationFormSurname(fullInformationSender.contactPerson.surname)){
+                    dispatch(validSurnameSender(false))
+                }
+                if(!validationFormPhone(fullInformationSender.contactPerson.phone)){
+                    dispatch(validPhoneSender(false))
+                }
+                if(!validationFormPhone(fullInformationRecipient.contactPerson.phone)){
+                    dispatch(validPhoneRecipient(false))
+                }
+            }
+
         }
         else if(fullInfoTK.pickup && fullInfoTK.delivery===false){
             console.log('Дверь-склад')
