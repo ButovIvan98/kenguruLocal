@@ -34,7 +34,10 @@
   <component name="ChangeListManager">
     <list default="true" id="7c8f36c5-f73a-4c7e-82fb-7aecf26b4ff2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/API/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/API/api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/addCompany/addingDocuments/addingDocuments.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/addCompany/addingDocuments/addingDocuments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/Permanent_main/PermanentMain.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/Permanent_main/PermanentMain.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/addCompanyReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/addCompanyReducer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -213,7 +216,7 @@
       <workItem from="1598433650483" duration="15039000" />
       <workItem from="1598600364786" duration="28666000" />
       <workItem from="1598868247129" duration="48274000" />
-      <workItem from="1599465555396" duration="16714000" />
+      <workItem from="1599465555396" duration="24370000" />
     </task>
     <servers />
   </component>

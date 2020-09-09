@@ -87,8 +87,8 @@ export const addCompanyAPI = {
     addPhoneAndEmailCompany(id, formData) {
         return instanceHeaders().patch(`/profile/${id}/`, formData)
     },
-    addDocument(formData){
-        return instanceHeaders().post('/company/documents/',formData)
+    addDocument(formData,id){
+        return instanceHeaders().put(`/company/documents/${id}`,formData)
     }
 }
 export const addOrder={

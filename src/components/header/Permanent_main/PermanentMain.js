@@ -22,6 +22,7 @@ const Permanent_main = (props) => {
                 </NavLink>
             </div>
             <div className={'col-lg-6 text-center d-lg-inline d-none  col-6 align-self-center'}>
+                <NavLink className={classes.phoneNumber} to="/transportCompany">Отслеживание груза</NavLink>
                 <NavLink className={classes.phoneNumber} to="/transportCompany">Транспортные компании</NavLink>
                 <NavLink className={classes.phoneNumber} to="/paymentMethod">Способы оплаты</NavLink>
                 <NavLink className={classes.phoneNumber} to="/websitePlagin">Модуль для сайта</NavLink>

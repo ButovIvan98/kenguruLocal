@@ -14,19 +14,19 @@ import {listCompany} from "./headerReducer";
 
 const SEARCH_COMPANY = 'SEARCH_COMPANY';
 
-const ADD_DOCUMENTS_INN='ADD_DOCUMENTS_INN'//Добавление документа - инн
-const ADD_DOCUMENTS_ORGANIZATION_CHARTER='ADD_DOCUMENTS_ORGANIZATION_CHARTER'//Добавление документа - устав организации
-const ADD_DOCUMENTS_REASON_FOR_SIGNING='ADD_DOCUMENTS_REASON_FOR_SIGNING'//Добавление документа - основание для подписания
-const ADD_DOCUMENTS_CONTRACT='ADD_DOCUMENTS_CONTRACT'//Добавление документа - договор
-const ADD_DOCUMENTS_EGRIP='ADD_DOCUMENTS_EGRIP'//Добавление документа - егрип
-const ADDING_DOCUMENTS_SERVER='ADDING_DOCUMENTS_SERVER'//Флаг добавлены ли документы на сервер или нет
-const UPDATE_URL_DOCUMENTS='UPDATE_URL_DOCUMENTS'//Обновление пути для загрузки заполненного договора.
+const ADD_DOCUMENTS_INN = 'ADD_DOCUMENTS_INN'//Добавление документа - инн
+const ADD_DOCUMENTS_ORGANIZATION_CHARTER = 'ADD_DOCUMENTS_ORGANIZATION_CHARTER'//Добавление документа - устав организации
+const ADD_DOCUMENTS_REASON_FOR_SIGNING = 'ADD_DOCUMENTS_REASON_FOR_SIGNING'//Добавление документа - основание для подписания
+const ADD_DOCUMENTS_CONTRACT = 'ADD_DOCUMENTS_CONTRACT'//Добавление документа - договор
+const ADD_DOCUMENTS_EGRIP = 'ADD_DOCUMENTS_EGRIP'//Добавление документа - егрип
+const ADDING_DOCUMENTS_SERVER = 'ADDING_DOCUMENTS_SERVER'//Флаг добавлены ли документы на сервер или нет
+const UPDATE_URL_DOCUMENTS = 'UPDATE_URL_DOCUMENTS'//Обновление пути для загрузки заполненного договора.
 
 const UPDATE_INN = 'UPDATE_INN';
 const UPDATE_OGRN = 'UPDATE_OGRN';
 const UPDATE_KPP = 'UPDATE_KPP';
 const UPDATE_NAME_COMPANY = 'UPDATE_NAME_COMPANY';//Наименование организации
-const FULL_INFORMATION_COMPANY='FULL_INFORMATION_COMPANY'//Полная информация о компании
+const FULL_INFORMATION_COMPANY = 'FULL_INFORMATION_COMPANY'//Полная информация о компании
 const UPDATE_LEGAL_ADDRESS = 'UPDATE_LEGAL_ADDRESS';//Обновление юридического адреса
 const UPDATE_ACTUAL_ADDRESS = 'UPDATE_ACTUAL_ADDRESS';//Обновление фактического адреса
 const UPDATE_CHECKED_COINCIDENCE = 'UPDATE_CHECKED_COINCIDENCE';//Изменения состояния галочки у "Юр. адрес совпадает с фактическим".
@@ -43,17 +43,17 @@ const UPDATE_ACCOUNT_PAYMENT = 'UPDATE_ACCOUNT_PAYMENT'//Состояние по
 const UPDATE_CORRESPONDENT_PAYMENT = 'UPDATE_CORRESPONDENT_PAYMENT'//Состояние поля - Корреспондентский счет
 const UPDATE_ADDRESS_BANK = 'UPDATE_ADDRESS_BANK'//Состояние поля - Наименование и адрес банка
 const UPDATE_LIST_BANK = 'UPDATE_LIST_BANK';//Состояния списка банков найденных через запрос
-const UPDATE_ID_COMPANY='UPDATE_ID_COMPANY'
-const STEP_SENDING_DETAILS='STEP_SENDING_DETAILS'//Отправление реквизитов заполенных пользователем
+const UPDATE_ID_COMPANY = 'UPDATE_ID_COMPANY'
+const STEP_SENDING_DETAILS = 'STEP_SENDING_DETAILS'//Отправление реквизитов заполенных пользователем
 
 const initialState = {
-    flags:{
-        step1:false,//Отправка реквизитов на сервер и переход к проверке документов
-        step2:false,//Отправка документов на проверку на сервер и переход на страницу уведомление
+    flags: {
+        step1: false,//Отправка реквизитов на сервер и переход к проверке документов
+        step2: false,//Отправка документов на проверку на сервер и переход на страницу уведомление
     },
     listCompany: [],
     listBank: [],
-    fullInfoCompany:[],
+    fullInfoCompany: [],
     INN: '',
     validINN: true,
     OGRN: '',
@@ -75,7 +75,7 @@ const initialState = {
     validBIC: true,
     addressBank: '',//Адрес банка
     validAddressBank: true,
-    idCompany:null,
+    idCompany: null,
     personalData: {
         surname: '',
         validSurname: true,
@@ -89,19 +89,19 @@ const initialState = {
         email: '',
         validEmail: true
     },
-    documents:{
-        inn:null,//Документ - инн
-        validINN:false,
-        organizationCharter:null,//Документ - Устав организации
-        validOrganizationCharter:false,
-        reasonForSigning:null,//Документ - основание для подписания
-        validReasonForSigning:false,
-        egrip:null,//Егрип если это ИП
-        validEgrip:false,
-        contract:null,//Документ - заполненный и подписанный договор клиента
-        validContract:false,
-        addingDocuments:false,//Отправлены документы на сервер или нет
-        urlContract:null,//
+    documents: {
+        inn: null,//Документ - инн
+        validINN: false,
+        organizationCharter: null,//Документ - Устав организации
+        validOrganizationCharter: false,
+        reasonForSigning: null,//Документ - основание для подписания
+        validReasonForSigning: false,
+        egrip: null,//Егрип если это ИП
+        validEgrip: false,
+        contract: null,//Документ - заполненный и подписанный договор клиента
+        validContract: false,
+        addingDocuments: false,//Отправлены документы на сервер или нет
+        urlContract: null,//
     }
 };
 const AddCompanyReducer = (state = initialState, action) => {
@@ -376,17 +376,37 @@ const updateAddressBank = (value, status) => ({
     bodyAddressBank: value,
     bodyValidAddressBank: status
 });
-const updateFullInfoCompany=(value)=>({type:FULL_INFORMATION_COMPANY,bodyFullInfoCompany:value});
-const updateStep1=(status)=>({type:STEP_SENDING_DETAILS,bodyStep1:status});
+const updateFullInfoCompany = (value) => ({type: FULL_INFORMATION_COMPANY, bodyFullInfoCompany: value});
+const updateStep1 = (status) => ({type: STEP_SENDING_DETAILS, bodyStep1: status});
 /*Документы*/
-const updateDocINN=(value,status)=>({type:ADD_DOCUMENTS_INN, bodyDocumentINN:value,bodyValidDocumentINN:status})
-const updateDocOrganizationCharter=(value,status)=>({type:ADD_DOCUMENTS_ORGANIZATION_CHARTER, bodyDocumentOrganizationCharter:value,bodyValidDocumentOrganizationCharter:status})
-const updateDocReasonForSigning=(value,status)=>({type:ADD_DOCUMENTS_REASON_FOR_SIGNING, bodyDocumentReasonForSigning:value,bodyValidDocumentReasonForSigning:status})
-const updateDocContract=(value,status)=>({type:ADD_DOCUMENTS_CONTRACT, bodyDocumentContract:value,bodyValidDocumentContract:status})
-const updateEgrip=(value,status)=>({type:ADD_DOCUMENTS_EGRIP,bodyDocumentEgrip:value,bodyValidDocumentEgrip:status})
-const updateStatusAddingDocument=(status)=>({type:ADDING_DOCUMENTS_SERVER, bodyDocumentAddingDocuments:status})
-const updateUrlContract=(url)=>({type:UPDATE_URL_DOCUMENTS,bodyUrlContract:url})
-const updateId=(id)=>({type:UPDATE_ID_COMPANY, bodyIdCompany:id})
+const updateDocINN = (value, status) => ({
+    type: ADD_DOCUMENTS_INN,
+    bodyDocumentINN: value,
+    bodyValidDocumentINN: status
+})
+const updateDocOrganizationCharter = (value, status) => ({
+    type: ADD_DOCUMENTS_ORGANIZATION_CHARTER,
+    bodyDocumentOrganizationCharter: value,
+    bodyValidDocumentOrganizationCharter: status
+})
+const updateDocReasonForSigning = (value, status) => ({
+    type: ADD_DOCUMENTS_REASON_FOR_SIGNING,
+    bodyDocumentReasonForSigning: value,
+    bodyValidDocumentReasonForSigning: status
+})
+const updateDocContract = (value, status) => ({
+    type: ADD_DOCUMENTS_CONTRACT,
+    bodyDocumentContract: value,
+    bodyValidDocumentContract: status
+})
+const updateEgrip = (value, status) => ({
+    type: ADD_DOCUMENTS_EGRIP,
+    bodyDocumentEgrip: value,
+    bodyValidDocumentEgrip: status
+})
+const updateStatusAddingDocument = (status) => ({type: ADDING_DOCUMENTS_SERVER, bodyDocumentAddingDocuments: status})
+const updateUrlContract = (url) => ({type: UPDATE_URL_DOCUMENTS, bodyUrlContract: url})
+const updateId = (id) => ({type: UPDATE_ID_COMPANY, bodyIdCompany: id})
 /*------------------*/
 export const updateVat_payer = (status) => ({type: UPDATE_VAT_PAYER, bodyVat_payer: !status})
 
@@ -512,7 +532,7 @@ export const searchCompany = (value, id) => {
         if (id === 3) {
             dispatch(updateNameCompany(value, true));
         }
-        if(String(value).length>1) {
+        if (String(value).length > 1) {
             addCompanyAPI.searchDetail(value).then(r => {
                 dispatch(updateListSearch(r.data));
             })
@@ -569,7 +589,7 @@ export const informationYouCompany = (value, listCompany, id) => {
 /*Отпарвляем запрос на получение списка банковских данных по БИК*/
 export const searchInfoBIC = (value) => {
     return (dispatch) => {
-        if (String(value).length>2) {
+        if (String(value).length > 2) {
             addCompanyAPI.searchBank(value).then(r => {
                 dispatch(updateListBank(r.data));
             })
@@ -627,22 +647,22 @@ export const addCompanyYou = (listInfo) => {
         if (!validationFormAccountPayment(listInfo.accountPayment)) {
             dispatch(updateAccountPayment(listInfo.accountPayment, false));
         }
-        if(!validationFormSurname(listInfo.personalData.surname)){
-            dispatch(updateSurname(listInfo.personalData.surname,false));
+        if (!validationFormSurname(listInfo.personalData.surname)) {
+            dispatch(updateSurname(listInfo.personalData.surname, false));
         }
-        if(!validationFormName(listInfo.personalData.name)){
-            dispatch(updateName(listInfo.personalData.name,false));
+        if (!validationFormName(listInfo.personalData.name)) {
+            dispatch(updateName(listInfo.personalData.name, false));
         }
-        if(!validationFormPosition(listInfo.personalData.position)){
-            dispatch(updatePosition(listInfo.personalData.position,false));
+        if (!validationFormPosition(listInfo.personalData.position)) {
+            dispatch(updatePosition(listInfo.personalData.position, false));
         }
-        if(!validationFormEmail(listInfo.personalData.email)){
-            dispatch(updateEmail(listInfo.personalData.email,false));
+        if (!validationFormEmail(listInfo.personalData.email)) {
+            dispatch(updateEmail(listInfo.personalData.email, false));
         }
-        if(!validationFormPhone(listInfo.personalData.phone)){
-            dispatch(updatePhone(listInfo.personalData.phone,false));
+        if (!validationFormPhone(listInfo.personalData.phone)) {
+            dispatch(updatePhone(listInfo.personalData.phone, false));
         }
-        if(
+        if (
             validationFormPosition(listInfo.personalData.position) &&
             validationFormName(listInfo.personalData.name) &&
             validationFormSurname(listInfo.personalData.surname) &&
@@ -653,82 +673,83 @@ export const addCompanyYou = (listInfo) => {
             validationFormLegalAddress(listInfo.legalAddress) &&
             validationFormNameCompany(listInfo.nameCompany) &&
             validationFormOGRN(listInfo.OGRN) &&
-            validationFormINN(listInfo.INN)){
+            validationFormINN(listInfo.INN)) {
             addCompanyAPI.addCompanyInfo(
-                listInfo.fullInfoCompany.full_with_opf,listInfo.fullInfoCompany.value,
-                listInfo.fullInfoCompany.type,listInfo.fullInfoCompany.inn,
-                listInfo.fullInfoCompany.ogrn,listInfo.fullInfoCompany.kpp,
+                listInfo.fullInfoCompany.full_with_opf, listInfo.fullInfoCompany.value,
+                listInfo.fullInfoCompany.type, listInfo.fullInfoCompany.inn,
+                listInfo.fullInfoCompany.ogrn, listInfo.fullInfoCompany.kpp,
                 listInfo.fullInfoCompany.opf_code, listInfo.fullInfoCompany.opf_full,
-                listInfo.fullInfoCompany.opf_short,listInfo.fullInfoCompany.address,
-                listInfo.actualAddress,listInfo.personalData.surname,listInfo.personalData.name,
-                listInfo.personalData.middleName,listInfo.personalData.position,1,
-                listInfo.VAT_payer,listInfo.addressBank, listInfo.accountPayment,
+                listInfo.fullInfoCompany.opf_short, listInfo.fullInfoCompany.address,
+                listInfo.actualAddress, listInfo.personalData.surname, listInfo.personalData.name,
+                listInfo.personalData.middleName, listInfo.personalData.position, 1,
+                listInfo.VAT_payer, listInfo.addressBank, listInfo.accountPayment,
                 listInfo.BIC, listInfo.correspondentPayment, listInfo.fullInfoCompany.management_name,
-                listInfo.personalData.email,listInfo.personalData.phone
-                ).then(r=>{
-                    dispatch(updateUrlContract(r.data.contract))
+                listInfo.personalData.email, listInfo.personalData.phone
+            ).then(r => {
+                dispatch(updateUrlContract(r.data.contract))
                 dispatch(listCompany());
                 dispatch(updateStep1(true));
                 dispatch(updateId(r.data.id))
+
                 let formData = new FormData();
                 formData.append("email", listInfo.personalData.email);
                 formData.append("phone", listInfo.personalData.phone);
-                addCompanyAPI.addPhoneAndEmailCompany(r.data.profile_id,formData);
+                addCompanyAPI.addPhoneAndEmailCompany(r.data.profile_id, formData,);
             })
         }
     }
 }
 /*Добавление документа - ИНН*/
-export const addingDocumentINN=(documents)=>{
-    return(dispatch)=>{
-        dispatch(updateDocINN(documents));
+export const addingDocumentINN = (documents) => {
+    return (dispatch) => {
+        dispatch(updateDocINN(documents,true));
     }
 }
 /*Добавление документа - Устав организации*/
-export const addingDocumentOrganizationCharter=(documents)=>{
-    return(dispatch)=>{
-        dispatch(updateDocOrganizationCharter(documents));
+export const addingDocumentOrganizationCharter = (documents) => {
+    return (dispatch) => {
+        dispatch(updateDocOrganizationCharter(documents,true));
     }
 }
 /*Добавление документа - Основания для подписания*/
-export const addingDocumentReasonForSigning=(documents)=>{
-    return(dispatch)=>{
-        dispatch(updateDocReasonForSigning(documents));
+export const addingDocumentReasonForSigning = (documents) => {
+    return (dispatch) => {
+        dispatch(updateDocReasonForSigning(documents,true));
     }
 }
 /*Добавление документа - Договор*/
-export const addingDocumentContract=(documents)=>{
-    return(dispatch)=>{
-        dispatch(updateDocContract(documents,true));
+export const addingDocumentContract = (documents) => {
+    return (dispatch) => {
+        dispatch(updateDocContract(documents, true));
     }
 }
 /*Добавление документа - ЕГРИП*/
-export const addingDocumentEgrip=(documents)=>{
-    return(dispatch)=>{
-        dispatch(updateEgrip(documents,true));
+export const addingDocumentEgrip = (documents) => {
+    return (dispatch) => {
+        dispatch(updateEgrip(documents, true));
     }
 }
 /*тест*/
-export const addDocumentsCompany=(documents,company,idCompany)=>{
-    return(dispatch)=>{
+export const addDocumentsCompany = (documents, company, idCompany) => {
+    return (dispatch) => {
         let formData = new FormData();
-        formData.append("company",idCompany)
-        if(String(company)==='ИП'){
-            if(documents.validEgrip && documents.validContract){
+        formData.append("company", idCompany)
+        if (String(company) === 'ИП') {
+            if (documents.validEgrip && documents.validContract) {
                 formData.append("egrip", documents.egrip[0]);//выписка ЕГРИП
                 formData.append("contract", documents.contract[0]);
-                addCompanyAPI.addDocument(formData).then(r=>{
+                addCompanyAPI.addDocument(formData, idCompany).then(r => {
                     dispatch(updateStatusAddingDocument(true))
                 })
             }
         }
-        else{
-            if(documents.validContract && documents.validINN && documents.validOrganizationCharter && documents.validReasonForSigning){
+        else {
+            if (documents.validContract && documents.validINN && documents.validOrganizationCharter && documents.validReasonForSigning) {
                 formData.append("inn", documents.inn[0]);
                 formData.append("contract", documents.contract[0]);
                 formData.append("charter", documents.organizationCharter[0]);//устав организации
                 formData.append("order_appointment", documents.reasonForSigning[0]);//основания для подписания
-                addCompanyAPI.addDocument(formData).then(r=>{
+                addCompanyAPI.addDocument(formData,idCompany).then(r => {
                     dispatch(updateStatusAddingDocument(true))
                 })
             }
@@ -736,7 +757,7 @@ export const addDocumentsCompany=(documents,company,idCompany)=>{
     }
 }
 /*Отправка документов на проверку*/
-export const addDocuments=(documents,company,idCompany)=>{
+export const addDocuments = (documents, company, idCompany) => {
 
 }
 export default AddCompanyReducer;

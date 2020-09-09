@@ -36,7 +36,7 @@ const AddingDocuments = (props) => {
                     </h2>
                 </div>
                 <div className={'col-lg-12 mt-3 text-center'}>
-                    <a href={props.company.documents.urlContract} className={classes.buttonLoad} download>
+                    <a _target="_blank" href={props.company.documents.urlContract} className={classes.buttonLoad} download>
                         <span>
                             Скачать договор
                         </span>
@@ -105,7 +105,9 @@ const AddingDocuments = (props) => {
                                 maxFileSize={10000000}
                                 filesLimit={1}
                                 acceptedFiles={['application/doc', 'application/pdf']}
-
+                                onChange={(files) => {
+                                    props.addingDocumentReasonForSigning(files)
+                                }}
                             />
                         </div>
                         <div className={'col-lg-6 mt-3 mb-3'}>
@@ -117,6 +119,10 @@ const AddingDocuments = (props) => {
                                 maxFileSize={10000000}
                                 filesLimit={1}
                                 acceptedFiles={['application/doc', 'application/pdf']}
+                                onChange={(files) => {
+                                    props.addingDocumentOrganizationCharter(files)
+                                }}
+
                             />
                         </div>
                         <div className={'col-lg-6 mt-3 mb-3'}>
@@ -128,6 +134,9 @@ const AddingDocuments = (props) => {
                                 maxFileSize={10000000}
                                 filesLimit={1}
                                 acceptedFiles={['application/doc', 'application/pdf']}
+                                onChange={(files) => {
+                                    props.addingDocumentContract(files)
+                                }}
                             />
                         </div>
                     </div>
