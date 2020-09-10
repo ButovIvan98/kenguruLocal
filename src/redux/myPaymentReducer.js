@@ -1,14 +1,14 @@
 import Cookies from "js-cookie";
 import {addOrder} from "../API/api";
 
-const LIST_ORDER='LIST_ORDER';//Полный список заказов
+const LIST_PAYMENT='LIST_PAYMENT';//Полный список заказов
 
 let initialState = {
-    orderList: [],
+    paymentList: [],
 }
-const MyShipmentsReducer = (state = initialState, action) => {
+const MyPaymentReducer = (state = initialState, action) => {
     switch (action.type){
-        case LIST_ORDER:
+        case LIST_PAYMENT:
             return {
                 ...state,
                 orderList: action.bodyOrderList
@@ -17,14 +17,14 @@ const MyShipmentsReducer = (state = initialState, action) => {
             return state
     }
 }
-const updateListOrder=(list)=>({type:LIST_ORDER,bodyOrderList:list})
+const updateListPayment=(list)=>({type:LIST_PAYMENT,bodyOrderList:list})
 
-export const searchListOrder=()=>{
+export const searchListPayment=()=>{
     return(dispatch)=>{
         addOrder.allOrder(Cookies.get('id_company')).then(r=>{
-            dispatch(updateListOrder(r.data))
+            dispatch(updateListPayment(r.data))
         })
     }
 }
 
-export default MyShipmentsReducer;
+export default MyPaymentReducer;

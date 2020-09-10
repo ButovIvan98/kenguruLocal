@@ -1,18 +1,22 @@
 import React from 'react';
-import MySpipments from "./myShipments";
 import {connect} from "react-redux";
+import {searchListOrder} from "../../../redux/myShipmentsReducer";
+import MyShipments from "./myShipments";
 
 class MyShipmentsContainer extends React.Component {
+    componentDidMount() {
+        this.props.searchListOrder();
+    }
 
     render() {
-        return <MySpipments {...this.props} MySpipments={this.props.MySpipments}/>
+        return <MyShipments {...this.props}/>
     }
 }
 
 let mapStateToProps = (state) => {
     return {
-        MySpipments: state.MyShipmentsPage.list
+        shipments: state.MyShipmentsPage
     }
 };
-let ExportMyShipmentsContainer = connect(mapStateToProps)(MyShipmentsContainer);
+let ExportMyShipmentsContainer = connect(mapStateToProps,{searchListOrder})(MyShipmentsContainer);
 export default ExportMyShipmentsContainer;

@@ -91,6 +91,7 @@ export const addCompanyAPI = {
         return instanceHeaders().put(`/company/documents/${id}`,formData)
     }
 }
+/*Работа с заказом*/
 export const addOrder={
     order(price,sender_terminal,receiver_terminal,user,sender_contact,receiver_contact,rate){
         return instance().post('/order/', {
@@ -105,6 +106,9 @@ export const addOrder={
     },
     payOrder(id){
         return instance().post('/order/payment/status', {internal_number:id})
+    },
+    allOrder(id){
+        return instance().get(`/order/?profile=${id}`)
     }
 }
 export const companyAPI = {

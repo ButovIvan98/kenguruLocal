@@ -923,7 +923,7 @@ export const validZipSender = (status) => ({type: UPDATE_ZIP_SENDER, bodyValidZi
 
 export const updateCityRecipient = (city) => ({type: UPDATE_CITY_RECIPIENT, bodyCityRecipient: city})
 const updateListStreetRecipient = (list) => ({type: LIST_STREET_RECIPIENT, bodyListStreetRecipient: list})
-const updateStreetRecipient = (street) => ({type: UPDATE_STREET_RECIPIENT, bodyStreetRecipient: street})
+const updateStreetRecipient = (street,status) => ({type: UPDATE_STREET_RECIPIENT, bodyStreetRecipient: street})
 const updateListHouseRecipient = (list) => ({type: LIST_HOUSE_RECIPIENT, bodyListHouseRecipient: list})
 const updateHouseRecipient = (house) => ({type: UPDATE_HOUSE_RECIPIENT, bodyHouseRecipient: house})
 export const updateFlatRecipient = (flat) => ({type: UPDATE_FLAT_RECIPIENT, bodyFlatRecipient: flat})
@@ -1238,7 +1238,7 @@ export const addTerminalBook = (fullInfoUser, infoTK, sender)=>{
             fullInfoUser.contactPerson.fullInfoCompany.address, sender, fullInfoUser.contactPerson.surname,
             fullInfoUser.contactPerson.name,fullInfoUser.contactPerson.middleName,fullInfoUser.contactPerson.phone,
             fullInfoUser.contactPerson.series,fullInfoUser.contactPerson.number,fullInfoUser.contactPerson.issuedByPassport,
-            (String(fullInfoUser.contactPerson.dateIssue).length>1 ? null : fullInfoUser.contactPerson.dateIssue),fullInfoUser.contactPerson.emailRecipient
+            (String(fullInfoUser.contactPerson.dateIssue).length < 1 ? null : fullInfoUser.contactPerson.dateIssue),fullInfoUser.contactPerson.emailRecipient
             ).then(function (someValue) {
             resolve(someValue);
         });
@@ -1331,9 +1331,9 @@ const orderRegisterTerminalDoor=(fullInformationRecipient,fullInformationSender,
     return(dispatch)=>{
         if(fullInformationRecipient.idAddress===''){
             addAddressBook(fullInformationRecipient.addressRecipient, fullInformationRecipient.contactPerson).then(r => {
-                idRecipient = r.data.external_code;
+                idRecipient = r.data.id;
                 addTerminalBook(fullInformationSender,fullInfoTK,sender).then(r=>{
-                    idSender=r.data.external_code
+                    idSender=r.data.id
                     dispatch(addOrderUser(fullInfoTK.priceBefore,idSender,null,Cookies.get('id_company'),null,idRecipient,fullInfoTK.id))
                 })
             })
@@ -1368,10 +1368,10 @@ const orderRegisterTerminalTerminal=(fullInformationRecipient,fullInformationSen
 export const orderRegister = (fullInformationSender, fullInformationRecipient, fullInfoTK,terminal) => {
     return (dispatch) => {
         if(fullInfoTK.pickup && fullInfoTK.delivery){
-            if(validationFormStreet(fullInformationSender.addressSender.street.street) &&
-                validationFormHouse(fullInformationSender.addressSender.house.house) &&
-                validationFormStreet(fullInformationRecipient.addressRecipient.street.street) &&
-                validationFormHouse(fullInformationRecipient.addressRecipient.house.house) &&
+            if(fullInformationSender.addressSender.street!==null &&
+                fullInformationSender.addressSender.house!==null &&
+                fullInformationRecipient.addressRecipient.street!==null &&
+                fullInformationRecipient.addressRecipient.house!==null &&
                 validationFormIndex(fullInformationSender.addressSender.zip) &&
                 validationFormIndex(fullInformationRecipient.addressRecipient.zip) &&
                 validationFormName(fullInformationSender.contactPerson.name) &&
@@ -1384,16 +1384,16 @@ export const orderRegister = (fullInformationSender, fullInformationRecipient, f
                 dispatch(orderRegisterDoorDoor(fullInformationSender,fullInformationRecipient,fullInfoTK));
             }
             else{
-                if(!validationFormStreet(fullInformationSender.addressSender.street.street)){
+                if(fullInformationSender.addressSender.street==null){
                     dispatch(validStreetSender(false));
                 }
-                if(!validationFormStreet(fullInformationRecipient.addressRecipient.street.street)){
+                if(fullInformationRecipient.addressRecipient.street==null){
                     dispatch(validStreetRecipient(false))
                 }
-                if(!validationFormHouse(fullInformationSender.addressSender.house.house)){
+                if(fullInformationSender.addressSender.house==null){
                     dispatch(validHouseSender(false))
                 }
-                if(!validationFormHouse(fullInformationRecipient.addressRecipient.house.house)){
+                if(fullInformationRecipient.addressRecipient.house==null){
                     dispatch(validHouseRecipient(false))
                 }
                 if(!validationFormIndex(fullInformationSender.addressSender.zip)){

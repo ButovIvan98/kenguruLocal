@@ -24,7 +24,7 @@ const BlockShipments = (props) => {
             </div>
             <div className={'col-lg-2 mb-lg-0 mb-2 col-6'}>
                 <span className={classes.textHeader}>{props.numberInvoice}</span>
-                <p className={classes.text}>Номер накладной</p>
+                <p className={classes.text}>Номер заказа</p>
             </div>
             <div className={'col-lg-1 col-6 pl-lg-0 pr-lg-0'}>
                 <span className={classes.textHeader} style={{color: '#28a4eb'}}>{props.price} ₽</span>

@@ -33,11 +33,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c8f36c5-f73a-4c7e-82fb-7aecf26b4ff2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/public/index.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/express/myPayment/MyPaymentContainer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/redux/myPaymentReducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/logo192.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/API/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/API/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/express/addCompany/addingDocuments/addingDocuments.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/addCompany/addingDocuments/addingDocuments.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/Permanent_main/PermanentMain.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/Permanent_main/PermanentMain.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/addCompanyReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/addCompanyReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/myShipments/blockShipments/blockShipments.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/myShipments/blockShipments/blockShipments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/myShipments/myShipments.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/myShipments/myShipments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/myShipments/myShipmentsContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/myShipments/myShipmentsContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/headerReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/headerReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/myShipmentsReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/myShipmentsReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/orderReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/orderReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/redux-store.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/redux-store.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +95,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -98,19 +109,19 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/components/authorization/registrationUser/img" />
-      <recent name="$PROJECT_DIR$/src/components/authorization/authorizationUser/img" />
-      <recent name="$PROJECT_DIR$/src/components/express/order/orderSent/img" />
-      <recent name="$PROJECT_DIR$/src/components/express/order" />
-      <recent name="$PROJECT_DIR$/src/components/express/order/img" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/components/authorization/confirmationEmail" />
       <recent name="$PROJECT_DIR$/src/components/authorization/registrationUser" />
       <recent name="$PROJECT_DIR$/src/components/express/order/blockDate" />
       <recent name="$PROJECT_DIR$/src/components/express/order/orderData" />
       <recent name="C:\Users\Админ\Documents\GitHub\react-django\frontend\src\components\express\main-page\calculateResult\blockResult\img" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public" />
+      <recent name="$PROJECT_DIR$/src/components/authorization/registrationUser/img" />
+      <recent name="$PROJECT_DIR$/src/components/authorization/authorizationUser/img" />
+      <recent name="$PROJECT_DIR$/src/components/express/order/orderSent/img" />
+      <recent name="$PROJECT_DIR$/src/components/express/order" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -216,7 +227,8 @@
       <workItem from="1598433650483" duration="15039000" />
       <workItem from="1598600364786" duration="28666000" />
       <workItem from="1598868247129" duration="48274000" />
-      <workItem from="1599465555396" duration="24370000" />
+      <workItem from="1599465555396" duration="26688000" />
+      <workItem from="1599641553289" duration="10641000" />
     </task>
     <servers />
   </component>
@@ -243,10 +255,11 @@
       <screen x="49" y="27" width="1871" height="1053" />
     </state>
     <state x="613" y="234" width="732" height="637" key="#Inspections/49.27.1871.1053@49.27.1871.1053" timestamp="1593423379218" />
-    <state x="442" y="210" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1597142081634">
-      <screen x="49" y="27" width="1871" height="1053" />
+    <state x="444" y="210" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1599712906006">
+      <screen x="51" y="27" width="1869" height="1053" />
     </state>
     <state x="442" y="210" key="#com.intellij.execution.impl.EditConfigurationsDialog/49.27.1871.1053@49.27.1871.1053" timestamp="1597142081634" />
+    <state x="444" y="210" key="#com.intellij.execution.impl.EditConfigurationsDialog/51.27.1869.1053@51.27.1869.1053" timestamp="1599712906006" />
     <state x="717" y="301" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1592577983270">
       <screen x="49" y="27" width="1871" height="1053" />
     </state>

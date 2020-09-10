@@ -4,20 +4,25 @@ import {NavLink} from "react-router-dom";
 import SearchSVG from "../../common/svgImg/searchSVG";
 import BlockShipments from "./blockShipments/blockShipments";
 
-const MySpipments = (props) => {
-    let listOrder = props.MySpipments.map(list => (
+const MyShipments = (props) => {
+    let listOrder = props.shipments.orderList.map(list => (
         <BlockShipments
-            color={list.color}
-            sendingCity={list.sendingCity}
-            sender={list.sender}
-            recipientCity={list.recipientCity}
-            recipient={list.recipient}
+            //color={list.color}
+            sendingCity={list.sender_city}
+            sender={list.sender_contact===null
+                ? list.sender_terminal.surname + ' ' + list.sender_terminal.name
+                : list.sender_contact.surname + ' ' + list.sender_contact.name
+            }
+            recipientCity={list.receiver_city}
+            recipient={list.receiver_contact===null
+                ? list.receiver_terminal.surname + ' ' + list.receiver_terminal.name
+                : list.receiver_contact.surname + ' ' + list.receiver_contact.name}
             status={list.status}
-            dateOrder={list.dateOrder}
-            numberInvoice={list.numberInvoice}
+            dateOrder={list.date_created.split('T')[0]}
+            numberInvoice={list.internal_number}
             price={list.price}
-            transportCompany={list.transportCompany}
-            tariff={list.tariff}
+            transportCompany={list.operator}
+            tariff={list.rate}
         />
     ))
     return <div className={'container' + ' ' + classes.block}>
@@ -41,10 +46,11 @@ const MySpipments = (props) => {
 
                     </div>
                 </div>
-
-                {listOrder}
+                {listOrder.length===0
+                    ? 'Еще нет отправлений'
+                    : listOrder}
             </div>
         </div>
     </div>
 }
-export default MySpipments
+export default MyShipments

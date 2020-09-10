@@ -56,8 +56,8 @@ const App = (props) => {
                                     ?
                                     <Switch>
                                         <Route exact path='/'  render={() => <MainPage />}/>
-                                        <Route exact path='/myAddress' render={() => <ExportMyAddressContainer />} />
-                                        <Route exact path='/myShipments' render={() => <ExportMyShipmentsContainer />} />
+                                        <Route exact path='/my_address' render={() => <ExportMyAddressContainer />} />
+                                        <Route exact path='/my_shipments' render={() => <ExportMyShipmentsContainer />} />
                                         <Route exact path='/login' render={() => <AuthorizationContainerExport />} />
                                         <Route exact path={'/aboutMe'} render={() => <AboutMe />} />
                                         <Route exact path={'/contact'} render={() => <ExportContactContainer />} />
@@ -71,7 +71,7 @@ const App = (props) => {
                                         <Route exact path={'/reloadPassword'} render={() => <ExportReloadPasswordContainer />} />
                                         <Route exact path={'/websitePlagin'} render={()=> <ExportWebsitePlaginContainer />} />
                                         <Route exact path={'/addAddress'} render={()=><AddressContainerExport/>}/>
-                                        <Route exact path={'/myPayment'} render={()=><MyPayment/>}/>
+                                        <Route exact path={'/my_payment'} render={()=><MyPayment/>}/>
                                         <Route exact path={'/addCompany'} render={()=><ExportAddCompanyContainer/>}/>
                                         <Route exact path={'/plan'} render={()=><Plan/>}/>
                                         <Route exact path={'/personalAccount'} render={()=><PersonalAccountContainerExport/>}/>

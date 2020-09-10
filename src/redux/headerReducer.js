@@ -8,9 +8,9 @@ const ADD_COMPANY = 'ADD_COMPANY';
 let initialState = {
     Express_main: [
         {id: '/', title: 'Калькулятор', active: 'classNamees.active'},
-        {id: '/myShipments', title: 'Мои отправления', active: 'classNamees.active'},
-        {id: '/myPayment', title: 'Счета и оплата', active: 'classNamees.active'},
-        {id: '/myAddress', title: 'Адресная книга', active: 'classNamees.active'},
+        {id: '/my_shipments', title: 'Мои отправления', active: 'classNamees.active'},
+        {id: '/my_payment', title: 'Счета и оплата', active: 'classNamees.active'},
+        {id: '/my_address', title: 'Адресная книга', active: 'classNamees.active'},
     ],
     Cargo_main: [
         {id: '/car', title: 'Найти машины', active: 'classNamees.active'},
