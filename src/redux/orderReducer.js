@@ -1,4 +1,5 @@
 import {
+    validationFormEmail,
     validationFormHouse, validationFormIndex,
     validationFormName,
     validationFormPhone, validationFormStreet,
@@ -8,6 +9,7 @@ import {addAddressAPI, addCompanyAPI, addOrder, cityAPI, orderAPI} from "../API/
 import Cookies from "js-cookie";
 //Информация о транспортной компании и тарифе
 let UPDATE_INFORMATION_TK = 'UPDATE_INFORMATION_TK'
+let CLEAR_REDUCER = 'CLEAR_REDUCER'//Очистка редюсера от всех изменений ранее внесенных
 //Информация об отправителе
 let UPDATE_SURNAME_SENDER = 'UPDATE_SURNAME_SENDER';//Изменение фамилии отправителя
 let UPDATE_NAME_SENDER = 'UPDATE_NAME_SENDER';//Изменение имени отправителя
@@ -24,7 +26,7 @@ let UPDATE_PHONE_RECIPIENT = 'UPDATE_PHONE_RECIPIENT'//Изменение ном
 let UPDATE_ADDITIONAL_PHONE_RECIPIENT = 'UPDATE_ADDITIONAL_PHONE_RECIPIENT'//Изменение дополнительного номера телефона получателя
 let UPDATE_NAME_COMPANY_RECIPIENT = 'UPDATE_NAME_COMPANY_RECIPIENT'//Изменение наименование компании получателя
 let UPDATE_COMMENT_RECIPIENT = 'UPDATE_COMMENT_RECIPIENT'//Изменение комментария получателя
-let UPDATE_LEGAL_ENTITY='UPDATE_LEGAL_ENTITY'//Получатель юридическое лицо или физическое
+let UPDATE_LEGAL_ENTITY = 'UPDATE_LEGAL_ENTITY'//Получатель юридическое лицо или физическое
 //Проверка полей на валидацию
 let VALID_SURNAME_SENDER = 'VALID_SURNAME_SENDER'//Проверка поля на валидность фамилии
 let VALID_NAME_SENDER = 'VALID_NAME_SENDER'//Проверка поля на валидность имени
@@ -38,6 +40,14 @@ let VALID_ZIP_SENDER = 'VALID_ZIP_SENDER'//Проверка что индекс�
 let VALID_STREET_RECIPIENT = 'VALID_STREET_RECIPIENT'//Проверка что улица доставки заполнена
 let VALID_HOUSE_RECIPIENT = 'VALID_HOUSE_RECIPIENT'//Проверка что дом доставки заполнен
 let VALID_ZIP_RECIPIENT = 'VALID_ZIP_RECIPIENT'//Проверка что индекс доставки заполнен
+let VALID_SERIES_NUMBER_PASSPORT = 'VALID_SERIES_NUMBER_PASSPORT'//Проверка что серия и номер паспорта заполнены
+let VALID_ISSUED_BY_PASSPORT = 'VALID_ISSUED_BY_PASSPORT'//Проверка что поле кем выдан паспорт заполнен
+let VALID_COMPANY = 'VALID_COMPANY'//Проверка что поле компания заполнено
+let VALID_DATE_ISSUE = 'VALID_DATE_ISSUE'//Проверка что поле дата выдачи паспорта заполенно
+let VALID_EMAIL_RECIPIENT = 'VALID_EMAIL_RECIPIENT'//Проверка что поле емаил компании получателя заполнен
+let VALID_INN_LEGAL_ENTITY = 'VALID_INN_LEGAL_ENTITY'//Проверка что поле инн компании получателя заполнено
+let VALID_TERMINAL_SENDER = 'VALID_TERMINAL_SENDER'//Проверка что терминал отправителя добавлен
+let VALID_TERMINAL_RECIPIENT = 'VALID_TERMINAL_RECIPIENT'//Проверка что терминал получателя добавлен
 //Информация об адресе отправления
 let UPDATE_CITY_SENDER = 'UPDATE_CITY_SENDER'//Обновление наименования города отправителя
 let UPDATE_STREET_SENDER = 'UPDATE_STREET_SENDER'//Обновление наименования улицы отправителя
@@ -55,10 +65,10 @@ let LIST_HOUSE_RECIPIENT = 'LIST_HOUSE_RECIPIENT'//Обновление спис
 let UPDATE_FLAT_RECIPIENT = 'UPDATE_FLAT_RECIPIENT'//Обнавление квартиры получателя
 let UPDATE_ZIP_RECIPIENT = 'UPDATE_ZIP_RECIPIENT'//Обновление индекса получателя
 //Заполнение и работа с адресной книгой.
-let FULL_INFO_COMPANY_SENDER='FULL_INFO_COMPANY_SENDER'//Добавление полной информармации о компании
-let FULL_INFO_COMPANY_RECIPIENT='FULL_INFO_COMPANY_RECIPIENT'//Добавление полной информармации о компании
-let LIST_COMPANY_SENDER='LIST_COMPANY_SENDER'//Список компаний отправителя
-let LIST_COMPANY_RECIPIENT='LIST_COMPANY_RECIPIENT'//Список компаний получателя
+let FULL_INFO_COMPANY_SENDER = 'FULL_INFO_COMPANY_SENDER'//Добавление полной информармации о компании
+let FULL_INFO_COMPANY_RECIPIENT = 'FULL_INFO_COMPANY_RECIPIENT'//Добавление полной информармации о компании
+let LIST_COMPANY_SENDER = 'LIST_COMPANY_SENDER'//Список компаний отправителя
+let LIST_COMPANY_RECIPIENT = 'LIST_COMPANY_RECIPIENT'//Список компаний получателя
 let LIST_ADDRESS_BOOK = 'LIST_ADDRESS_BOOK'//Список адресов в адресной книге
 let LIST_ADDRESS_BOOK_SENDER = 'LIST_ADDRESS_BOOK_SENDER'//Список адресов для отправителя
 let LIST_ADDRESS_BOOK_RECIPIENT = 'LIST_ADDRESS_BOOK_RECIPIENT'//Список адресов для получателя
@@ -72,30 +82,31 @@ let TERMINAL_RECIPIENT = 'TERMINAL_RECIPIENT'//Выбранные термина
 let ID_ADDRESS_SENDER = 'ID_ADDRESS_SENDER'//Заполнение id адреса отправителя
 let ID_ADDRESS_RECIPIENT = 'ID_ADDRESS_RECIPIENT'//Заполнение id адреса получателя
 //Данные для получателя при отправке юр. лицом
-let UPDATE_DATE_ISSUE_PASSPORT='UPDATE_DATA_ISSUE_PASSPORT'//Дата получения паспорта
-let ISSUED_BY_PASSPORT='ISSUED_BY_PASSPORT'//Кем выдан паспорт
+let UPDATE_DATE_ISSUE_PASSPORT = 'UPDATE_DATA_ISSUE_PASSPORT'//Дата получения паспорта
+let ISSUED_BY_PASSPORT = 'ISSUED_BY_PASSPORT'//Кем выдан паспорт
 let SERIES_NUMBER_PASSPORT = 'SERIES_NUMBER_PASSPORT'//Добавление серии и номера паспорта
 let INN_COMPANY_RECIPIENT = 'INN_COMPANY_RECIPIENT'//Добавление инн юр. лица для получателя
 let EMAIL_RECIPIENT = 'EMAIL_RECIPIENT'//Емаил получателя для отправки доверенности
 
 /*Статус заказа*/
-const ORDER='ORDER';
-const PLACE_ORDER_LEGAL='PLACE_ORDER_LEGAL'//Заказа создает юридическое лицо
-const PLACE_ORDER_NATURAL='PLACE_ORDER_NATURAL'//Заказ создает физическое лицо
+const ORDER = 'ORDER';
+const PLACE_ORDER_LEGAL = 'PLACE_ORDER_LEGAL'//Заказа создает юридическое лицо
+const PLACE_ORDER_NATURAL = 'PLACE_ORDER_NATURAL'//Заказ создает физическое лицо
 
 let initialState = {
-    srcPay:null,//ссылка для оплаты заказа для физических лиц
-    placeOrderNaturalPerson:false,//если отправитель физическое лицо
-    placeOrderLegalEntity:false,//если отправитель юридическое лицо
-    order:false,//Отправлен ли заказ или нет true-да false-нет
+    srcPay: null,//ссылка для оплаты заказа для физических лиц
+    placeOrderNaturalPerson: false,//если отправитель физическое лицо
+    placeOrderLegalEntity: false,//если отправитель юридическое лицо
+    order: false,//Отправлен ли заказ или нет true-да false-нет
     addressBook: [],
     informationCompany: null,//Информация о тарифе и компании
     sender: {
-        type_user:'sender',//Отправитель
+        type_user: 'sender',//Отправитель
         addressBook: [],//Адресная книга
         terminalSender: [//Терминалы отправителя если выбран тип забора как склад
         ],
         terminal: null,
+        validTerminal: true,
         address: null,//Адресная строка полученная из адресной книги
         idAddress: '',//id закрепленного за адресом в адресной книге
         choiceAddressBook: false,//Выбирается ли адрес из адресной книги.
@@ -112,7 +123,7 @@ let initialState = {
             validZip: true,//Валидация индекса
         },
         contactPerson: {//Отправитель
-            legalEntity:false,
+            legalEntity: false,
             surname: '',//Фамилия
             validSurname: true,//Валидация фамилии
             name: '',//Имя
@@ -122,17 +133,19 @@ let initialState = {
             validPhone: true,//Валидация телефона
             additionalPhone: '',//Добавочный номер
             company: '',//Наименование компании
-            fullInfoCompany:'',//Полная информация о компании
-            listCompany:[],//Список компаний
+            fullInfoCompany: null,//Полная информация о компании
+            listCompany: [],//Список компаний
             comment: '',//Добавленный комментарий к заказу
+            validCompany: true,
         },
     },
     recipient: {
-        type_user:'receiver',//Получатель
+        type_user: 'receiver',//Получатель
         addressBook: [],//Адресная книга
         terminalRecipient: [//Терминалы получателя если выбран тип доставки как склад
         ],
         terminal: null,
+        validTerminal: true,
         address: null,//Адресная строка полученная из адресной книги
         idAddress: '',//id закрепленного за адресом в адресной книге
         choiceAddressBook: false,//Выбирается ли адрес из адресной книги.
@@ -149,7 +162,7 @@ let initialState = {
             validZip: true,//Валидация индекса
         },
         contactPerson: {//Получатель
-            legalEntity:false,//Юридическое лицо (true-false)
+            legalEntity: false,//Юридическое лицо (true-false)
             surname: '',//Фамилия
             validSurname: true,//Валидация фамилии получателя
             name: '',//Имя
@@ -158,22 +171,127 @@ let initialState = {
             phone: '',//Основной телефон
             validPhone: true,//Валидация телефона
             additionalPhone: '',//Добавочный номер
-            listCompany:[],//Список компаний
+            listCompany: [],//Список компаний
             company: '',//Наименование компании
-            fullInfoCompany:'',//Полная информация о компании
+            fullInfoCompany: '',//Полная информация о компании
             series: '',//Серия паспорта получателя
             number: '',//Номер паспорта получателя
-            issuedByPassport:'',//Кем выдан паспорт
-            dateIssue:'',//Дата выдачи
+            issuedByPassport: '',//Кем выдан паспорт
+            dateIssue: '',//Дата выдачи
             emailRecipient: '',//Емаил адрес получателя для отправки доверенности
             innLegalEntity: '',//ИНН компании получателя, если отправляется как юр лицом
             comment: '',//Добавленный комментарий к заказу
+            validSeriesAndNumber: true,//Валидация серии и номера паспорта
+            validIssuedByPassport: true,//Валидация поля кем дан паспорт
+            validCompany: true,//Валидация наименования компании
+            validDateIssue: true,//Валидация поля дата выдачи паспорта
+            validEmailRecipient: true,//Валидация поля емаил получателя
+            validInnLegalEntity: true,//Валидация поля инн компании получателя
         },
     },
     dateShipping: null,//Дата забора
 }
 const OrderReducer = (state = initialState, action) => {
     switch (action.type) {
+        case CLEAR_REDUCER:
+            return {
+                srcPay: null,//ссылка для оплаты заказа для физических лиц
+                placeOrderNaturalPerson: false,//если отправитель физическое лицо
+                placeOrderLegalEntity: false,//если отправитель юридическое лицо
+                order: false,//Отправлен ли заказ или нет true-да false-нет
+                addressBook: [],
+                informationCompany: null,//Информация о тарифе и компании
+                sender: {
+                    type_user: 'sender',//Отправитель
+                    addressBook: [],//Адресная книга
+                    terminalSender: [//Терминалы отправителя если выбран тип забора как склад
+                    ],
+                    terminal: null,
+                    validTerminal: true,
+                    address: null,//Адресная строка полученная из адресной книги
+                    idAddress: '',//id закрепленного за адресом в адресной книге
+                    choiceAddressBook: false,//Выбирается ли адрес из адресной книги.
+                    addressSender: {//Адрес отправителя
+                        listStreet: [],//Список улиц полученный через DadaTa
+                        listHouse: [],//Список домов полученный через DadaTa
+                        city: null,//Выбранный город
+                        street: null,//Выбранная улица
+                        validStreet: true,//Валидация выбранной улицы
+                        house: null,//Выбранный дом
+                        validHouse: true,//Валидация выбранного дома
+                        flat: null,//Квартира
+                        zip: '',//Индекс
+                        validZip: true,//Валидация индекса
+                    },
+                    contactPerson: {//Отправитель
+                        legalEntity: false,
+                        surname: '',//Фамилия
+                        validSurname: true,//Валидация фамилии
+                        name: '',//Имя
+                        validName: true,//Валидация имени
+                        middleName: '',//Отчество если имеется
+                        phone: '',//Основной телефон
+                        validPhone: true,//Валидация телефона
+                        additionalPhone: '',//Добавочный номер
+                        company: '',//Наименование компании
+                        fullInfoCompany: null,//Полная информация о компании
+                        listCompany: [],//Список компаний
+                        comment: '',//Добавленный комментарий к заказу
+                        validCompany: true,
+                    },
+                },
+                recipient: {
+                    type_user: 'receiver',//Получатель
+                    addressBook: [],//Адресная книга
+                    terminalRecipient: [//Терминалы получателя если выбран тип доставки как склад
+                    ],
+                    terminal: null,
+                    validTerminal: true,
+                    address: null,//Адресная строка полученная из адресной книги
+                    idAddress: '',//id закрепленного за адресом в адресной книге
+                    choiceAddressBook: false,//Выбирается ли адрес из адресной книги.
+                    addressRecipient: {//Адрес отправителя
+                        listStreet: [],//Список улиц полученный через DadaTa
+                        listHouse: [],//Список домов полученный через DadaTa
+                        street: null,//Выбранная улица
+                        validStreet: true,//Валидация выбранной улицы
+                        city: null,//Выбранный город
+                        house: null,//Выбранный дом
+                        validHouse: true,//Валидация выбранного дома
+                        flat: null,//Квартира
+                        zip: '',//Индекс
+                        validZip: true,//Валидация индекса
+                    },
+                    contactPerson: {//Получатель
+                        legalEntity: false,//Юридическое лицо (true-false)
+                        surname: '',//Фамилия
+                        validSurname: true,//Валидация фамилии получателя
+                        name: '',//Имя
+                        validName: true,//Валидация имени получателя
+                        middleName: '',//Отчество если имеется
+                        phone: '',//Основной телефон
+                        validPhone: true,//Валидация телефона
+                        additionalPhone: '',//Добавочный номер
+                        listCompany: [],//Список компаний
+                        company: '',//Наименование компании
+                        fullInfoCompany: '',//Полная информация о компании
+                        series: '',//Серия паспорта получателя
+                        number: '',//Номер паспорта получателя
+                        issuedByPassport: '',//Кем выдан паспорт
+                        dateIssue: '',//Дата выдачи
+                        emailRecipient: '',//Емаил адрес получателя для отправки доверенности
+                        innLegalEntity: '',//ИНН компании получателя, если отправляется как юр лицом
+                        comment: '',//Добавленный комментарий к заказу
+                        validSeriesAndNumber: true,//Валидация серии и номера паспорта
+                        validIssuedByPassport: true,//Валидация поля кем дан паспорт
+                        validCompany: true,//Валидация наименования компании
+                        validDateIssue: true,//Валидация поля дата выдачи паспорта
+                        validEmailRecipient: true,//Валидация поля емаил получателя
+                        validInnLegalEntity: true,//Валидация поля инн компании получателя
+                    },
+                },
+                dateShipping: null,//Дата забора
+            }
         case UPDATE_SURNAME_SENDER:
             return {
                 ...state,
@@ -521,6 +639,72 @@ const OrderReducer = (state = initialState, action) => {
                     }
                 }
             }
+        case VALID_SERIES_NUMBER_PASSPORT:
+            return {
+                ...state,
+                recipient: {
+                    ...state.recipient,
+                    contactPerson: {
+                        ...state.recipient.contactPerson,
+                        validSeriesAndNumber: action.bodyValidSeriesAndNumberPassport
+                    }
+                }
+            }
+        case VALID_ISSUED_BY_PASSPORT:
+            return {
+                ...state,
+                recipient: {
+                    ...state.recipient,
+                    contactPerson: {
+                        ...state.recipient.contactPerson,
+                        validIssuedByPassport: action.bodyValidIssuedByPassport
+                    }
+                }
+            }
+        case VALID_COMPANY:
+            return {
+                ...state,
+                recipient: {
+                    ...state.recipient,
+                    contactPerson: {
+                        ...state.recipient.contactPerson,
+                        validCompany: action.bodyValidCompany
+                    }
+                }
+            }
+        case VALID_DATE_ISSUE:
+            return {
+                ...state,
+                recipient: {
+                    ...state.recipient,
+                    contactPerson: {
+                        ...state.recipient.contactPerson,
+                        validDateIssue: action.bodyValidDateIssue
+                    }
+                }
+            }
+        case VALID_EMAIL_RECIPIENT:
+            return {
+                ...state,
+                recipient: {
+                    ...state.recipient,
+                    contactPerson: {
+                        ...state.recipient.contactPerson,
+                        validEmailRecipient: action.bodyValidEmailRecipient
+                    }
+                }
+            }
+        case VALID_INN_LEGAL_ENTITY:
+            return {
+                ...state,
+                recipient: {
+                    ...state.recipient,
+                    contactPerson: {
+                        ...state.recipient.contactPerson,
+                        validInnLegalEntity: action.bodyValidInnLegalEntity
+                    }
+                }
+            }
 
         case LIST_STREET_RECIPIENT:
             return {
@@ -664,7 +848,7 @@ const OrderReducer = (state = initialState, action) => {
         case LIST_COMPANY_SENDER:
             return {
                 ...state,
-                sender:{
+                sender: {
                     ...state.sender,
                     contactPerson: {
                         ...state.sender.contactPerson,
@@ -675,7 +859,7 @@ const OrderReducer = (state = initialState, action) => {
         case LIST_COMPANY_RECIPIENT:
             return {
                 ...state,
-                recipient:{
+                recipient: {
                     ...state.recipient,
                     contactPerson: {
                         ...state.recipient.contactPerson,
@@ -835,7 +1019,7 @@ const OrderReducer = (state = initialState, action) => {
         case ORDER:
             return {
                 ...state,
-                order:action.bodyOrder
+                order: action.bodyOrder
             }
         case PLACE_ORDER_LEGAL:
             return {
@@ -848,15 +1032,35 @@ const OrderReducer = (state = initialState, action) => {
                 placeOrderNaturalPerson: action.bodyPlaceOrderNaturalPerson,
                 srcPay: action.bodySrcPay
             }
+        case VALID_TERMINAL_SENDER:
+            return {
+                ...state,
+                sender: {
+                    ...state.sender,
+                    validTerminal: action.bodyValidTerminalSender
+                }
+            }
+        case VALID_TERMINAL_RECIPIENT:
+            return {
+                ...state,
+                recipient: {
+                    ...state.recipient,
+                    validTerminal: action.bodyValidTerminalRecipient
+                }
+            }
         default:
             return state
     }
 }
-const placeOrderNaturalPerson=(status,src)=>({type:PLACE_ORDER_NATURAL,bodyPlaceOrderNaturalPerson:status,bodySrcPay:src})
-const placeOrderLegalPerson=(status)=>({type:PLACE_ORDER_LEGAL,bodyPlaceOrderLegalEntity:status})
-const updateStatusOrder=(status)=>({type:ORDER,bodyOrder:status})
-export const updateDateIssue=(date)=>({type:UPDATE_DATE_ISSUE_PASSPORT,bodyDateIssue:date})
-export const updateIssuedByPassport=(date)=>({type:ISSUED_BY_PASSPORT,bodyIssuedByPassport:date})
+const placeOrderNaturalPerson = (status, src) => ({
+    type: PLACE_ORDER_NATURAL,
+    bodyPlaceOrderNaturalPerson: status,
+    bodySrcPay: src
+})
+const placeOrderLegalPerson = (status) => ({type: PLACE_ORDER_LEGAL, bodyPlaceOrderLegalEntity: status})
+const updateStatusOrder = (status) => ({type: ORDER, bodyOrder: status})
+export const updateDateIssue = (date) => ({type: UPDATE_DATE_ISSUE_PASSPORT, bodyDateIssue: date})
+export const updateIssuedByPassport = (date) => ({type: ISSUED_BY_PASSPORT, bodyIssuedByPassport: date})
 export const updateSurnameSender = (surname) => ({type: UPDATE_SURNAME_SENDER, bodySurnameSender: surname})
 export const updateNameSender = (name) => ({type: UPDATE_NAME_SENDER, bodyNameSender: name})
 export const updateMiddleNameSender = (middleName) => ({
@@ -896,7 +1100,7 @@ export const updateNameCompanyRecipient = (company) => ({
     bodyCompanyRecipient: company
 })
 export const updateCommentRecipient = (comment) => ({type: UPDATE_COMMENT_RECIPIENT, bodyCommentRecipient: comment})
-export const updateLegalRecipient = (status) => ({type:UPDATE_LEGAL_ENTITY, bodyLegalEntityRecipient:status})
+export const updateLegalRecipient = (status) => ({type: UPDATE_LEGAL_ENTITY, bodyLegalEntityRecipient: status})
 export const validSurnameRecipient = (surname) => ({
     type: VALID_SURNAME_RECIPIENT,
     bodyValidSurnameRecipient: validationFormSurname(surname)
@@ -917,26 +1121,29 @@ const updateListHouseSender = (list) => ({type: LIST_HOUSE_SENDER, bodyListHouse
 const updateHouseSender = (house) => ({type: UPDATE_HOUSE_SENDER, bodyHouseSender: house})
 export const updateFlatSender = (flat) => ({type: UPDATE_FLAT_SENDER, bodyFlatSender: flat})
 export const updateZipSender = (zip) => ({type: UPDATE_ZIP_SENDER, bodyZipSender: zip})
-export const validStreetSender = (status) => ({type: UPDATE_ZIP_SENDER, bodyValidStreetSender: status})
-export const validHouseSender = (status) => ({type: UPDATE_ZIP_SENDER, bodyValidHouseSender: status})
-export const validZipSender = (status) => ({type: UPDATE_ZIP_SENDER, bodyValidZipSender: status})
+export const validStreetSender = (status) => ({type: VALID_STREET_SENDER, bodyValidStreetSender: status})
+export const validHouseSender = (status) => ({type: VALID_HOUSE_SENDER, bodyValidHouseSender: status})
+export const validZipSender = (status) => ({type: VALID_ZIP_SENDER, bodyValidZipSender: status})
 
 export const updateCityRecipient = (city) => ({type: UPDATE_CITY_RECIPIENT, bodyCityRecipient: city})
 const updateListStreetRecipient = (list) => ({type: LIST_STREET_RECIPIENT, bodyListStreetRecipient: list})
-const updateStreetRecipient = (street,status) => ({type: UPDATE_STREET_RECIPIENT, bodyStreetRecipient: street})
+const updateStreetRecipient = (street, status) => ({type: UPDATE_STREET_RECIPIENT, bodyStreetRecipient: street})
 const updateListHouseRecipient = (list) => ({type: LIST_HOUSE_RECIPIENT, bodyListHouseRecipient: list})
 const updateHouseRecipient = (house) => ({type: UPDATE_HOUSE_RECIPIENT, bodyHouseRecipient: house})
 export const updateFlatRecipient = (flat) => ({type: UPDATE_FLAT_RECIPIENT, bodyFlatRecipient: flat})
 export const updateZipRecipient = (zip) => ({type: UPDATE_ZIP_RECIPIENT, bodyZipRecipient: zip})
-export const validStreetRecipient = (status) => ({type: UPDATE_ZIP_RECIPIENT, bodyValidStreetRecipient: status})
-export const validHouseRecipient = (status) => ({type: UPDATE_ZIP_RECIPIENT, bodyValidHouseRecipient: status})
-export const validZipRecipient = (status) => ({type: UPDATE_ZIP_RECIPIENT, bodyValidZipRecipient: status})
+export const validStreetRecipient = (status) => ({type: VALID_STREET_RECIPIENT, bodyValidStreetRecipient: status})
+export const validHouseRecipient = (status) => ({type: VALID_HOUSE_RECIPIENT, bodyValidHouseRecipient: status})
+export const validZipRecipient = (status) => ({type: VALID_ZIP_RECIPIENT, bodyValidZipRecipient: status})
 
 export const updateInformationCompany = (info) => ({type: UPDATE_INFORMATION_TK, bodyInformationCompany: info})
-const updateListCompanySender=(list)=>({type:LIST_COMPANY_SENDER,bodyListCompanySender:list})
-const updateListCompanyRecipient=(list)=>({type:LIST_COMPANY_RECIPIENT,bodyListCompanyRecipient:list})
-const updateFullInfoCompanySender=(data)=>({type:FULL_INFO_COMPANY_SENDER,bodyFullInfoCompanySender:data})
-const updateFullInfoCompanyRecipient=(data)=>({type:FULL_INFO_COMPANY_RECIPIENT,bodyFullInfoCompanyRecipient:data})
+const updateListCompanySender = (list) => ({type: LIST_COMPANY_SENDER, bodyListCompanySender: list})
+const updateListCompanyRecipient = (list) => ({type: LIST_COMPANY_RECIPIENT, bodyListCompanyRecipient: list})
+const updateFullInfoCompanySender = (data) => ({type: FULL_INFO_COMPANY_SENDER, bodyFullInfoCompanySender: data})
+const updateFullInfoCompanyRecipient = (data) => ({
+    type: FULL_INFO_COMPANY_RECIPIENT,
+    bodyFullInfoCompanyRecipient: data
+})
 
 export const addListTerminalSender = (address) => ({type: LIST_TERMINAL_SENDER, bodyTerminalSender: address});
 export const addListTerminalRecipient = (address) => ({type: LIST_TERMINAL_RECIPIENT, bodyTerminalRecipient: address});
@@ -973,6 +1180,24 @@ export const updateInnCompanyRecipient = (inn) => ({
     bodyInnLegalEntityRecipient: inn.replace(/[^+\d]/g, '')
 })
 export const updateEmailRecipient = (email) => ({type: EMAIL_RECIPIENT, bodyEmailRecipient: email})
+export const updateValidSeriesAndNumber = (status) => ({
+    type: VALID_SERIES_NUMBER_PASSPORT,
+    bodyValidSeriesAndNumberPassport: status
+})
+export const updateValidIssuedByPassport = (status) => ({
+    type: VALID_ISSUED_BY_PASSPORT,
+    bodyValidIssuedByPassport: status
+})
+export const updateValidCompany = (status) => ({type: VALID_COMPANY, bodyValidCompany: status})
+export const updateValidDateIssue = (status) => ({type: VALID_DATE_ISSUE, bodyValidDateIssue: status})
+export const updateValidEmailRecipient = (status) => ({type: VALID_EMAIL_RECIPIENT, bodyValidEmailRecipient: status})
+export const updateValidInnLegalEntity = (status) => ({type: VALID_INN_LEGAL_ENTITY, bodyValidInnLegalEntity: status})
+export const updateValidTerminalSender = (status) => ({type: VALID_TERMINAL_SENDER, bodyValidTerminalSender: status})
+export const updateValidTerminalRecipient = (status) => ({
+    type: VALID_TERMINAL_RECIPIENT,
+    bodyValidTerminalRecipient: status
+})
+export const clearReducer = () => ({type: CLEAR_REDUCER})
 
 /*Поиск списка улиц отправления по введенным параметрам*/
 export const searchStreetSender = (locality_type, locality_fias, street) => {
@@ -985,20 +1210,20 @@ export const searchStreetSender = (locality_type, locality_fias, street) => {
     }
 }
 /*Поиск списка компаний для отправителей*/
-export const listCompanySender=(company)=>{
-    return(dispatch)=>{
-        if(String(company).length>1){
-            addCompanyAPI.searchDetail(company).then(r=>{
+export const listCompanySender = (company) => {
+    return (dispatch) => {
+        if (String(company).length > 1) {
+            addCompanyAPI.searchDetail(company).then(r => {
                 dispatch(updateListCompanySender(r.data))
             })
         }
     }
 }
 /*Выбор компании определенной для отправителя*/
-export const choiceCompanySender =(list,company)=>{
-    return(dispatch)=>{
-        list.map(r=>{
-            if((r.value + '( ИНН:' + r.inn + ')')===company){
+export const choiceCompanySender = (list, company) => {
+    return (dispatch) => {
+        list.map(r => {
+            if ((r.value + '( ИНН:' + r.inn + ')') === company) {
                 dispatch(updateFullInfoCompanySender(r));
                 dispatch(updateNameCompanySender(r.value));
             }
@@ -1006,20 +1231,20 @@ export const choiceCompanySender =(list,company)=>{
     }
 }
 /*Поиск списка компаний для получателей*/
-export const listCompanyRecipient=(company)=>{
-    return(dispatch)=>{
-        if(String(company).length>1){
-            addCompanyAPI.searchDetail(company).then(r=>{
+export const listCompanyRecipient = (company) => {
+    return (dispatch) => {
+        if (String(company).length > 1) {
+            addCompanyAPI.searchDetail(company).then(r => {
                 dispatch(updateListCompanyRecipient(r.data))
             })
         }
     }
 }
 /*Выбор компании для получателя*/
-export const choiceCompanyRecipient = (list,company)=>{
-    return(dispatch)=>{
-        list.map(r=>{
-            if((r.value + '( ИНН:' + r.inn + ')')===company){
+export const choiceCompanyRecipient = (list, company) => {
+    return (dispatch) => {
+        list.map(r => {
+            if ((r.value + '( ИНН:' + r.inn + ')') === company) {
                 dispatch(updateFullInfoCompanyRecipient(r));
                 dispatch(updateNameCompanyRecipient(r.value));
                 dispatch(updateInnCompanyRecipient(r.inn))
@@ -1040,7 +1265,7 @@ export const informationStreetSender = (street, listStreet) => {
 /*Поиск списка домов отправления по введенным параметрам*/
 export const searchHouseSender = (locality_fias, house) => {
     return (dispatch) => {
-        if(String(house)>0) {
+        if (String(house) > 0) {
             cityAPI.searchHouse(locality_fias, house).then(r => {
                 dispatch(updateListHouseSender(r.data));
             })
@@ -1086,7 +1311,7 @@ export const informationStreetRecipient = (street, listStreet) => {
 /*Поиск списка домов отправления по введенным параметрам*/
 export const searchHouseRecipient = (locality_fias, house) => {
     return (dispatch) => {
-        if(String(house).length>0) {
+        if (String(house).length > 0) {
             cityAPI.searchHouse(locality_fias, house).then(r => {
                 dispatch(updateListHouseRecipient(r.data));
             })
@@ -1226,35 +1451,37 @@ const addAddressBook = (address, contactPerson) => {
             });
         })
     }
+
     return someAsyncFunction();
 }
 /*Формирование терминала*/
-export const addTerminalBook = (fullInfoUser, infoTK, sender)=>{
+export const addTerminalBook = (fullInfoUser, infoTK, sender) => {
     function someAsyncFunction() {
-        return new Promise(function (resolve, reject) {orderAPI.addTerminal(
-            infoTK.id,fullInfoUser.type_user, fullInfoUser.terminal.external_code,
-            fullInfoUser.contactPerson.legalEntity,fullInfoUser.contactPerson.fullInfoCompany.value,
-            fullInfoUser.contactPerson.fullInfoCompany.inn,fullInfoUser.contactPerson.fullInfoCompany.management_name,
-            fullInfoUser.contactPerson.fullInfoCompany.address, sender, fullInfoUser.contactPerson.surname,
-            fullInfoUser.contactPerson.name,fullInfoUser.contactPerson.middleName,fullInfoUser.contactPerson.phone,
-            fullInfoUser.contactPerson.series,fullInfoUser.contactPerson.number,fullInfoUser.contactPerson.issuedByPassport,
-            (String(fullInfoUser.contactPerson.dateIssue).length < 1 ? null : fullInfoUser.contactPerson.dateIssue),fullInfoUser.contactPerson.emailRecipient
+        return new Promise(function (resolve, reject) {
+            orderAPI.addTerminal(
+                infoTK.id, fullInfoUser.type_user, fullInfoUser.terminal.external_code,
+                fullInfoUser.contactPerson.legalEntity, fullInfoUser.contactPerson.fullInfoCompany.value,
+                fullInfoUser.contactPerson.fullInfoCompany.inn, fullInfoUser.contactPerson.fullInfoCompany.management_name,
+                fullInfoUser.contactPerson.fullInfoCompany.address, sender, fullInfoUser.contactPerson.surname,
+                fullInfoUser.contactPerson.name, fullInfoUser.contactPerson.middleName, fullInfoUser.contactPerson.phone,
+                fullInfoUser.contactPerson.series, fullInfoUser.contactPerson.number, fullInfoUser.contactPerson.issuedByPassport,
+                (String(fullInfoUser.contactPerson.dateIssue).length < 1 ? null : fullInfoUser.contactPerson.dateIssue), fullInfoUser.contactPerson.emailRecipient
             ).then(function (someValue) {
-            resolve(someValue);
-        });
+                resolve(someValue);
+            });
         })
     }
+
     return someAsyncFunction();
 }
 /*Отправка запроса на добавления заказа*/
-const addOrderUser=(price,sender_terminal,receiver_terminal,user,sender_contact,receiver_contact,rate)=>{
-    return(dispatch)=>{
-        addOrder.order(10,sender_terminal,receiver_terminal,user,sender_contact,receiver_contact,rate).then(r=>{
+const addOrderUser = (price, sender_terminal, receiver_terminal, user, sender_contact, receiver_contact, rate) => {
+    return (dispatch) => {
+        addOrder.order(10, sender_terminal, receiver_terminal, user, sender_contact, receiver_contact, rate).then(r => {
                 dispatch(updateStatusOrder(true));
-                if(String(r.data.url).length>10){
-                    dispatch(placeOrderNaturalPerson(true,r.data.url))
-                }
-                else{
+                if (String(r.data.url).length > 10) {
+                    dispatch(placeOrderNaturalPerson(true, r.data.url))
+                } else {
                     dispatch(placeOrderLegalPerson(true));
                 }
             }
@@ -1263,115 +1490,112 @@ const addOrderUser=(price,sender_terminal,receiver_terminal,user,sender_contact,
 }
 /*Отправка заказа если условие доставки Дверь-Дверь*/
 const orderRegisterDoorDoor = (fullInformationSender, fullInformationRecipient, fullInfoTK) => {
-    let idSender='';
-    let idRecipient='';
+    let idSender = '';
+    let idRecipient = '';
     return (dispatch) => {
         if (fullInformationSender.idAddress === '') {/*Если id адреса отправителя пустой*/
             addAddressBook(fullInformationSender.addressSender, fullInformationSender.contactPerson).then(r => {
-                idSender=r.data.id;
+                idSender = r.data.id;
                 if (fullInformationRecipient.idAddress === '') {
                     /*Если id города получателя пустое*/
                     addAddressBook(fullInformationRecipient.addressRecipient, fullInformationRecipient.contactPerson).then(r => {
                         idRecipient = r.data.id;
-                        dispatch(addOrderUser(fullInfoTK.priceBefore,null,null,Cookies.get('id_company'),idSender,idRecipient,fullInfoTK.id))
+                        dispatch(addOrderUser(fullInfoTK.priceBefore, null, null, Cookies.get('id_company'), idSender, idRecipient, fullInfoTK.id))
                     })
                 } else {
-                    idRecipient=fullInformationRecipient.idAddress
-                    dispatch(addOrderUser(fullInfoTK.priceBefore,null,null,Cookies.get('id_company'),idSender,idRecipient,fullInfoTK.id))
+                    idRecipient = fullInformationRecipient.idAddress
+                    dispatch(addOrderUser(fullInfoTK.priceBefore, null, null, Cookies.get('id_company'), idSender, idRecipient, fullInfoTK.id))
                 }
             })
-        }
-        else {
-            idSender=fullInformationSender.idAddress
+        } else {
+            idSender = fullInformationSender.idAddress
             if (fullInformationRecipient.idAddress === '') {/*Если id города получателя пустое*/
                 addAddressBook(fullInformationRecipient.addressRecipient, fullInformationRecipient.contactPerson).then(r => {
                     idRecipient = r.data.id;
-                    dispatch(addOrderUser(fullInfoTK.priceBefore,null,null,Cookies.get('id_company'),idSender,idRecipient,fullInfoTK.id))
+                    dispatch(addOrderUser(fullInfoTK.priceBefore, null, null, Cookies.get('id_company'), idSender, idRecipient, fullInfoTK.id))
                 })
             } else {
-                idRecipient=fullInformationRecipient.idAddress
-                dispatch(addOrderUser(fullInfoTK.priceBefore,null,null,Cookies.get('id_company'),idSender,idRecipient,fullInfoTK.id))
+                idRecipient = fullInformationRecipient.idAddress
+                dispatch(addOrderUser(fullInfoTK.priceBefore, null, null, Cookies.get('id_company'), idSender, idRecipient, fullInfoTK.id))
             }
         }
     }
 }
 /*Отправка заказа если условия доставки Дверь-Склад*/
-const orderRegisterDoorTerminal=(fullInformationSender,fullInformationRecipient,fullInfoTK)=>{
-    let idSender='';
-    let idRecipient=''
-    let sender=String(fullInformationSender.contactPerson.company).length===0
+const orderRegisterDoorTerminal = (fullInformationSender, fullInformationRecipient, fullInfoTK) => {
+    let idSender = '';
+    let idRecipient = ''
+    let sender = String(fullInformationSender.contactPerson.company).length === 0
         ? (fullInformationSender.contactPerson.surname + ' ' + fullInformationSender.contactPerson.name + ' ' + fullInformationSender.contactPerson.middleName)
         : fullInformationSender.contactPerson.company
-    return(dispatch)=>{
-        if(String(fullInformationSender.idAddress).length===0){
+    return (dispatch) => {
+        if (String(fullInformationSender.idAddress).length === 0) {
             addAddressBook(fullInformationSender.addressSender, fullInformationSender.contactPerson).then(r => {
                 idSender = r.data.id;
-                addTerminalBook(fullInformationRecipient,fullInfoTK,sender).then(r=>{
-                    idRecipient=r.data.id
-                    dispatch(addOrderUser(fullInfoTK.priceBefore,null,idRecipient,Cookies.get('id_company'),idSender,null,fullInfoTK.id))
+                addTerminalBook(fullInformationRecipient, fullInfoTK, sender).then(r => {
+                    idRecipient = r.data.id
+                    dispatch(addOrderUser(fullInfoTK.priceBefore, null, idRecipient, Cookies.get('id_company'), idSender, null, fullInfoTK.id))
                 })
             })
-        }
-        else{
-            idSender=fullInformationSender.idAddress
-            addTerminalBook(fullInformationRecipient,fullInfoTK,sender).then(r=>{
-                idRecipient=r.data.id
-                dispatch(addOrderUser(fullInfoTK.priceBefore,null,idRecipient,Cookies.get('id_company'),idSender,null,fullInfoTK.id))
+        } else {
+            idSender = fullInformationSender.idAddress
+            addTerminalBook(fullInformationRecipient, fullInfoTK, sender).then(r => {
+                idRecipient = r.data.id
+                dispatch(addOrderUser(fullInfoTK.priceBefore, null, idRecipient, Cookies.get('id_company'), idSender, null, fullInfoTK.id))
             })
         }
     }
 }
 /*Отправка заказа если условия доставки Склад-дверь*/
-const orderRegisterTerminalDoor=(fullInformationRecipient,fullInformationSender,fullInfoTK)=>{
-    let idRecipient='';
-    let idSender='';
-    let sender=String(fullInformationSender.contactPerson.company).length===0
+const orderRegisterTerminalDoor = (fullInformationRecipient, fullInformationSender, fullInfoTK) => {
+    let idRecipient = '';
+    let idSender = '';
+    let sender = String(fullInformationSender.contactPerson.company).length === 0
         ? (fullInformationSender.contactPerson.surname + ' ' + fullInformationSender.contactPerson.name + ' ' + fullInformationSender.contactPerson.middleName)
         : fullInformationSender.contactPerson.company
-    return(dispatch)=>{
-        if(fullInformationRecipient.idAddress===''){
+    return (dispatch) => {
+        if (fullInformationRecipient.idAddress === '') {
             addAddressBook(fullInformationRecipient.addressRecipient, fullInformationRecipient.contactPerson).then(r => {
                 idRecipient = r.data.id;
-                addTerminalBook(fullInformationSender,fullInfoTK,sender).then(r=>{
-                    idSender=r.data.id
-                    dispatch(addOrderUser(fullInfoTK.priceBefore,idSender,null,Cookies.get('id_company'),null,idRecipient,fullInfoTK.id))
+                addTerminalBook(fullInformationSender, fullInfoTK, sender).then(r => {
+                    idSender = r.data.id
+                    dispatch(addOrderUser(fullInfoTK.priceBefore, idSender, null, Cookies.get('id_company'), null, idRecipient, fullInfoTK.id))
                 })
             })
-        }
-        else{
-            idRecipient=fullInformationRecipient.idAddress
-            addTerminalBook(fullInformationSender,fullInfoTK,sender).then(r=>{
-                idSender=r.data.id
-                dispatch(addOrderUser(fullInfoTK.priceBefore,idSender,null,Cookies.get('id_company'),null,idRecipient,fullInfoTK.id))
+        } else {
+            idRecipient = fullInformationRecipient.idAddress
+            addTerminalBook(fullInformationSender, fullInfoTK, sender).then(r => {
+                idSender = r.data.id
+                dispatch(addOrderUser(fullInfoTK.priceBefore, idSender, null, Cookies.get('id_company'), null, idRecipient, fullInfoTK.id))
             })
         }
     }
 }
 /*Отправка заказа если условия достаки терминал-терминал*/
-const orderRegisterTerminalTerminal=(fullInformationRecipient,fullInformationSender,fullInfoTK)=>{
-    return(dispatch)=>{
-        let idSender='';
-        let idRecipient='';
-        let sender=String(fullInformationSender.contactPerson.company).length===0
+const orderRegisterTerminalTerminal = (fullInformationRecipient, fullInformationSender, fullInfoTK) => {
+    return (dispatch) => {
+        let idSender = '';
+        let idRecipient = '';
+        let sender = String(fullInformationSender.contactPerson.company).length === 0
             ? (fullInformationSender.contactPerson.surname + ' ' + fullInformationSender.contactPerson.name + ' ' + fullInformationSender.contactPerson.middleName)
             : fullInformationSender.contactPerson.company
-        addTerminalBook(fullInformationRecipient,fullInfoTK,sender).then(r=>{
-            idRecipient=r.data.id;
-            addTerminalBook(fullInformationSender,fullInfoTK,sender).then(r=>{
-                idSender=r.data.id;
-                dispatch(addOrderUser(fullInfoTK.priceBefore,idSender,idRecipient,Cookies.get('id_company'),null,null,fullInfoTK.id))
+        addTerminalBook(fullInformationRecipient, fullInfoTK, sender).then(r => {
+            idRecipient = r.data.id;
+            addTerminalBook(fullInformationSender, fullInfoTK, sender).then(r => {
+                idSender = r.data.id;
+                dispatch(addOrderUser(fullInfoTK.priceBefore, idSender, idRecipient, Cookies.get('id_company'), null, null, fullInfoTK.id))
             })
         })
     }
 }
 /*Оформление заказа, обработка валидаций*/
-export const orderRegister = (fullInformationSender, fullInformationRecipient, fullInfoTK,terminal) => {
+export const orderRegister = (fullInformationSender, fullInformationRecipient, fullInfoTK, terminal) => {
     return (dispatch) => {
-        if(fullInfoTK.pickup && fullInfoTK.delivery){
-            if(fullInformationSender.addressSender.street!==null &&
-                fullInformationSender.addressSender.house!==null &&
-                fullInformationRecipient.addressRecipient.street!==null &&
-                fullInformationRecipient.addressRecipient.house!==null &&
+        if (fullInfoTK.pickup && fullInfoTK.delivery) {
+            if (fullInformationSender.addressSender.street !== null &&
+                fullInformationSender.addressSender.house !== null &&
+                fullInformationRecipient.addressRecipient.street !== null &&
+                fullInformationRecipient.addressRecipient.house !== null &&
                 validationFormIndex(fullInformationSender.addressSender.zip) &&
                 validationFormIndex(fullInformationRecipient.addressRecipient.zip) &&
                 validationFormName(fullInformationSender.contactPerson.name) &&
@@ -1380,72 +1604,173 @@ export const orderRegister = (fullInformationSender, fullInformationRecipient, f
                 validationFormSurname(fullInformationRecipient.contactPerson.surname) &&
                 validationFormPhone(fullInformationSender.contactPerson.phone) &&
                 validationFormPhone(fullInformationRecipient.contactPerson.phone)
-            ){
-                dispatch(orderRegisterDoorDoor(fullInformationSender,fullInformationRecipient,fullInfoTK));
-            }
-            else{
-                if(fullInformationSender.addressSender.street==null){
+            ) {
+                console.log('Отправление Дверь-Дверь создано успешно')
+                //dispatch(orderRegisterDoorDoor(fullInformationSender,fullInformationRecipient,fullInfoTK));
+            } else {
+                if (fullInformationSender.addressSender.street === null) {
                     dispatch(validStreetSender(false));
                 }
-                if(fullInformationRecipient.addressRecipient.street==null){
+                if (fullInformationRecipient.addressRecipient.street === null) {
                     dispatch(validStreetRecipient(false))
                 }
-                if(fullInformationSender.addressSender.house==null){
+                if (fullInformationSender.addressSender.house === null) {
                     dispatch(validHouseSender(false))
                 }
-                if(fullInformationRecipient.addressRecipient.house==null){
+                if (fullInformationRecipient.addressRecipient.house == null) {
                     dispatch(validHouseRecipient(false))
                 }
-                if(!validationFormIndex(fullInformationSender.addressSender.zip)){
+                if (!validationFormIndex(fullInformationSender.addressSender.zip)) {
                     dispatch(validZipSender(false))
                 }
-                if(!validationFormIndex(fullInformationRecipient.addressRecipient.zip)){
+                if (!validationFormIndex(fullInformationRecipient.addressRecipient.zip)) {
                     dispatch(validZipRecipient(false))
                 }
-                if(!validationFormName(fullInformationSender.contactPerson.name)){
-                    dispatch(validNameSender(false))
+                if ((fullInformationSender.contactPerson.name).toString().length < 1) {
+                    dispatch(validNameSender(fullInformationSender.contactPerson.name))
                 }
-                if(!validationFormName(fullInformationRecipient.contactPerson.name)){
-                    dispatch(validNameRecipient(false))
+                if ((fullInformationRecipient.contactPerson.name).toString().length < 3) {
+                    dispatch(validNameRecipient(fullInformationRecipient.contactPerson.name))
                 }
-                if(!validationFormSurname(fullInformationRecipient.contactPerson.surname)){
-                    dispatch(validSurnameRecipient(false))
+                if ((fullInformationRecipient.contactPerson.surname).toString().length < 3) {
+                    dispatch(validSurnameRecipient(fullInformationRecipient.contactPerson.surname))
                 }
-                if(!validationFormSurname(fullInformationSender.contactPerson.surname)){
-                    dispatch(validSurnameSender(false))
+                if ((fullInformationSender.contactPerson.surname).toString().length < 3) {
+                    dispatch(validSurnameSender(fullInformationSender.contactPerson.surname))
                 }
-                if(!validationFormPhone(fullInformationSender.contactPerson.phone)){
+                if (!validationFormPhone(fullInformationSender.contactPerson.phone)) {
                     dispatch(validPhoneSender(false))
                 }
-                if(!validationFormPhone(fullInformationRecipient.contactPerson.phone)){
+                if (!validationFormPhone(fullInformationRecipient.contactPerson.phone)) {
                     dispatch(validPhoneRecipient(false))
                 }
             }
 
         }
-        else if(fullInfoTK.pickup && fullInfoTK.delivery===false){
-            console.log('Дверь-склад')
-            dispatch(orderRegisterDoorTerminal(fullInformationSender,fullInformationRecipient,fullInfoTK,terminal));
+        else if (fullInfoTK.pickup && fullInfoTK.delivery === false) {
+            if (fullInformationSender.addressSender.street !== null &&
+                fullInformationSender.addressSender.house !== null &&
+                fullInformationRecipient.terminal !== null &&
+                validationFormIndex(fullInformationSender.addressSender.zip) &&
+                validationFormName(fullInformationSender.contactPerson.name) &&
+                validationFormSurname(fullInformationSender.contactPerson.surname) &&
+                validationFormName(fullInformationRecipient.contactPerson.name) &&
+                validationFormSurname(fullInformationRecipient.contactPerson.surname) &&
+                validationFormPhone(fullInformationSender.contactPerson.phone) &&
+                validationFormPhone(fullInformationRecipient.contactPerson.phone) &&
+                checkLegalRecipient(fullInformationRecipient.contactPerson)
+            ) {
+                console.log('Отправление Дверь-Склад создано успешно')
+                //dispatch(orderRegisterDoorTerminal(fullInformationSender,fullInformationRecipient,fullInfoTK,terminal));
+            } else {
+                if (fullInformationSender.addressSender.street === null) dispatch(validStreetSender(false));
+                if (fullInformationSender.addressSender.house === null) dispatch(validHouseSender(false))
+                if (!validationFormIndex(fullInformationSender.addressSender.zip)) dispatch(validZipSender(false))
+                if (fullInformationRecipient.terminal === null) dispatch(updateValidTerminalRecipient(false))
+                if ((fullInformationSender.contactPerson.name).toString().length < 1) dispatch(validNameSender(fullInformationSender.contactPerson.name))
+                if ((fullInformationRecipient.contactPerson.name).toString().length < 3) dispatch(validNameRecipient(fullInformationRecipient.contactPerson.name))
+                if ((fullInformationRecipient.contactPerson.surname).toString().length < 3) dispatch(validSurnameRecipient(fullInformationRecipient.contactPerson.surname))
+                if ((fullInformationSender.contactPerson.surname).toString().length < 3) dispatch(validSurnameSender(fullInformationSender.contactPerson.surname))
+                if (!validationFormPhone(fullInformationSender.contactPerson.phone)) dispatch(validPhoneSender(false))
+                if (!validationFormPhone(fullInformationRecipient.contactPerson.phone)) dispatch(validPhoneRecipient(false))
+                if (fullInformationRecipient.contactPerson.legalEntity) {
+                    if ((fullInformationRecipient.contactPerson.innLegalEntity).toString() === '') dispatch(updateValidInnLegalEntity(false));
+                    if (fullInformationRecipient.contactPerson.fullInfoCompany === '') dispatch(updateValidCompany(false));
+                    if ((fullInformationRecipient.contactPerson.dateIssue).toString().length < 9) dispatch(updateValidDateIssue(false))
+                    if (!validationFormEmail(fullInformationRecipient.contactPerson.emailRecipient)) dispatch(updateValidEmailRecipient(false))
+                    if ((fullInformationRecipient.contactPerson.series).toString().length !== 4) dispatch(updateValidSeriesAndNumber(false))
+                    if ((fullInformationRecipient.contactPerson.number).toString().length !== 6) dispatch(updateValidSeriesAndNumber(false))
+                    if ((fullInformationRecipient.contactPerson.issuedByPassport).toString().length < 3) dispatch(updateValidIssuedByPassport(false))
+                }
+            }
         }
-        else if(fullInfoTK.pickup===false && fullInfoTK.delivery){
-            console.log('Склад-дверь')
-            dispatch(orderRegisterTerminalDoor(fullInformationRecipient,fullInformationSender,fullInfoTK))
+        else if (fullInfoTK.pickup === false && fullInfoTK.delivery)  {
+            if (fullInformationRecipient.addressRecipient.street !== null &&
+                fullInformationRecipient.addressRecipient.house !== null &&
+                fullInformationSender.terminal !== null &&
+                validationFormIndex(fullInformationRecipient.addressRecipient.zip) &&
+                validationFormName(fullInformationSender.contactPerson.name) &&
+                validationFormSurname(fullInformationSender.contactPerson.surname) &&
+                validationFormName(fullInformationRecipient.contactPerson.name) &&
+                validationFormSurname(fullInformationRecipient.contactPerson.surname) &&
+                validationFormPhone(fullInformationSender.contactPerson.phone) &&
+                validationFormPhone(fullInformationRecipient.contactPerson.phone) &&
+                checkLegalRecipient(fullInformationRecipient.contactPerson)
+            ) {
+                console.log('Отправление Склад-Дверь создано успешно')
+                //dispatch(orderRegisterTerminalDoor(fullInformationRecipient, fullInformationSender, fullInfoTK));
+            } else {
+                if (fullInformationRecipient.addressRecipient.street === null) dispatch(validStreetRecipient(false));
+                if (fullInformationRecipient.addressRecipient.house === null) dispatch(validHouseRecipient(false))
+                if (!validationFormIndex(fullInformationRecipient.addressRecipient.zip)) dispatch(validZipRecipient(false))
+                if (fullInformationSender.terminal === null) dispatch(updateValidTerminalSender(false))
+                if ((fullInformationSender.contactPerson.name).toString().length < 1) dispatch(validNameSender(fullInformationSender.contactPerson.name))
+                if ((fullInformationRecipient.contactPerson.name).toString().length < 3) dispatch(validNameRecipient(fullInformationRecipient.contactPerson.name))
+                if ((fullInformationRecipient.contactPerson.surname).toString().length < 3) dispatch(validSurnameRecipient(fullInformationRecipient.contactPerson.surname))
+                if ((fullInformationSender.contactPerson.surname).toString().length < 3) dispatch(validSurnameSender(fullInformationSender.contactPerson.surname))
+                if (!validationFormPhone(fullInformationSender.contactPerson.phone)) dispatch(validPhoneSender(false))
+                if (!validationFormPhone(fullInformationRecipient.contactPerson.phone)) dispatch(validPhoneRecipient(false))
+            }
         }
-        else if(fullInfoTK.pickup===false && fullInfoTK.delivery===false){
-            console.log('Склад-Склад')
-            dispatch(orderRegisterTerminalTerminal(fullInformationRecipient,fullInformationSender,fullInfoTK))
+        else if (fullInfoTK.pickup === false && fullInfoTK.delivery === false) {
+            if (fullInformationSender.terminal !== null &&
+                fullInformationRecipient.terminal !== null &&
+                validationFormName(fullInformationSender.contactPerson.name) &&
+                validationFormSurname(fullInformationSender.contactPerson.surname) &&
+                validationFormName(fullInformationRecipient.contactPerson.name) &&
+                validationFormSurname(fullInformationRecipient.contactPerson.surname) &&
+                validationFormPhone(fullInformationSender.contactPerson.phone) &&
+                validationFormPhone(fullInformationRecipient.contactPerson.phone) &&
+                checkLegalRecipient(fullInformationRecipient.contactPerson)
+            ) {
+                console.log('Отправление Склад-Склад создано успешно')
+                //dispatch(orderRegisterTerminalTerminal(fullInformationRecipient, fullInformationSender, fullInfoTK));
+            } else {
+                if (fullInformationSender.terminal === null) dispatch(updateValidTerminalSender(false))
+                if (fullInformationRecipient.terminal === null) dispatch(updateValidTerminalRecipient(false))
+                if ((fullInformationSender.contactPerson.name).toString().length < 1) dispatch(validNameSender(fullInformationSender.contactPerson.name))
+                if ((fullInformationRecipient.contactPerson.name).toString().length < 3) dispatch(validNameRecipient(fullInformationRecipient.contactPerson.name))
+                if ((fullInformationRecipient.contactPerson.surname).toString().length < 3) dispatch(validSurnameRecipient(fullInformationRecipient.contactPerson.surname))
+                if ((fullInformationSender.contactPerson.surname).toString().length < 3) dispatch(validSurnameSender(fullInformationSender.contactPerson.surname))
+                if (!validationFormPhone(fullInformationSender.contactPerson.phone)) dispatch(validPhoneSender(false))
+                if (!validationFormPhone(fullInformationRecipient.contactPerson.phone)) dispatch(validPhoneRecipient(false))
+                if (fullInformationRecipient.contactPerson.legalEntity) {
+                    if ((fullInformationRecipient.contactPerson.innLegalEntity).toString() === '') dispatch(updateValidInnLegalEntity(false));
+                    if (fullInformationRecipient.contactPerson.fullInfoCompany === '') dispatch(updateValidCompany(false));
+                    if ((fullInformationRecipient.contactPerson.dateIssue).toString().length < 9) dispatch(updateValidDateIssue(false))
+                    if (!validationFormEmail(fullInformationRecipient.contactPerson.emailRecipient)) dispatch(updateValidEmailRecipient(false))
+                    if ((fullInformationRecipient.contactPerson.series).toString().length !== 4) dispatch(updateValidSeriesAndNumber(false))
+                    if ((fullInformationRecipient.contactPerson.number).toString().length !== 6) dispatch(updateValidSeriesAndNumber(false))
+                    if ((fullInformationRecipient.contactPerson.issuedByPassport).toString().length < 3) dispatch(updateValidIssuedByPassport(false))
+                }
+            }
+
         }
     }
 }
 /*Отправляем id оплаченного заказа для изменения статуса заказа*/
-export const sendingOrderIdPayment=()=>{
+export const sendingOrderIdPayment = () => {
     let array = (window.location.pathname).split('/')
-    let array1 = (array[array.length-1]).split('?');
+    let array1 = (array[array.length - 1]).split('?');
 
-    return(dispatch)=>{
-        addOrder.payOrder(array1[0]).then(r=>{
+    return (dispatch) => {
+        addOrder.payOrder(array1[0]).then(r => {
 
         })
     }
+}
+/*Если получатель является юридическим лицом, то делается проверка на заполнение всех полей*/
+const checkLegalRecipient = (recipient) => {
+    if (recipient.legalEntity) {
+        if (recipient.fullInfoCompany !== null
+            && (recipient.innLegalEntity).toString() !== ''
+            && (recipient.dateIssue).toString() !== ''
+            && validationFormEmail(recipient.emailRecipient)
+            && (recipient.series).toString().length === 4
+            && (recipient.number).toString().length === 6
+            && (recipient.issuedByPassport).toString().length > 3
+        ) return true
+        else return false
+    } else return true
 }
 export default OrderReducer

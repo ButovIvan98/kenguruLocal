@@ -9,6 +9,7 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 
 const BlockPersonalInformation = (props) => {
     let seriesAndNumber = props.value.series + props.value.number
+    console.log(props.value)
     return <div className={'row'}>
         <div className={'col-lg-4 mt-lg-3 mt-2'}>
             <TextField
@@ -124,8 +125,14 @@ const BlockPersonalInformation = (props) => {
                         onChange={(e) => {
                             props.updateCompany(e.target.value)
                         }}
+                        error={!props.value.validCompany}
+                        helperText={props.value.validCompany ? '' : 'Выберите компанию из списка'}
                     />}
                 onChange={(event) => {
+                    if(!props.delivery){
+                        props.updateValidCompany(true);
+                        props.updateValidInnLegalEntity(true);
+                    }
                     props.clickCompany(props.value.listCompany, event.target.valueOf().innerText)
                 }}
                 noOptionsText={'Нет такой компании'}
@@ -172,6 +179,9 @@ const BlockPersonalInformation = (props) => {
                                    onChange={(e) => {
                                        props.updateSeriesAndNumberPassport(e.target.value);
                                    }}
+                                   onBlur={()=>{
+                                       props.updateValidSeriesAndNumber(true);
+                                   }}
                                    value={seriesAndNumber}
                         >
                             <TextField
@@ -182,7 +192,8 @@ const BlockPersonalInformation = (props) => {
                                     shrink: String(seriesAndNumber).length !== 0 ? true : false
                                 }}
                                 disableUnderline
-                                //error={props.setting.validNumber ? false : true}
+                                error={props.value.validSeriesAndNumber ? false : true}
+                                helperText={props.value.validSeriesAndNumber ? '' : 'Укажите серию и номер паспорта'}
                             />
                         </InputMask>
                     </div>
@@ -194,9 +205,14 @@ const BlockPersonalInformation = (props) => {
                             InputLabelProps={{
                                 shrink: true,
                             }}
+                            onBlur={()=>{
+                                props.updateValidDateIssue(true)
+                            }}
                             onChange={(e)=>(props.dateIssue(e.target.value))}
                             className={classes.input}
                             value={props.value.dateIssue}
+                            error={!props.value.validDateIssue}
+                            helperText={props.value.validDateIssue ? '' : 'Укажите дату выдачи паспорта'}
                         />
                     </div>
                     <div className={'col-lg-4 mt-lg-0 mt-3 col-12'}>
@@ -211,6 +227,11 @@ const BlockPersonalInformation = (props) => {
                             onChange={(e) => {
                                 props.issuedByPassport(e.target.value)
                             }}
+                            onBlur={()=>{
+                                props.updateValidIssuedByPassport(true)
+                            }}
+                            error={!props.value.validIssuedByPassport}
+                            helperText={props.value.validIssuedByPassport ? '' : 'Укажите кем выдан паспорт'}
                         />
                     </div>
                     <div className={'col-lg-4 col-12 mt-3'}>
@@ -218,6 +239,9 @@ const BlockPersonalInformation = (props) => {
                                    maskChar=" "
                                    onChange={(e) => {
                                        props.innCompany(e.target.value)
+                                   }}
+                                   onBlur={()=>{
+                                       props.updateValidInnLegalEntity(true)
                                    }}
                                    value={props.value.innLegalEntity}
                         >
@@ -229,7 +253,8 @@ const BlockPersonalInformation = (props) => {
                                     shrink: String(props.value.innLegalEntity).length !== 0 ? true : false
                                 }}
                                 disableUnderline
-                                //error={props.setting.validNumber ? false : true}
+                                error={!props.value.validInnLegalEntity}
+                                helperText={props.value.validInnLegalEntity ? ' ' : 'Укажите ИНН компании'}
                             />
                         </InputMask>
                     </div>
@@ -241,7 +266,12 @@ const BlockPersonalInformation = (props) => {
                                 shrink: String(props.value.emailRecipient).length !== 0 ? true : false
                             }}
                             className={classes.input}
+                            onBlur={()=>{
+                                props.updateValidEmailRecipient(true)
+                            }}
                             value={props.value.emailRecipient}
+                            error={!props.value.validEmailRecipient}
+                            helperText={props.value.validEmailRecipient ? ' ' : 'Укажите email получателя'}
                             onChange={(e) => {
                                 props.emailRecipient(e.target.value)
                             }}

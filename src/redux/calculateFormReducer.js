@@ -3,7 +3,7 @@ import {updateObjectInArray} from "../components/utils/updateElementMassive";
 import {
     addAddressBookRecipient,
     addAddressBookSender,
-    addTerminal,
+    addTerminal, clearReducer,
     updateCityRecipient,
     updateCitySender,
     updateInformationCompany, updateLegalRecipient
@@ -848,6 +848,7 @@ const cheaplyAndFaster = (listResultCalculate) => {
 /*Обработка нажатия заказать*/
 export const clickArrangeOrder = (infoCitySender, infoCityRecipient, infoTK) => {
     return (dispatch) => {
+        dispatch(clearReducer());
         dispatch(updateLegalRecipient(false));
         dispatch(addAddressBookSender(infoCitySender.locality));
         dispatch(addAddressBookRecipient(infoCityRecipient.locality));

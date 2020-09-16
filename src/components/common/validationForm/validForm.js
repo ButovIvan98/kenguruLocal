@@ -1,7 +1,7 @@
 /*Форма для волидации полей - телефон*/
+
 export const validationFormPhone = (phone) => {
-    let phoneClean = Number(phone.replace(/[^\d]/g, ''));
-    console.log(String(phoneClean).length);
+    let phoneClean = Number(phone.toString().replace(/[^\d]/g, ''));
     if (String(phoneClean).length === 11) {
         return true
     } else {
@@ -81,7 +81,7 @@ export const validationFormHouse = (house) => {
     else return false
 }
 /*Форма валидации полей - индекс*/
-export const validationFormIndex = (index)=>{
-    if(String(index).length===6) return true
+export const validationFormIndex = (index) => {
+    if (String(index).length === 6) return true
     else return false
 }

@@ -40,6 +40,7 @@ const BlockDate = (props) => {
                         helperText={!props.address.validStreet ? 'Заполните улицу' : ''}
                     />}
                 onChange={(event) => {
+                    props.validStreet(true)
                     props.infoStreet(event.target.valueOf().innerText, props.address.listStreet)
                 }}
                 noOptionsText={'Нет такой улицы'}
@@ -64,6 +65,8 @@ const BlockDate = (props) => {
                     />}
                 disabled={props.address.street===null ? true : false}
                 onChange={(event) => {
+                    props.validHouse(true)
+                    props.validZip(true);
                     props.infoHouse(props.address.street.street_fias_id, event.target.valueOf().innerText, props.address.listHouse)
                 }}
                 value={props.address.house===null ? '' : props.address.house.house}
@@ -92,6 +95,7 @@ const BlockDate = (props) => {
                     shrink: String(props.address.zip).length !== 0 ? true : false
                 }}
                 onChange={(e) => {
+                    props.validZip(true);
                     props.updateIndex(e.target.value)
                 }}
                 error={!props.address.validZip}

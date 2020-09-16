@@ -8,6 +8,12 @@ import {makeStyles} from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import BlockTerminal from "./blockTerminal/blockTerminal";
 import Redirect from "react-router-dom/es/Redirect";
+import {
+    updateValidCompany,
+    updateValidDateIssue, updateValidEmailRecipient, updateValidInnLegalEntity,
+    updateValidIssuedByPassport,
+    updateValidSeriesAndNumber
+} from "../../../redux/orderReducer";
 
 function rand() {
     return Math.round(Math.random() * 20) - 10;
@@ -160,8 +166,11 @@ const Order = (props) => {
                                             updateFlat={props.updateFlatSender}
                                             statusForm={props.order.sender.choiceAddressBook}
                                             fullData={props.order.sender.address}
+                                            validStreet={props.validStreetSender}
+                                            validHouse={props.validHouseSender}
+                                            validZip={props.validZipSender}
                                         />
-                                        : <BlockTerminal clickTerminal={props.addTerminalSender} terminal={props.order.sender.terminalSender}/>
+                                        : <BlockTerminal checkValidTerminal={props.updateValidTerminalSender} clickTerminal={props.addTerminalSender} validTerminal={props.order.sender.validTerminal} terminal={props.order.sender.terminalSender}/>
                                 )
                             }
                         </div>
@@ -187,6 +196,8 @@ const Order = (props) => {
                                 delivery={true}/*true - значит не отображать поле*/
                                 updateComment={props.updateCommentSender}
                                 clickCompany={props.choiceCompanySender}
+                                validCompany={''}
+                                validINN={''}
                             />
                         </div>
                     </div>
@@ -231,8 +242,11 @@ const Order = (props) => {
                                         updateFlat={props.updateFlatRecipient}
                                         statusForm={props.order.recipient.choiceAddressBook}
                                         fullData={props.order.recipient.address}
+                                        validStreet={props.validStreetRecipient}
+                                        validHouse={props.validHouseRecipient}
+                                        validZip={props.validZipRecipient}
                                     />
-                                    : <BlockTerminal clickTerminal={props.addTerminalRecipient} terminal={props.order.recipient.terminalRecipient}/>
+                                    : <BlockTerminal checkValidTerminal={props.updateValidTerminalRecipient} clickTerminal={props.addTerminalRecipient} validTerminal={props.order.recipient.validTerminal} terminal={props.order.recipient.terminalRecipient}/>
                             }
                         </div>
                         <div className={'col-lg-12 mt-3'}>
@@ -262,6 +276,12 @@ const Order = (props) => {
                                 clickCompany={props.choiceCompanyRecipient}
                                 dateIssue={props.updateDateIssue}
                                 issuedByPassport={props.updateIssuedByPassport}
+                                updateValidSeriesAndNumber={props.updateValidSeriesAndNumber}
+                                updateValidIssuedByPassport={props.updateValidIssuedByPassport}
+                                updateValidCompany={props.updateValidCompany}
+                                updateValidDateIssue={props.updateValidDateIssue}
+                                updateValidEmailRecipient={props.updateValidEmailRecipient}
+                                updateValidInnLegalEntity={props.updateValidInnLegalEntity}
                             />
                         </div>
                     </div>
