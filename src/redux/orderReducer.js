@@ -1606,7 +1606,7 @@ export const orderRegister = (fullInformationSender, fullInformationRecipient, f
                 validationFormPhone(fullInformationRecipient.contactPerson.phone)
             ) {
                 console.log('Отправление Дверь-Дверь создано успешно')
-                //dispatch(orderRegisterDoorDoor(fullInformationSender,fullInformationRecipient,fullInfoTK));
+                dispatch(orderRegisterDoorDoor(fullInformationSender,fullInformationRecipient,fullInfoTK));
             } else {
                 if (fullInformationSender.addressSender.street === null) {
                     dispatch(validStreetSender(false));
@@ -1661,7 +1661,7 @@ export const orderRegister = (fullInformationSender, fullInformationRecipient, f
                 checkLegalRecipient(fullInformationRecipient.contactPerson)
             ) {
                 console.log('Отправление Дверь-Склад создано успешно')
-                //dispatch(orderRegisterDoorTerminal(fullInformationSender,fullInformationRecipient,fullInfoTK,terminal));
+                dispatch(orderRegisterDoorTerminal(fullInformationSender,fullInformationRecipient,fullInfoTK,terminal));
             } else {
                 if (fullInformationSender.addressSender.street === null) dispatch(validStreetSender(false));
                 if (fullInformationSender.addressSender.house === null) dispatch(validHouseSender(false))
@@ -1698,7 +1698,7 @@ export const orderRegister = (fullInformationSender, fullInformationRecipient, f
                 checkLegalRecipient(fullInformationRecipient.contactPerson)
             ) {
                 console.log('Отправление Склад-Дверь создано успешно')
-                //dispatch(orderRegisterTerminalDoor(fullInformationRecipient, fullInformationSender, fullInfoTK));
+                dispatch(orderRegisterTerminalDoor(fullInformationRecipient, fullInformationSender, fullInfoTK));
             } else {
                 if (fullInformationRecipient.addressRecipient.street === null) dispatch(validStreetRecipient(false));
                 if (fullInformationRecipient.addressRecipient.house === null) dispatch(validHouseRecipient(false))
@@ -1724,7 +1724,7 @@ export const orderRegister = (fullInformationSender, fullInformationRecipient, f
                 checkLegalRecipient(fullInformationRecipient.contactPerson)
             ) {
                 console.log('Отправление Склад-Склад создано успешно')
-                //dispatch(orderRegisterTerminalTerminal(fullInformationRecipient, fullInformationSender, fullInfoTK));
+                dispatch(orderRegisterTerminalTerminal(fullInformationRecipient, fullInformationSender, fullInfoTK));
             } else {
                 if (fullInformationSender.terminal === null) dispatch(updateValidTerminalSender(false))
                 if (fullInformationRecipient.terminal === null) dispatch(updateValidTerminalRecipient(false))
