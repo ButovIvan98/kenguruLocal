@@ -36,7 +36,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c8f36c5-f73a-4c7e-82fb-7aecf26b4ff2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/order/order.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/order/order.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -219,7 +220,7 @@
       <workItem from="1599641553289" duration="10979000" />
       <workItem from="1599795932651" duration="58637000" />
       <workItem from="1600249536237" duration="15378000" />
-      <workItem from="1600675827549" duration="31624000" />
+      <workItem from="1600675827549" duration="31953000" />
     </task>
     <servers />
   </component>
@@ -263,11 +264,11 @@
       <screen x="49" y="27" width="1871" height="1053" />
     </state>
     <state x="779" y="236" width="401" height="633" key="RollbackChangesDialog/49.27.1871.1053@49.27.1871.1053" timestamp="1593770133882" />
-    <state x="887" y="527" width="702" height="522" key="find.popup" timestamp="1599117414963">
+    <state x="887" y="527" width="702" height="522" key="find.popup" timestamp="1600836670999">
       <screen x="51" y="27" width="1869" height="1053" />
     </state>
     <state x="675" y="291" width="702" height="522" key="find.popup/49.27.1871.1053@49.27.1871.1053" timestamp="1596965537564" />
-    <state x="887" y="527" width="702" height="522" key="find.popup/51.27.1869.1053@51.27.1869.1053" timestamp="1599117414963" />
+    <state x="887" y="527" width="702" height="522" key="find.popup/51.27.1869.1053@51.27.1869.1053" timestamp="1600836670999" />
     <state x="650" y="270" width="672" height="677" key="run.anything.popup" timestamp="1600745193251">
       <screen x="51" y="27" width="1869" height="1053" />
     </state>

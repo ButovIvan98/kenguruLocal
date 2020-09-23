@@ -8,10 +8,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import BlockTerminal from "./blockTerminal/blockTerminal";
 import Redirect from "react-router-dom/es/Redirect";
-import {
-    KeyboardDatePicker,
-} from 'material-ui-pickers';
-import {updateDateShipping} from "../../../redux/orderReducer";
+
 function rand() {
     return Math.round(Math.random() * 20) - 10;
 }
