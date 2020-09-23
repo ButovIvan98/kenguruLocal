@@ -37,6 +37,27 @@
   <component name="ChangeListManager">
     <list default="true" id="7c8f36c5-f73a-4c7e-82fb-7aecf26b4ff2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/API/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/API/api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/calculateForm/blockDataCargo/blockDataCargo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/calculateForm/blockDataCargo/blockDataCargo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/calculateForm/calculateForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/calculateForm/calculateForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/modal/modalMobileMenu/modalMobileMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/modal/modalMobileMenu/modalMobileMenu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/validationForm/validForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/validationForm/validForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/addCompany/addCompany.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/addCompany/addCompany.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/myAddress/blockAddress/blockAddress.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/myAddress/blockAddress/blockAddress.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/myPayment/MyPaymentContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/myPayment/MyPaymentContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/myPayment/blockPayment/blockPayment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/myPayment/blockPayment/blockPayment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/myPayment/blockPayment/blockPayment.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/myPayment/blockPayment/blockPayment.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/myPayment/myPayment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/myPayment/myPayment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/myShipments/css/myShipments.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/myShipments/css/myShipments.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/myShipments/myShipments.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/myShipments/myShipments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/order/order.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/order/order.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/order/orderContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/order/orderContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/order/orderSent/orderSentContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/order/orderSent/orderSentContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/express/personalAccount/personalAccount.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/personalAccount/personalAccount.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/Permanent_main/PermanentMain.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/Permanent_main/PermanentMain.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/calculateFormReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/calculateFormReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/myPaymentReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/myPaymentReducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/orderReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/orderReducer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -218,7 +239,9 @@
       <workItem from="1598868247129" duration="48274000" />
       <workItem from="1599465555396" duration="26688000" />
       <workItem from="1599641553289" duration="10979000" />
-      <workItem from="1599795932651" duration="53936000" />
+      <workItem from="1599795932651" duration="58637000" />
+      <workItem from="1600249536237" duration="15378000" />
+      <workItem from="1600675827549" duration="31089000" />
     </task>
     <servers />
   </component>
@@ -262,20 +285,16 @@
       <screen x="49" y="27" width="1871" height="1053" />
     </state>
     <state x="779" y="236" width="401" height="633" key="RollbackChangesDialog/49.27.1871.1053@49.27.1871.1053" timestamp="1593770133882" />
-    <state x="473" y="187" key="SettingsEditor" timestamp="1592027174055">
-      <screen x="49" y="27" width="1871" height="1053" />
-    </state>
-    <state x="473" y="187" key="SettingsEditor/49.27.1871.1053@49.27.1871.1053" timestamp="1592027174055" />
     <state x="887" y="527" width="702" height="522" key="find.popup" timestamp="1599117414963">
       <screen x="51" y="27" width="1869" height="1053" />
     </state>
     <state x="675" y="291" width="702" height="522" key="find.popup/49.27.1871.1053@49.27.1871.1053" timestamp="1596965537564" />
     <state x="887" y="527" width="702" height="522" key="find.popup/51.27.1869.1053@51.27.1869.1053" timestamp="1599117414963" />
-    <state x="650" y="270" width="672" height="677" key="run.anything.popup" timestamp="1600055158574">
+    <state x="650" y="270" width="672" height="677" key="run.anything.popup" timestamp="1600745193251">
       <screen x="51" y="27" width="1869" height="1053" />
     </state>
     <state x="649" y="270" width="672" height="677" key="run.anything.popup/49.27.1871.1053@49.27.1871.1053" timestamp="1597319453801" />
-    <state x="650" y="270" width="672" height="677" key="run.anything.popup/51.27.1869.1053@51.27.1869.1053" timestamp="1600055158574" />
+    <state x="650" y="270" width="672" height="677" key="run.anything.popup/51.27.1869.1053@51.27.1869.1053" timestamp="1600745193251" />
     <state x="648" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1600080516189">
       <screen x="51" y="27" width="1869" height="1053" />
     </state>

@@ -93,7 +93,7 @@ export const addCompanyAPI = {
 }
 /*Работа с заказом*/
 export const addOrder={
-    order(price,sender_terminal,receiver_terminal,user,sender_contact,receiver_contact,rate){
+    order(price,sender_terminal,receiver_terminal,user,sender_contact,receiver_contact,rate,date_pickup){
         return instance().post('/order/', {
             price:price,
             sender_terminal:sender_terminal,
@@ -101,7 +101,8 @@ export const addOrder={
             user:user,
             sender_contact:sender_contact,
             receiver_contact:receiver_contact,
-            rate:rate
+            rate:rate,
+            date_pickup:date_pickup
         })
     },
     payOrder(id){
@@ -136,6 +137,11 @@ export const cityAPI = {
     },
     searchCity(city) {
         return auth.post('/geo/locality/', {locality: city, count: 10})
+    }
+}
+export const payment={
+    allPayment(id){
+        return instance().get(`/bill/?profile=${id}`)
     }
 }
 export const addAddressAPI = {

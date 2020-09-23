@@ -46,3 +46,10 @@
 .loading{
     padding-left: 5px;
 }
+.textStyle{
+    font-size: 35px;
+    font-weight: bold;
+    text-shadow:0 0 1px #007bff;
+    color: #007bff;
+    opacity: 0.7;
+}

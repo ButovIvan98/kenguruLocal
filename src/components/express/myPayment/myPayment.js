@@ -18,7 +18,7 @@ const MyPayment =(props)=>{
                     {/*Место для фильтра*/}
                 </div>
                 <div className={'col-12'}>
-                    <BlockPayment/>
+                    <BlockPayment listPayment={props.payments}/>
                 </div>
             </div>
         </div>

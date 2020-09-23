@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import {addOrder} from "../API/api";
+import {payment} from "../API/api";
 
 const LIST_PAYMENT='LIST_PAYMENT';//Полный список заказов
 
@@ -11,17 +11,17 @@ const MyPaymentReducer = (state = initialState, action) => {
         case LIST_PAYMENT:
             return {
                 ...state,
-                orderList: action.bodyOrderList
+                paymentList: action.bodyPaymentList
             }
         default :
             return state
     }
 }
-const updateListPayment=(list)=>({type:LIST_PAYMENT,bodyOrderList:list})
+const updateListPayment=(list)=>({type:LIST_PAYMENT,bodyPaymentList:list})
 
 export const searchListPayment=()=>{
     return(dispatch)=>{
-        addOrder.allOrder(Cookies.get('id_company')).then(r=>{
+        payment.allPayment(Cookies.get('id_company')).then(r=>{
             dispatch(updateListPayment(r.data))
         })
     }

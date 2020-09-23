@@ -15,7 +15,7 @@ const BlockAddress = (props) => {
                 </div>
                 <div className={'col-lg-3 col-12 align-self-center'}>
                         <span className={classes.headerText}>
-                            {list.company}
+                            {String(list.company).length===0 ? 'Отсутствует' : list.company}
                         </span>
                     <br/>
                     <span className={classes.headerTextDescription}>

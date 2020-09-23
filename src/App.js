@@ -40,6 +40,7 @@ import ExportAddCompanyContainer from "./components/express/addCompany/addCompan
 import ExportOrderContainer from "./components/express/order/orderContainer";
 import ExportAddingDocumentContainer from "./components/express/addCompany/addingDocuments/addingDocumentsContainer";
 import OrderSentContainerExport from "./components/express/order/orderSent/orderSentContainer";
+import ExportMyPaymentContainer from "./components/express/myPayment/MyPaymentContainer";
 //нельзя удалять полетит бутстрап
 
 const App = (props) => {
@@ -71,7 +72,7 @@ const App = (props) => {
                                         <Route exact path={'/reloadPassword'} render={() => <ExportReloadPasswordContainer />} />
                                         <Route exact path={'/websitePlagin'} render={()=> <ExportWebsitePlaginContainer />} />
                                         <Route exact path={'/addAddress'} render={()=><AddressContainerExport/>}/>
-                                        <Route exact path={'/my_payment'} render={()=><MyPayment/>}/>
+                                        <Route exact path={'/my_payment'} render={()=><ExportMyPaymentContainer/>}/>
                                         <Route exact path={'/addCompany'} render={()=><ExportAddCompanyContainer/>}/>
                                         <Route exact path={'/plan'} render={()=><Plan/>}/>
                                         <Route exact path={'/personalAccount'} render={()=><PersonalAccountContainerExport/>}/>

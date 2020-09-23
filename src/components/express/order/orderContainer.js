@@ -27,6 +27,7 @@ import {
     updateCommentRecipient,
     updateCommentSender,
     updateDateIssue,
+    updateDateShipping,
     updateEmailRecipient,
     updateFlatRecipient,
     updateFlatSender,
@@ -42,7 +43,12 @@ import {
     updatePhoneRecipient,
     updatePhoneSender,
     updateSurnameRecipient,
-    updateSurnameSender, updateValidCompany, updateValidDateIssue, updateValidEmailRecipient, updateValidInnLegalEntity,
+    updateSurnameSender,
+    updateValidCompany,
+    updateValidDateIssue,
+    updateValidDateShipping,
+    updateValidEmailRecipient,
+    updateValidInnLegalEntity,
     updateValidIssuedByPassport,
     updateValidSeriesAndNumber,
     updateValidTerminalRecipient,
@@ -101,7 +107,8 @@ const ExportOrderContainer = connect(mapStateToProps, {
     updateValidTerminalSender,
     updateValidSeriesAndNumber,
     updateValidIssuedByPassport,updateValidCompany,updateValidDateIssue,
-    updateValidEmailRecipient,updateValidInnLegalEntity,
+    updateValidEmailRecipient,updateValidInnLegalEntity,updateDateShipping,
+    updateValidDateShipping,
 
 })(OrderContainer);
 export default ExportOrderContainer;

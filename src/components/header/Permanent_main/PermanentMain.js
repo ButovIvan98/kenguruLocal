@@ -8,6 +8,7 @@ import ListMenuIn from "../../common/svgImg/listMenuIn";
 import ModalMobileMenu from "../../common/modal/modalMobileMenu/modalMobileMenu";
 import BlockMainSelectContainerExport from "../../common/selectBlock/blockMainSelectContainer";
 import {Avatar} from "@material-ui/core";
+import {logout} from "../../../redux/headerReducer";
 
 const Permanent_main = (props) => {
     let updateStatus = () => {
@@ -42,7 +43,7 @@ const Permanent_main = (props) => {
                         <path d="M1 14H14L13 16H0L1 14Z" fill="white"></path>
                     </svg>
                 </button>
-                <ModalMobileMenu  props={props} listCompany={props.DataCompany}/>
+                <ModalMobileMenu props={props} listCompany={props.DataCompany}/>
             </div>
             { props.auth.isAuth
                 ? <div className={'col-lg-3 d-lg-block text-right d-none align-self-center'}>

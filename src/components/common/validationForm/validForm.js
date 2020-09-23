@@ -85,3 +85,8 @@ export const validationFormIndex = (index) => {
     if (String(index).length === 6) return true
     else return false
 }
+export const validationFormDate=(date)=>{
+    if((new Date()).toLocaleDateString() <= (new Date(date)).toLocaleDateString()) return true
+    else return false
+
+}

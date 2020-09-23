@@ -484,13 +484,13 @@ export const widthData = (value, id, height, length) => {
         if (!/^[\d,.]*$/.test(NewValue)) {
         } else {
             if (NewValue.length > 0) {
-                dispatch(updateWidth(NewValue, id, true))
+                dispatch(updateWidth(NewValue.substr(0,6), id, true))
                 if (height > 0 && length > 0) {
-                    let volume = (height * length * NewValue / 1000000).toFixed(3);
+                    let volume = (((height * length * value))/5000).toFixed(2);;
                     dispatch(updateVolume(volume, id, true));
                 }
             } else {
-                dispatch(updateWidth(NewValue, id, false))
+                dispatch(updateWidth(NewValue.substr(0,6), id, false))
             }
         }
     }
@@ -501,8 +501,8 @@ export const weightData = (value, id) => {
         if (!/^[\d,.]*$/.test(value)) {
         } else {
             value.length > 0
-                ? dispatch(updateWeight(value, id, true))
-                : dispatch(updateWeight(value, id, false))
+                ? dispatch(updateWeight(value.substr(0,6), id, true))
+                : dispatch(updateWeight(value.substr(0,6), id, false))
         }
     }
 };
@@ -512,13 +512,13 @@ export const heightData = (value, id, length, width) => {
         if (!/^[\d,.]*$/.test(value)) {
         } else {
             if (value.length > 0) {
-                dispatch(updateHeight(value, id, true))
+                dispatch(updateHeight(value.substr(0,6), id, true))
                 if (width > 0 && length > 0) {
-                    let volume = (width * length * value / 1000000).toFixed(3);
+                    let volume = (((width * length * value))/5000).toFixed(2);
                     dispatch(updateVolume(volume, id, true));
                 }
             } else {
-                dispatch(updateHeight(value, id, false))
+                dispatch(updateHeight(value.substr(0,6), id, false))
             }
         }
     }
@@ -530,13 +530,13 @@ export const lengthData = (value, id, width, height) => {
         if (!/^[\d,.]*$/.test(NewValue)) {
         } else {
             if (NewValue.length > 0) {
-                dispatch(updateLength(NewValue, id, true))
+                dispatch(updateLength(NewValue.substr(0,6), id, true))
                 if (width > 0 && height > 0) {
-                    let volume = (width * height * NewValue / 1000000).toFixed(3);
+                    let volume = (((width * width * value))/5000).toFixed(2);;
                     dispatch(updateVolume(volume, id, true));
                 }
             } else {
-                dispatch(updateLength(NewValue, id, false))
+                dispatch(updateLength(NewValue.substr(0,6), id, false))
             }
         }
     }
@@ -547,8 +547,8 @@ export const quantityData = (value, id) => {
         if (!/^[\d,.]*$/.test(value)) {
         } else {
             value.length > 0
-                ? dispatch(updateQuantity(value, id, true))
-                : dispatch(updateQuantity(value, id, false))
+                ? dispatch(updateQuantity(value.substr(0,3), id, true))
+                : dispatch(updateQuantity(value.substr(0,3), id, false))
         }
     }
 };
@@ -596,7 +596,7 @@ export const ListCityDestination = (city) => {
 }
 /*Изменения объема груза*/
 export const volumeData = (value, id) => {
-    let params = (Math.cbrt(value * 1000000, 3));
+    let params = (Math.cbrt(value * 1000000, 3)).toFixed(2);
     return (dispatch) => {
         if (!/^[\d,.]*$/.test(value)) {
         } else {
@@ -746,7 +746,7 @@ export const calculateTariff = (cargo, type, idCityDeparture, idCityDestination,
                                                 message.id,
                                                 'https://kenguruexpress.ru/images/services/dimex.png',
                                                 message.operator,
-                                                message.title,
+                                                message.value,
                                                 message.rating,
                                                 message.term,
                                                 message.common_price,
@@ -755,35 +755,9 @@ export const calculateTariff = (cargo, type, idCityDeparture, idCityDestination,
                                                 message.delivery
                                             ))
                                         }
-                                        // if (String(message.pickup) === String(1) && String(message.delivery) === String(1)) {
-                                        //     dispatch(addListFilterResult(
-                                        //         message.id,
-                                        //         'https://kenguruexpress.ru/images/services/dimex.png',
-                                        //         message.operator,
-                                        //         message.title,
-                                        //         message.rating,
-                                        //         message.term,
-                                        //         message.common_price,
-                                        //         message.price,
-                                        //         message.pickup,
-                                        //         message.delivery
-                                        //     ))
-                                        // }
-                                        // dispatch(addListCalculateResult(
-                                        //     message.id,
-                                        //     'https://kenguruexpress.ru/images/services/dimex.png',
-                                        //     message.operator,
-                                        //     message.title,
-                                        //     message.rating,
-                                        //     message.term,
-                                        //     message.common_price,
-                                        //     message.price,
-                                        //     message.pickup,
-                                        //     message.delivery
-                                        // ))
                                     };
                                     chatSocket.onclose = function (e) {
-                                        console.error('Chat socket closed unexpectedly');
+
                                     };
                                 }).catch(error => {
                                 })
@@ -825,7 +799,6 @@ export const updateDataFaster = (data) => {
     function compareNumbersFaster(a, b) {
         return a.deliveryTime - b.deliveryTime;
     }
-
     return (dispatch) => {
         dispatch(updateData(data.sort(compareNumbersFaster)));
     }

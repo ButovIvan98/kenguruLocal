@@ -8,68 +8,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 
 const BlockDataCargo = (props) => {
     return <div className={classes.blockCalculate}>
-        {props.status
-            ? <div className={'row mt-3'}>
-                <div className={'col-lg-7 col-12'}>
-                    <div className={'row'}>
-                        <div className={'col-lg-4 col-6 pl-1 pr-1'}>
-                            <TextField
-                                error={!props.validWeight}
-                                data-number-cargo={props.id}
-                                variant="outlined"
-                                type={'number'}
-                                id="standard-helperText"
-                                label="Вес"
-                                value={props.weight}
-                                InputProps={{
-                                    startAdornment: <InputAdornment position="start">Кг</InputAdornment>,
-                                }}
-                                onChange={(e) => (props.updateWeight(e.target.value, props.id))}
-                                //helperText="Some important text"
-                            />
-                        </div>
-                        <div className={'col-lg-4 col-6 pl-1 pr-1'}>
-                            <TextField
-                                error={!props.validVolume}
-                                data-number-cargo={props.id}
-                                variant="outlined"
-                                id="standard-helperText"
-                                type={'number'}
-                                label="Объем"
-                                InputProps={{
-                                    startAdornment: <InputAdornment position="start">м³ </InputAdornment>,
-                                }}
-                                value={props.volume}
-                                onChange={(e) => (props.updateVolume(e.target.value, props.id))}
-                                //helperText="Some important text"
-                            />
-                        </div>
-                        <div className={'col-lg-4 mt-lg-0 mt-2 col-12  pl-1 pr-1 '}>
-                            <TextField
-                                error={!props.validQuantity}
-                                data-number-cargo={props.id}
-                                variant="outlined"
-                                id="standard-helperText"
-                                type={'number'}
-                                label="Количество"
-                                InputProps={{
-                                    startAdornment: <InputAdornment position="start">Шт</InputAdornment>,
-                                }}
-
-                                value={props.quantity}
-                                onChange={(e) => (props.updateQuantity(e.target.value, props.id))}
-                                //helperText="Some important text"
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div className={'col-lg-5 col-12 text-lg-right text-center align-self-center'}>
-                    <span onClick={() => {
-                        props.updateStatus(props.status, props.id)
-                    }} className={classes.buttonAddParametr}>Подробные параметры</span>
-                </div>
-            </div>
-            : <div className={'row mt-3'}>
+        <div className={'row mt-3'}>
                 <div className={'col-lg-2 col-4 pl-1 pr-1'}>
                     <TextField
                         error={!props.validLenght}
@@ -78,7 +17,7 @@ const BlockDataCargo = (props) => {
                         id="standard-helperText"
                         type={'number'}
                         label="Длина"
-                        value={props.lenght}
+                        value={props.length}
                         InputProps={{
                             startAdornment: <InputAdornment position="start">См</InputAdornment>,
                         }}
@@ -95,7 +34,7 @@ const BlockDataCargo = (props) => {
                         type={'number'}
                         label="Высота"
                         value={props.height}
-                        onChange={(e) => (props.updateHeight(e.target.value, props.id,props.lenght,props.width))}
+                        onChange={(e) => (props.updateHeight(e.target.value, props.id,props.length,props.width))}
                         InputProps={{
                             startAdornment: <InputAdornment position="start">См</InputAdornment>,
                         }}
@@ -111,7 +50,7 @@ const BlockDataCargo = (props) => {
                         type={'number'}
                         label="Ширина"
                         value={props.width}
-                        onChange={(e) => (props.updateWidth(e.target.value, props.id,props.height,props.lenght))}
+                        onChange={(e) => (props.updateWidth(e.target.value, props.id,props.height,props.length))}
                         InputProps={{
                             startAdornment: <InputAdornment position="start">См</InputAdornment>,
                         }}
@@ -136,16 +75,17 @@ const BlockDataCargo = (props) => {
                 </div>
                 <div className={'col-lg-2 mt-lg-0 mt-2  col-4 pl-1 pr-1'}>
                     <TextField
+                        disabled={true}
                         error={!props.validVolume}
                         data-number-cargo={props.id}
                         variant="outlined"
                         id="standard-helperText"
                         type={'number'}
-                        label="Объем"
+                        label="Объемный вес"
                         value={props.volume}
                         onChange={(e) => (props.updateVolume(e.target.value, props.id))}
                         InputProps={{
-                            startAdornment: <InputAdornment position="start">м³</InputAdornment>,
+                            startAdornment: <InputAdornment position="start">кг</InputAdornment>,
                         }}
                         //helperText="Some important text"
                     />
@@ -167,7 +107,6 @@ const BlockDataCargo = (props) => {
                     />
                 </div>
             </div>
-        }
         {
             (props.props.calculate.listCargo).length>1
                 ? <div className={'col-12 mt-2 text-right'}>
@@ -182,7 +121,6 @@ const BlockDataCargo = (props) => {
                 </div>
                 : null
         }
-
         <div className={'col-12'}>
             <hr className={classes.hrDashed}/>
         </div>

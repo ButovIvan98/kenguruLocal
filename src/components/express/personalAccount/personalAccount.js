@@ -10,7 +10,6 @@ import BlockPayment from "../myPayment/blockPayment/blockPayment";
 import BlockCompany from "./blockCompany/blockCompany";
 
 const PersonalAccount = (props) =>{
-    debugger
     let listCompany = props.PersonalAccountData.myCompany.map(data=>
         <BlockCompany
             preloader={data.preloader}
@@ -27,11 +26,12 @@ const PersonalAccount = (props) =>{
                     <div onClick={()=>{props.statusCount(props.PersonalAccountData.statusCount)}} className={classes.blockCard}>
                         <div className={'row'}>
                             <div className={'col-8 ' + ' ' + classes.blockElement}>
-                                <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">Всего
-                                    заказов
+                                <div className="text-xs font-weight-bold text-primary text-uppercase pl-3 mb-1">
+                                    Всего заказов
                                 </div>
-                                <div
-                                    className="h5 mb-0 font-weight-bold text-gray-800">{props.PersonalAccountData.order}</div>
+                                <div className="h5 mb-0 font-weight-bold text-gray-800 pl-3">
+                                    {props.PersonalAccountData.order}
+                                </div>
                             </div>
                             <div className={'col-4 text-right pr-4 mt-3'}>
                                 <OrderIcon/>
@@ -43,9 +43,9 @@ const PersonalAccount = (props) =>{
                     <div onClick={()=>{props.statusAmount(props.PersonalAccountData.statusAmount)}} className={classes.blockCard}>
                         <div className={'row'}>
                             <div className={'col-8 ' + ' ' + classes.blockElement}>
-                                <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">Сумма</div>
+                                <div className="text-xs font-weight-bold text-primary text-uppercase mb-1 pl-3">Сумма</div>
                                 <div
-                                    className="h5 mb-0 font-weight-bold text-gray-800">₽{props.PersonalAccountData.amount}</div>
+                                    className="h5 mb-0 font-weight-bold text-gray-800 pl-3">₽{props.PersonalAccountData.amount}</div>
                             </div>
                             <div className={'col-4 text-right pr-4 mt-3'}>
                                 <MoneyIcon/>
@@ -58,10 +58,10 @@ const PersonalAccount = (props) =>{
                         <div className={'row'}>
                             <div className={'col-8 ' + ' ' + classes.blockElement} >
                                 <div
-                                    className="text-xs font-weight-bold text-primary text-uppercase mb-1">Задолженность
+                                    className="text-xs font-weight-bold text-primary text-uppercase mb-1 pl-3">Задолженность
                                 </div>
                                 <div
-                                    className="h5 mb-0 font-weight-bold text-gray-800">₽{props.PersonalAccountData.debt}</div>
+                                    className="h5 mb-0 font-weight-bold text-gray-800 pl-3">₽{props.PersonalAccountData.debt}</div>
                             </div>
                             <div className={'col-4 text-right pr-4 mt-3'}>
                                 <CardIcon/>
@@ -190,13 +190,13 @@ const PersonalAccount = (props) =>{
                         </BarChart>
                     </ResponsiveContainer>
                 </div>
-                <div className={'col-12 mb-3 mt-3 text-center'}>
-                    <NavLink to={'/reports'}>
-                        <label className={classes.detailedReports}>
-                            Подробные отчеты
-                        </label>
-                    </NavLink>
-                </div>
+                {/*<div className={'col-12 mb-3 mt-3 text-center'}>*/}
+                {/*    <NavLink to={'/reports'}>*/}
+                {/*        <label className={classes.detailedReports}>*/}
+                {/*            Подробные отчеты*/}
+                {/*        </label>*/}
+                {/*    </NavLink>*/}
+                {/*</div>*/}
             </div>
             <div className={'row'}>
                 <div className={'col-lg-4 mb-3'}>

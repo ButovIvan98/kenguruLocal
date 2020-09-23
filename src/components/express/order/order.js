@@ -9,12 +9,9 @@ import Modal from '@material-ui/core/Modal';
 import BlockTerminal from "./blockTerminal/blockTerminal";
 import Redirect from "react-router-dom/es/Redirect";
 import {
-    updateValidCompany,
-    updateValidDateIssue, updateValidEmailRecipient, updateValidInnLegalEntity,
-    updateValidIssuedByPassport,
-    updateValidSeriesAndNumber
-} from "../../../redux/orderReducer";
-
+    KeyboardDatePicker,
+} from 'material-ui-pickers';
+import {updateDateShipping} from "../../../redux/orderReducer";
 function rand() {
     return Math.round(Math.random() * 20) - 10;
 }
@@ -332,23 +329,32 @@ const Order = (props) => {
                                         label="Дата забора"
                                         variant="outlined"
                                         type={'date'}
+                                        error={!props.order.recipient.validDateShipping}
+                                        helperText={props.order.recipient.validDateShipping ? '' : 'Укажите правильную дату забора'}
                                         InputLabelProps={{
                                             shrink: true,
                                         }}
-                                        className={classes.input}
-                                    />
-                                </div>
-                                <div className={'col-lg-6 mt-3 mb-3'}>
-                                    <TextField
-                                        label="Дата доставки"
-                                        variant="outlined"
-                                        type={'date'}
-                                        InputLabelProps={{
-                                            shrink: true,
+                                        onBlur={(e)=>{
+                                            props.updateValidDateShipping(e.target.value)
                                         }}
+                                        onChange={(e)=>{
+                                            props.updateDateShipping(e.target.value)
+                                        }}
+                                        value={props.order.recipient.dateShipping}
                                         className={classes.input}
                                     />
                                 </div>
+                                {/*<div className={'col-lg-6 mt-3 mb-3'}>*/}
+                                {/*    <TextField*/}
+                                {/*        label="Дата доставки"*/}
+                                {/*        variant="outlined"*/}
+                                {/*        type={'date'}*/}
+                                {/*        InputLabelProps={{*/}
+                                {/*            shrink: true,*/}
+                                {/*        }}*/}
+                                {/*        className={classes.input}*/}
+                                {/*    />*/}
+                                {/*</div>*/}
                             </div>
                         </div>
                     </div>
@@ -376,7 +382,6 @@ const Order = (props) => {
             </div>
         </div>
         {
-
             props.order.placeOrderNaturalPerson
                 ? window.location.href=props.order.srcPay
                 : ''

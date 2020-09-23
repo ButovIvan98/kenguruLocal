@@ -15,7 +15,7 @@ class MyPaymentContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        shipments: state.MyShipmentsPage
+        payments: state.Payment
     }
 };
 let ExportMyPaymentContainer = connect(mapStateToProps,{searchListPayment})(MyPaymentContainer);

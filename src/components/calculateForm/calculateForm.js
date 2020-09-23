@@ -53,7 +53,7 @@ const CalculateForm = (props) => {
             weight={option.weight}
             height={option.height}
             volume={option.volume}
-            lenght={option.lenght}
+            length={option.lenght}
             status={option.status}
             width={option.width}
             quantity={option.quantity}
@@ -75,7 +75,7 @@ const CalculateForm = (props) => {
                             <div className={'col-lg-4  pr-1 pl-1'}>
                                 <Autocomplete
                                     id="combo-box-demo"
-                                    options={props.calculate.cityOfDeparture.listCity.map((option) => option.title)}
+                                    options={props.calculate.cityOfDeparture.listCity.map((option) => option.value)}
                                     fullWidth={true}
                                     renderInput={(params) => <TextField {...params}
                                                                         error={!props.calculate.cityOfDeparture.validCity}
@@ -107,7 +107,7 @@ const CalculateForm = (props) => {
                             <div className={'col-lg-4 mt-lg-0 mt-2 pr-1 pl-1'}>
                                 <Autocomplete
                                     id="combo-box-demo"
-                                    options={props.calculate.cityOfDestination.listCity.map((option) => option.title)}
+                                    options={props.calculate.cityOfDestination.listCity.map((option) => option.value)}
                                     renderInput={(params) => <TextField
                                         error={!props.calculate.cityOfDestination.validCity}
                                         {...params}

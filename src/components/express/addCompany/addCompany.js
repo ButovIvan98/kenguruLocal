@@ -20,7 +20,7 @@ const AddCompany = (props) => {
                         Добавление компании
                     </h2>
                 </div>
-                <div className={'col-9 mt-3' + ' ' + classes.block}>
+                <div className={'col-lg-9 col-12 mt-3' + ' ' + classes.block}>
                     <div className={'row'}>
                         <div className={'col-12 text-center'}>
                             <h5>
@@ -324,7 +324,7 @@ const AddCompany = (props) => {
                         </div>
                     </div>
                 </div>
-                <div className={'col-lg-3 mt-3'}>
+                <div className={'col-lg-3 col-12 mt-3'}>
                     <InfoManager/>
                 </div>
             </div>

@@ -9,12 +9,12 @@ const MyShipments = (props) => {
         <BlockShipments
             //color={list.color}
             sendingCity={list.sender_city}
-            sender={list.sender_contact===null
+            sender={list.sender_contact === null
                 ? list.sender_terminal.surname + ' ' + list.sender_terminal.name
                 : list.sender_contact.surname + ' ' + list.sender_contact.name
             }
             recipientCity={list.receiver_city}
-            recipient={list.receiver_contact===null
+            recipient={list.receiver_contact === null
                 ? list.receiver_terminal.surname + ' ' + list.receiver_terminal.name
                 : list.receiver_contact.surname + ' ' + list.receiver_contact.name}
             status={list.status}
@@ -46,8 +46,12 @@ const MyShipments = (props) => {
 
                     </div>
                 </div>
-                {listOrder.length===0
-                    ? 'Еще нет отправлений'
+                {listOrder.length === 0
+                    ? <div className={'row mt-5'}>
+                        <div className={'col-12 mt-2 text-center'}>
+                            <span className={classes.textStyle}>Нет созданных отправлений.</span>
+                        </div>
+                    </div>
                     : listOrder}
             </div>
         </div>
