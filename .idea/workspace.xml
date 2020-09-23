@@ -36,29 +36,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c8f36c5-f73a-4c7e-82fb-7aecf26b4ff2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/API/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/API/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/calculateForm/blockDataCargo/blockDataCargo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/calculateForm/blockDataCargo/blockDataCargo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/calculateForm/calculateForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/calculateForm/calculateForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/modal/modalMobileMenu/modalMobileMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/modal/modalMobileMenu/modalMobileMenu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/validationForm/validForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/validationForm/validForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/express/addCompany/addCompany.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/addCompany/addCompany.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/express/myAddress/blockAddress/blockAddress.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/myAddress/blockAddress/blockAddress.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/express/myPayment/MyPaymentContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/myPayment/MyPaymentContainer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/express/myPayment/blockPayment/blockPayment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/myPayment/blockPayment/blockPayment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/express/myPayment/blockPayment/blockPayment.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/myPayment/blockPayment/blockPayment.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/express/myPayment/myPayment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/myPayment/myPayment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/express/myShipments/css/myShipments.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/myShipments/css/myShipments.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/express/myShipments/myShipments.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/myShipments/myShipments.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/express/order/order.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/order/order.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/express/order/orderContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/order/orderContainer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/express/order/orderSent/orderSentContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/order/orderSent/orderSentContainer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/express/personalAccount/personalAccount.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/personalAccount/personalAccount.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/Permanent_main/PermanentMain.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/Permanent_main/PermanentMain.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/calculateFormReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/calculateFormReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/myPaymentReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/myPaymentReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/orderReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/orderReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -241,7 +219,7 @@
       <workItem from="1599641553289" duration="10979000" />
       <workItem from="1599795932651" duration="58637000" />
       <workItem from="1600249536237" duration="15378000" />
-      <workItem from="1600675827549" duration="31089000" />
+      <workItem from="1600675827549" duration="31624000" />
     </task>
     <servers />
   </component>
