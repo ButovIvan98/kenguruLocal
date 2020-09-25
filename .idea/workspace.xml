@@ -37,17 +37,6 @@
   <component name="ChangeListManager">
     <list default="true" id="7c8f36c5-f73a-4c7e-82fb-7aecf26b4ff2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/calculateForm/blockDataCargo/blockDataCargo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/calculateForm/blockDataCargo/blockDataCargo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/modal/modalMobileMenu/modalMobileMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/modal/modalMobileMenu/modalMobileMenu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/express/addCompany/addCompany.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/addCompany/addCompany.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/express/addCompany/addCompany.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/addCompany/addCompany.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/express/addCompany/addingDocuments/addingDocuments.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/addCompany/addingDocuments/addingDocuments.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/express/addCompany/addingDocuments/addingDocuments.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/addCompany/addingDocuments/addingDocuments.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/express/myAddress/add_address/add_address.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/myAddress/add_address/add_address.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/express/personalAccount/setting/setting.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/express/personalAccount/setting/setting.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/addCompanyReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/addCompanyReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/myShipmentsReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/myShipmentsReducer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -232,7 +221,7 @@
       <workItem from="1600249536237" duration="15378000" />
       <workItem from="1600675827549" duration="46535000" />
       <workItem from="1600936328552" duration="50000" />
-      <workItem from="1600936555638" duration="7610000" />
+      <workItem from="1600936555638" duration="9285000" />
     </task>
     <servers />
   </component>
