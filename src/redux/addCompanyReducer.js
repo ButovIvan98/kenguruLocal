@@ -729,7 +729,7 @@ export const addingDocumentEgrip = (documents) => {
         dispatch(updateEgrip(documents, true));
     }
 }
-/*тест*/
+/*Отправка документов на проверку*/
 export const addDocumentsCompany = (documents, company, idCompany) => {
     return (dispatch) => {
         let formData = new FormData();

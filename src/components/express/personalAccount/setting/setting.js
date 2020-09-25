@@ -51,7 +51,7 @@ const Setting = (props) => {
                 </div>
             case 1:
                 return <div className={'row'}>
-                    <div className={'col-lg-4'}>
+                    <div className={'col-lg-4 col-12'}>
                         <TextField
                             className={classesStyle.input}
                             id="outlined-required"
@@ -64,7 +64,7 @@ const Setting = (props) => {
                             error={props.setting.validSurname ? false : true}
                         />
                     </div>
-                    <div className={'col-lg-4'}>
+                    <div className={'col-lg-4 col-12 mt-lg-0 mt-2'}>
                         <TextField
                             className={classesStyle.input}
                             id="outlined-required"
@@ -77,7 +77,7 @@ const Setting = (props) => {
                             error={props.setting.validName ? false : true}
                         />
                     </div>
-                    <div className={'col-lg-4'}>
+                    <div className={'col-lg-4col-12 mt-lg-0 mt-2'}>
                         <TextField
                             className={classesStyle.input}
                             label="Отчество"
@@ -92,7 +92,7 @@ const Setting = (props) => {
                 </div>;
             case 2:
                 return <div className={'row'}>
-                    <div className={'col-lg-4 align-self-center'}>
+                    <div className={'col-lg-4 col-12 mt-lg-0 mt-2 align-self-center'}>
                         <InputMask mask="+7(999)999 99 99"
                                    maskChar=" "
                                    onChange={(e) => {
@@ -110,7 +110,7 @@ const Setting = (props) => {
                             />
                         </InputMask>
                     </div>
-                    <div className={'col-lg-8'}>
+                    <div className={'col-lg-8col-12 mt-lg-0 mt-2'}>
                         {props.setting.validButtonCode
                             ? <button onClick={() => {
                                 props.updateClickButtonCode(props.setting.number)
@@ -223,7 +223,7 @@ const Setting = (props) => {
                             {activeStep === steps.length && (
                                 <Paper square elevation={0} className={classes.resetContainer}>
                                     <div className={'row'}>
-                                        <div className={'col-lg-12 text-center'}>
+                                        <div className={'col-lg-12  text-center'}>
                                             <Typography>
                                                 <BeenhereIcon
                                                     color="secondary"
@@ -265,7 +265,7 @@ const Setting = (props) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className={'col-lg-8'}>
+                            <div className={'col-lg-8 col-12 mt-lg-0 mt-2'}>
                                 <div className={'row'}>
                                     <div className={'col-lg-6'}>
                                         <TextField
@@ -279,7 +279,7 @@ const Setting = (props) => {
                                             error={props.setting.validSurname ? false : true}
                                         />
                                     </div>
-                                    <div className={'col-lg-6'}>
+                                    <div className={'col-lg-6 col-12 mt-lg-0 mt-2'}>
                                         <TextField
                                             className={classesStyle.input}
                                             label="Имя"
@@ -291,7 +291,7 @@ const Setting = (props) => {
                                             error={props.setting.validMiddleName ? false : true}
                                         />
                                     </div>
-                                    <div className={'col-lg-6 mt-lg-3'}>
+                                    <div className={'col-lg-6 mt-lg-3 col-12 mt-2'}>
                                         <TextField
                                             className={classesStyle.input}
                                             label="Отчество"
@@ -303,7 +303,7 @@ const Setting = (props) => {
                                             error={props.setting.validName ? false : true}
                                         />
                                     </div>
-                                    <div className={'col-lg-6 mt-lg-3'}>
+                                    <div className={'col-lg-6 mt-lg-3 col-12 mt-2'}>
                                         <TextField
                                             className={classesStyle.input}
                                             label="День рождения"
@@ -320,7 +320,7 @@ const Setting = (props) => {
                                              //error={props.setting.validSurname ? false : true}
                                         />
                                     </div>
-                                    <div className={'col-lg-6 mt-lg-3 '}>
+                                    <div className={'col-lg-6 mt-lg-3 col-12 mt-2'}>
                                         <TextField
                                             className={classesStyle.input}
                                             label="Email"
@@ -333,7 +333,7 @@ const Setting = (props) => {
                                             //  error={props.setting.validMiddleName ? false : true}
                                         />
                                     </div>
-                                    <div className={'col-lg-6 mt-lg-3 mb-lg-3'}>
+                                    <div className={'col-lg-6 mt-lg-3 mb-lg-3 col-12 mb-2 mt-2'}>
                                         <InputMask mask="+7(999)999 99 99"
                                                    maskChar=" "
                                                    onChange={(e) => {
@@ -351,9 +351,9 @@ const Setting = (props) => {
                                             />
                                         </InputMask>
                                     </div>
-                                    <div className={'col-lg-6'}>
+                                    <div className={'col-lg-6 '}>
                                     </div>
-                                    <div className={'col-lg-6 mb-3'}>
+                                    <div className={'col-lg-6 col-12 mt-lg-0 mt-2 mb-3'}>
                                         {props.setting.validButtonCode
                                             ? <button onClick={() => {
                                                 props.updateClickButtonCode(props.setting.number)

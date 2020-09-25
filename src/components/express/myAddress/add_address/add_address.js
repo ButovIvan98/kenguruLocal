@@ -15,7 +15,7 @@ console.log(props)
         <div className={'container'}>
             <div className={'row'}>
                 <div className={'col-lg-12'}>
-                    <Button_return path={'/myAddress'}/>
+                    <Button_return path={'/my_address'}/>
                 </div>
                 <div className={'col-12 mt-2'}>
                     <h3 className={classes.headerText}>

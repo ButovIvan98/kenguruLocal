@@ -40,8 +40,8 @@ const ModalMobileMenu = (props) => {
             <div className={'col-auto text-left pr-0'}>
                 <span className={classNamees.nameCompany}>{nav.is_personal
                     ? 'Физ. лицо'
-                    : (String(nav.company_title).length > 25
-                        ? String(nav.company_title).substr(0, 22) + ' ...'
+                    : (String(nav.company_title).length > 20
+                        ? String(nav.company_title).substr(0, 17) + ' ...'
                         : nav.company_title)}</span><br/>
                 <span className={classNamees.authorizedFaceCompany}>{nav.last_name + ' ' + nav.first_name}</span>
             </div>
@@ -79,11 +79,11 @@ const ModalMobileMenu = (props) => {
                                             <div className={'col-auto text-left pr-0'}>
                                                 <span
                                                     className={classNamees.nameCompany}> {props.props.activeCompany.isPersonal
-                                                    ? ( String(props.props.activeCompany.username).length>25
-                                                        ? String(props.props.activeCompany.username).substr(0,23) + ' ...'
+                                                    ? ( String(props.props.activeCompany.username).length>20
+                                                        ? String(props.props.activeCompany.username).substr(0,17) + ' ...'
                                                         : props.props.activeCompany.username)
-                                                    : (String(props.props.activeCompany.companyTitle).length > 25
-                                                        ? String(props.props.activeCompany.companyTitle).substr(0,23) + ' ...'
+                                                    : (String(props.props.activeCompany.companyTitle).length > 20
+                                                        ? String(props.props.activeCompany.companyTitle).substr(0,17) + ' ...'
                                                         : props.props.activeCompany.companyTitle)}</span><br/>
                                                 <span
                                                     className={classNamees.authorizedFaceCompany}>{props.props.ResponsiblePerson}</span>
@@ -105,20 +105,16 @@ const ModalMobileMenu = (props) => {
                                     <div className={'col-12 mb-1'} onClick={() => {
                                         closeModal()
                                     }}>
-                                        <NavLink to={'/transportCompany'} data-dismiss="modal" aria-label="Close"><span
-                                            aria-hidden="true">Отслеживание груза</span></NavLink>
+                                        <NavLink to={'/transportCompany'} ><span>Отслеживание груза</span></NavLink>
                                     </div>
                                     <div className={'col-12 mb-1'} onClick={() => {closeModal()}}>
-                                        <NavLink to={'/transportCompany'} data-dismiss="modal" aria-label="Close"><span
-                                            aria-hidden="true">Транспортные компании</span></NavLink>
+                                        <NavLink to={'/transportCompany'} ><span>Транспортные компании</span></NavLink>
                                     </div>
                                     <div className={'col-12 mb-1'} onClick={() => {closeModal()}}>
-                                        <NavLink to={'/paymentMethod'} data-dismiss="modal" aria-label="Close"><span
-                                            aria-hidden="true">Способы оплаты</span></NavLink>
+                                        <NavLink to={'/paymentMethod'}><span>Способы оплаты</span></NavLink>
                                     </div>
                                     <div className={'col-12 mb-1'} onClick={() => {closeModal()}}>
-                                        <NavLink to={'/contact'} data-dismiss="modal" aria-label="Close"><span
-                                            aria-hidden="true">Контакты</span></NavLink>
+                                        <NavLink to={'/contact'}><span>Контакты</span></NavLink>
                                     </div>
                                 </div>
                             </div>
@@ -132,17 +128,13 @@ const ModalMobileMenu = (props) => {
                                             <div className={'col-12' + ' ' + classNamees.link}>
                                                 <div className={'row'}>
                                                     <div className={'col-12 mb-1'} onClick={() => {closeModal()}}>
-                                                        <NavLink to={'/my_shipments'} data-dismiss="modal"
-                                                                 aria-label="Close"><span
-                                                            aria-hidden="true">Мои отправления</span></NavLink>
+                                                        <NavLink to={'/my_shipments'}><span>Мои отправления</span></NavLink>
                                                     </div>
                                                     <div className={'col-12 mb-1'} onClick={() => {closeModal()}}>
-                                                        <NavLink to={'/my_payment'} data-dismiss="modal" aria-label="Close"><span
-                                                            aria-hidden="true">Счета и оплата</span></NavLink>
+                                                        <NavLink to={'/my_payment'}><span>Счета и оплата</span></NavLink>
                                                     </div>
                                                     <div className={'col-12 mb-1'} onClick={() => {closeModal()}}>
-                                                        <NavLink to={'/my_address'} data-dismiss="modal" aria-label="Close"><span
-                                                            aria-hidden="true">Адресная книга</span></NavLink>
+                                                        <NavLink to={'/my_address'} ><span>Адресная книга</span></NavLink>
                                                     </div>
                                                     <div className={'col-12 mb-1'} onClick={() => {closeModal()}}>
                                                         <NavLink to={'/personalAccount'}><span>Личный кабинет</span></NavLink>

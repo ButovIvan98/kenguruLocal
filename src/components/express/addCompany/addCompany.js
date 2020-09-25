@@ -16,11 +16,11 @@ const AddCompany = (props) => {
         <div className={'container'}>
             <div className={'row'}>
                 <div className={'col-12 mt-3'}>
-                    <h2>
+                    <h2 className={classes.textHeader}>
                         Добавление компании
                     </h2>
                 </div>
-                <div className={'col-lg-9 col-12 mt-3' + ' ' + classes.block}>
+                <div className={'col-lg-9 col-12 mt-lg-3 mt-2' + ' ' + classes.block}>
                     <div className={'row'}>
                         <div className={'col-12 text-center'}>
                             <h5>
@@ -30,7 +30,7 @@ const AddCompany = (props) => {
                         <div className={'col-12'}>
                             <hr className={classes.line}/>
                         </div>
-                        <div className={'col-6'}>
+                        <div className={'col-lg-6 col-12'}>
                             <Autocomplete
                                 id="combo-box-demo"
                                 options={props.company.listCompany.map((option) => option.value + '(' + option.management_name + ')')}
@@ -54,7 +54,7 @@ const AddCompany = (props) => {
                                 disableClearable={true}
                             />
                         </div>
-                        <div className={'col-6'}>
+                        <div className={'col-lg-6 col-12 mt-lg-0 mt-2'}>
                             <Autocomplete
                                 id="combo-box-demo"
                                 options={props.company.listCompany.map((option) => option.inn)}
@@ -78,7 +78,7 @@ const AddCompany = (props) => {
                                 disableClearable={true}
                             />
                         </div>
-                        <div className={'col-6 mt-2'}>
+                        <div className={'col-lg-6 col-12 mt-2'}>
                             <Autocomplete
                                 id="combo-box-demo"
                                 options={props.company.listCompany.map((option) => option.ogrn)}
@@ -102,7 +102,7 @@ const AddCompany = (props) => {
                                 disableClearable={true}
                             />
                         </div>
-                        <div className={'col-6 mt-2'}>
+                        <div className={'col-lg-6 col-12 mt-2'}>
                             <TextField
                                 error={!props.company.validLegalAddress}
                                 label="Юридический адрес"
@@ -118,7 +118,7 @@ const AddCompany = (props) => {
                                 placeholder={'Пример: г. Барнаул, ул. Баварина д.2 к.Б офис 900'}
                             />
                         </div>
-                        <div className={'col-lg-6 mt-2'}>
+                        <div className={'col-lg-6 col-12 mt-2'}>
                             <span> <FormControlLabel
                                 control={
                                     <Checkbox
@@ -145,7 +145,7 @@ const AddCompany = (props) => {
                                 />
                             </span>
                         </div>
-                        <div className={'col-lg-6 mt-2'}>
+                        <div className={'col-lg-6 col-12 mt-2'}>
                             <TextField
                                 disabled={props.company.coincidence ? true : false}
                                 label="Фактический адрес"
@@ -166,7 +166,7 @@ const AddCompany = (props) => {
                         <div className={'col-12'}>
                             <hr className={classes.line}/>
                         </div>
-                        <div className={'col-6 mt-2'}>
+                        <div className={'col-lg-6 col-12 mt-2'}>
                             <Autocomplete
                                 id="combo-box-demo"
                                 options={props.company.listBank.map((option) => option.bic)}
@@ -190,7 +190,7 @@ const AddCompany = (props) => {
                                 disableClearable={true}
                             />
                         </div>
-                        <div className={'col-6 mt-2'}>
+                        <div className={'col-lg-6 col-12 mt-2'}>
                             <TextField
                                 label="Расчетный счет"
                                 variant="outlined"
@@ -202,7 +202,7 @@ const AddCompany = (props) => {
                                 error={!props.company.validAccountPayment}
                             />
                         </div>
-                        <div className={'col-12 mt-2'}>
+                        <div className={'col-lg-6 col-12 mt-2'}>
                             <TextField
                                 label="Наименование банка"
                                 variant="outlined"
@@ -222,7 +222,7 @@ const AddCompany = (props) => {
                         <div className={'col-12'}>
                             <hr className={classes.line}/>
                         </div>
-                        <div className={'col-6 mt-2'}>
+                        <div className={'col-lg-6 col-12 mt-2'}>
                             <TextField
                                 className={classes.inputData}
                                 label="Фамилия"
@@ -235,7 +235,7 @@ const AddCompany = (props) => {
                                 error={!props.company.personalData.validSurname}
                             />
                         </div>
-                        <div className={'col-6 mt-2'}>
+                        <div className={'col-lg-6 col-12 mt-2'}>
                             <TextField
                                 className={classes.inputData}
                                 label="Имя"
@@ -248,7 +248,7 @@ const AddCompany = (props) => {
                                 error={!props.company.personalData.validName}
                             />
                         </div>
-                        <div className={'col-6 mt-2'}>
+                        <div className={'col-lg-6 col-12 mt-2'}>
                             <TextField
                                 className={classes.inputData}
                                 label="Отчество"
@@ -257,7 +257,7 @@ const AddCompany = (props) => {
                                 onChange={(e) => (props.middleNameAddCompany(e.target.value))}
                             />
                         </div>
-                        <div className={'col-6 mt-2'}>
+                        <div className={'col-lg-6 col-12 mt-2'}>
                             <TextField
                                 className={classes.inputData}
                                 label="Должность"
@@ -278,7 +278,7 @@ const AddCompany = (props) => {
                         <div className={'col-12'}>
                             <hr className={classes.line}/>
                         </div>
-                        <div className={'col-lg-6'}>
+                        <div className={'col-lg-6 col-12'}>
                             <TextField
                                 className={classes.inputData}
                                 label="Электронная почта"
@@ -292,7 +292,7 @@ const AddCompany = (props) => {
                                 error={!props.company.personalData.validEmail}
                             />
                         </div>
-                        <div className={'col-lg-6'}>
+                        <div className={'col-lg-6 col-12 mt-lg-0 mt-2'}>
                             <InputMask mask="+7(999)999 99 99"
                                        maskChar=" "
                                        onChange={(e) => {

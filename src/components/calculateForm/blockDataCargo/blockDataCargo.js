@@ -9,7 +9,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 const BlockDataCargo = (props) => {
     return <div className={classes.blockCalculate}>
         <div className={'row mt-3'}>
-                <div className={'col-lg-2 col-4 pl-1 pr-1'}>
+                <div className={'col-lg-2 col-6 pl-1 pr-1'}>
                     <TextField
                         error={!props.validLenght}
                         data-number-cargo={props.id}
@@ -25,7 +25,7 @@ const BlockDataCargo = (props) => {
                         //helperText="Some important text"
                     />
                 </div>
-                <div className={'col-lg-2 col-4 pl-1 pr-1'}>
+                <div className={'col-lg-2 col-6 pl-1 pr-1'}>
                     <TextField
                         error={!props.validHeight}
                         data-number-cargo={props.id}
@@ -41,7 +41,7 @@ const BlockDataCargo = (props) => {
                         //helperText="Some important text"
                     />
                 </div>
-                <div className={'col-lg-2 col-4 pl-1 pr-1'}>
+                <div className={'col-lg-2 col-6 mt-2  mt-lg-0 pl-1 pr-1'}>
                     <TextField
                         error={!props.validWidth}
                         data-number-cargo={props.id}
@@ -57,7 +57,7 @@ const BlockDataCargo = (props) => {
                         //helperText="Some important text"
                     />
                 </div>
-                <div className={'col-lg-2 mt-lg-0 mt-2 col-4 pl-1 pr-1'}>
+                <div className={'col-lg-2 mt-lg-0 mt-2 col-6 pl-1 pr-1'}>
                     <TextField
                         error={!props.validWeight}
                         data-number-cargo={props.id}
@@ -73,7 +73,7 @@ const BlockDataCargo = (props) => {
                         //helperText="Some important text"
                     />
                 </div>
-                <div className={'col-lg-2 mt-lg-0 mt-2  col-4 pl-1 pr-1'}>
+                <div className={'col-lg-2 mt-lg-0 mt-2  col-6 pl-1 pr-1'}>
                     <TextField
                         disabled={true}
                         error={!props.validVolume}
@@ -90,7 +90,7 @@ const BlockDataCargo = (props) => {
                         //helperText="Some important text"
                     />
                 </div>
-                <div className={'col-lg-2 mt-lg-0 mt-2 col-4 pl-1 pr-1'}>
+                <div className={'col-lg-2 mt-lg-0 mt-2 col-6 pl-1 pr-1'}>
                     <TextField
                         error={!props.validQuantity}
                         data-number-cargo={props.id}

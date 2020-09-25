@@ -38,3 +38,18 @@
 .addAddress:active{
     background: #001C2D;
 }
+.textHeader{
+    font-size: 35px;
+}
+@media (max-width: 992px) {
+    .textHeader{
+        font-size: 23px;
+        font-weight: bold;
+    }
+    .block{
+        padding: 15px 15px;
+    }
+    .labelCheckbox span{
+        font-size: 14px;
+    }
+}

@@ -5,6 +5,14 @@ const LIST_ORDER='LIST_ORDER';//Полный список заказов
 
 let initialState = {
     orderList: [],
+    selectedOrder:{
+    sender:{
+
+    },
+    recipient:{
+
+    }
+    }
 }
 const MyShipmentsReducer = (state = initialState, action) => {
     switch (action.type){

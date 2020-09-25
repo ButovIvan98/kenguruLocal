@@ -67,7 +67,7 @@ const App = (props) => {
                                         <Route exact path={'/paymentMethod'} render={() => <PaymentMethod />} />
                                         <Route exact path={'/transportCompany'} render={() => <ExportTransportCompany />} />
                                         <Route exact path={'/profileCompany/'} render={() => <ExportProfileTransportCompany />} />
-                                        <Route exact path={'/1'} render={() => <ExportMyShipmentsInformationContainer />} />
+                                        <Route exact path={'/cargo-detailed'} render={() => <ExportMyShipmentsInformationContainer />} />
                                         <Route exact path={'/registration'} render={() => <RegistrationContainerExport />} />
                                         <Route exact path={'/reloadPassword'} render={() => <ExportReloadPasswordContainer />} />
                                         <Route exact path={'/websitePlagin'} render={()=> <ExportWebsitePlaginContainer />} />

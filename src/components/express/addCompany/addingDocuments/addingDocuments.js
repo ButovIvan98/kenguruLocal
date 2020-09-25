@@ -31,19 +31,19 @@ const AddingDocuments = (props) => {
         <div className={'container'}>
             <div className={'row mt-3' + ' ' + classes.block}>
                 <div className={'col-lg-12'}>
-                    <h2>
+                    <h2 className={classes.textFont}>
                         Работа с документами
                     </h2>
                 </div>
                 <div className={'col-lg-12 mt-3 text-center'}>
                     <a _target="_blank" href={props.company.documents.urlContract} className={classes.buttonLoad} download>
-                        <span>
+                        <span className={classes.styleButton}>
                             Скачать договор
                         </span>
                     </a>
                 </div>
                 <div className={'col-lg-12 mt-4 text-center'}>
-                    <h5>Скачайте, ознакомьтесь и подпишите договор.<br/>Затем прикрепите перечень документов и нажмите
+                    <h5 className={classes.textHeader}>Скачайте, ознакомьтесь и подпишите договор.<br/>Затем прикрепите перечень документов и нажмите
                         "Отправить."</h5>
                 </div>
                 {props.company.fullInfoCompany.opf_short === 'ИП'
@@ -122,7 +122,6 @@ const AddingDocuments = (props) => {
                                 onChange={(files) => {
                                     props.addingDocumentOrganizationCharter(files)
                                 }}
-
                             />
                         </div>
                         <div className={'col-lg-6 mt-3 mb-3'}>
